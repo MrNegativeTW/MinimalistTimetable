@@ -1,13 +1,21 @@
 package com.example.admin.course;
 
+/*For Dialog Interface*/
+import android.content.DialogInterface;
+/* For Internet Connection*/
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.DrawableRes;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+
+/*For Alert Dialog*/
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        /**
+         * Exit Button
+         */
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 */
             }
         });
-
     }
+
 
 
     @Override
@@ -89,7 +102,26 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menuAbout) {
+            AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
+
+            // Show About Message
+            aboutBox.setTitle(R.string.aboutTitle);
+            aboutBox.setMessage(R.string.aboutMessage);
+            aboutBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //do things
+                }
+            });
+            aboutBox.setNeutralButton("GitHub", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent github = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MrNegativeTW/simpleCourseTable"));
+                    startActivity(github);
+                }
+
+            });
+
+            aboutBox.show();
             return true;
         }
 
