@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    String[] items;
+    String[] items; //courseTime
     String[] courseName;
     String[] coursePlace;
 

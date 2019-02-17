@@ -1,8 +1,8 @@
 package com.example.admin.course;
 
-/*For Dialog Interface*/
+// For Dialog Interface
 import android.content.DialogInterface;
-/* For Internet Connection*/
+// For Internet Connection
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
@@ -10,7 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 
-/*For Alert Dialog*/
+// For Alert Dialog
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,9 +26,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Button;
 import android.widget.TextView;
+// For Get Date
+import java.util.Calendar;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Set theme from splash screen to Main theme.
+        super.setTheme(R.style.AppTheme_NoActionBar);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -67,10 +72,28 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        // Get weekday
+        Calendar c = Calendar.getInstance();
+        int date = c.get(Calendar.DAY_OF_WEEK);
+        // Open tab by which weekday it is, DEFAULT = Monday.
+        switch (date){
+            case Calendar.MONDAY:
+                mViewPager.setCurrentItem(0);
+            case Calendar.TUESDAY:
+                mViewPager.setCurrentItem(1);
+            case Calendar.WEDNESDAY:
+                mViewPager.setCurrentItem(2);
+            case Calendar.THURSDAY:
+                mViewPager.setCurrentItem(3);
+            case Calendar.FRIDAY:
+                mViewPager.setCurrentItem(4);
+            case Calendar.SATURDAY:
+                mViewPager.setCurrentItem(0);
+            case Calendar.SUNDAY:
+                mViewPager.setCurrentItem(0);
+        }
 
-        /**
-         * Exit Button
-         */
+        // Exit Button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,9 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 */
             }
         });
+
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,30 +123,35 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Menu Item Selected Action
         if (id == R.id.menuAbout) {
             AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
-
-            // Show About Message
+            // Show About Message, get string from string.xml
             aboutBox.setTitle(R.string.aboutTitle);
             aboutBox.setMessage(R.string.aboutMessage);
+            // A OK button do nothing.
             aboutBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     //do things
                 }
             });
+            // A Github button link to this project's Repo.
             aboutBox.setNeutralButton("GitHub", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    Intent github = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MrNegativeTW/simpleCourseTable"));
-                    startActivity(github);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MrNegativeTW/simpleCourseTable")));
                 }
-
             });
-
             aboutBox.show();
             return true;
-        }
 
+        } else if (id == R.id.menuLogin) {
+            AlertDialog.Builder loginFeature = new AlertDialog.Builder(this);
+            // Show Login Message, get string from string.xml
+            loginFeature.setTitle(R.string.loginInfo);
+            loginFeature.setMessage("On the road...");
+            loginFeature.show();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -1,23 +1,37 @@
 <resources>
     <string name="app_name">Course Table (107-2)</string>
+
+    <!--分頁名稱-->
     <string name="tab_text_1">Mon</string>
     <string name="tab_text_2">Tue</string>
     <string name="tab_text_3">Wed</string>
     <string name="tab_text_4">Thu</string>
     <string name="tab_text_5">Fri</string>
-    <string name="action_settings">關於</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="menuAbout">關於</string>
-    <string name="aboutTitle">關於</string>
-    <string name="aboutMessage">程式版本: 1.0 \n課表版本: 107 學年 第二學期\n作者: Trevor Wu</string>
 
-    <string-array name="mon">
+    <!--右上角目錄-->
+    <string name="menuLogin">登入</string>
+    <string name="menuLogout">登出</string><!--考慮不使用-->
+    <string name="menuAbout">關於</string>
+
+    <!--關於-->
+    <string name="aboutTitle">關於</string>
+    <string name="aboutMessage">程式版本: 1.1 \n課表版本: 107 學年 第二學期\n作者: Trevor Wu</string>
+
+    <!--登入-->
+    <string name="loginAccount">帳號</string>
+    <string name="loginPassword">密碼</string>
+    <string name="loginButton">登入</string>
+    <string name="loginInfo">歡迎使用本服務</string>
+
+
+    <string-array name="courseName_Mon">
         <item>慢速壘球</item>
         <item>科技新知通論</item>
         <item>台灣生態環境與資源保護</item>
     </string-array>
 
-
+    <!--未使用-->
     <string name="mon_12_name">慢速壘球</string>
     <string name="mon_12_place">林森 - 操場</string>
     <string name="mon_12_time">08:00 ~ 09:50</string>

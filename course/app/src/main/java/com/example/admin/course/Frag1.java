@@ -17,6 +17,7 @@ public class Frag1 extends Fragment {
 
     String[] Items={"08:00 ~ 09:50","10:10 ~ 12:00","13:30 ~ 15:20"};
     String[] CourseName={"慢速壘球","科技新知通論","台灣生態環境與資源保護"};
+    //String[] CourseName = getResources().getStringArray(R.array.courseName_Mon);
     String[] CoursePlace={"林森 - 操場", "林森 - 敬業樓509", "屏商 - 二館中M314"};
 
     public Frag1(){
