@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Set theme from splash screen to Main theme.
-        super.setTheme(R.style.AppTheme_NoActionBar);
+        // Also set android:theme="@style/AppTheme.NoActionBar" in AndroidManifest.xml
+        //super.setTheme(R.style.AppTheme_NoActionBar);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

@@ -24,6 +24,13 @@
     <string name="loginButton">登入</string>
     <string name="loginInfo">歡迎使用本服務</string>
 
+    <!--Course Table String Array-->
+    <!--Monday-->
+    <string-array name="courseTime_Mon">
+        <item>08:00 ~ 09:50</item>
+        <item>10:10 ~ 12:00</item>
+        <item>13:30 ~ 15:20</item>
+    </string-array>
 
     <string-array name="courseName_Mon">
         <item>慢速壘球</item>
@@ -31,21 +38,74 @@
         <item>台灣生態環境與資源保護</item>
     </string-array>
 
-    <!--未使用-->
-    <string name="mon_12_name">慢速壘球</string>
-    <string name="mon_12_place">林森 - 操場</string>
-    <string name="mon_12_time">08:00 ~ 09:50</string>
-    <string name="mon_34_name">科技新知通論</string>
-    <string name="mon_34_place">林森 - 敬業樓509</string>
-    <string name="mon_34_time">10:10 ~ 12:00</string>
-    <string name="mon_56_name">台灣生態環境與資源保護</string>
-    <string name="mon_56_place">屏商 - 二館中M314</string>
-    <string name="mon_56_time">13:30 ~ 15:20</string>
+    <string-array name="coursePlace_Mon">
+        <item>林森 - 操場</item>
+        <item>林森 - 敬業樓509</item>
+        <item>屏商 - 二館中M314</item>
+    </string-array>
 
-    <string name="tue_234_name">機率</string>
-    <string name="tue_234_place">五育樓108</string>
-    <string name="tue_234_time">09:00 ~ 12:00</string>
-    <string name="tue_567_name">資料結構</string>
-    <string name="tue_567_place">五育樓303</string>
-    <string name="tue_567_time">13:30 ~ 16:30</string>
+    <!--Tuesday-->
+    <string-array name="courseTime_Tue">
+        <item>09:00 ~ 12:00</item>
+        <item>13:30 ~ 16:30</item>
+    </string-array>
+
+    <string-array name="courseName_Tue">
+        <item>機率</item>
+        <item>資料結構</item>
+    </string-array>
+
+    <string-array name="coursePlace_Tue">
+        <item>民生 - 五育樓108</item>
+        <item>民生 - 五育樓303</item>
+    </string-array>
+
+    <!--Wednesday-->
+    <string-array name="courseTime_Wed">
+        <item>09:00 ~ 12:00</item>
+        <item>13:30 ~ 15:20</item>
+    </string-array>
+
+    <string-array name="courseName_Wed">
+        <item>演算法</item>
+        <item>進階英文B</item>
+    </string-array>
+
+    <string-array name="coursePlace_Wed">
+        <item>民生 - 五育樓3F視聽</item>
+        <item>民生 - 五育樓109</item>
+    </string-array>
+
+    <!--Thursday-->
+    <string-array name="courseTime_Thu">
+        <item>09:00 ~ 12:00</item>
+        <item>13:30 ~ 16:30</item>
+    </string-array>
+
+    <string-array name="courseName_Thu">
+        <item>ios 程式設計</item>
+        <item>Java 程式設計</item>
+    </string-array>
+
+    <string-array name="coursePlace_Thu">
+        <item>民生 - 教科館遠距暨微型</item>
+        <item>民生 - 五育樓電B</item>
+    </string-array>
+
+    <!--Friday-->
+    <string-array name="courseTime_Fri">
+        <item>09:00 ~ 12:00</item>
+    </string-array>
+
+    <string-array name="courseName_Fri">
+        <item>線性代數</item>
+    </string-array>
+
+    <string-array name="coursePlace_Fri">
+        <item>民生 - 五育樓203</item>
+    </string-array>
+    <!--Course Table String Array END-->
+
+
+
 </resources>

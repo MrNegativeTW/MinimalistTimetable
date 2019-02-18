@@ -13,16 +13,17 @@ import android.view.ViewGroup;
 public class Frag2 extends Fragment {
     private RecyclerView recyclerView;
 
-    String[] Items={"09:00 ~ 12:00","13:30 ~ 16:30"};
-    String[] CourseName={"機率","資料結構"};
-    String[] CoursePlace={"林森 - 五育樓108", "林森 - 五育樓303"};
-
     public Frag2(){
         // Required empty public constructor
     }
 
     public void onStart() {
         super.onStart();
+
+        String[] Items = getActivity().getResources().getStringArray(R.array.courseTime_Tue);
+        String[] CourseName = getActivity().getResources().getStringArray(R.array.courseName_Tue);
+        String[] CoursePlace = getActivity().getResources().getStringArray(R.array.coursePlace_Tue);
+
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace));

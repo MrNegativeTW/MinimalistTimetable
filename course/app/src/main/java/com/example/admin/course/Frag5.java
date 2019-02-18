@@ -14,16 +14,17 @@ public class Frag5 extends Fragment {
 
     private RecyclerView recyclerView;
 
-    String[] Items={"09:00 ~ 12:00"};
-    String[] CourseName={"線性代數"};
-    String[] CoursePlace={"林森 - 五育樓203"};
-
-    public Frag5(){
+        public Frag5(){
         // Required empty public constructor
     }
 
     public void onStart() {
         super.onStart();
+
+        String[] Items = getActivity().getResources().getStringArray(R.array.courseTime_Fri);
+        String[] CourseName = getActivity().getResources().getStringArray(R.array.courseName_Fri);
+        String[] CoursePlace = getActivity().getResources().getStringArray(R.array.coursePlace_Fri);
+
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview5);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace));
