@@ -80,18 +80,25 @@ public class MainActivity extends AppCompatActivity {
         switch (date){
             case Calendar.MONDAY:
                 mViewPager.setCurrentItem(0);
+                break;
             case Calendar.TUESDAY:
                 mViewPager.setCurrentItem(1);
+                break;
             case Calendar.WEDNESDAY:
                 mViewPager.setCurrentItem(2);
+                break;
             case Calendar.THURSDAY:
                 mViewPager.setCurrentItem(3);
+                break;
             case Calendar.FRIDAY:
                 mViewPager.setCurrentItem(4);
+                break;
             case Calendar.SATURDAY:
                 mViewPager.setCurrentItem(0);
+                break;
             case Calendar.SUNDAY:
                 mViewPager.setCurrentItem(0);
+                break;
         }
 
         // Exit Button
