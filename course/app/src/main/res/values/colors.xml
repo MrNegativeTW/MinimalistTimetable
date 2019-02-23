@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorSplashScreen">#FFFFFF</color>
+
+    <color name="colorPink">#d81b60</color>
+    <color name="colorPinkDark">#a00037</color>
+    <color name="colorPinkLight">#ff5c8d</color>
 </resources>
