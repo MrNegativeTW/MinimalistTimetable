@@ -8,4 +8,8 @@
     <color name="colorPink">#d81b60</color>
     <color name="colorPinkDark">#a00037</color>
     <color name="colorPinkLight">#ff5c8d</color>
+
+    <color name="colorBrown">#795548</color>
+    <color name="colorBrownDark">#5D4037</color>
+    <color name="colorBrownLight">#a98274</color>
 </resources>
