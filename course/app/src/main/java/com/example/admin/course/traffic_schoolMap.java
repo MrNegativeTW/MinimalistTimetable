@@ -23,7 +23,7 @@ public class traffic_schoolMap extends AppCompatActivity {
         webview.setWebViewClient(new WebViewClient());
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
-        webview.setInitialScale(75);
+        webview.setInitialScale(150);
         /*webview.loadUrl("https://raw.githubusercontent.com/MrNegativeTW/simpleCourseTable/master/schoolMap.jpg");*/
         webview.loadDataWithBaseURL("file:///android_res/drawable/school_map.jpg", "<img src='school_map.jpg' />", "text/html", "utf-8", null);
 

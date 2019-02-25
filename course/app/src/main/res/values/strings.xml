@@ -46,7 +46,7 @@
 
     <string-array name="coursePlace_Mon">
         <item>林森 - 操場</item>
-        <item>林森 - 敬業樓509</item>
+        <item>林森 - 科學館5F禮堂</item>
         <item>屏商 - 二館中M314</item>
     </string-array>
 
@@ -62,7 +62,7 @@
     </string-array>
 
     <string-array name="coursePlace_Tue">
-        <item>民生 - 五育樓108</item>
+        <item>民生 - 五育樓3F視聽</item>
         <item>民生 - 五育樓303</item>
     </string-array>
 
