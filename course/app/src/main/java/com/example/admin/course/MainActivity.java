@@ -4,6 +4,7 @@ package com.example.admin.course;
 import android.content.DialogInterface;
 // For Internet Connection
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.TabLayout;
@@ -31,6 +32,12 @@ import android.widget.TextView;
 // For Get Date
 import java.util.Calendar;
 
+
+import android.content.Context;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         // Get weekday
         Calendar c = Calendar.getInstance();
         int date = c.get(Calendar.DAY_OF_WEEK);
-        // Open tab by which weekday it is, DEFAULT = Monday.
+        // Open tab by which weekday it is.
         switch (date){
             case Calendar.MONDAY:
                 mViewPager.setCurrentItem(0);
@@ -134,42 +141,46 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handle Menu Item Selected.
+     *
+     * menuAdd: Switch to AddCourse activity.
+     * menuSettings: Do nothing for now.
+     * menuAbout: Show information about this app.
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        // Menu Item Selected Action
-        if (id == R.id.menuAbout) {
+        if (id == R.id.menuAdd) {
+            Intent intent = new Intent(this, AddCourse.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.menuSettings) {
             AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
-            // Show About Message, get string from string.xml
-            aboutBox.setTitle(R.string.aboutTitle);
-            aboutBox.setMessage(R.string.aboutMessage);
-            // A OK button do nothing.
-            aboutBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //do things
-                }
-            });
-            // A Github button link to this project's Repo.
-            aboutBox.setNeutralButton("GitHub", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MrNegativeTW/simpleCourseTable")));
-                }
-            });
+            aboutBox.setMessage("Settings Clicked");
             aboutBox.show();
             return true;
-
-        } else if (id == R.id.menuLogin) {
-            AlertDialog.Builder loginFeature = new AlertDialog.Builder(this);
-            // Show Login Message, get string from string.xml
-            loginFeature.setTitle(R.string.loginInfo);
-            loginFeature.setMessage("On the road...");
-            loginFeature.show();
+//            Intent intent = new Intent(this, SettingsActivity.class);
+//            startActivity(intent);
+        } else if (id == R.id.menuAbout) {
+            AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
+            aboutBox.setTitle(R.string.aboutTitle);
+            aboutBox.setMessage(R.string.aboutMessage);
+//            aboutBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//                    //do things
+//                }
+//            });
+//            aboutBox.setNeutralButton("GitHub", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MrNegativeTW/simpleCourseTable")));
+//                }
+//            });
+            aboutBox.show();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -247,7 +258,5 @@ public class MainActivity extends AppCompatActivity {
             return 5;
         }
     }
-
-
 
 }

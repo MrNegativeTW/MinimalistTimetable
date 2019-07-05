@@ -4,12 +4,15 @@
     tools:context="com.example.admin.course.MainActivity">
 
     <item
-        android:id="@+id/menuLogin"
-        android:title="@string/menuLogin"
+        android:id="@+id/menuAdd"
+        android:title="@string/menuAddCourse"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menuSettings"
+        android:title="@string/menuSettings"
         app:showAsAction="never" />
     <item
         android:id="@+id/menuAbout"
-        android:orderInCategory="100"
         android:title="@string/menuAbout"
         app:showAsAction="never" />
 </menu>

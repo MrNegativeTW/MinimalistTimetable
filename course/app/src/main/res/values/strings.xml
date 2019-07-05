@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Course Table (107-2)</string>
+    <string name="app_name">Course Table</string>
+    <string name="section_format">wow</string>
 
     <!--Activity Name-->
     <string name="main_activity">個人課表</string>
     <string name="traffic_schoolMap">校區地圖</string>
+    <string name="activityAddCourse">新增課程</string>
 
     <!--分頁名稱-->
     <string name="tab_text_1">Mon</string>
@@ -11,24 +13,26 @@
     <string name="tab_text_3">Wed</string>
     <string name="tab_text_4">Thu</string>
     <string name="tab_text_5">Fri</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-
-
 
     <!--右上角目錄-->
-    <string name="menuLogin">登入</string>
-    <string name="menuLogout">登出</string><!--考慮不使用-->
+    <string name="menuAddCourse">新增</string>
+    <string name="menuSettings">設定</string>
     <string name="menuAbout">關於</string>
 
-    <!--關於-->
+    <!-- About -->
     <string name="aboutTitle">關於</string>
-    <string name="aboutMessage">程式版本: 1.1.2 \n課表版本: 107 學年 第二學期\n作者: Trevor Wu</string>
+    <string name="aboutMessage">Made with ❤ in Taiwan</string>
 
-    <!--登入-->
-    <string name="loginAccount">帳號</string>
-    <string name="loginPassword">密碼</string>
-    <string name="loginButton">登入</string>
-    <string name="loginInfo">歡迎使用本服務</string>
+    <!-- Activity Add Course -->
+    <string name="addCourseName">課程</string>
+    <string name="addCoursePlace">地點</string>
+    <string name="weekdays">星期：</string>
+    <string name="startTime">開始：</string>
+    <string name="endTime">結束：</string>
+    <string name="startTimeButton">a</string>
+    <string name="endTimeButton">b</string>
+
+
 
     <!--Course Table String Array-->
     <!--Monday-->
@@ -110,8 +114,6 @@
     <string-array name="coursePlace_Fri">
         <item>民生 - 五育樓203</item>
     </string-array>
-    <!--Course Table String Array END-->
-
-
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

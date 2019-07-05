@@ -13,7 +13,7 @@ public class traffic_schoolMap extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traffic_school_map);
-        setTitle(R.string.traffic_schoolMap);
+//        setTitle(R.string.traffic_schoolMap);
 
         WebView webview = (WebView) findViewById(R.id.traffic_schoolmap_webview);
         WebSettings webSettings = webview.getSettings();
