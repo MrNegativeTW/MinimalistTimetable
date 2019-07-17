@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.example.admin.course.Fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admin.course.Adapter;
+import com.example.admin.course.DBHandler;
+import com.example.admin.course.R;
+
 import java.util.ArrayList;
 
 public class Frag5 extends Fragment {
 
     private RecyclerView recyclerView;
 
-    DBHandler DBHandler;
+    com.example.admin.course.DBHandler DBHandler;
 
         public Frag5(){
         // Required empty public constructor
@@ -33,7 +37,7 @@ public class Frag5 extends Fragment {
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview5);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace));
+        recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace, 4));
     }
 
     @Override

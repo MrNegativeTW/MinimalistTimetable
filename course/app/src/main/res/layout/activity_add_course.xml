@@ -13,10 +13,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:errorEnabled="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/addCourseName"
@@ -40,11 +40,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCourseNameWrapper"
-        app:errorEnabled="true">
+        app:layout_constraintTop_toBottomOf="@+id/addCourseNameWrapper">
 
         <EditText
             android:id="@+id/addCoursePlace"
@@ -65,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,30 +82,26 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/addCourseWeekdaysSpinner"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4" />
+            android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/addCourseWeekdaysSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_weight="1"
             android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3" />
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -130,32 +126,6 @@
             app:layout_constraintEnd_toStartOf="@+id/startTimeButton"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/startTimeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:background="@android:color/transparent"
-            android:onClick="setTimeButtonOnClick"
-            android:text="@string/startTimeButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
         <TextView
             android:id="@+id/endTimeTextView"
             android:layout_width="wrap_content"
@@ -168,11 +138,47 @@
             app:layout_constraintEnd_toStartOf="@+id/endTimeButton"
             app:layout_constraintStart_toStartOf="parent" />
 
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeksDaysLinear">
+
+
+        <Button
+            android:id="@+id/startTimeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="setTimeButtonOnClick"
+            android:text="@string/startTimeButton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="~"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
         <Button
             android:id="@+id/endTimeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="setTimeButtonOnClick"
             android:text="@string/endTimeButton"

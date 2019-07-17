@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".traffic_schoolMap"
+            android:name=".SchoolMap"
             android:label="@string/traffic_schoolMap"
             />
         <activity

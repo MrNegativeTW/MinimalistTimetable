@@ -1,43 +1,37 @@
 package com.example.admin.course;
 
 // For Dialog Interface
-import android.content.DialogInterface;
 // For Internet Connection
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.support.annotation.DrawableRes;
-import android.support.design.widget.TabLayout;
+        import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 
 // For Alert Dialog
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+        import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+        import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+        import android.widget.TextView;
 // For Get Date
 import java.util.Calendar;
 
 
-import android.content.Context;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+        import android.widget.Toast;
+
+import com.example.admin.course.Fragments.Frag1;
+import com.example.admin.course.Fragments.Frag2;
+import com.example.admin.course.Fragments.Frag3;
+import com.example.admin.course.Fragments.Frag4;
+import com.example.admin.course.Fragments.Frag5;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setupFragments();
+        setupExitButton();
+    }
+
+
+    /**
+     * Handle which tab to open based on which day it is.
+     * */
+    private void setupFragments() {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -81,36 +85,24 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        // Get weekday
+
+        // Get day of the week, start from SUNDAY, int == 1.
+        // then open belongs today's tab.
         Calendar c = Calendar.getInstance();
         int date = c.get(Calendar.DAY_OF_WEEK);
-        // Open tab by which weekday it is.
-        switch (date){
-            case Calendar.MONDAY:
-                mViewPager.setCurrentItem(0);
-                break;
-            case Calendar.TUESDAY:
-                mViewPager.setCurrentItem(1);
-                break;
-            case Calendar.WEDNESDAY:
-                mViewPager.setCurrentItem(2);
-                break;
-            case Calendar.THURSDAY:
-                mViewPager.setCurrentItem(3);
-                break;
-            case Calendar.FRIDAY:
-                mViewPager.setCurrentItem(4);
-                break;
-            case Calendar.SATURDAY:
-                mViewPager.setCurrentItem(0);
-                break;
-            case Calendar.SUNDAY:
-                mViewPager.setCurrentItem(0);
-                break;
-        }
+        mViewPager.setCurrentItem(date == 1 ? 6 : date-2, false);
+    } // .setupFragments()
 
-        // Exit Button
+
+    /**
+     * Handle exit button action
+     *
+     * onClick: Exit app.
+     * onLongClick: Open map.
+     * */
+    private void setupExitButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,17 +114,18 @@ public class MainActivity extends AppCompatActivity {
                 */
             }
         });
+
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, traffic_schoolMap.class);
+                intent.setClass(MainActivity.this, SchoolMap.class);
                 startActivity(intent);
                 return false;
             }
         });
+    } // .setupExitButton()
 
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Handle Menu Item Selected.
      *
-     * menuAdd: Switch to AddCourse activity.
+     * menuAdd: Open AddCourse activity.
      * menuSettings: Do nothing for now.
-     * menuAbout: Show information about this app.
+     * menuAbout: About this app.
      * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -156,13 +149,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddCourse.class);
             startActivity(intent);
             return true;
+
         } else if (id == R.id.menuSettings) {
-            AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
-            aboutBox.setMessage("Settings Clicked");
-            aboutBox.show();
+            Toast.makeText(getApplicationContext(), "已點擊設定", Toast.LENGTH_SHORT).show();
             return true;
 //            Intent intent = new Intent(this, SettingsActivity.class);
 //            startActivity(intent);
+
         } else if (id == R.id.menuAbout) {
             AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
             aboutBox.setTitle(R.string.aboutTitle);
@@ -182,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    } // .onOptionsItemSelected
 
     /**
      * A placeholder fragment containing a simple view.

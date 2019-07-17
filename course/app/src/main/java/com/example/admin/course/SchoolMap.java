@@ -7,13 +7,13 @@ import android.webkit.WebView;
 import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 
-public class traffic_schoolMap extends AppCompatActivity {
+public class SchoolMap extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traffic_school_map);
-//        setTitle(R.string.traffic_schoolMap);
+//        setTitle(R.string.SchoolMap);
 
         WebView webview = (WebView) findViewById(R.id.traffic_schoolmap_webview);
         WebSettings webSettings = webview.getSettings();

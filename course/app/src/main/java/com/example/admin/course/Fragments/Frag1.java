@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.example.admin.course.Fragments;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admin.course.Adapter;
+import com.example.admin.course.DBHandler;
+import com.example.admin.course.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +24,6 @@ import java.util.List;
 public class Frag1 extends Fragment {
 
     private RecyclerView recyclerView;
-
     DBHandler mDBHandler;
 
 
@@ -37,7 +40,7 @@ public class Frag1 extends Fragment {
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview1);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace));
+        recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace, 0));
     }
 
     private List<String> ItemsList = new ArrayList<String>();
@@ -53,10 +56,7 @@ public class Frag1 extends Fragment {
         mDBHandler = new DBHandler(getActivity());
         Cursor data = mDBHandler.getCourse(4);
 
-//        ArrayList<String> listData = new ArrayList<>();
         while (data.moveToNext()) {
-            // i == courseName, maybe.
-//            listData.add(data.getString(1));
             ItemsList.add(data.getString(4));
             CourseNameList.add(data.getString(1));
             CoursePlaceList.add(data.getString(2));
@@ -65,16 +65,12 @@ public class Frag1 extends Fragment {
         Items = ItemsList.toArray(new String[0]);
         CourseName = CourseNameList.toArray(new String[0]);
         CoursePlace = CoursePlaceList.toArray(new String[0]);
-//        Log.i("Test", String.valueOf(listData));
         Log.i("Test", String.valueOf(CourseNameList));
     }
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View frags1 = inflater.inflate(R.layout.frag1_layout, container, false);
         return frags1;
-
-
     }
 }

@@ -18,13 +18,17 @@ import android.widget.Toast;
 
 public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
 
+    // Database and model.
     DBHandler DBHandler;
+    final Course course = new Course();
+
+    // Define View.
     TextInputLayout addCourseNameWrapper, addCoursePlaceWrapper;
     EditText addCourseName, addCoursePlace;
     Button startTimeButton, endTimeButton;
     Spinner addCourseWeekdaysSpinner;
 
-    private int weekdaySelected = 0;
+    // Default value for time, use to verify input or not.
     private String courseStartTimeNewEntry = "9999", courseEndTimeNewEntry = "9999";
 
     @Override
@@ -39,7 +43,7 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         startTimeButton = (Button) findViewById(R.id.startTimeButton);
         endTimeButton = (Button) findViewById(R.id.endTimeButton);
 
-        // Spinner: Select Weekdays
+        // Spinner: Use to Select Weekdays.
         addCourseWeekdaysSpinner = (Spinner) findViewById(R.id.addCourseWeekdaysSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.add_course_item, android.R.layout.simple_spinner_item);
@@ -50,13 +54,21 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         // Database
         DBHandler = new DBHandler(this);
 
+
+
+        submitVerify();
+    }
+
+
+    /**
+     * Verify submitted data is empty or not, NO content verify.
+     * */
+    private void submitVerify() {
         // Save Button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_save);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String courseNameNewEntry = addCourseName.getText().toString();
-                String coursePlaceNewEntry = addCoursePlace.getText().toString();
                 if (addCourseName.length() == 0 || addCoursePlace.length() == 0
                         || courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
                     if (addCourseName.length() == 0) {
@@ -67,67 +79,25 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
                     }
                     if (courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
                         Toast.makeText(AddCourse.this,
-                                        "輸入時間", Toast.LENGTH_SHORT).show();
+                                "輸入時間", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    addData(courseNameNewEntry, coursePlaceNewEntry,
-                            weekdaySelected,
-                            courseStartTimeNewEntry, courseEndTimeNewEntry);
+                    course.setCourseName(addCourseName.getText().toString());
+                    course.setCoursePlace(addCoursePlace.getText().toString());
+                    DBHandler.addCourse(course);
+
+                    // Exit activity
                     finish();
                 }
-//                if (addCoursePlace.length() == 0) {
-//
-//                }
-
-
             }
         });
-
-        // startTimeButton
-//        Button startTimeButton = (Button) findViewById(R.id.startTimeButton);
-//        startTimeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogFragment startTimePicker = new TimePickerFragment();
-//                startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
-//            }
-//        });
-
-//        View.OnClickListener showTimePicker = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final View vv = v;
-//
-//                TimePickerDialog timePickDialog = new TimePickerDialog();
-//            }
-//        };
-    }
-
-    private boolean addDataStatus = false;
-    public void addData(String courseNameNewEntry, String coursePlaceNewEntry,
-                        int weekdaySelected,
-                        String courseStartTimeNewEntry, String courseEndTimeNewEntry) {
-        boolean status = DBHandler.addCourse(courseNameNewEntry, coursePlaceNewEntry,
-                                            weekdaySelected,
-                                            courseStartTimeNewEntry, courseEndTimeNewEntry);
-        Log.i("Test",
-                "入庫 - 名稱：" + courseNameNewEntry
-                        + " 地點：" + coursePlaceNewEntry
-                        + " 日期：" + weekdaySelected
-                        + "開始：" + courseStartTimeNewEntry
-                        + "結束：" + courseEndTimeNewEntry);
-        if (status) {
-            Log.i("Test", "加入成功");
-        } else {
-            Log.i("Test", "加入失敗");
-        }
     }
 
 
     /**
      * In this two func, they will handle time set.
      *
-     * func onTimeSet: Assign value to startTime and endTime.
+     * func onTimeSet: Assign value to startTime or endTime.
      * func setTimeButtonOnClick: Open time picker dialog
      *
      * arg whichOne: Use Determine is start or end.
@@ -141,11 +111,11 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         if (whichOne == "startTime") {
             startTimeButton.setText(timeToShow);
             courseStartTimeNewEntry = timeToSQL;
-            Log.i("Test", "courseStartTimeNewEntry: " + courseStartTimeNewEntry);
+            course.setCourseStartTime(timeToSQL);
         } else if (whichOne == "endTime") {
             endTimeButton.setText(timeToShow);
             courseEndTimeNewEntry = timeToSQL;
-            Log.i("Test", "courseEndTimeNewEntry: " + courseEndTimeNewEntry);
+            course.setCourseEndTime(timeToSQL);
         }
     }
 
@@ -155,28 +125,24 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
 
         if (v.getId() == R.id.startTimeButton) {
             whichOne = "startTime";
-            Log.i("Test", "開始按鈕, WhichOne 為 " + whichOne);
         } else if (v.getId() == R.id.endTimeButton) {
             whichOne = "endTime";
-            Log.i("Test Message", "結束按鈕, WhichOne 為 " + whichOne);
         }
-        Log.i("Test", "This is setTimeButtonOnClick.");
     }
 
 
     /**
-     * Determine which weekday it is.
-     * Start from 0, which is Monday.
+     * Determine which day it is.
+     * Start from 0, Monday.
      * */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//        String text= adapterView.getItemAtPosition(i).toString();
-//        Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
-        weekdaySelected = addCourseWeekdaysSpinner.getSelectedItemPosition();
+        course.setCourseWeekday(addCourseWeekdaysSpinner.getSelectedItemPosition());
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        // Default value for weekday.
+        course.setCourseWeekday(0);
     }
 }

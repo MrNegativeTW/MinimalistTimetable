@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.example.admin.course.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.admin.course.Adapter;
+import com.example.admin.course.R;
 
 public class Frag3 extends Fragment {
 
@@ -27,7 +30,7 @@ public class Frag3 extends Fragment {
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview3);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace));
+        recyclerView.setAdapter(new Adapter(getActivity(), Items, CourseName, CoursePlace, 2));
     }
 
     @Override
