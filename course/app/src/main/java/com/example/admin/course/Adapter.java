@@ -1,6 +1,7 @@
 package com.example.admin.course;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,19 +16,14 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
-    String[] items; //courseTime
-    String[] courseName;
-    String[] coursePlace;
-    int fragment;
+    private ArrayList<Course> courseArrayList;
+    private int fragment;
 
-    public Adapter(Context context, String[] items, String[] courseName, String[] coursePlace, int fragment){
+    public Adapter(Context context, ArrayList<Course> arrayList, int fragment){
         this.context = context;
-        this.items = items;
-        this.courseName = courseName;
-        this.coursePlace = coursePlace;
+        this.courseArrayList = arrayList;
         this.fragment = fragment;
     }
-
 
     @NonNull
     @Override
@@ -43,43 +39,53 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return item;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        ((Item)holder).textView.setText(items[position]);
-        ((Item)holder).textView2.setText(courseName[position]);
-        ((Item)holder).textView3.setText(coursePlace[position]);
+
+        // Get each value in ArrayList, then set them to text.
+        String Name = courseArrayList.get(position).getCourseName();
+        String Place = courseArrayList.get(position).getCoursePlace();
+        String StartTime = courseArrayList.get(position).getCourseStartTime();
+        ((Item)holder).textView.setText(StartTime);
+        ((Item)holder).textView2.setText(Name);
+        ((Item)holder).textView3.setText(Place);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                String title = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.title)).getText().toString();
                 TextView text = (TextView) view.findViewById(R.id.item);
-                switch (fragment) {
-                    case 0:
-                        Log.i("Test", "禮拜1 的 " + position + text.getText().toString());
-                        break;
-                    case 1:
-                        Log.i("Test", "禮拜2 的 " + position);
-                        break;
-                    case 2:
-                        Log.i("Test", "禮拜3 的 " + position);
-                        break;
-                    case 3:
-                        Log.i("Test", "禮拜4 的 " + position);
-                        break;
-                    case 4:
-                        Log.i("Test", "禮拜5 的 " + position);
-                        break;
-                }
+                int dateDebug = fragment + 1;
+                Log.i("Test", "禮拜 " + dateDebug + "的第" + position + "個，時間" + text.getText().toString());
+
+//                switch (fragment) {
+//                    case 0:
+//                        Log.i("Test", "禮拜1 的第 " + position + "個，時間" + text.getText().toString());
+//                        break;
+//                    case 1:
+//                        Log.i("Test", "禮拜2 的第 " + position + "個");
+//                        break;
+//                    case 2:
+//                        Log.i("Test", "禮拜3 的第 " + position + "個");
+//                        break;
+//                    case 3:
+//                        Log.i("Test", "禮拜4 的第 " + position + "個");
+//                        break;
+//                    case 4:
+//                        Log.i("Test", "禮拜5 的第 " + position + "個");
+//                        break;
+//                }
             } //.onClick
 
 
         });
     }
 
+
     @Override
     public int getItemCount() {
-        return items.length;
+        return courseArrayList.size();
     }
 
 

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class DBHandler extends SQLiteOpenHelper {
 
     private final static int DB_VERSION = 1;
@@ -46,9 +48,11 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * Methods for Course things.
+     *
+     * addCourse(): Adding data from AddCourse.Activity
+     * getCourse(): Called by 5 fragments, will return a ArrayList, and send to Adapter.
      * */
     public boolean addCourse(Course course) {
-        Log.i("Test", "正在執行：使用 Model 加入資料");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COURSE_NAME, course.getCourseName());
@@ -59,7 +63,6 @@ public class DBHandler extends SQLiteOpenHelper {
         long testResult = db.insert(TIMETABLE, null, contentValues);
         db.close();
         if (testResult == -1) {
-            Log.i("Test", "使用 Model 加入資料失敗");
             return false;
         } else {
             return true;
@@ -67,15 +70,24 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getCourse(int weekdayWanted) {
-        // Random youtube video
+    public ArrayList<Course> getCourse(int dayWanted) {
         SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Course> courseArrayList = new ArrayList<>();
+        Course course;
+
         String query = "SELECT * FROM " + TIMETABLE
-                    + " WHERE courseWeekday = " + weekdayWanted
+                    + " WHERE " + COURSE_WEEKDAY + " = " + dayWanted
                     + " ORDER BY " + COURSE_START_TIME + " ASC";
         Cursor data = db.rawQuery(query, null);
-        Log.i("Test", "正在執行：取得課程");
-        return data;
+        while(data.moveToNext()) {
+            course = new Course();
+            course.setCourseName(data.getString(data.getColumnIndex(COURSE_NAME)));
+            course.setCoursePlace(data.getString(data.getColumnIndex(COURSE_PLACE)));
+            course.setCourseStartTime(data.getString(data.getColumnIndex(COURSE_START_TIME)));
+            course.setCourseEndTime(data.getString(data.getColumnIndex(COURSE_END_TIME)));
+            courseArrayList.add(course);
+        }
+        return courseArrayList;
     }
 
 

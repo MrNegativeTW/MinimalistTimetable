@@ -54,8 +54,6 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         // Database
         DBHandler = new DBHandler(this);
 
-
-
         submitVerify();
     }
 
