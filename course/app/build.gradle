@@ -4,10 +4,10 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.admin.course"
-        minSdkVersion 24
-        targetSdkVersion 27
+        minSdkVersion 23
+        targetSdkVersion 26
         versionCode 1
-        versionName "1.1.2"
+        versionName "There is no version name here fuck you"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -16,7 +16,8 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/darkMode">
 
         <EditText
             android:id="@+id/addCourseName"
@@ -101,44 +102,6 @@
 
     </LinearLayout>
 
-    <!--<LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weeksDaysLinear">
-
-        <TextView
-            android:id="@+id/startTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/startTime"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/startTimeButton"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/endTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/endTime"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/endTimeButton"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -194,6 +157,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_check_24dp" />
+        app:srcCompat="@drawable/ic_check_24dp"
+        android:background="@color/darkMode"/>
 
 </android.support.constraint.ConstraintLayout>

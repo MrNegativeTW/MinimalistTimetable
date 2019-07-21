@@ -81,23 +81,29 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         while(data.moveToNext()) {
             course = new Course();
+            course.setID(data.getString(data.getColumnIndex(COURSE_ID)));
             course.setCourseName(data.getString(data.getColumnIndex(COURSE_NAME)));
             course.setCoursePlace(data.getString(data.getColumnIndex(COURSE_PLACE)));
             course.setCourseStartTime(data.getString(data.getColumnIndex(COURSE_START_TIME)));
             course.setCourseEndTime(data.getString(data.getColumnIndex(COURSE_END_TIME)));
             courseArrayList.add(course);
         }
+        db.close();
         return courseArrayList;
     }
 
 
-    public boolean deleteCourse(int weekday, String courseName, String coursePlace, String courseTime) {
+    public void deleteCourse(String ID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TIMETABLE
-                    + " WHERE " + COURSE_WEEKDAY + " = " + weekday
-                    + " AND " + COURSE_NAME + "=" + courseName;
-        db.rawQuery(query, null);
-        return true;
+//        int IDD = Integer.valueOf(ID);
+//        String query = "DELETE FROM " + TIMETABLE
+//                    + " WHERE " + COURSE_ID + " = " + IDD;
+//        db.rawQuery(query, null);
+//        db.close();
+
+        db.delete(TIMETABLE, COURSE_ID + "=?", new String[]{ID});
+        db.close();
+
     }
 
 }

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="item1"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/item2"
@@ -20,7 +20,7 @@
         android:layout_marginTop="8dp"
         android:text="item2"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        app:layout_constraintTop_toBottomOf="@+id/item" />
+        app:layout_constraintTop_toBottomOf="@+id/item"/>
 
     <TextView
         android:id="@+id/item3"
@@ -30,7 +30,7 @@
         android:text="item3"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/item2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </android.support.constraint.ConstraintLayout>

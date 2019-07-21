@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
     private ArrayList<Course> courseArrayList;
+    DBHandler db;
     private int fragment;
 
     public Adapter(Context context, ArrayList<Course> arrayList, int fragment){
@@ -51,6 +53,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Item)holder).textView2.setText(Name);
         ((Item)holder).textView3.setText(Place);
 
+        // Single Click: Edit item
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +61,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 TextView text = (TextView) view.findViewById(R.id.item);
                 int dateDebug = fragment + 1;
                 Log.i("Test", "禮拜 " + dateDebug + "的第" + position + "個，時間" + text.getText().toString());
-
+                notifyDataSetChanged();
 //                switch (fragment) {
 //                    case 0:
 //                        Log.i("Test", "禮拜1 的第 " + position + "個，時間" + text.getText().toString());
@@ -77,9 +80,25 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //                        break;
 //                }
             } //.onClick
+        }); // .setOnClickListener
 
+        // Long Click: Delete item
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                db = new DBHandler(context);
 
-        });
+                String ID = courseArrayList.get(position).getID();
+
+                db.deleteCourse(ID);
+                db.getCourse(fragment);
+                courseArrayList.remove(position);
+                notifyDataSetChanged();
+                Toast.makeText(context, "已刪除", Toast.LENGTH_SHORT).show();
+
+                return true;
+            } // .onLongClick
+        }); // .setOnLongClickListener
     }
 
 

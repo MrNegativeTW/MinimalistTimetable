@@ -12,4 +12,9 @@
     <color name="colorBrown">#795548</color>
     <color name="colorBrownDark">#5D4037</color>
     <color name="colorBrownLight">#a98274</color>
+
+    <color name="darkMode">#1b1f2b</color>
+
+    <color name="white">#ffffff</color>
+    <color name="gray">#bdbdbd</color>
 </resources>

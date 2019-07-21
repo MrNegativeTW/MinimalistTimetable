@@ -2,18 +2,27 @@ package com.example.admin.course;
 
 public class Course {
 
-    private String courseName, coursePlace, courseStartTime, courseEndTime;
+    private String ID, courseName, coursePlace, courseStartTime, courseEndTime;
     private int courseWeekday;
 
     public Course(){}
 
-    public Course(String courseName, String coursePlace, String courseStartTime,
+    public Course(String ID, String courseName, String coursePlace, String courseStartTime,
                   String courseEndTime, int courseWeekday) {
+        this.ID = ID;
         this.courseName = courseName;
         this.coursePlace = coursePlace;
         this.courseStartTime = courseStartTime;
         this.courseEndTime = courseEndTime;
         this.courseWeekday = courseWeekday;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public void setCourseName(String courseName) {
