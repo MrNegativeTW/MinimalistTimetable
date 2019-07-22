@@ -1,7 +1,6 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

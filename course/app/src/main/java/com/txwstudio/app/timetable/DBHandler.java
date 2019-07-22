@@ -1,11 +1,10 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -49,8 +48,10 @@ public class DBHandler extends SQLiteOpenHelper {
     /**
      * Methods for Course things.
      *
-     * addCourse(): Adding data from AddCourse.Activity
+     * addCourse(): Adding data from CourseAddActivity.Activity
      * getCourse(): Called by 5 fragments, will return a ArrayList, and send to Adapter.
+     * deleteCourse(): Delete course by ID, called by every new adapter.
+     * updateCourse():
      * */
     public boolean addCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -95,15 +96,21 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void deleteCourse(String ID) {
         SQLiteDatabase db = this.getWritableDatabase();
-//        int IDD = Integer.valueOf(ID);
-//        String query = "DELETE FROM " + TIMETABLE
-//                    + " WHERE " + COURSE_ID + " = " + IDD;
-//        db.rawQuery(query, null);
-//        db.close();
-
         db.delete(TIMETABLE, COURSE_ID + "=?", new String[]{ID});
         db.close();
 
     }
 
+
+    public void updateCourse(Course course, String ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COURSE_NAME, course.getCourseName());
+        contentValues.put(COURSE_PLACE, course.getCoursePlace());
+        contentValues.put(COURSE_WEEKDAY, course.getCourseWeekday());
+        contentValues.put(COURSE_START_TIME, course.getCourseStartTime());
+        contentValues.put(COURSE_END_TIME, course.getCourseEndTime());
+        db.update(TIMETABLE, contentValues, COURSE_ID + " = " + ID, null);
+        db.close();
+    }
 }

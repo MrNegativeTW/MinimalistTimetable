@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.admin.course", appContext.getPackageName());
+        assertEquals("com.txwstudio.app.timetable", appContext.getPackageName());
     }
 }

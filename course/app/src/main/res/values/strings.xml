@@ -33,7 +33,6 @@
     <string name="endTimeButton">結束時間</string>
 
 
-
     <!--Course Table String Array-->
     <!--Monday-->
     <string-array name="courseTime_Mon">

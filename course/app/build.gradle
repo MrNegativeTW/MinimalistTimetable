@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.admin.course"
+        applicationId "com.txwstudio.app.timetable"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1

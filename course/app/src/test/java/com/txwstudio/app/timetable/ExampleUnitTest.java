@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 import org.junit.Test;
 

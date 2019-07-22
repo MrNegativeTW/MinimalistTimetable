@@ -1,14 +1,11 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
-import android.widget.TimePicker;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment{

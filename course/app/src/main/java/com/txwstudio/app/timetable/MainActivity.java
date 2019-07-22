@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 // For Dialog Interface
 // For Internet Connection
@@ -27,11 +27,11 @@ import java.util.Calendar;
 
         import android.widget.Toast;
 
-import com.example.admin.course.Fragments.Frag1;
-import com.example.admin.course.Fragments.Frag2;
-import com.example.admin.course.Fragments.Frag3;
-import com.example.admin.course.Fragments.Frag4;
-import com.example.admin.course.Fragments.Frag5;
+import com.txwstudio.app.timetable.Fragments.Frag1;
+import com.txwstudio.app.timetable.Fragments.Frag2;
+import com.txwstudio.app.timetable.Fragments.Frag3;
+import com.txwstudio.app.timetable.Fragments.Frag4;
+import com.txwstudio.app.timetable.Fragments.Frag5;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Handle Menu Item Selected.
      *
-     * menuAdd: Open AddCourse activity.
+     * menuAdd: Open CourseAddActivity activity.
      * menuSettings: Do nothing for now.
      * menuAbout: About this app.
      * */
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menuAdd) {
-            Intent intent = new Intent(this, AddCourse.class);
+            Intent intent = new Intent(this, CourseAddActivity.class);
             startActivity(intent);
             return true;
 

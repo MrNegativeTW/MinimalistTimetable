@@ -1,4 +1,4 @@
-package com.example.admin.course;
+package com.txwstudio.app.timetable;
 
 public class Course {
 
