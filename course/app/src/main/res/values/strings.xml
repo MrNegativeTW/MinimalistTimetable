@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Course Table</string>
-    <string name="section_format">wow</string>
 
     <!--Activity Name-->
     <string name="main_activity">個人課表</string>
@@ -23,7 +22,10 @@
     <string name="aboutTitle">關於</string>
     <string name="aboutMessage">Made with ❤ in Taiwan</string>
 
-    <!-- Activity Add Course -->
+    <!-- Activity Add/Edit Course -->
+    <string name="addCourseActivityTitle">新增課程</string>
+    <string name="editCourseActivityTitle">編輯課程</string>
+    <string name="errorNoEntry">這裡沒打到喔</string>
     <string name="addCourseName">課程</string>
     <string name="addCoursePlace">地點</string>
     <string name="weekdays">星期：</string>
@@ -32,6 +34,12 @@
     <string name="startTimeButton">開始時間</string>
     <string name="endTimeButton">結束時間</string>
 
+    <string name="dialogTitle">你要幹嘛</string>
+    <string name="dialogDeleted">已刪除</string>
+    <array name="dialog">
+        <item>編輯</item>
+        <item>刪除</item>
+    </array>
 
     <!--Course Table String Array-->
     <!--Monday-->

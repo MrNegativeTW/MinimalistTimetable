@@ -82,7 +82,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         while(data.moveToNext()) {
             course = new Course();
-            course.setID(data.getString(data.getColumnIndex(COURSE_ID)));
+            course.setID(data.getInt(data.getColumnIndex(COURSE_ID)));
             course.setCourseName(data.getString(data.getColumnIndex(COURSE_NAME)));
             course.setCoursePlace(data.getString(data.getColumnIndex(COURSE_PLACE)));
             course.setCourseStartTime(data.getString(data.getColumnIndex(COURSE_START_TIME)));
@@ -94,15 +94,38 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void deleteCourse(String ID) {
+    public ArrayList<Course> getCourseById(int ID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Course> courseArrayList = new ArrayList<>();
+        Course course;
+
+        String query = "SELECT * FROM " + TIMETABLE + " WHERE " + COURSE_ID + " = " + ID;
+        Cursor data = db.rawQuery(query, null);
+
+        while(data.moveToNext()){
+            course = new Course();
+            course.setID(data.getInt(data.getColumnIndex(COURSE_ID)));
+            course.setCourseName(data.getString(data.getColumnIndex(COURSE_NAME)));
+            course.setCoursePlace(data.getString(data.getColumnIndex(COURSE_PLACE)));
+            course.setCourseWeekday(data.getInt(data.getColumnIndex(COURSE_WEEKDAY)));
+            course.setCourseStartTime(data.getString(data.getColumnIndex(COURSE_START_TIME)));
+            course.setCourseEndTime(data.getString(data.getColumnIndex(COURSE_END_TIME)));
+            courseArrayList.add(course);
+        }
+        db.close();
+        return courseArrayList;
+    }
+
+    public void deleteCourse(int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TIMETABLE, COURSE_ID + "=?", new String[]{ID});
+        String IDD = String.valueOf(ID);
+        db.delete(TIMETABLE, COURSE_ID + "=?", new String[]{IDD});
         db.close();
 
     }
 
 
-    public void updateCourse(Course course, String ID) {
+    public void updateCourse(Course course, int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COURSE_NAME, course.getCourseName());

@@ -7,7 +7,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
-        versionName "There is no version name here fuck you"
+        versionName "Am I a joke to you?"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

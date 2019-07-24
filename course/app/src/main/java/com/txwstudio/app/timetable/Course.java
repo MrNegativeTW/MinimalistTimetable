@@ -2,12 +2,12 @@ package com.txwstudio.app.timetable;
 
 public class Course {
 
-    private String ID, courseName, coursePlace, courseStartTime, courseEndTime;
-    private int courseWeekday;
+    private String courseName, coursePlace, courseStartTime, courseEndTime;
+    private int ID, courseWeekday;
 
     public Course(){}
 
-    public Course(String ID, String courseName, String coursePlace, String courseStartTime,
+    public Course(int ID, String courseName, String coursePlace, String courseStartTime,
                   String courseEndTime, int courseWeekday) {
         this.ID = ID;
         this.courseName = courseName;
@@ -17,11 +17,11 @@ public class Course {
         this.courseWeekday = courseWeekday;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 

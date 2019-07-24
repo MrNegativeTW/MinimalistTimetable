@@ -1,7 +1,11 @@
 package com.txwstudio.app.timetable;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,13 +18,14 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    Context context;
+    private Activity mContext;
+//    private Context mContext;
     private ArrayList<Course> courseArrayList;
     DBHandler db;
     private int fragment;
 
-    public Adapter(Context context, ArrayList<Course> arrayList, int fragment){
-        this.context = context;
+    public Adapter(Activity mContext, ArrayList<Course> arrayList, int fragment){
+        this.mContext = mContext;
         this.courseArrayList = arrayList;
         this.fragment = fragment;
     }
@@ -28,7 +33,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         View row = inflater.inflate(R.layout.costume_row, parent, false);
         Item item = new Item(row);
 
@@ -46,57 +51,68 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // Get each value in ArrayList, then set them to text.
         String Name = courseArrayList.get(position).getCourseName();
         String Place = courseArrayList.get(position).getCoursePlace();
-        String StartTime = courseArrayList.get(position).getCourseStartTime();
-        ((Item)holder).textView.setText(StartTime);
+
+        String startTime = courseArrayList.get(position).getCourseStartTime();
+        String endTime = courseArrayList.get(position).getCourseEndTime();
+        String startTimeFormat = startTime.replaceAll("..(?!$)", "$0:");
+        String endTimeFormat = endTime.replaceAll("..(?!$)", "$0:");
+        String timeToShow = startTimeFormat + " ~ " + endTimeFormat;
+
+        ((Item)holder).textView.setText(timeToShow);
         ((Item)holder).textView2.setText(Name);
         ((Item)holder).textView3.setText(Place);
 
-        // Single Click: Edit item
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String title = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.title)).getText().toString();
-                TextView text = (TextView) view.findViewById(R.id.item);
+                TextView text = (TextView) view.findViewById(R.id.item2);
                 int dateDebug = fragment + 1;
-                Log.i("Test", "禮拜 " + dateDebug + "的第" + position + "個，時間" + text.getText().toString());
-                notifyDataSetChanged();
-//                switch (fragment) {
-//                    case 0:
-//                        Log.i("Test", "禮拜1 的第 " + position + "個，時間" + text.getText().toString());
-//                        break;
-//                    case 1:
-//                        Log.i("Test", "禮拜2 的第 " + position + "個");
-//                        break;
-//                    case 2:
-//                        Log.i("Test", "禮拜3 的第 " + position + "個");
-//                        break;
-//                    case 3:
-//                        Log.i("Test", "禮拜4 的第 " + position + "個");
-//                        break;
-//                    case 4:
-//                        Log.i("Test", "禮拜5 的第 " + position + "個");
-//                        break;
-//                }
-            } //.onClick
-        }); // .setOnClickListener
+                Toast.makeText(mContext, "禮拜" + dateDebug +"的"+ text.getText().toString(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Long Click: Delete item
+
+        // Long Click will show up an dialog window to ask user want to edit or delete.
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                db = new DBHandler(context);
+            public boolean onLongClick(final View view) {
 
-                String ID = courseArrayList.get(position).getID();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+                dialog.setTitle(R.string.dialogTitle);
+                dialog.setItems(R.array.dialog, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        db = new DBHandler(mContext);
+                        int ID = courseArrayList.get(position).getID();
+                        switch (i) {
+                            case 0:
+                                Toast.makeText(mContext, "Editing", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(mContext, CourseEditActivity.class);
+                                intent.putExtra("ID", ID);
+                                mContext.startActivity(intent);
 
-                db.deleteCourse(ID);
-                db.getCourse(fragment);
-                courseArrayList.remove(position);
-                notifyDataSetChanged();
-                Toast.makeText(context, "已刪除", Toast.LENGTH_SHORT).show();
+                                courseArrayList.clear();
+                                if (courseArrayList.isEmpty()) {Log.i("Test", "Cleaned");}
+                                courseArrayList = db.getCourse(fragment);
+                                notifyDataSetChanged();
+                                break;
+                            case 1:
+                                db.deleteCourse(ID);
+                                courseArrayList.remove(position);
+                                notifyDataSetChanged();
+                                Toast.makeText(mContext, R.string.dialogDeleted, Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+                dialog.show();
 
                 return true;
             } // .onLongClick
         }); // .setOnLongClickListener
+
     }
 
 

@@ -1,32 +1,24 @@
 package com.txwstudio.app.timetable;
 
-// For Dialog Interface
-// For Internet Connection
 import android.content.Intent;
-        import android.support.design.widget.TabLayout;
+import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-
-// For Alert Dialog
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-        import android.view.LayoutInflater;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-        import android.widget.TextView;
-// For Get Date
+import android.widget.TextView;
 import java.util.Calendar;
-
-
-        import android.widget.Toast;
-
+import android.widget.Toast;
 import com.txwstudio.app.timetable.Fragments.Frag1;
 import com.txwstudio.app.timetable.Fragments.Frag2;
 import com.txwstudio.app.timetable.Fragments.Frag3;
@@ -206,8 +198,6 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
