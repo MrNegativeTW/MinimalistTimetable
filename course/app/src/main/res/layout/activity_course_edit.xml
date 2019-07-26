@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
             android:ems="10"
             android:hint="@string/addCourseName"
             android:inputType="textNoSuggestions"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addCoursePlace" />
@@ -38,7 +38,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +53,7 @@
             android:ems="10"
             android:hint="@string/addCoursePlace"
             android:inputType="textNoSuggestions"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="169dp" />
@@ -134,7 +133,7 @@
             android:layout_weight="1"
             android:text="~"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <Button
             android:id="@+id/editEndTimeButton"
