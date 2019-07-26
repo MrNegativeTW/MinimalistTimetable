@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Time Table</string>
+    <string name="main_activity">Time Table</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="dialogDeleted">Deleted</string>
+    <string name="dialogTitle">What do you want</string>
+    <string name="endTimeButton">End Time</string>
+    <string name="startTimeButton">Start Time</string>
+    <string name="weekdays">Weekday:</string>
+    <string name="addCoursePlace">Room</string>
+    <string name="addCourseName">Subject</string>
+    <string name="errorNoEntry">Give me something</string>
+    <string name="menuSettings">Settings</string>
+    <string name="menuAddCourse">Add</string>
+    <string name="tab_text_5">Fri</string>
+    <string name="tab_text_4">Thu</string>
+    <string name="tab_text_3">Wed</string>
+    <string name="tab_text_2">Tue</string>
+    <string name="tab_text_1">Mon</string>
+    <string name="editCourseActivityTitle">Edit Detail</string>
+    <string name="addCourseActivityTitle">Add Course</string>
+    <string name="traffic_schoolMap">Maps</string>
+    <string name="aboutTitle">About</string>
+    <string name="startTime">Start From:</string>
+    <string name="endTime">To:</string>
+    <string name="lightMode">Light Mode (Require restart)</string>
+    <string name="lightModeSummary">Turn the light on, it is dark here.</string>
+</resources>
