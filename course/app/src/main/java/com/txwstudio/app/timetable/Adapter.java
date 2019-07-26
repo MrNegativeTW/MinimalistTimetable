@@ -80,7 +80,6 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public boolean onLongClick(final View view) {
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-                dialog.setTitle(R.string.dialogTitle);
                 dialog.setItems(R.array.dialog, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -88,13 +87,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         int ID = courseArrayList.get(position).getID();
                         switch (i) {
                             case 0:
-                                Toast.makeText(mContext, "Editing", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(mContext, CourseEditActivity.class);
                                 intent.putExtra("ID", ID);
                                 mContext.startActivity(intent);
 
                                 courseArrayList.clear();
-                                if (courseArrayList.isEmpty()) {Log.i("Test", "Cleaned");}
                                 courseArrayList = db.getCourse(fragment);
                                 notifyDataSetChanged();
                                 break;

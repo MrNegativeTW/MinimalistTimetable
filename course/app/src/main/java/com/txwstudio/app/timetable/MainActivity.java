@@ -1,6 +1,8 @@
 package com.txwstudio.app.timetable;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,19 +48,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Set theme from splash screen to Main theme.
-        // Also set android:theme="@style/AppTheme.NoActionBar" in AndroidManifest.xml
-        //super.setTheme(R.style.AppTheme_NoActionBar);
-
+    setupTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.main_activity);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         setupFragments();
         setupExitButton();
+    }
+
+
+    private void setupTheme() {
+        PreferenceManager.setDefaultValues(this,  R.xml.preferences, false);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
+        if (lightMode) {
+            Log.i("Test", "Light Mode Enable");
+//            setTheme(R.style.lightTheme);
+        }
     }
 
 
@@ -143,10 +153,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         } else if (id == R.id.menuSettings) {
-            Toast.makeText(getApplicationContext(), "我也想知道有什麼可以設定的", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

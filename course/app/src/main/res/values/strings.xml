@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">Course Table</string>
+    <string name="app_name">極簡課表</string>
 
     <!--Activity Name-->
-    <string name="main_activity">個人課表</string>
+    <string name="main_activity">課表</string>
     <string name="traffic_schoolMap">校區地圖</string>
-    <string name="activityAddCourse">新增課程</string>
+    <string name="addCourseActivityTitle">新增課程</string>
+    <string name="editCourseActivityTitle">編輯課程</string>
+    <string name="title_activity_settings">設定</string>
 
     <!--分頁名稱-->
     <string name="tab_text_1">Mon</string>
@@ -18,13 +20,7 @@
     <string name="menuSettings">設定</string>
     <string name="menuAbout">關於</string>
 
-    <!-- About -->
-    <string name="aboutTitle">關於</string>
-    <string name="aboutMessage">Made with ❤ in Taiwan</string>
-
     <!-- Activity Add/Edit Course -->
-    <string name="addCourseActivityTitle">新增課程</string>
-    <string name="editCourseActivityTitle">編輯課程</string>
     <string name="errorNoEntry">這裡沒打到喔</string>
     <string name="addCourseName">課程</string>
     <string name="addCoursePlace">地點</string>
@@ -41,86 +37,9 @@
         <item>刪除</item>
     </array>
 
-    <!--Course Table String Array-->
-    <!--Monday-->
-    <string-array name="courseTime_Mon">
-        <item>08:00 ~ 09:50</item>
-        <item>10:10 ~ 12:00</item>
-        <item>13:30 ~ 15:20</item>
-    </string-array>
-
-    <string-array name="courseName_Mon">
-        <item>慢速壘球</item>
-        <item>科技新知通論</item>
-        <item>台灣生態環境與資源保護</item>
-    </string-array>
-
-    <string-array name="coursePlace_Mon">
-        <item>林森 - 操場</item>
-        <item>林森 - 科學館5F禮堂</item>
-        <item>屏商 - 二館中M314</item>
-    </string-array>
-
-    <!--Tuesday-->
-    <string-array name="courseTime_Tue">
-        <item>09:00 ~ 12:00</item>
-        <item>13:30 ~ 16:30</item>
-    </string-array>
-
-    <string-array name="courseName_Tue">
-        <item>機率</item>
-        <item>資料結構</item>
-    </string-array>
-
-    <string-array name="coursePlace_Tue">
-        <item>民生 - 五育樓3F視聽</item>
-        <item>民生 - 五育樓303</item>
-    </string-array>
-
-    <!--Wednesday-->
-    <string-array name="courseTime_Wed">
-        <item>09:00 ~ 12:00</item>
-        <item>13:30 ~ 15:20</item>
-    </string-array>
-
-    <string-array name="courseName_Wed">
-        <item>演算法</item>
-        <item>進階英文B</item>
-    </string-array>
-
-    <string-array name="coursePlace_Wed">
-        <item>民生 - 五育樓3F視聽</item>
-        <item>民生 - 五育樓109</item>
-    </string-array>
-
-    <!--Thursday-->
-    <string-array name="courseTime_Thu">
-        <item>09:00 ~ 12:00</item>
-        <item>13:30 ~ 16:30</item>
-    </string-array>
-
-    <string-array name="courseName_Thu">
-        <item>ios 程式設計</item>
-        <item>行動多媒體程式設計</item>
-    </string-array>
-
-    <string-array name="coursePlace_Thu">
-        <item>民生 - 教科館遠距暨微型</item>
-        <item>屏商 - 二館S2422</item>
-    </string-array>
-
-    <!--Friday-->
-    <string-array name="courseTime_Fri">
-        <item>09:00 ~ 12:00</item>
-    </string-array>
-
-    <string-array name="courseName_Fri">
-        <item>線性代數</item>
-    </string-array>
-
-    <string-array name="coursePlace_Fri">
-        <item>民生 - 五育樓203</item>
-    </string-array>
-    <string name="title_activity_settings">Settings</string>
-
+    <!-- Activity Setting -->
+    <string name="lightMode">淺色主題(須重啟程式)</string>
+    <string name="lightModeSummary">這裡太黑暗了，給我來點亮的</string>
+    <string name="aboutTitle">關於</string>
+    <string name="aboutMessage" translatable="false">Made with ❤ in Taiwan</string>
 </resources>
