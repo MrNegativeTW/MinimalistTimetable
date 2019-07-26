@@ -143,27 +143,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         } else if (id == R.id.menuSettings) {
-            Toast.makeText(getApplicationContext(), "已點擊設定", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "我也想知道有什麼可以設定的", Toast.LENGTH_SHORT).show();
             return true;
 //            Intent intent = new Intent(this, SettingsActivity.class);
 //            startActivity(intent);
-
-        } else if (id == R.id.menuAbout) {
-            AlertDialog.Builder aboutBox = new AlertDialog.Builder(this);
-            aboutBox.setTitle(R.string.aboutTitle);
-            aboutBox.setMessage(R.string.aboutMessage);
-//            aboutBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int id) {
-//                    //do things
-//                }
-//            });
-//            aboutBox.setNeutralButton("GitHub", new DialogInterface.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int id) {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MrNegativeTW/simpleCourseTable")));
-//                }
-//            });
-            aboutBox.show();
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
