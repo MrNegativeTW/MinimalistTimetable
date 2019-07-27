@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    setupTheme();
+        setupTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -61,13 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupTheme() {
-        PreferenceManager.setDefaultValues(this,  R.xml.preferences, false);
+//        PreferenceManager.setDefaultValues(this,  R.xml.preferences, false);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
-        if (lightMode) {
-            Log.i("Test", "Light Mode Enable");
-//            setTheme(R.style.lightTheme);
-        }
+        setTheme(lightMode ? R.style.LightTheme_NoActionBar : R.style.AppTheme_NoActionBar);
     }
 
 

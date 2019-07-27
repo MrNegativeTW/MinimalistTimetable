@@ -37,8 +37,8 @@
     </array>
 
     <!-- Activity Setting -->
-    <string name="lightMode">淺色主題(須重啟程式)</string>
-    <string name="lightModeSummary">這裡太黑暗了，給我來點亮的</string>
+    <string name="lightMode">淺色主題 (須重啟程式)</string>
+    <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
     <string name="aboutTitle">關於</string>
     <string name="aboutMessage" translatable="false">Made with ❤ in Taiwan</string>
 </resources>
