@@ -22,16 +22,5 @@ public class TimePickerFragment extends DialogFragment{
         return new TimePickerDialog(getActivity(),
                 (TimePickerDialog.OnTimeSetListener) getActivity(),
                 hour, min, android.text.format.DateFormat.is24HourFormat(getActivity()));
-//        return new TimePickerDialog(getActivity(), this, hour, min,
-//                android.text.format.DateFormat.is24HourFormat(getActivity()));
     }
-
-
-//    @Override
-//    public void onTimeSet(TimePicker timePicker, int hourOfDay, int min) {
-//        Log.i("Test Message", hourOfDay + "::" + min + "View:" + timePicker);
-//    }
-
-
-
 }

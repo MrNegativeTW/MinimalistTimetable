@@ -10,6 +10,7 @@ public class SchoolMap extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traffic_school_map);
 //        setTitle(R.string.SchoolMap);

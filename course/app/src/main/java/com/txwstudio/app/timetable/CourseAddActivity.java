@@ -1,6 +1,8 @@
 package com.txwstudio.app.timetable;
 
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
@@ -32,6 +34,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        setupTheme();
+        Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
 
@@ -54,6 +58,13 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         DBHandler = new DBHandler(this);
 
         submitVerify();
+    }
+
+
+    private void setupTheme() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
+        setTheme(lightMode ? R.style.LightTheme : R.style.AppTheme);
     }
 
 

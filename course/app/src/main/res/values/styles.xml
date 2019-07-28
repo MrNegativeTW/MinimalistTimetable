@@ -10,7 +10,7 @@
         <item name="PopupOverlay">@style/AppTheme.PopupOverlay</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme_NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

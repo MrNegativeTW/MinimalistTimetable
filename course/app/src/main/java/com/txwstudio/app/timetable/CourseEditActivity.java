@@ -35,6 +35,7 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_edit);
         setTitle(R.string.editCourseActivityTitle);
