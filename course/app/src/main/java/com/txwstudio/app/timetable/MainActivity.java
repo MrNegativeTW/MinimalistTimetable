@@ -12,12 +12,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.Calendar;
 
 import com.txwstudio.app.timetable.Fragments.Frag1;
@@ -25,6 +25,7 @@ import com.txwstudio.app.timetable.Fragments.Frag2;
 import com.txwstudio.app.timetable.Fragments.Frag3;
 import com.txwstudio.app.timetable.Fragments.Frag4;
 import com.txwstudio.app.timetable.Fragments.Frag5;
+import static com.txwstudio.app.timetable.SettingsFragment.restartSchedule;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,13 +43,12 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private SharedPreferences sharedPref;
+    private Toolbar toolbar;
 
-    SharedPreferences sharedPref;
-    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        PreferenceManager.setDefaultValues(this,  R.xml.preferences, false);
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        initPrefManager();
         setupTheme();
 
         super.onCreate(savedInstanceState);
@@ -61,11 +61,25 @@ public class MainActivity extends AppCompatActivity {
         setupExitButton();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
+        if (restartSchedule) {
+            restartSchedule = false;
+            this.finish();
+            Intent refresh = new Intent(this, MainActivity.class);
+            startActivity(refresh);
+        }
         toolbar.setTitle(sharedPref.getString("tableTitle_Pref", String.valueOf(R.string.tableTitleDefault)));
     }
+
+
+    private void initPrefManager() {
+        PreferenceManager.setDefaultValues(this,  R.xml.preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
 
     private void setupTheme() {
         Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
@@ -84,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -95,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         int date = c.get(Calendar.DAY_OF_WEEK);
         mViewPager.setCurrentItem(date == 1 ? 6 : date-2, false);
-    } // .setupFragments()
+    }
 
 
     /**
@@ -111,11 +124,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finishAndRemoveTask();
-                /*
-                ---Original Code---
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                */
             }
         });
 
@@ -138,13 +146,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /**
-     * Handle Menu Item Selected.
-     *
-     * menuAdd: Open CourseAddActivity activity.
-     * menuSettings: Do nothing for now.
-     * menuAbout: About this app.
-     * */
+
+    /** Handle Menu Item Selected. */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -162,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     } // .onOptionsItemSelected
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -231,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 5;
         }
     }

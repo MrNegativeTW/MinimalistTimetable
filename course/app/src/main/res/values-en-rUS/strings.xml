@@ -24,7 +24,7 @@
     <string name="aboutTitle">About</string>
     <string name="startTime">Start From:</string>
     <string name="endTime">To:</string>
-    <string name="lightMode">Light Mode (Require restart)</string>
+    <string name="lightMode">Light Mode</string>
     <string name="lightModeSummary">Turn the light on, it is dark here.</string>
     <string name="tableTitle">Custom table name</string>
     <string name="tableTitleDefault">Time Table</string>

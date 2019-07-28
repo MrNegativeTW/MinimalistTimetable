@@ -5,11 +5,12 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+
+    public static boolean restartSchedule = false;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -34,15 +35,15 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 
     @Override
     public void onPause() {
-        super.onPause();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.i("Test", "Doge");
+        if (key.equals("lightMode_Pref")) {
+            restartSchedule = true;
+        }
     }
-
-
 }
