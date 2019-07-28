@@ -37,8 +37,13 @@
     </array>
 
     <!-- Activity Setting -->
+    <string name="tableTitle">自訂課表名稱</string>
+    <string name="tableTitleMessage">自訂要顯示在主畫面的名稱</string>
+    <string name="tableTitleDefault">課表</string>
     <string name="lightMode">淺色主題 (須重啟程式)</string>
     <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
     <string name="aboutTitle">關於</string>
     <string name="aboutMessage" translatable="false">Made with ❤ in Taiwan</string>
+    <string name="versionTitle">版本</string>
+    <string name="versionMessage" translatable="false">Beta 1.0</string>
 </resources>

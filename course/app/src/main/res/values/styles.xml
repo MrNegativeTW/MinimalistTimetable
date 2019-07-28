@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/white</item>
         <item name="fabButtonColor">@color/darkMode_colorAccent</item>
         <item name="PopupOverlay">@style/AppTheme.PopupOverlay</item>
+        <item name="iconColor">@color/white</item>
     </style>
 
     <style name="AppTheme_NoActionBar" parent="AppTheme">
@@ -29,6 +30,7 @@
         <item name="colorAccent">@color/lightMode_colorAccent</item>
         <item name="fabButtonColor">@color/darkMode_colorAccent</item>
         <item name="PopupOverlay">@style/LightTheme.PopupOverlay</item>
+        <item name="iconColor">@color/gray</item>
     </style>
 
     <style name="LightTheme_NoActionBar" parent="LightTheme">

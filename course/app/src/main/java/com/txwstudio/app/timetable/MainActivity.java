@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -13,15 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import java.util.Calendar;
-import android.widget.Toast;
+
 import com.txwstudio.app.timetable.Fragments.Frag1;
 import com.txwstudio.app.timetable.Fragments.Frag2;
 import com.txwstudio.app.timetable.Fragments.Frag3;
@@ -45,23 +43,31 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-
+    SharedPreferences sharedPref;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        PreferenceManager.setDefaultValues(this,  R.xml.preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         setupTheme();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         setupFragments();
         setupExitButton();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        toolbar.setTitle(sharedPref.getString("tableTitle_Pref", String.valueOf(R.string.tableTitleDefault)));
+    }
 
     private void setupTheme() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
         setTheme(lightMode ? R.style.LightTheme_NoActionBar : R.style.AppTheme_NoActionBar);
     }

@@ -2,4 +2,5 @@
 <resources>
     <attr name="fabButtonColor" format="color" />
     <attr name="PopupOverlay" format="reference"/>
+    <attr name="iconColor" format="color" />
 </resources>
