@@ -27,7 +27,7 @@
     <string name="lightMode">Light Mode</string>
     <string name="lightModeSummary">Turn the light on, it is dark here.</string>
     <string name="tableTitle">Custom table name</string>
-    <string name="tableTitleDefault">Time Table</string>
+    <string name="tableTitleDefault">My Time Table</string>
     <string name="versionTitle">Version</string>
     <string name="tableTitleMessage">Name to show on the main screen</string>
 </resources>
