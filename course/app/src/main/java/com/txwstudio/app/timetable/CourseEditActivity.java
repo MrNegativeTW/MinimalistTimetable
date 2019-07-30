@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 
 public class CourseEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
@@ -32,13 +35,14 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
     EditText editCourseName, editCoursePlace;
     Button editStartTimeButton, editEndTimeButton;
     Spinner editCourseWeekdaysSpinner;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_edit);
-        setTitle(R.string.editCourseActivityTitle);
+        setupAds();
 
         editCourseNameWrapper = (TextInputLayout) findViewById(R.id.editCourseNameWrapper);
         editCoursePlaceWrapper = (TextInputLayout) findViewById(R.id.editCoursePlaceWrapper);
@@ -65,6 +69,11 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
         submitVerify();
     }
 
+    private void setupAds() {
+        mAdView = (AdView) findViewById(R.id.editCourseAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
 
     /**
      * Get course detail from database.

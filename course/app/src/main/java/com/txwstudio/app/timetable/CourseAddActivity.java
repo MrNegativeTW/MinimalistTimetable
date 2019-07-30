@@ -17,6 +17,11 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class CourseAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
 
     // Database and model.
@@ -28,16 +33,17 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     EditText addCourseName, addCoursePlace;
     Button startTimeButton, endTimeButton;
     Spinner addCourseWeekdaysSpinner;
+    private AdView mAdView;
 
     // Default value for time, use to verify input or not.
     private String courseStartTimeNewEntry = "9999", courseEndTimeNewEntry = "9999";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        setupTheme();
         Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
+        setupAds();
 
         addCourseNameWrapper = (TextInputLayout) findViewById(R.id.addCourseNameWrapper);
         addCoursePlaceWrapper = (TextInputLayout) findViewById(R.id.addCoursePlaceWrapper);
@@ -61,10 +67,10 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     }
 
 
-    private void setupTheme() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
-        setTheme(lightMode ? R.style.LightTheme : R.style.AppTheme);
+    private void setupAds() {
+        mAdView = (AdView) findViewById(R.id.addCourseAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 

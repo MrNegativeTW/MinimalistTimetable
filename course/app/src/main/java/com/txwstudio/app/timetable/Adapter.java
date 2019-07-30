@@ -130,30 +130,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             textView = (TextView) itemView.findViewById(R.id.item);
             textView2 = (TextView) itemView.findViewById(R.id.item2);
             textView3 = (TextView) itemView.findViewById(R.id.item3);
-//            itemView.setOnClickListener(this);
         }
-
-//        @Override
-//        public void onClick(View view) {
-//            switch (fragment) {
-//                case 0:
-//                    Log.i("Test", "禮拜一");
-//                    break;
-//                case 1:
-//                    Log.i("Test", "禮拜二");
-//                    break;
-//                case 2:
-//                    Log.i("Test", "禮拜3");
-//                    break;
-//                case 3:
-//                    Log.i("Test", "禮拜4");
-//                    break;
-//                case 4:
-//                    Log.i("Test", "禮拜5");
-//                    break;
-//            }
-//        }
-
-    } // .class
+    }
 
 }
