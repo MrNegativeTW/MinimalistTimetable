@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/generalSection">
     <EditTextPreference
         android:icon="@drawable/ic_label_outline_24dp"
         android:key="tableTitle_Pref"
@@ -14,12 +16,17 @@
         android:title="@string/lightMode"
         android:summary="@string/lightModeSummary"
         android:defaultValue="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/aboutSection">
     <Preference
-        android:icon="@drawable/ic_info_outline_24dp"
-        android:title="@string/aboutTitle"
-        android:summary="@string/aboutMessage"/>
+        android:icon="@drawable/ic_bug_24dp"
+        android:title="@string/contactTitle"
+        android:summary="@string/contactMessage"/>
     <Preference
         android:icon="@drawable/ic_code_24dp"
         android:title="@string/versionTitle"
         android:summary="@string/versionMessage"/>
+    </PreferenceCategory>
 </PreferenceScreen>

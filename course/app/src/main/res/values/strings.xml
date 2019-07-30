@@ -9,11 +9,11 @@
     <string name="title_activity_settings">設定</string>
 
     <!--分頁名稱-->
-    <string name="tab_text_1">Mon</string>
-    <string name="tab_text_2">Tue</string>
-    <string name="tab_text_3">Wed</string>
-    <string name="tab_text_4">Thu</string>
-    <string name="tab_text_5">Fri</string>
+    <string name="tab_text_1">一</string>
+    <string name="tab_text_2">二</string>
+    <string name="tab_text_3">三</string>
+    <string name="tab_text_4">四</string>
+    <string name="tab_text_5">五</string>
 
     <!--右上角目錄-->
     <string name="menuAddCourse">新增</string>
@@ -37,13 +37,18 @@
     </array>
 
     <!-- Activity Setting -->
+    <string name="generalSection">一般</string>
     <string name="tableTitle">自訂課表名稱</string>
     <string name="tableTitleMessage">自訂要顯示在主畫面的名稱</string>
     <string name="tableTitleDefault">我的課表</string>
     <string name="lightMode">淺色主題</string>
     <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
+    <string name="aboutSection">關於</string>
+    <string name="contactTitle">聯繫作者</string>
+    <string name="contactMessage">Bug 回報、希望功能、想聊天，通通都可以</string>
     <string name="aboutTitle">關於</string>
     <string name="aboutMessage" translatable="false">Made with ❤ in Taiwan</string>
     <string name="versionTitle">版本</string>
-    <string name="versionMessage" translatable="false">1.0</string>
+    <string name="versionMessage" translatable="false">1.0, Made with ❤ in Taiwan</string>
+
 </resources>
