@@ -2,20 +2,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/generalSection">
-    <EditTextPreference
-        android:icon="@drawable/ic_label_outline_24dp"
-        android:key="tableTitle_Pref"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/tableTitle"
-        android:summary="@string/tableTitleMessage"
-        android:defaultValue="Table" />
-    <CheckBoxPreference
-        android:icon="@drawable/ic_lightbulb_outline_24dp"
-        android:key="lightMode_Pref"
-        android:title="@string/lightMode"
-        android:summary="@string/lightModeSummary"
-        android:defaultValue="false" />
+        <EditTextPreference
+            android:icon="@drawable/ic_label_outline_24dp"
+            android:key="tableTitle_Pref"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/tableTitle"
+            android:summary="@string/tableTitleMessage"
+            android:defaultValue="Table" />
+        <CheckBoxPreference
+            android:icon="@drawable/ic_lightbulb_outline_24dp"
+            android:key="lightMode_Pref"
+            android:title="@string/lightMode"
+            android:summary="@string/lightModeSummary"
+            android:defaultValue="false" />
+        <Preference
+            android:icon="@drawable/ic_map_24dp"
+            android:key="schoolMapPicker"
+            android:title="@string/schoolMapPickerTitle"
+            android:summary="@string/schoolMapPickerSummary"/>
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -1,15 +1,25 @@
 package com.txwstudio.app.timetable;
 
+import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragment implements
+        OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     public static boolean restartSchedule = false;
     private EditTextPreference editTextPreference;
@@ -28,6 +38,9 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+
+        Preference imagePicker = findPreference("schoolMapPicker");
+        imagePicker.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -53,5 +66,40 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
         if (key.equals("lightMode_Pref")) {
             restartSchedule = true;
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference.getKey().equals("schoolMapPicker")) {
+
+            int permission = ContextCompat.checkSelfPermission(getContext(),
+                                                        Manifest.permission.READ_EXTERNAL_STORAGE);
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                        0);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(intent, 0);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            Uri imageUri = data.getData();
+            String imageRealPath = Util.getPath(getContext(), imageUri);
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("schoolMapPath", imageRealPath);
+            editor.commit();
+        }
+
     }
 }

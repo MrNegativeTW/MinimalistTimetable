@@ -43,6 +43,8 @@
     <string name="tableTitleDefault">我的課表</string>
     <string name="lightMode">淺色主題</string>
     <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
+    <string name="schoolMapPickerTitle">選擇學校地圖</string>
+    <string name="schoolMapPickerSummary">長按離開按鈕即可顯示</string>
     <string name="aboutSection">關於</string>
     <string name="contactTitle">聯繫作者</string>
     <string name="contactMessage">Bug 回報、希望功能、想聊天，通通都可以</string>

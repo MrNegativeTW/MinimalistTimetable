@@ -63,22 +63,21 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Item)holder).textView3.setText(Place);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView text = (TextView) view.findViewById(R.id.item2);
-                int dateDebug = fragment + 1;
-                Toast.makeText(mContext, "禮拜" + dateDebug +"的"+ text.getText().toString(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                TextView text = (TextView) view.findViewById(R.id.item2);
+//                int dateDebug = fragment + 1;
+//                Toast.makeText(mContext, "禮拜" + dateDebug +"的"+ text.getText().toString(),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         // Long Click will show up an dialog window to ask user want to edit or delete.
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View view) {
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                 dialog.setItems(R.array.dialog, new DialogInterface.OnClickListener() {
                     @Override
@@ -90,7 +89,6 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                 Intent intent = new Intent(mContext, CourseEditActivity.class);
                                 intent.putExtra("ID", ID);
                                 mContext.startActivity(intent);
-
                                 courseArrayList.clear();
                                 courseArrayList = db.getCourse(fragment);
                                 notifyDataSetChanged();

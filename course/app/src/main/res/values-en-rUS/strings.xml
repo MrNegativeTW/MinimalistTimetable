@@ -34,4 +34,6 @@
     <string name="contactTitle">Contact Developers</string>
     <string name="aboutSection">About</string>
     <string name="generalSection">General</string>
+    <string name="schoolMapPickerTitle">Select Campus Map</string>
+    <string name="schoolMapPickerSummary">Long press on exit button to display</string>
 </resources>
