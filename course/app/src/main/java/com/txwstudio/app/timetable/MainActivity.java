@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         if (restartSchedule) {
             restartSchedule = false;
             this.finish();
-            Intent refresh = new Intent(this, MainActivity.class);
+            Intent refresh = getIntent();
             startActivity(refresh);
         }
         toolbar.setTitle(sharedPref.getString("tableTitle_Pref", String.valueOf(R.string.tableTitleDefault)));

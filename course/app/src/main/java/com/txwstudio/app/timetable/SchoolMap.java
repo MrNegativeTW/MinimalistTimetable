@@ -28,8 +28,6 @@ public class SchoolMap extends AppCompatActivity {
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
         webview.setInitialScale(150);
-        /*webview.loadUrl("https://raw.githubusercontent.com/MrNegativeTW/simpleCourseTable/master/schoolMap.jpg");*/
         webview.loadDataWithBaseURL("", "<img src='"+ schoolMapPathToDisplay + "' />", "text/html", "utf-8", null);
-
     }
 }

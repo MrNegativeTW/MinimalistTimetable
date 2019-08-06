@@ -22,7 +22,7 @@
         <!-- addCourseAdView AD ID: ca-app-pub-3716797788275517/8911928028 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3716797788275517~4461004551" />
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
             android:name=".MainActivity"

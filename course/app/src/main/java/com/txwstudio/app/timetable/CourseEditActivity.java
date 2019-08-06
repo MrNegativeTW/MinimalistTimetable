@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -44,6 +43,32 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_course_edit);
         setupAds();
 
+        findViewById();
+
+        // Database
+        db = new DBHandler(this);
+        courseArrayList = new ArrayList<>();
+        ID = getIntent().getExtras().getInt("ID");
+
+        settingValue(ID);
+
+        submitVerify();
+    }
+
+
+    private void setupAds() {
+        mAdView = (AdView) findViewById(R.id.editCourseAdView);
+        final AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAdView.loadAd(adRequest);
+            }
+        }, 1000);
+    }
+
+
+    private void findViewById() {
         editCourseNameWrapper = (TextInputLayout) findViewById(R.id.editCourseNameWrapper);
         editCoursePlaceWrapper = (TextInputLayout) findViewById(R.id.editCoursePlaceWrapper);
         editCourseName = (EditText) findViewById(R.id.editCourseName);
@@ -58,22 +83,8 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         editCourseWeekdaysSpinner.setAdapter(adapter);
         editCourseWeekdaysSpinner.setOnItemSelectedListener(this);
-
-        // Database
-        db = new DBHandler(this);
-        courseArrayList = new ArrayList<>();
-        ID = getIntent().getExtras().getInt("ID");
-
-        settingValue(ID);
-
-        submitVerify();
     }
 
-    private void setupAds() {
-        mAdView = (AdView) findViewById(R.id.editCourseAdView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 
     /**
      * Get course detail from database.

@@ -1,8 +1,6 @@
 package com.txwstudio.app.timetable;
 
 import android.app.TimePickerDialog;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
@@ -18,9 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 public class CourseAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
 
@@ -45,6 +41,28 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_course_add);
         setupAds();
 
+        findViewById();
+
+        // Database
+        DBHandler = new DBHandler(this);
+
+        submitVerify();
+    }
+
+
+    private void setupAds() {
+        mAdView = (AdView) findViewById(R.id.addCourseAdView);
+        final AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAdView.loadAd(adRequest);
+            }
+        }, 1000);
+    }
+
+
+    private void findViewById() {
         addCourseNameWrapper = (TextInputLayout) findViewById(R.id.addCourseNameWrapper);
         addCoursePlaceWrapper = (TextInputLayout) findViewById(R.id.addCoursePlaceWrapper);
         addCourseName = (EditText) findViewById(R.id.addCourseName);
@@ -59,18 +77,6 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         addCourseWeekdaysSpinner.setAdapter(adapter);
         addCourseWeekdaysSpinner.setOnItemSelectedListener(this);
-
-        // Database
-        DBHandler = new DBHandler(this);
-
-        submitVerify();
-    }
-
-
-    private void setupAds() {
-        mAdView = (AdView) findViewById(R.id.addCourseAdView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
 
