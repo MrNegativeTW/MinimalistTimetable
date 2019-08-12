@@ -5,8 +5,9 @@
 
     <item
         android:id="@+id/menuAdd"
+        android:icon="@drawable/ic_add_24dp"
         android:title="@string/menuAddCourse"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/menuSettings"
         android:title="@string/menuSettings"
