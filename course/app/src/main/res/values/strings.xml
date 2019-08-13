@@ -3,7 +3,7 @@
 
     <!--Activity Name-->
     <string name="main_activity">課表</string>
-    <string name="traffic_schoolMap">校區地圖</string>
+    <string name="traffic_schoolMap">地圖</string>
     <string name="addCourseActivityTitle">新增課程</string>
     <string name="editCourseActivityTitle">編輯課程</string>
     <string name="title_activity_settings">設定</string>
@@ -21,6 +21,7 @@
 
     <!-- Activity Add/Edit Course -->
     <string name="errorNoEntry">這裡沒打到喔</string>
+    <string name="saveCourse">儲存</string>
     <string name="addCourseName">課程</string>
     <string name="addCoursePlace">地點</string>
     <string name="weekdays">星期：</string>
@@ -43,14 +44,14 @@
     <string name="tableTitleDefault">我的課表</string>
     <string name="lightMode">淺色主題</string>
     <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
-    <string name="schoolMapPickerTitle">選擇學校地圖</string>
+    <string name="schoolMapPickerTitle">自訂學校地圖</string>
     <string name="schoolMapPickerSummary">長按離開按鈕即可顯示</string>
     <string name="aboutSection">關於</string>
     <string name="contactTitle">聯繫作者</string>
     <string name="contactMessage">Bug 回報、希望功能、想聊天，通通都可以</string>
     <string name="aboutTitle">關於</string>
     <string name="aboutMessage" translatable="false">Made with ❤ in Taiwan</string>
-    <string name="versionTitle">版本</string>
-    <string name="versionMessage" translatable="false">1.0, Made with ❤ in Taiwan</string>
+    <string name="versionTitle">版本 1.0</string>
+    <string name="versionMessage" translatable="false">Made with ❤ in Taiwan</string>
 
 </resources>
