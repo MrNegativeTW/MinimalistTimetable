@@ -1,11 +1,12 @@
 package com.txwstudio.app.timetable;
 
 import android.app.TimePickerDialog;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,7 +32,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     Spinner addCourseWeekdaysSpinner;
     private AdView mAdView;
 
-    // Default value for time, use to verify input or not.
+    // Default value for time, use to verify.
     private String courseStartTimeNewEntry = "9999", courseEndTimeNewEntry = "9999";
 
     @Override
@@ -39,14 +40,13 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupAds();
 
         findViewById();
 
         // Database
         DBHandler = new DBHandler(this);
-
-        submitVerify();
     }
 
 
@@ -81,41 +81,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
 
     /**
-     * Verify submitted data is empty or not, NO content verify.
-     * */
-    private void submitVerify() {
-        // Save Button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_save);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (addCourseName.length() == 0 || addCoursePlace.length() == 0
-                        || courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
-                    if (addCourseName.length() == 0) {
-                        addCourseNameWrapper.setError("Oops!");
-                    }
-                    if (addCoursePlace.length() == 0) {
-                        addCoursePlaceWrapper.setError("Oops!");
-                    }
-                    if (courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
-                        Toast.makeText(CourseAddActivity.this,
-                                "輸入時間", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    course.setCourseName(addCourseName.getText().toString());
-                    course.setCoursePlace(addCoursePlace.getText().toString());
-                    DBHandler.addCourse(course);
-
-                    // Exit activity
-                    finish();
-                }
-            }
-        });
-    }
-
-
-    /**
-     * In this two func, they will handle time set.
+     * These two func will handle time set.
      *
      * func onTimeSet: Assign value to startTime or endTime.
      * func setTimeButtonOnClick: Open time picker dialog
@@ -164,5 +130,49 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     public void onNothingSelected(AdapterView<?> adapterView) {
         // Default value for weekday.
         course.setCourseWeekday(0);
+    }
+
+
+    /**
+     * Below code will handle every actionBar button's action.
+     *
+     * menuSave: Check value then call database to save it.
+     * android.R.id.home: If there is already has value, check user want to leave or not.
+     * */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.save_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menuSave) {
+            if (addCourseName.length() == 0 || addCoursePlace.length() == 0
+                    || courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
+                if (addCourseName.length() == 0) {
+                    addCourseNameWrapper.setError("Oops!");
+                }
+                if (addCoursePlace.length() == 0) {
+                    addCoursePlaceWrapper.setError("Oops!");
+                }
+                if (courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
+                    Toast.makeText(CourseAddActivity.this,
+                            "輸入時間", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                course.setCourseName(addCourseName.getText().toString());
+                course.setCoursePlace(addCoursePlace.getText().toString());
+                DBHandler.addCourse(course);
+
+                // Exit activity
+                finish();
+            }
+        } else if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

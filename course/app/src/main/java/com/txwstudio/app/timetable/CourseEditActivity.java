@@ -1,12 +1,13 @@
 package com.txwstudio.app.timetable;
 
 import android.app.TimePickerDialog;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,6 +42,7 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
         Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_edit);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupAds();
 
         findViewById();
@@ -51,8 +53,6 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
         ID = getIntent().getExtras().getInt("ID");
 
         settingValue(ID);
-
-        submitVerify();
     }
 
 
@@ -113,33 +113,6 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
         course.setCourseEndTime(EndTime);
     }
 
-
-
-
-    private void submitVerify() {
-        // Save Button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_update);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (editCourseName.length() == 0 || editCoursePlace.length() == 0) {
-                    if (editCourseName.length() == 0) {
-                        editCourseNameWrapper.setError(getString(R.string.errorNoEntry));
-                    }
-                    if (editCoursePlace.length() == 0) {
-                        editCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
-                    }
-                } else {
-                    course.setCourseName(editCourseName.getText().toString());
-                    course.setCoursePlace(editCoursePlace.getText().toString());
-                    db.updateCourse(course, ID);
-                    finish();
-                }
-            }
-        }); // .setOnClickListener
-    }
-
-
     private String whichOne = "startTime";
 
     @Override
@@ -175,5 +148,42 @@ public class CourseEditActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+
+    /**
+     * Below code will handle every actionBar button's action.
+     *
+     * menuSave: Check value then call database to update it.
+     * android.R.id.home: If there is already has value, check user want to leave or not.
+     * */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.save_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menuSave) {
+            if (editCourseName.length() == 0 || editCoursePlace.length() == 0) {
+                if (editCourseName.length() == 0) {
+                    editCourseNameWrapper.setError(getString(R.string.errorNoEntry));
+                }
+                if (editCoursePlace.length() == 0) {
+                    editCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
+                }
+            } else {
+                course.setCourseName(editCourseName.getText().toString());
+                course.setCoursePlace(editCoursePlace.getText().toString());
+                db.updateCourse(course, ID);
+                finish();
+            }
+        } else if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
