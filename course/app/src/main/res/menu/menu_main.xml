@@ -10,6 +10,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/menuSettings"
+        android:icon="@drawable/ic_settings_24dp"
         android:title="@string/menuSettings"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
