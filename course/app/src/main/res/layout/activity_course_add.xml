@@ -101,51 +101,95 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_weight="1"
         android:orientation="horizontal"
+        android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weeksDaysLinear">
 
-
-        <Button
-            android:id="@+id/startTimeButton"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:id="@+id/startTimeCardView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="setTimeButtonOnClick"
-            android:text="@string/startTimeButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            app:cardBackgroundColor="#00FFFFFF"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="8dp"
+            app:contentPaddingTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCourseAdView">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/startTime" />
+
+                <TextView
+                    android:id="@+id/startTimeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:text="00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/endTimeCardView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="~"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-        <Button
-            android:id="@+id/endTimeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="setTimeButtonOnClick"
-            android:text="@string/endTimeButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            app:cardBackgroundColor="#00FFFFFF"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="8dp"
+            app:contentPaddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCourseAdView">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/endTime" />
+
+                <TextView
+                    android:id="@+id/endTimeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:text="00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
     <com.google.android.gms.ads.AdView

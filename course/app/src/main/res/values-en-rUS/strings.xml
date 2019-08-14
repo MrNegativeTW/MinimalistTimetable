@@ -22,8 +22,8 @@
     <string name="addCourseActivityTitle">Add Course</string>
     <string name="traffic_schoolMap">Map</string>
     <string name="aboutTitle">About</string>
-    <string name="startTime">Start From:</string>
-    <string name="endTime">To:</string>
+    <string name="startTime">Starts</string>
+    <string name="endTime">Ends</string>
     <string name="lightMode">Light Mode</string>
     <string name="lightModeSummary">Turn the light on, it is dark here.</string>
     <string name="tableTitle">Custom Table Name</string>

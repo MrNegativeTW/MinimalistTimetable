@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -27,8 +28,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
     // Define View.
     TextInputLayout addCourseNameWrapper, addCoursePlaceWrapper;
+    TextView startTimeView, endTimeView;
     EditText addCourseName, addCoursePlace;
-    Button startTimeButton, endTimeButton;
     Spinner addCourseWeekdaysSpinner;
     private AdView mAdView;
 
@@ -67,8 +68,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         addCoursePlaceWrapper = (TextInputLayout) findViewById(R.id.addCoursePlaceWrapper);
         addCourseName = (EditText) findViewById(R.id.addCourseName);
         addCoursePlace = (EditText) findViewById(R.id.addCoursePlace);
-        startTimeButton = (Button) findViewById(R.id.startTimeButton);
-        endTimeButton = (Button) findViewById(R.id.endTimeButton);
+        startTimeView = (TextView) findViewById(R.id.startTimeView);
+        endTimeView = (TextView) findViewById(R.id.endTimeView);
 
         // Spinner: Use to Select Weekdays.
         addCourseWeekdaysSpinner = (Spinner) findViewById(R.id.addCourseWeekdaysSpinner);
@@ -95,11 +96,11 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         String timeToShow = String.format("%02d:%02d", hourOfDay, min);
         String timeToSQL = String.format("%02d%02d", hourOfDay, min);
         if (whichOne == "startTime") {
-            startTimeButton.setText(timeToShow);
+            startTimeView.setText(timeToShow);
             courseStartTimeNewEntry = timeToSQL;
             course.setCourseStartTime(timeToSQL);
         } else if (whichOne == "endTime") {
-            endTimeButton.setText(timeToShow);
+            endTimeView.setText(timeToShow);
             courseEndTimeNewEntry = timeToSQL;
             course.setCourseEndTime(timeToSQL);
         }
@@ -109,9 +110,9 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         DialogFragment startTimePicker = new TimePickerFragment();
         startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
 
-        if (v.getId() == R.id.startTimeButton) {
+        if (v.getId() == R.id.startTimeCardView) {
             whichOne = "startTime";
-        } else if (v.getId() == R.id.endTimeButton) {
+        } else if (v.getId() == R.id.endTimeCardView) {
             whichOne = "endTime";
         }
     }
