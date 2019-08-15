@@ -7,7 +7,7 @@
     <string name="dialogTitle">What do you want</string>
     <string name="endTimeButton">End Time</string>
     <string name="startTimeButton">Start Time</string>
-    <string name="weekdays">Weekday:</string>
+    <string name="weekdays">Day</string>
     <string name="addCoursePlace">Room</string>
     <string name="addCourseName">Subject</string>
     <string name="errorNoEntry">Give me something</string>

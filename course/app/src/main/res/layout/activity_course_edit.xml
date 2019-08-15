@@ -26,7 +26,7 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/addCourseName"
-            android:inputType="textNoSuggestions"
+            android:inputType="textAutoCorrect"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +54,7 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/addCoursePlace"
-            android:inputType="textNoSuggestions"
+            android:inputType="textAutoCorrect"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,104 +62,142 @@
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
-        android:id="@+id/editWeeksDaysLinear"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCoursePlaceWrapper">
 
-        <TextView
-            android:id="@+id/editWeekdays"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:id="@+id/editStartTimeCardView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/weekdays"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/editCourseWeekdaysSpinner"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="setTimeButtonOnClick"
+            app:cardBackgroundColor="#00FFFFFF"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="8dp"
+            app:contentPaddingTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCourseAdView">
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/editCourseWeekdaysSpinner"
-            android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/startTime" />
+
+                <TextView
+                    android:id="@+id/editStartTimeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:text="00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/editEndTimeCardView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="setTimeButtonOnClick"
+            app:cardBackgroundColor="#00FFFFFF"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="8dp"
+            app:contentPaddingTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/addCourseAdView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/endTime" />
+
+                <TextView
+                    android:id="@+id/editEndTimeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:text="00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="selectDay"
+            app:cardBackgroundColor="#00FFFFFF"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="8dp"
+            app:contentPaddingTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCourseAdView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weekdays" />
+
+                <TextView
+                    android:id="@+id/editWeekday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:text="星期一"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/editLinearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editWeeksDaysLinear">
-
-
-        <Button
-            android:id="@+id/editStartTimeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:onClick="setTimeButtonOnClick"
-            android:text="@string/startTimeButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="~"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-        <Button
-            android:id="@+id/editEndTimeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:onClick="setTimeButtonOnClick"
-            android:text="@string/endTimeButton"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-    </LinearLayout>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/editCourseAdView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLinearLayout2"
+        android:layout_marginBottom="8dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

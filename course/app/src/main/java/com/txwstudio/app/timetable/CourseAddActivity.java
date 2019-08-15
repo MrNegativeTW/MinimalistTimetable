@@ -1,17 +1,15 @@
 package com.txwstudio.app.timetable;
 
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -20,7 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class CourseAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
+public class CourseAddActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     // Database and model.
     DBHandler DBHandler;
@@ -28,13 +26,14 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
     // Define View.
     TextInputLayout addCourseNameWrapper, addCoursePlaceWrapper;
-    TextView startTimeView, endTimeView;
+    TextView addStartTimeView, addEndTimeView;
+    public TextView addWeekday;
     EditText addCourseName, addCoursePlace;
-    Spinner addCourseWeekdaysSpinner;
     private AdView mAdView;
 
     // Default value for time, use to verify.
     private String courseStartTimeNewEntry = "9999", courseEndTimeNewEntry = "9999";
+    String[] addCourseItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
             public void run() {
                 mAdView.loadAd(adRequest);
             }
-        }, 1000);
+        }, 500);
     }
 
 
@@ -68,16 +67,25 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         addCoursePlaceWrapper = (TextInputLayout) findViewById(R.id.addCoursePlaceWrapper);
         addCourseName = (EditText) findViewById(R.id.addCourseName);
         addCoursePlace = (EditText) findViewById(R.id.addCoursePlace);
-        startTimeView = (TextView) findViewById(R.id.startTimeView);
-        endTimeView = (TextView) findViewById(R.id.endTimeView);
+        addStartTimeView = (TextView) findViewById(R.id.addStartTimeView);
+        addEndTimeView = (TextView) findViewById(R.id.addEndTimeView);
+        addWeekday = (TextView) findViewById(R.id.addWeekday);
 
-        // Spinner: Use to Select Weekdays.
-        addCourseWeekdaysSpinner = (Spinner) findViewById(R.id.addCourseWeekdaysSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.add_course_item, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        addCourseWeekdaysSpinner.setAdapter(adapter);
-        addCourseWeekdaysSpinner.setOnItemSelectedListener(this);
+        addCourseItem = getResources().getStringArray(R.array.add_course_item);
+        course.setCourseWeekday(0);
+    }
+
+
+    public void selectDay(View v) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setItems(R.array.add_course_item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                addWeekday.setText(String.valueOf(addCourseItem[i]));
+                course.setCourseWeekday(i);
+            }
+        });
+        dialog.show();
     }
 
 
@@ -96,11 +104,11 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         String timeToShow = String.format("%02d:%02d", hourOfDay, min);
         String timeToSQL = String.format("%02d%02d", hourOfDay, min);
         if (whichOne == "startTime") {
-            startTimeView.setText(timeToShow);
+            addStartTimeView.setText(timeToShow);
             courseStartTimeNewEntry = timeToSQL;
             course.setCourseStartTime(timeToSQL);
         } else if (whichOne == "endTime") {
-            endTimeView.setText(timeToShow);
+            addEndTimeView.setText(timeToShow);
             courseEndTimeNewEntry = timeToSQL;
             course.setCourseEndTime(timeToSQL);
         }
@@ -115,22 +123,6 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         } else if (v.getId() == R.id.endTimeCardView) {
             whichOne = "endTime";
         }
-    }
-
-
-    /**
-     * Determine which day it is.
-     * Start from 0, Monday.
-     * */
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        course.setCourseWeekday(addCourseWeekdaysSpinner.getSelectedItemPosition());
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        // Default value for weekday.
-        course.setCourseWeekday(0);
     }
 
 
