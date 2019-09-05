@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="add_course_item">
-        <item>Monday</item>
-        <item>Tuesday </item>
-        <item>Wednesday</item>
-        <item>Thursdays</item>
-        <item>Friday</item>
+        <item>Mon</item>
+        <item>Tue </item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
     </array>
 </resources>
