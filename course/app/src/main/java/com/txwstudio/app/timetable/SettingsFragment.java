@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -91,14 +92,20 @@ public class SettingsFragment extends PreferenceFragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            Uri imageUri = data.getData();
-            String imageRealPath = Util.getPath(getContext(), imageUri);
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("schoolMapPath", imageRealPath);
-            editor.commit();
+        try {
+            if (data != null) {
+                Uri imageUri = data.getData();
+                String imageRealPath = Util.getPath(getContext(), imageUri);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("schoolMapPath", imageRealPath);
+                editor.commit();
+            }
+        } catch (Exception e) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+            dialog.setTitle(R.string.imageReadErrorTitle);
+            dialog.setMessage(R.string.imageReadErrorMsg);
+            dialog.show();
         }
 
     }
