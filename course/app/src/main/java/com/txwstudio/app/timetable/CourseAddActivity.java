@@ -146,14 +146,14 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
             if (addCourseName.length() == 0 || addCoursePlace.length() == 0
                     || courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
                 if (addCourseName.length() == 0) {
-                    addCourseNameWrapper.setError("Oops!");
+                    addCourseNameWrapper.setError(getString(R.string.errorNoEntry));
                 }
                 if (addCoursePlace.length() == 0) {
-                    addCoursePlaceWrapper.setError("Oops!");
+                    addCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
                 }
                 if (courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
                     Toast.makeText(CourseAddActivity.this,
-                            "輸入時間", Toast.LENGTH_SHORT).show();
+                            R.string.errorNoTimeEntry, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 course.setCourseName(addCourseName.getText().toString());

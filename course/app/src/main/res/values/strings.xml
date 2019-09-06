@@ -21,6 +21,7 @@
 
     <!-- Activity Add/Edit Course -->
     <string name="errorNoEntry">這裡沒打到喔</string>
+    <string name="errorNoTimeEntry">輸入時間</string>
     <string name="saveCourse">儲存</string>
     <string name="addCourseName">課程</string>
     <string name="addCoursePlace">地點</string>
