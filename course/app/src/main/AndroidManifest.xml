@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SchoolMap"
+            android:name=".CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
         <activity
             android:name=".CourseAddActivity"
