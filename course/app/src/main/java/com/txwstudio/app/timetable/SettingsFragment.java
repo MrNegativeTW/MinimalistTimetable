@@ -11,11 +11,11 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+
 import android.view.View;
 import android.widget.ListView;
 
@@ -33,15 +33,15 @@ public class SettingsFragment extends PreferenceFragment implements
         list.setDivider(null);
 
         editTextPreference = (EditTextPreference) findPreference("tableTitle_Pref");
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-
-        Preference imagePicker = findPreference("schoolMapPicker");
-        imagePicker.setOnPreferenceClickListener(this);
+        Preference schoolMapPicker = findPreference("schoolMapPicker");
+        schoolMapPicker.setOnPreferenceClickListener(this);
     }
 
     @Override

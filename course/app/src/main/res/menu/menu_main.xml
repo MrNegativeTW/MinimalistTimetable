@@ -9,6 +9,11 @@
         android:title="@string/menuAddCourse"
         app:showAsAction="always" />
     <item
+        android:id="@+id/menuGotoMap"
+        android:icon="@drawable/ic_map_24dp"
+        android:title="@string/menuAddCourse"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menuSettings"
         android:icon="@drawable/ic_settings_24dp"
         android:title="@string/menuSettings"

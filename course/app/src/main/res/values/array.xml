@@ -7,4 +7,14 @@
         <item>星期四</item>
         <item>星期五</item>
     </array>
+    <array name="schoolMapMode">
+        <item>WebView</item>
+        <item>PhotoView</item>
+        <item>TouchImageView</item>
+    </array>
+    <array name="schoolMapModeValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </array>
 </resources>
