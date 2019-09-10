@@ -5,10 +5,11 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebSettings;
-import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.ortiz.touchview.TouchImageView;
@@ -18,6 +19,7 @@ public class CampusMapActivity extends AppCompatActivity {
     private WebView webview;
     private PhotoView photoView;
     private TouchImageView touchImageView;
+    private TextView campusMapErrorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,18 @@ public class CampusMapActivity extends AppCompatActivity {
 //        webview = (WebView) findViewById(R.id.traffic_schoolmap_webview);
 //        photoView = (PhotoView) findViewById(R.id.photo_view);
         touchImageView = (TouchImageView) findViewById(R.id.touchImageView);
+        campusMapErrorMsg = (TextView) findViewById(R.id.campusMapErrorTextView);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String schoolMap = prefs.getString("schoolMapPath", "");
         String schoolMapPath = "file://" + schoolMap;
         Uri campusMapUri = Uri.parse(schoolMapPath);
+        Log.i("TESTTT", schoolMap);
+
+        if (!schoolMap.isEmpty()) {
+            campusMapErrorMsg.setVisibility(View.INVISIBLE);
+        }
+
 
 //        WebSettings webSettings = webview.getSettings();
 //        webSettings.setJavaScriptEnabled(true);

@@ -57,4 +57,7 @@
     <string name="imageReadErrorMsg">喔不，你不該看到這則訊息的，但目前我對於讀取在SD卡或其他地方的圖片有點問題，所以現階段請先將圖片放置於手機內部儲存空間，我會盡快解決這問題的 : )</string>
     <string name="imageReadErrorTitle" translatable="false">: (</string>
 
+    <string name="campusMapErrorMsg">: (\n1. [設定] -> [自訂校園地圖] 選擇你的圖片 \n2. 目前無法讀取除手機內部空間外的圖，研究中
+    </string>
+
 </resources>
