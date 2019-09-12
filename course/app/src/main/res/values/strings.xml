@@ -17,6 +17,7 @@
 
     <!--右上角目錄-->
     <string name="menuAddCourse">新增</string>
+    <string name="menuMap">地圖</string>
     <string name="menuSettings">設定</string>
 
     <!-- Activity Add/Edit Course -->
@@ -26,12 +27,10 @@
     <string name="addCourseName">課程</string>
     <string name="addCoursePlace">地點</string>
     <string name="weekdays">星期</string>
+    <string name="weekdaysInitValue">星期一</string>
     <string name="startTime">開始</string>
     <string name="endTime">結束</string>
-    <string name="startTimeButton">開始時間</string>
-    <string name="endTimeButton">結束時間</string>
 
-    <string name="dialogTitle">你要幹嘛</string>
     <string name="dialogDeleted">已刪除</string>
     <array name="dialog">
         <item>編輯</item>
@@ -49,7 +48,7 @@
     <string name="schoolMapPickerSummary">長按離開按鈕即可顯示</string>
     <string name="aboutSection">關於</string>
     <string name="contactTitle">聯繫作者</string>
-    <string name="contactMessage">Bug 回報、希望功能、想聊天，通通都可以</string>
+    <string name="contactMessage">Bug 回報、功能請求、想聊天，通通都可以</string>
     <string name="aboutTitle">關於</string>
     <string name="aboutMessage" translatable="false">Made with ❤ in Taiwan</string>
     <string name="versionTitle">版本 1.0</string>

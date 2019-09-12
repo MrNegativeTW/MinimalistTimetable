@@ -89,8 +89,8 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
         String Name = courseArrayList.get(0).getCourseName();
         String Place = courseArrayList.get(0).getCoursePlace();
         String StartTime = courseArrayList.get(0).getCourseStartTime();
-        int Weekday = courseArrayList.get(0).getCourseWeekday();
         String EndTime = courseArrayList.get(0).getCourseEndTime();
+        int Weekday = courseArrayList.get(0).getCourseWeekday();
 
         editCourseName.setText(Name, TextView.BufferType.EDITABLE);
         editCoursePlace.setText(Place);
@@ -101,9 +101,9 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
 
         course.setCourseName(Name);
         course.setCoursePlace(Place);
-        course.setCourseWeekday(Weekday);
         course.setCourseStartTime(StartTime);
         course.setCourseEndTime(EndTime);
+        course.setCourseWeekday(Weekday);
     }
 
 
@@ -137,14 +137,13 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
 
     public void setTimeButtonOnClick(View v) {
         DialogFragment startTimePicker = new TimePickerFragment();
-        startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
 
         if (v.getId() == R.id.editStartTimeCardView) {
             whichOne = "startTime";
         } else if (v.getId() == R.id.editEndTimeCardView) {
             whichOne = "endTime";
         }
-
+        startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
     }
 
 

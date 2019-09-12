@@ -4,9 +4,6 @@
     <string name="main_activity">Timetable</string>
     <string name="title_activity_settings">Settings</string>
     <string name="dialogDeleted">Deleted</string>
-    <string name="dialogTitle">What do you want</string>
-    <string name="endTimeButton">End Time</string>
-    <string name="startTimeButton">Start Time</string>
     <string name="weekdays">Day</string>
     <string name="addCoursePlace">Room</string>
     <string name="addCourseName">Subject</string>
@@ -39,4 +36,7 @@
     <string name="saveCourse">Save</string>
     <string name="imageReadErrorMsg">Sorry, you shouldn\'t see this message, but currently, I have some problem with reading image from sd card or somewhere else, so please put your image inside phone storage for now, I will fix this problem soon.</string>
     <string name="errorNoTimeEntry">Enter time</string>
+    <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
+    <string name="menuMap">Map</string>
+    <string name="weekdaysInitValue">Mon</string>
 </resources>
