@@ -19,6 +19,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private final static String COURSE_WEEKDAY = "courseWeekday";
     private final static String COURSE_START_TIME = "courseStartTime";
     private final static String COURSE_END_TIME = "courseEndTime";
+    private final static String COURSE_TEACHER = "courseTeacher";
 
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

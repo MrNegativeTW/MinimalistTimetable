@@ -2,18 +2,19 @@ package com.txwstudio.app.timetable;
 
 public class Course {
 
-    private String courseName, coursePlace, courseStartTime, courseEndTime;
+    private String courseName, coursePlace, courseStartTime, courseEndTime, courseTeacher;
     private int ID, courseWeekday;
 
     public Course(){}
 
     public Course(int ID, String courseName, String coursePlace, String courseStartTime,
-                  String courseEndTime, int courseWeekday) {
+                  String courseEndTime, String courseTeacher, int courseWeekday) {
         this.ID = ID;
         this.courseName = courseName;
         this.coursePlace = coursePlace;
         this.courseStartTime = courseStartTime;
         this.courseEndTime = courseEndTime;
+        this.courseTeacher = courseTeacher;
         this.courseWeekday = courseWeekday;
     }
 
@@ -57,9 +58,20 @@ public class Course {
         return courseEndTime;
     }
 
+    public void setCourseTeacher(String courseTeacher) {
+        this.courseTeacher = courseTeacher;
+    }
+
+    public String getCourseTeacher() {
+        return courseTeacher;
+    }
+
     public void setCourseWeekday(int courseWeekday) {this.courseWeekday = courseWeekday;}
 
     public int getCourseWeekday() {
         return courseWeekday;
     }
+
+
+
 }
