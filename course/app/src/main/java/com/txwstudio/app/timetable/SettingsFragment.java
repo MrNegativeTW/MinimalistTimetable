@@ -15,9 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
-
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class SettingsFragment extends PreferenceFragment implements
         OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
@@ -96,6 +96,10 @@ public class SettingsFragment extends PreferenceFragment implements
             if (data != null) {
                 Uri imageUri = data.getData();
                 String imageRealPath = Util.getPath(getContext(), imageUri);
+                if (imageRealPath == null) {
+                    Toast.makeText(getActivity(), R.string.imageReadErrorToast, Toast.LENGTH_SHORT)
+                            .show();
+                }
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("schoolMapPath", imageRealPath);

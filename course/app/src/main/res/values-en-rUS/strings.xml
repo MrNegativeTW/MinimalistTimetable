@@ -32,6 +32,10 @@
     <string name="aboutSection">About</string>
     <string name="generalSection">General</string>
     <string name="schoolMapPickerTitle">Custom Campus Map</string>
+    <array name="dialog">
+        <item>Edit</item>
+        <item>Delete</item>
+    </array>
     <string name="schoolMapPickerSummary">Long press on exit button to display</string>
     <string name="saveCourse">Save</string>
     <string name="imageReadErrorMsg">Sorry, you shouldn\'t see this message, but currently, I have some problem with reading image from sd card or somewhere else, so please put your image inside phone storage for now, I will fix this problem soon.</string>
@@ -39,4 +43,5 @@
     <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
     <string name="menuMap">Map</string>
     <string name="weekdaysInitValue">Mon</string>
+    <string name="imageReadErrorToast">Only support Internal Storage for now.</string>
 </resources>
