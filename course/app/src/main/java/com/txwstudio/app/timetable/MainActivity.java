@@ -164,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
 
+        } else if (id == R.id.menuCalendar) {
+
+//            Intent intent = new Intent(this, SettingsActivity.class);
+//            startActivity(intent);
+            return true;
         } else if (id == R.id.menuSettings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
