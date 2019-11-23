@@ -120,6 +120,14 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
     }
 
 
+    /**
+     * These two func will handle time set.
+     *
+     * func onTimeSet: Assign value to startTime or endTime.
+     * func setTimeButtonOnClick: Open time picker dialog
+     *
+     * arg whichOne: Use Determine is start or end.
+     * */
     private String whichOne = "startTime";
 
     @Override
