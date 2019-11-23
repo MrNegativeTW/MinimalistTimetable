@@ -115,14 +115,13 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
     }
 
     public void setTimeButtonOnClick(View v) {
-        DialogFragment startTimePicker = new TimePickerFragment();
-        startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
-
         if (v.getId() == R.id.startTimeCardView) {
             whichOne = "startTime";
         } else if (v.getId() == R.id.endTimeCardView) {
             whichOne = "endTime";
         }
+        DialogFragment startTimePicker = new TimePickerFragment();
+        startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
     }
 
 
