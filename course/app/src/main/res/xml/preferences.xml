@@ -21,6 +21,11 @@
             android:key="schoolMapPicker"
             android:title="@string/schoolMapPickerTitle"
             android:summary="@string/schoolMapPickerSummary"/>
+        <Preference
+            android:icon="@drawable/ic_event_note_24dp"
+            android:key="schoolCalendarPicker"
+            android:title="@string/schoolCalendarPickerTitle"
+            android:summary="@string/schoolCalendarPickerSummary"/>
     </PreferenceCategory>
 
     <PreferenceCategory

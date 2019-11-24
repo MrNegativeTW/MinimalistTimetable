@@ -18,7 +18,6 @@
     <string name="editCourseActivityTitle">Edit Detail</string>
     <string name="addCourseActivityTitle">Add Course</string>
     <string name="traffic_schoolMap">Map</string>
-    <string name="aboutTitle">About</string>
     <string name="startTime">Starts</string>
     <string name="endTime">Ends</string>
     <string name="lightMode">Light Mode</string>
@@ -44,4 +43,9 @@
     <string name="menuMap">Map</string>
     <string name="weekdaysInitValue">Mon</string>
     <string name="imageReadErrorToast">Only support Internal Storage for now.</string>
+    <string name="menuCalendar">Calendar</string>
+    <string name="schoolCalendarPickerTitle">Custom Schoole Calendar</string>
+    <string name="schoolCalendarPickerSummary">PDF, using Google Drive to open.</string>
+    <string name="pdfNoAppMsg">Install Google Drive first</string>
+    <string name="pdfOpenWithMsg">Open PDF with...</string>
 </resources>

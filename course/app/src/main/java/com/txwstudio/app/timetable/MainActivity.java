@@ -1,12 +1,15 @@
 package com.txwstudio.app.timetable;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -19,6 +22,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.io.File;
 import java.util.Calendar;
 
 import com.txwstudio.app.timetable.Fragments.Frag1;
@@ -158,16 +164,34 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
 
-        } else if (id == R.id.menuGotoMap) {
+        } else if (id == R.id.menuMap) {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, CampusMapActivity.class);
             startActivity(intent);
             return true;
 
         } else if (id == R.id.menuCalendar) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String pdfPath = prefs.getString("pdfPath", "");
+            File file = new File(pdfPath);
+            Uri uri = FileProvider.getUriForFile(MainActivity.this,
+                    BuildConfig.APPLICATION_ID + ".provider", file);
 
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
+            Intent target = new Intent(Intent.ACTION_VIEW);
+            target.setDataAndType(uri,"application/pdf");
+            target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            Intent intent = Intent.createChooser(target, String.valueOf(R.string.pdfOpenWithMsg));
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(this, R.string.pdfNoAppMsg, Toast.LENGTH_LONG).show();
+            }
+
+
+
+
             return true;
         } else if (id == R.id.menuSettings) {
             Intent intent = new Intent(this, SettingsActivity.class);

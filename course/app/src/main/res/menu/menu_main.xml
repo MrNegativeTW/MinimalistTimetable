@@ -9,14 +9,14 @@
         android:title="@string/menuAddCourse"
         app:showAsAction="always" />
     <item
-        android:id="@+id/menuGotoMap"
+        android:id="@+id/menuMap"
         android:icon="@drawable/ic_map_24dp"
         android:title="@string/menuMap"
         app:showAsAction="always" />
     <item
         android:id="@+id/menuCalendar"
         android:icon="@drawable/ic_event_note_24dp"
-        android:title="@string/menuMap"
+        android:title="@string/menuCalendar"
         app:showAsAction="always" />
     <item
         android:id="@+id/menuSettings"

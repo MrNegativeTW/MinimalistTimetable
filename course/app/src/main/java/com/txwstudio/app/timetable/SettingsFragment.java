@@ -15,15 +15,24 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import static android.app.Activity.RESULT_OK;
+
+
 public class SettingsFragment extends PreferenceFragment implements
         OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
+
     public static boolean restartSchedule = false;
     private EditTextPreference editTextPreference;
+    private static final int MAP_REQUEST_CODE = 0;
+    private static final int CALENDAR_REQUEST_CODE = 1;
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -41,7 +50,9 @@ public class SettingsFragment extends PreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         Preference schoolMapPicker = findPreference("schoolMapPicker");
+        Preference schoolCalendarPicker = findPreference("schoolCalendarPicker");
         schoolMapPicker.setOnPreferenceClickListener(this);
+        schoolCalendarPicker.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -71,27 +82,46 @@ public class SettingsFragment extends PreferenceFragment implements
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals("schoolMapPicker")) {
+        int permission = ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-            int permission = ContextCompat.checkSelfPermission(getContext(),
-                                                        Manifest.permission.READ_EXTERNAL_STORAGE);
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
-                        0);
-            } else {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                startActivityForResult(intent, 0);
-            }
+        if (permission == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
+
+        } else if (preference.getKey().equals("schoolMapPicker")) {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+            startActivityForResult(intent, MAP_REQUEST_CODE);
+
+        } else if  (preference.getKey().equals("schoolCalendarPicker")) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("application/pdf");
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+            startActivityForResult(intent, CALENDAR_REQUEST_CODE);
         }
+
         return false;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            switch (requestCode){
+                case MAP_REQUEST_CODE:
+                    mapRequest(data);
+                    break;
+                case CALENDAR_REQUEST_CODE:
+                    calendarRequest(data);
+                    break;
+            }
+        }
+    }
+
+    private void mapRequest(Intent data) {
         try {
             if (data != null) {
                 Uri imageUri = data.getData();
@@ -111,6 +141,22 @@ public class SettingsFragment extends PreferenceFragment implements
             dialog.setMessage(R.string.imageReadErrorMsg);
             dialog.show();
         }
-
     }
+
+    private void calendarRequest(Intent data) {
+        if (data != null) {
+            Uri pdfUri = data.getData();
+            String pdfRealPath = Util.getPath(getContext(), pdfUri);
+            if (pdfRealPath == null) {
+                Toast.makeText(getActivity(), R.string.imageReadErrorToast, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("pdfPath", pdfRealPath);
+            editor.commit();
+        }
+    }
+
 }
