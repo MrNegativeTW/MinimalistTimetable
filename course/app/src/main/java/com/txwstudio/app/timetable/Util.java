@@ -3,6 +3,7 @@ package com.txwstudio.app.timetable;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 public class Util extends Activity {
 
@@ -22,6 +24,34 @@ public class Util extends Activity {
         Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
         activity.setTheme(lightMode ? R.style.LightTheme : R.style.AppTheme);
     }
+
+
+    /**
+     * Prevent from losing data when accidentally pressed the back button.
+     * Here we use a dialog to confirm the action.
+     *
+     * @param activity The activity.
+     * */
+    public static void onBackPressedDialog(final Activity activity){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+        dialog.setMessage(R.string.dialogConfirmExit);
+        dialog.setPositiveButton(R.string.dialogPositiveButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        dialog.setNegativeButton(R.string.dialogNegativeButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.show();
+    }
+
+
+
 
 
     /** https://stackoverflow.com/questions/8215308/using-context-in-a-fragment

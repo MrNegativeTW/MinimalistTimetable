@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">極簡課表</string>
 
-    <!--Activity Name-->
+    <!-- Activity Name -->
     <string name="main_activity">課表</string>
     <string name="traffic_schoolMap">地圖</string>
     <string name="addCourseActivityTitle">新增課程</string>
     <string name="editCourseActivityTitle">編輯課程</string>
     <string name="title_activity_settings">設定</string>
 
-    <!--分頁名稱-->
+    <!-- 分頁名稱 -->
     <string name="tab_text_1">一</string>
     <string name="tab_text_2">二</string>
     <string name="tab_text_3">三</string>
     <string name="tab_text_4">四</string>
     <string name="tab_text_5">五</string>
 
-    <!--右上角目錄-->
+    <!-- 右上角目錄 -->
     <string name="menuAddCourse">新增</string>
     <string name="menuMap">地圖</string>
     <string name="menuCalendar">行事曆</string>
@@ -32,11 +32,16 @@
     <string name="startTime">開始</string>
     <string name="endTime">結束</string>
 
+    <!-- Dialog -->
     <string name="dialogDeleted">已刪除</string>
     <array name="dialog">
         <item>編輯</item>
         <item>刪除</item>
     </array>
+    <string name="dialogConfirmExit">確定要離開?</string>
+    <string name="dialogConfirmDelete">你真的要刪掉它嗎?</string>
+    <string name="dialogPositiveButton">真的</string>
+    <string name="dialogNegativeButton">假的</string>
 
     <!-- Activity Setting -->
     <string name="generalSection">一般</string>

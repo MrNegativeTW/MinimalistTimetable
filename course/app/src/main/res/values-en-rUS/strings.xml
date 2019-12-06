@@ -26,7 +26,7 @@
     <string name="tableTitleDefault">My Timetable</string>
     <string name="versionTitle">Version 1.0</string>
     <string name="tableTitleMessage">Name to show on the main screen</string>
-    <string name="contactMessage">Bug Report, want a new feature or chat with me.</string>
+    <string name="contactMessage">Bug Report or feature request.</string>
     <string name="contactTitle">Contact Developers</string>
     <string name="aboutSection">About</string>
     <string name="generalSection">General</string>
@@ -48,4 +48,8 @@
     <string name="schoolCalendarPickerSummary">PDF, using Google Drive to open.</string>
     <string name="pdfNoAppMsg">Install Google Drive first</string>
     <string name="pdfOpenWithMsg">Open PDF with...</string>
+    <string name="dialogNegativeButton">Hell No</string>
+    <string name="dialogPositiveButton">Of Course</string>
+    <string name="dialogConfirmExit">Are you sure you want to EXIT?</string>
+    <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
 </resources>

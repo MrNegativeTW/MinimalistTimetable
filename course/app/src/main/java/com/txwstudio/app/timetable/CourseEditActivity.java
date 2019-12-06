@@ -185,8 +185,15 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
                 finish();
             }
         } else if (id == android.R.id.home) {
-            finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Util.onBackPressedDialog(this);
     }
 }
