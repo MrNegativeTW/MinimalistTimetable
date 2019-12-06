@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 
@@ -90,7 +91,7 @@ public class SettingsFragment extends PreferenceFragment implements
                     new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
 
         } else if (preference.getKey().equals("schoolMapPicker")) {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
             startActivityForResult(intent, MAP_REQUEST_CODE);
@@ -109,17 +110,52 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK){
-            switch (requestCode){
-                case MAP_REQUEST_CODE:
-                    mapRequest(data);
-                    break;
-                case CALENDAR_REQUEST_CODE:
-                    calendarRequest(data);
-                    break;
-            }
+        if (resultCode == RESULT_OK && data != null){
+            fileRequest(requestCode, data);
+//            switch (requestCode){
+//                case MAP_REQUEST_CODE:
+//                    mapRequest(data);
+//                    break;
+//                case CALENDAR_REQUEST_CODE:
+//                    calendarRequest(data);
+//                    break;
+//            }
+
+        } else if (resultCode == RESULT_CANCELED){}
+        else if (data == null) {
+            Toast.makeText(getActivity(), R.string.fileReadErrorToast, Toast.LENGTH_SHORT)
+                    .show();
         }
     }
+
+
+    private void fileRequest(int requestCode, Intent data) {
+
+        String prefName = "";
+        switch (requestCode){
+            case MAP_REQUEST_CODE:
+                prefName = "schoolMapPath";
+                break;
+            case CALENDAR_REQUEST_CODE:
+                prefName = "pdfPath";
+                break;
+        }
+
+        try {
+            Uri fileUri = data.getData();
+            String filePath = Util.getPath(getContext(), fileUri);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString(prefName, filePath);
+            editor.commit();
+        } catch (Exception e) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+            dialog.setTitle(R.string.fileReadErrorTitle);
+            dialog.setMessage(R.string.fileReadErrorMsg);
+            dialog.show();
+        }
+    }
+
 
     private void mapRequest(Intent data) {
         try {

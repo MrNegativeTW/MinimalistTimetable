@@ -34,12 +34,13 @@ public class CampusMapActivity extends AppCompatActivity {
         campusMapErrorMsg = (TextView) findViewById(R.id.campusMapErrorTextView);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String schoolMap = prefs.getString("schoolMapPath", "");
-        String schoolMapPath = "file://" + schoolMap;
-        Uri campusMapUri = Uri.parse(schoolMapPath);
-        Log.i("TESTTT", schoolMap);
+        String mapPath = prefs.getString("schoolMapPath", "");
+        String mapPathString = "file://" + mapPath;
+        Uri mapUri = Uri.parse(mapPathString);
 
-        if (!schoolMap.isEmpty()) {
+        Log.i("TESTTT", "Map Path:" + mapPath + " Map Uri: " + mapUri);
+
+        if (!mapPath.isEmpty()) {
             campusMapErrorMsg.setVisibility(View.INVISIBLE);
         }
 
@@ -51,13 +52,13 @@ public class CampusMapActivity extends AppCompatActivity {
 //        webSettings.setDisplayZoomControls(false);
 //        webview.setWebViewClient(new WebViewClient());
 //        webview.setInitialScale(150);
-//        webview.loadDataWithBaseURL("", "<img src='"+ schoolMapPath + "' />",
+//        webview.loadDataWithBaseURL("", "<img src='"+ mapPath + "' />",
 //                "text/html", "utf-8", null);
 
 
-//        photoView.setImageURI(campusMapUri);
+//        photoView.setImageURI(mapUri);
 
-        touchImageView.setImageURI(campusMapUri);
+        touchImageView.setImageURI(mapUri);
     }
 
 
