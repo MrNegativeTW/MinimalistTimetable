@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-    } // .setupExitButton()
+    }
 
 
     @Override
@@ -160,7 +160,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menuAdd) {
+            /* Get the current day and set it as default when adding the course. */
+            int autoWeekday = mViewPager.getCurrentItem();
+
             Intent intent = new Intent(this, CourseAddActivity.class);
+            intent.putExtra("autoWeekday", autoWeekday);
             startActivity(intent);
             return true;
 
@@ -200,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    } // .onOptionsItemSelected
+    }
 
 
     /**

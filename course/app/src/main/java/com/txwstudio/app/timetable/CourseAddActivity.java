@@ -41,8 +41,8 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setupAds();
 
+        setupAds();
         findViewById();
 
         // Database
@@ -72,7 +72,11 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
         addWeekday = (TextView) findViewById(R.id.addWeekday);
 
         addCourseItem = getResources().getStringArray(R.array.add_course_item);
-        course.setCourseWeekday(0);
+
+        /* Get the current day and set it as default when adding the course. */
+        int autoWeekday = getIntent().getIntExtra("autoWeekday", 0);
+        addWeekday.setText(String.valueOf(addCourseItem[autoWeekday]));
+        course.setCourseWeekday(autoWeekday);
     }
 
 
@@ -131,7 +135,6 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
      * menuSave: Check value then call database to save it.
      * android.R.id.home: If there is already has value, check user want to leave or not.
      * */
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.save_menu, menu);
