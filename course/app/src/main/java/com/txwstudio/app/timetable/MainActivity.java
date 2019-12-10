@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (id == R.id.menuCalendar) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String pdfPath = prefs.getString("pdfPath", "");
+            String pdfPath = prefs.getString("schoolCalendarPath", "");
             File file = new File(pdfPath);
             Uri uri = FileProvider.getUriForFile(MainActivity.this,
                     BuildConfig.APPLICATION_ID + ".provider", file);

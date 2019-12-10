@@ -36,7 +36,7 @@
         android:summary="@string/contactMessage">
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="https://docs.google.com/forms/d/e/1FAIpQLSdNQ9j4dJXFX5Ie__uoH294vQeTsqjjMJniMR82WhXMPZlI8w/viewform?usp=sf_link" />
+            android:data="http://bit.ly/timetableFeedback"/>
     </Preference>
     <Preference
         android:icon="@drawable/ic_code_24dp"

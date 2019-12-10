@@ -137,7 +137,7 @@ public class SettingsFragment extends PreferenceFragment implements
                 prefName = "schoolMapPath";
                 break;
             case CALENDAR_REQUEST_CODE:
-                prefName = "pdfPath";
+                prefName = "schoolCalendarPath";
                 break;
         }
 
