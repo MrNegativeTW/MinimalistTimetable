@@ -55,6 +55,12 @@
     <string name="schoolCalendarPickerTitle">自訂學校行事曆</string>
     <string name="schoolCalendarPickerSummary">支援PDF，使用 Google 雲端硬碟開啟</string>
 
+    <string name="columnSection">欄位設定</string>
+    <string name="weekendColTitle">週末欄位</string>
+    <string name="weekendColSummary">開啟禮拜六日欄位</string>
+    <string name="teacherColTitle">教師欄位</string>
+    <string name="teacherColSummary">在課表顯示教師名稱</string>
+
     <string name="aboutSection">關於</string>
     <string name="contactTitle">聯繫作者</string>
     <string name="contactMessage">Bug 回報、功能請求</string>

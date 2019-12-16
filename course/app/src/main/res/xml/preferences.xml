@@ -28,6 +28,18 @@
             android:summary="@string/schoolCalendarPickerSummary"/>
     </PreferenceCategory>
 
+    <!--<PreferenceCategory
+        android:title="@string/columnSection">
+        <CheckBoxPreference
+            android:icon="@drawable/ic_bug_24dp"
+            android:title="@string/weekendColTitle"
+            android:summary="@string/weekendColSummary" />
+        <CheckBoxPreference
+            android:icon="@drawable/ic_code_24dp"
+            android:title="@string/teacherColTitle"
+            android:summary="@string/teacherColSummary"/>
+    </PreferenceCategory>-->
+
     <PreferenceCategory
         android:title="@string/aboutSection">
     <Preference
