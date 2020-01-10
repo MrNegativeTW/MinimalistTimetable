@@ -26,6 +26,10 @@
             android:key="schoolCalendarPicker"
             android:title="@string/schoolCalendarPickerTitle"
             android:summary="@string/schoolCalendarPickerSummary"/>
+        <Preference
+            android:icon="@drawable/ic_event_note_24dp"
+            android:key="permissionTester"
+            android:title="取得權限"/>
     </PreferenceCategory>
 
     <!--<PreferenceCategory

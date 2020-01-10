@@ -7,6 +7,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -15,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+import androidx.documentfile.provider.DocumentFile;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -31,6 +34,7 @@ public class SettingsFragment extends PreferenceFragment implements
 
     public static boolean restartSchedule = false;
     private EditTextPreference editTextPreference;
+    private static final int SDCARD_REQUEST_CODE = 2;
     private static final int MAP_REQUEST_CODE = 0;
     private static final int CALENDAR_REQUEST_CODE = 1;
 
@@ -52,8 +56,10 @@ public class SettingsFragment extends PreferenceFragment implements
         addPreferencesFromResource(R.xml.preferences);
         Preference schoolMapPicker = findPreference("schoolMapPicker");
         Preference schoolCalendarPicker = findPreference("schoolCalendarPicker");
+        Preference permissionTester = findPreference("permissionTester");
         schoolMapPicker.setOnPreferenceClickListener(this);
         schoolCalendarPicker.setOnPreferenceClickListener(this);
+        permissionTester.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -96,11 +102,15 @@ public class SettingsFragment extends PreferenceFragment implements
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
             startActivityForResult(intent, MAP_REQUEST_CODE);
 
-        } else if  (preference.getKey().equals("schoolCalendarPicker")) {
+        } else if (preference.getKey().equals("schoolCalendarPicker")) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("application/pdf");
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
             startActivityForResult(intent, CALENDAR_REQUEST_CODE);
+
+        } else if (preference.getKey().equals("permissionTester")) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            startActivityForResult(intent, SDCARD_REQUEST_CODE);
         }
 
         return false;
@@ -110,8 +120,17 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == SDCARD_REQUEST_CODE) {
+            Uri treeUri = data.getData();
+            DocumentFile pickedDir = DocumentFile.fromTreeUri(getContext(), treeUri);
+            Log.i("TESTTT", "treeUri: "+ treeUri);
+            getActivity().grantUriPermission(getActivity().getPackageName(), treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            getActivity().getContentResolver().takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
+
         if (resultCode == RESULT_OK && data != null){
             fileRequest(requestCode, data);
+
 //            switch (requestCode){
 //                case MAP_REQUEST_CODE:
 //                    mapRequest(data);
@@ -121,8 +140,8 @@ public class SettingsFragment extends PreferenceFragment implements
 //                    break;
 //            }
 
-        } else if (resultCode == RESULT_CANCELED){}
-        else if (data == null) {
+        } else if (resultCode == RESULT_CANCELED){
+        } else if (data == null) {
             Toast.makeText(getActivity(), R.string.fileReadErrorToast, Toast.LENGTH_SHORT)
                     .show();
         }
