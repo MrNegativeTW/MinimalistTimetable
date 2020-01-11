@@ -120,13 +120,13 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == SDCARD_REQUEST_CODE) {
-            Uri treeUri = data.getData();
-            DocumentFile pickedDir = DocumentFile.fromTreeUri(getContext(), treeUri);
-            Log.i("TESTTT", "treeUri: "+ treeUri);
-            getActivity().grantUriPermission(getActivity().getPackageName(), treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            getActivity().getContentResolver().takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        }
+//        if (requestCode == SDCARD_REQUEST_CODE) {
+//            Uri treeUri = data.getData();
+//            DocumentFile pickedDir = DocumentFile.fromTreeUri(getContext(), treeUri);
+//            Log.i("TESTTT", "treeUri: "+ treeUri);
+//            getActivity().grantUriPermission(getActivity().getPackageName(), treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            getActivity().getContentResolver().takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//        }
 
         if (resultCode == RESULT_OK && data != null){
             fileRequest(requestCode, data);
@@ -158,6 +158,15 @@ public class SettingsFragment extends PreferenceFragment implements
             case CALENDAR_REQUEST_CODE:
                 prefName = "schoolCalendarPath";
                 break;
+            case SDCARD_REQUEST_CODE:
+                Uri treeUri = data.getData();
+                DocumentFile pickedDir = DocumentFile.fromTreeUri(getContext(), treeUri);
+                Log.i("TESTTT", "treeUri: "+ treeUri);
+                getActivity().grantUriPermission(getActivity().getPackageName(), treeUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                getActivity().getContentResolver().takePersistableUriPermission(treeUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
         }
 
         try {
