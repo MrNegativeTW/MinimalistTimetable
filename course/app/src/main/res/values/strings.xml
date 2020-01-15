@@ -68,9 +68,8 @@
     <string name="versionMessage" translatable="false">Made with ❤ in Taiwan</string>
 
     <!-- File Read Error Msg -->
-    <string name="fileReadErrorTitle">Oops!</string>
-    <string name="fileReadErrorMsg">看來路徑轉換時出了點小問題，現階段請先將檔案至於手機內部，開發者大大還在研究SAF如何使用 :)</string>
-    <string name="fileReadErrorToast">檔案請放置於手機內部，SD卡目前不支援</string>
+    <string name="fileReadErrorTitle">喔不</string>
+    <string name="fileReadErrorMsg">暫不支援存取 SD 卡上的檔案</string>
 
     <!-- Campus Map Error Msg -->
     <string name="imageReadErrorMsg">喔不，你不該看到這則訊息的，但目前我對於讀取在SD卡或其他地方的圖片有點問題，所以現階段請先將圖片放置於手機內部儲存空間，我會盡快解決這問題的 : )</string>

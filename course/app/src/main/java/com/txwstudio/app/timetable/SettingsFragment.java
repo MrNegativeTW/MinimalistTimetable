@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -120,30 +123,11 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        if (requestCode == SDCARD_REQUEST_CODE) {
-//            Uri treeUri = data.getData();
-//            DocumentFile pickedDir = DocumentFile.fromTreeUri(getContext(), treeUri);
-//            Log.i("TESTTT", "treeUri: "+ treeUri);
-//            getActivity().grantUriPermission(getActivity().getPackageName(), treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//            getActivity().getContentResolver().takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//        }
-
         if (resultCode == RESULT_OK && data != null){
             fileRequest(requestCode, data);
-
-//            switch (requestCode){
-//                case MAP_REQUEST_CODE:
-//                    mapRequest(data);
-//                    break;
-//                case CALENDAR_REQUEST_CODE:
-//                    calendarRequest(data);
-//                    break;
-//            }
-
         } else if (resultCode == RESULT_CANCELED){
         } else if (data == null) {
-            Toast.makeText(getActivity(), R.string.fileReadErrorToast, Toast.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -166,7 +150,6 @@ public class SettingsFragment extends PreferenceFragment implements
                         Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 getActivity().getContentResolver().takePersistableUriPermission(treeUri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
         }
 
         try {
@@ -177,50 +160,18 @@ public class SettingsFragment extends PreferenceFragment implements
             editor.putString(prefName, filePath);
             editor.commit();
         } catch (Exception e) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-            dialog.setTitle(R.string.fileReadErrorTitle);
-            dialog.setMessage(R.string.fileReadErrorMsg);
-            dialog.show();
+            Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    private void mapRequest(Intent data) {
-        try {
-            if (data != null) {
-                Uri imageUri = data.getData();
-                String imageRealPath = Util.getPath(getContext(), imageUri);
-                if (imageRealPath == null) {
-                    Toast.makeText(getActivity(), R.string.imageReadErrorToast, Toast.LENGTH_SHORT)
-                            .show();
-                }
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("schoolMapPath", imageRealPath);
-                editor.commit();
-            }
-        } catch (Exception e) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-            dialog.setTitle(R.string.imageReadErrorTitle);
-            dialog.setMessage(R.string.imageReadErrorMsg);
-            dialog.show();
+    public Uri getUri() {
+        List<UriPermission> persistedUriPermissions = getActivity().getContentResolver().getPersistedUriPermissions();
+        if (persistedUriPermissions.size() > 0) {
+            UriPermission uriPermission = persistedUriPermissions.get(0);
+            return uriPermission.getUri();
         }
-    }
-
-    private void calendarRequest(Intent data) {
-        if (data != null) {
-            Uri pdfUri = data.getData();
-            String pdfRealPath = Util.getPath(getContext(), pdfUri);
-            if (pdfRealPath == null) {
-                Toast.makeText(getActivity(), R.string.imageReadErrorToast, Toast.LENGTH_SHORT)
-                        .show();
-            }
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("pdfPath", pdfRealPath);
-            editor.commit();
-        }
+        return null;
     }
 
 }
