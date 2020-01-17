@@ -40,6 +40,8 @@ public class SettingsFragment extends PreferenceFragment implements
     private EditTextPreference editTextPreference;
     private static final int MAP_REQUEST_CODE = 0;
     private static final int CALENDAR_REQUEST_CODE = 1;
+    public static final String MAP_REQUEST_PREF_NAME = "schoolMapPath";
+    private static final String CALENDAR_REQUEST_PREF_NAME = "schoolCalendarPath";
 
 
     @Override
@@ -90,6 +92,13 @@ public class SettingsFragment extends PreferenceFragment implements
         }
     }
 
+    /**
+     * onPreferenceClick()
+     *
+     * schoolMapPicker: Send request code and start an intent for result.
+     * schoolCalendarPicker: Send request code and start an intent for result.
+     * mapCalHelper: Show what to do with above function in preference screen.
+     * */
     @Override
     public boolean onPreferenceClick(Preference preference) {
         int permission = ContextCompat.checkSelfPermission(getContext(),
@@ -116,9 +125,7 @@ public class SettingsFragment extends PreferenceFragment implements
             dialog.setMessage("PlaceHolder");
             dialog.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    getActivity().finish();
-                }
+                public void onClick(DialogInterface dialogInterface, int i) {}
             });
             dialog.show();
         }
@@ -131,23 +138,28 @@ public class SettingsFragment extends PreferenceFragment implements
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && data != null){
-            fileRequest(requestCode, data);
-        } else if (resultCode == RESULT_CANCELED){
+            handleSelectedFile(requestCode, data);
         } else if (data == null) {
-            Toast.makeText(getActivity(), "oops", Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(getActivity(), "未知錯誤，請在試一次", Toast.LENGTH_SHORT).show();
+        } else if (resultCode == RESULT_CANCELED){}
     }
 
 
-    private void fileRequest(int requestCode, Intent data) {
-
+    /**
+     * Decide which preference to write, then save uri into preference.
+     * Keyword: Storage Access Framework.
+     *
+     * @param requestCode: Receive code and decide which preference to write.
+     * @param data: File uri
+     * */
+    private void handleSelectedFile(int requestCode, Intent data) {
         String prefName = "";
         switch (requestCode){
             case MAP_REQUEST_CODE:
-                prefName = "schoolMapPath";
+                prefName = MAP_REQUEST_PREF_NAME;
                 break;
             case CALENDAR_REQUEST_CODE:
-                prefName = "schoolCalendarPath";
+                prefName = CALENDAR_REQUEST_PREF_NAME;
                 break;
         }
 
@@ -158,15 +170,17 @@ public class SettingsFragment extends PreferenceFragment implements
                     | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             getActivity().grantUriPermission(getActivity().getPackageName(), fileUri, takeFlags);
             getActivity().getContentResolver().takePersistableUriPermission(fileUri, takeFlags);
+            String filePath = fileUri.toString();
+
+            /**Old method, remove soon.*/
 //            String filePath = Util.getPath(getContext(), fileUri);
-            String filePath = fileUri.toString(); //Testing
 
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(prefName, filePath);
             editor.commit();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "未知錯誤，請在試一次", Toast.LENGTH_SHORT).show();
         }
     }
 
