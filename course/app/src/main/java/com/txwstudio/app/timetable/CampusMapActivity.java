@@ -5,24 +5,16 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
-
 import com.github.chrisbanes.photoview.PhotoView;
 import com.ortiz.touchview.TouchImageView;
-
-import java.io.FileNotFoundException;
+import static com.txwstudio.app.timetable.SettingsFragment.MAP_REQUEST_PREF_NAME;
 
 public class CampusMapActivity extends AppCompatActivity {
-
-    private WebView webview;
-    private PhotoView photoView;
-    private TouchImageView touchImageView;
-    private TextView campusMapErrorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +23,21 @@ public class CampusMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_campus_map);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        webview = (WebView) findViewById(R.id.traffic_schoolmap_webview);
-//        photoView = (PhotoView) findViewById(R.id.photo_view);
-        touchImageView = (TouchImageView) findViewById(R.id.touchImageView);
-        campusMapErrorMsg = (TextView) findViewById(R.id.campusMapErrorTextView);
+//        WebView webview = (WebView) findViewById(R.id.traffic_schoolmap_webview);
+//        PhotoView photoView = (PhotoView) findViewById(R.id.photo_view);
+        TouchImageView touchImageView = (TouchImageView) findViewById(R.id.touchImageView);
+        TextView campusMapErrorMsg = (TextView) findViewById(R.id.campusMapErrorTextView);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String mapPath = prefs.getString("schoolMapPath", "");
+        String mapPath = prefs.getString(MAP_REQUEST_PREF_NAME, "");
         Uri mapUri = Uri.parse(mapPath);
-
-//        String mapPathString = "file://" + mapPath;
-//        Uri mapUri = Uri.parse(mapPathString);
-
-
         if (!mapPath.isEmpty()) {
             campusMapErrorMsg.setVisibility(View.INVISIBLE);
         }
+
+        /**Old method, remove soon.*/
+//        String mapPathString = "file://" + mapPath;
+//        Uri mapUri = Uri.parse(mapPathString);
 
 //        WebSettings webSettings = webview.getSettings();
 //        webSettings.setJavaScriptEnabled(true);
@@ -58,22 +49,15 @@ public class CampusMapActivity extends AppCompatActivity {
 //        webview.loadDataWithBaseURL("", "<img src='"+ mapPath + "' />",
 //                "text/html", "utf-8", null);
 
-
 //        photoView.setImageURI(mapUri);
 
-//        touchImageView.setImageURI(mapUri);
         touchImageView.setImageURI(mapUri);
-
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-        }
+        if (id == android.R.id.home) { finish(); }
         return super.onOptionsItemSelected(item);
     }
 }
