@@ -137,11 +137,12 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && data != null){
+        if (resultCode == RESULT_OK && data != null) {
             handleSelectedFile(requestCode, data);
+        } else if (resultCode == RESULT_CANCELED) {
         } else if (data == null) {
-            Toast.makeText(getActivity(), "未知錯誤，請在試一次", Toast.LENGTH_SHORT).show();
-        } else if (resultCode == RESULT_CANCELED){}
+            Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -180,7 +181,7 @@ public class SettingsFragment extends PreferenceFragment implements
             editor.putString(prefName, filePath);
             editor.commit();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "未知錯誤，請在試一次", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
         }
     }
 

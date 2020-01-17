@@ -37,12 +37,10 @@
     </array>
     <string name="schoolMapPickerSummary">Long press on exit button to show</string>
     <string name="saveCourse">Save</string>
-    <string name="imageReadErrorMsg">Sorry, you shouldn\'t see this message, but currently, I have some problem with reading image from sd card or somewhere else, so please put your image inside phone storage for now, I will fix this problem soon.</string>
     <string name="errorNoTimeEntry">Enter time</string>
     <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
     <string name="menuMap">Map</string>
     <string name="weekdaysInitValue">Mon</string>
-    <string name="imageReadErrorToast">Only support Internal Storage for now.</string>
     <string name="menuCalendar">Calendar</string>
     <string name="schoolCalendarPickerTitle">Custom Schoole Calendar</string>
     <string name="schoolCalendarPickerSummary">PDF, using Google Drive to open.</string>
@@ -52,4 +50,8 @@
     <string name="dialogPositiveButton">Of Course</string>
     <string name="dialogConfirmExit">Are you sure you want to EXIT?</string>
     <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
+    <string name="fileReadErrorMsg">Unknown error, please try again.</string>
+    <string name="pdfFileNotFound">PDF not found, does it still there?</string>
+    <string name="mapCalSection">Map and Celandar</string>
+    <string name="mapCalHelperTitle">What is this?</string>
 </resources>

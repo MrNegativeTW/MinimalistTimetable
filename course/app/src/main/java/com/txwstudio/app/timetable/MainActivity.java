@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -175,29 +176,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         } else if (id == R.id.menuCalendar) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String pdfPath = prefs.getString("schoolCalendarPath", "");
-            Uri uri = Uri.parse(pdfPath);
-//            File file = new File(pdfPath);
-//            Uri uri = FileProvider.getUriForFile(MainActivity.this,
-//                    BuildConfig.APPLICATION_ID + ".provider", file);
-
-            Intent target = new Intent(Intent.ACTION_VIEW);
-            target.setDataAndType(uri,"application/pdf");
-            target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            Intent intent = Intent.createChooser(target, String.valueOf(R.string.pdfOpenWithMsg));
-            try {
-                startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(this, R.string.pdfNoAppMsg, Toast.LENGTH_LONG).show();
-            }
-
-
-
-
+            gotoCalendar();
             return true;
+
         } else if (id == R.id.menuSettings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -205,6 +186,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void gotoCalendar() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String pdfPath = prefs.getString("schoolCalendarPath", "");
+        Uri uri = Uri.parse(pdfPath);
+
+        /**Old method, remove soon*/
+//            File file = new File(pdfPath);
+//            Uri uri = FileProvider.getUriForFile(MainActivity.this,
+//                    BuildConfig.APPLICATION_ID + ".provider", file);
+
+        Intent target = new Intent(Intent.ACTION_VIEW);
+        target.setDataAndType(uri,"application/pdf");
+        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        Intent intent = Intent.createChooser(target, String.valueOf(R.string.pdfOpenWithMsg));
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.pdfNoAppMsg, Toast.LENGTH_LONG).show();
+        } catch (SecurityException e) {
+            Toast.makeText(this, R.string.pdfFileNotFound, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.fileReadErrorMsg, Toast.LENGTH_LONG).show();
+        }
     }
 
 

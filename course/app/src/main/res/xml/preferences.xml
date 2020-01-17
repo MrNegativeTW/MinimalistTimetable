@@ -19,7 +19,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="地圖與行事曆">
+        android:title="@string/mapCalSection">
         <Preference
             android:icon="@drawable/ic_map_24dp"
             android:key="schoolMapPicker"
@@ -33,8 +33,7 @@
         <Preference
             android:icon="@drawable/ic_event_note_24dp"
             android:key="mapCalHelper"
-            android:title="說明"/>
-
+            android:title="@string/mapCalHelperTitle"/>
     </PreferenceCategory>
 
     <!--<PreferenceCategory
