@@ -1,6 +1,7 @@
 package com.txwstudio.app.timetable;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -37,7 +38,6 @@ public class SettingsFragment extends PreferenceFragment implements
 
     public static boolean restartSchedule = false;
     private EditTextPreference editTextPreference;
-    private static final int SDCARD_REQUEST_CODE = 2;
     private static final int MAP_REQUEST_CODE = 0;
     private static final int CALENDAR_REQUEST_CODE = 1;
 
@@ -59,10 +59,10 @@ public class SettingsFragment extends PreferenceFragment implements
         addPreferencesFromResource(R.xml.preferences);
         Preference schoolMapPicker = findPreference("schoolMapPicker");
         Preference schoolCalendarPicker = findPreference("schoolCalendarPicker");
-        Preference permissionTester = findPreference("permissionTester");
+        Preference mapCalHelper = findPreference("mapCalHelper");
         schoolMapPicker.setOnPreferenceClickListener(this);
         schoolCalendarPicker.setOnPreferenceClickListener(this);
-        permissionTester.setOnPreferenceClickListener(this);
+        mapCalHelper.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -111,9 +111,16 @@ public class SettingsFragment extends PreferenceFragment implements
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
             startActivityForResult(intent, CALENDAR_REQUEST_CODE);
 
-        } else if (preference.getKey().equals("permissionTester")) {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-            startActivityForResult(intent, SDCARD_REQUEST_CODE);
+        } else if (preference.getKey().equals("mapCalHelper")) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+            dialog.setMessage("PlaceHolder");
+            dialog.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    getActivity().finish();
+                }
+            });
+            dialog.show();
         }
 
         return false;
@@ -127,7 +134,7 @@ public class SettingsFragment extends PreferenceFragment implements
             fileRequest(requestCode, data);
         } else if (resultCode == RESULT_CANCELED){
         } else if (data == null) {
-            Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "oops", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -142,19 +149,18 @@ public class SettingsFragment extends PreferenceFragment implements
             case CALENDAR_REQUEST_CODE:
                 prefName = "schoolCalendarPath";
                 break;
-            case SDCARD_REQUEST_CODE:
-                Uri treeUri = data.getData();
-                DocumentFile pickedDir = DocumentFile.fromTreeUri(getContext(), treeUri);
-                Log.i("TESTTT", "treeUri: "+ treeUri);
-                getActivity().grantUriPermission(getActivity().getPackageName(), treeUri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                getActivity().getContentResolver().takePersistableUriPermission(treeUri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         }
 
         try {
             Uri fileUri = data.getData();
-            String filePath = Util.getPath(getContext(), fileUri);
+            final int takeFlags = data.getFlags()
+                    & (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            getActivity().grantUriPermission(getActivity().getPackageName(), fileUri, takeFlags);
+            getActivity().getContentResolver().takePersistableUriPermission(fileUri, takeFlags);
+//            String filePath = Util.getPath(getContext(), fileUri);
+            String filePath = fileUri.toString(); //Testing
+
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(prefName, filePath);
@@ -162,16 +168,6 @@ public class SettingsFragment extends PreferenceFragment implements
         } catch (Exception e) {
             Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-    public Uri getUri() {
-        List<UriPermission> persistedUriPermissions = getActivity().getContentResolver().getPersistedUriPermissions();
-        if (persistedUriPermissions.size() > 0) {
-            UriPermission uriPermission = persistedUriPermissions.get(0);
-            return uriPermission.getUri();
-        }
-        return null;
     }
 
 }

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.ortiz.touchview.TouchImageView;
+
+import java.io.FileNotFoundException;
 
 public class CampusMapActivity extends AppCompatActivity {
 
@@ -35,15 +38,15 @@ public class CampusMapActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String mapPath = prefs.getString("schoolMapPath", "");
-        String mapPathString = "file://" + mapPath;
-        Uri mapUri = Uri.parse(mapPathString);
+        Uri mapUri = Uri.parse(mapPath);
 
-        Log.i("TESTTT", "Map Path:" + mapPath + " Map Uri: " + mapUri);
+//        String mapPathString = "file://" + mapPath;
+//        Uri mapUri = Uri.parse(mapPathString);
+
 
         if (!mapPath.isEmpty()) {
             campusMapErrorMsg.setVisibility(View.INVISIBLE);
         }
-
 
 //        WebSettings webSettings = webview.getSettings();
 //        webSettings.setJavaScriptEnabled(true);
@@ -58,7 +61,10 @@ public class CampusMapActivity extends AppCompatActivity {
 
 //        photoView.setImageURI(mapUri);
 
+//        touchImageView.setImageURI(mapUri);
         touchImageView.setImageURI(mapUri);
+
+
     }
 
 

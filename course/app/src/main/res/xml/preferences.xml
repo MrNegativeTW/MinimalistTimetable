@@ -16,6 +16,10 @@
             android:title="@string/lightMode"
             android:summary="@string/lightModeSummary"
             android:defaultValue="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="地圖與行事曆">
         <Preference
             android:icon="@drawable/ic_map_24dp"
             android:key="schoolMapPicker"
@@ -28,8 +32,9 @@
             android:summary="@string/schoolCalendarPickerSummary"/>
         <Preference
             android:icon="@drawable/ic_event_note_24dp"
-            android:key="permissionTester"
-            android:title="取得權限"/>
+            android:key="mapCalHelper"
+            android:title="說明"/>
+
     </PreferenceCategory>
 
     <!--<PreferenceCategory
