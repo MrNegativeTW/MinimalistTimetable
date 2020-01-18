@@ -78,10 +78,12 @@ public class DBHandler extends SQLiteOpenHelper {
         ArrayList<Course> courseArrayList = new ArrayList<>();
         Course course;
 
-        String query = "SELECT * FROM " + TIMETABLE
-                    + " WHERE " + COURSE_WEEKDAY + " = " + dayWanted
-                    + " ORDER BY " + COURSE_START_TIME + " ASC";
-        Cursor data = db.rawQuery(query, null);
+        String selection = COURSE_WEEKDAY + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(dayWanted)};
+        String orderBy = COURSE_START_TIME + " ASC";
+        Cursor data = db.query(TIMETABLE, null, selection, selectionArgs,
+                                        null, null, orderBy);
+
         while(data.moveToNext()) {
             course = new Course();
             course.setID(data.getInt(data.getColumnIndex(COURSE_ID)));
@@ -102,8 +104,10 @@ public class DBHandler extends SQLiteOpenHelper {
         ArrayList<Course> courseArrayList = new ArrayList<>();
         Course course;
 
-        String query = "SELECT * FROM " + TIMETABLE + " WHERE " + COURSE_ID + " = " + ID;
-        Cursor data = db.rawQuery(query, null);
+        String selection = COURSE_ID + " = ?";
+        String[] selectionArgs = new String[] {String.valueOf(ID)};
+        Cursor data = db.query(TIMETABLE, null, selection, selectionArgs,
+                                        null, null, null);
 
         while(data.moveToNext()){
             course = new Course();
