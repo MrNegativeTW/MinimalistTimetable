@@ -21,8 +21,8 @@ public class Util extends Activity {
 
     public static void setupTheme(Activity activity) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
-        Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
-        activity.setTheme(lightMode ? R.style.LightTheme : R.style.AppTheme);
+        activity.setTheme(sharedPref.getBoolean("lightMode_Pref", false) ?
+                            R.style.LightTheme : R.style.AppTheme);
     }
 
 

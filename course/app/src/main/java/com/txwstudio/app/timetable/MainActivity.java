@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupTheme() {
-        Boolean lightMode = sharedPref.getBoolean("lightMode_Pref", false);
-        setTheme(lightMode ? R.style.LightTheme_NoActionBar : R.style.AppTheme_NoActionBar);
+        setTheme(sharedPref.getBoolean("lightMode_Pref", false) ?
+                    R.style.LightTheme_NoActionBar : R.style.AppTheme_NoActionBar);
     }
 
 
