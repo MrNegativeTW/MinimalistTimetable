@@ -111,7 +111,7 @@ public class SettingsFragment extends PreferenceFragment implements
             dialog.show();
         }
 
-
+        //No needed when using storage access framework, remove soon.
 //        int permission = ContextCompat.checkSelfPermission(getContext(),
 //                Manifest.permission.WRITE_EXTERNAL_STORAGE);
 //
@@ -120,7 +120,7 @@ public class SettingsFragment extends PreferenceFragment implements
 //                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
 //
 //        } else 
-            if (preference.getKey().equals("schoolMapPicker")) {
+        if (preference.getKey().equals("schoolMapPicker")) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
