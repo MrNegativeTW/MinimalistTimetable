@@ -40,7 +40,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TIMETABLE);
         onCreate(db);
     }
@@ -51,6 +51,7 @@ public class DBHandler extends SQLiteOpenHelper {
      *
      * addCourse(): Adding data from CourseAddActivity.Activity
      * getCourse(): Called by 5 fragments, will return a ArrayList, and send to Adapter.
+     * getCourseById(): Called when editing details, return 1 course one time.
      * deleteCourse(): Delete course by ID, called by every new adapter.
      * updateCourse():
      * */
@@ -90,6 +91,7 @@ public class DBHandler extends SQLiteOpenHelper {
             course.setCourseEndTime(data.getString(data.getColumnIndex(COURSE_END_TIME)));
             courseArrayList.add(course);
         }
+        data.close();
         db.close();
         return courseArrayList;
     }
@@ -113,16 +115,17 @@ public class DBHandler extends SQLiteOpenHelper {
             course.setCourseEndTime(data.getString(data.getColumnIndex(COURSE_END_TIME)));
             courseArrayList.add(course);
         }
+        data.close();
         db.close();
         return courseArrayList;
     }
+
 
     public void deleteCourse(int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         String IDD = String.valueOf(ID);
         db.delete(TIMETABLE, COURSE_ID + "=?", new String[]{IDD});
         db.close();
-
     }
 
 
