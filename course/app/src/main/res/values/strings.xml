@@ -44,8 +44,9 @@
     <string name="dialogNegativeButton">假的</string>
     <string name="dialogNormalButton">好的</string>
     <string name="mapCalHelperTitleDescription">
-        這兩個是開啟地圖和行事曆的捷徑，設定後可從主畫面直接開啟，設定完成後檔案請勿刪除、移動、重命名，以上方法皆會使捷徑失效。
-        \n\n地圖檔案類型；JPG、PNG\n行事曆檔案類型：PDF
+        1. 這兩個是開啟地圖和行事曆的捷徑，設定後可從主畫面直接開啟。
+        \n\n2. 設定後檔案請勿刪除、移動、重命名，以上方法皆會使捷徑失效。
+        \n\n地圖支援：JPG、PNG\n行事曆支援：PDF
     </string>
 
     <!-- Activity Setting -->
@@ -57,7 +58,7 @@
     <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
     <string name="mapCalSection">地圖與行事曆</string>
     <string name="schoolMapPickerTitle">自訂學校地圖</string>
-    <string name="schoolMapPickerSummary">支援JPG、PNG</string>
+    <string name="schoolMapPickerSummary">支援 JPG、PNG</string>
     <string name="schoolCalendarPickerTitle">自訂學校行事曆</string>
     <string name="schoolCalendarPickerSummary">支援 PDF</string>
     <string name="mapCalHelperTitle">這什麼?</string>
@@ -78,11 +79,11 @@
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
 
     <!-- Campus Map Error Msg -->
-    <string name="campusMapErrorMsg">: (\n[設定] -> [自訂校園地圖] 選擇你的圖片
+    <string name="campusMapErrorMsg">[設定] -> [自訂學校地圖] 選擇你的圖片
     </string>
 
     <!-- PDF Error Msg -->
-    <string name="pdfOpenWithMsg">開啟 PDF 使用…</string>
+    <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
 

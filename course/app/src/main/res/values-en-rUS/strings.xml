@@ -20,7 +20,7 @@
     <string name="traffic_schoolMap">Map</string>
     <string name="startTime">Starts</string>
     <string name="endTime">Ends</string>
-    <string name="lightMode">Light Mode</string>
+    <string name="lightMode">Light Theme</string>
     <string name="lightModeSummary">Turn the light on, it is dark here.</string>
     <string name="tableTitle">Custom Table Name</string>
     <string name="tableTitleDefault">My Timetable</string>
@@ -35,17 +35,17 @@
         <item>Edit</item>
         <item>Delete</item>
     </array>
-    <string name="schoolMapPickerSummary">Long press on exit button to show</string>
+    <string name="schoolMapPickerSummary">Support JPG and PNG</string>
     <string name="saveCourse">Save</string>
     <string name="errorNoTimeEntry">Enter time</string>
     <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
     <string name="menuMap">Map</string>
     <string name="weekdaysInitValue">Mon</string>
     <string name="menuCalendar">Calendar</string>
-    <string name="schoolCalendarPickerTitle">Custom Schoole Calendar</string>
-    <string name="schoolCalendarPickerSummary">PDF, using Google Drive to open.</string>
+    <string name="schoolCalendarPickerTitle">Custom School Calendar</string>
+    <string name="schoolCalendarPickerSummary">Support PDF</string>
     <string name="pdfNoAppMsg">Install Google Drive first</string>
-    <string name="pdfOpenWithMsg">Open PDF with...</string>
+    <string name="pdfOpenWithMsg">Open PDF with</string>
     <string name="dialogNegativeButton">Hell No</string>
     <string name="dialogPositiveButton">Of Course</string>
     <string name="dialogConfirmExit">Are you sure you want to EXIT?</string>
@@ -55,4 +55,9 @@
     <string name="mapCalSection">Map and Celandar</string>
     <string name="mapCalHelperTitle">What is this?</string>
     <string name="dialogNormalButton">OK</string>
+    <string name="mapCalHelperTitleDescription">
+        1. These two are the shortcut of the map/calendar, can be opened from the main screen.
+        \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
+        \n\nMap: JPG、PNG\nCalendar: PDF
+    </string>
 </resources>
