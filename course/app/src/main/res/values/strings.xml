@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">極簡課表</string>
 
-    <!-- Activity Name -->
+    <!-- Activity Title -->
     <string name="main_activity">課表</string>
     <string name="traffic_schoolMap">地圖</string>
     <string name="addCourseActivityTitle">新增課程</string>
@@ -38,10 +38,15 @@
         <item>編輯</item>
         <item>刪除</item>
     </array>
-    <string name="dialogConfirmExit">確定要離開?</string>
-    <string name="dialogConfirmDelete">你真的要刪掉它嗎?</string>
+    <string name="dialogConfirmExit">確定離開?</string>
+    <string name="dialogConfirmDelete">確定刪除?</string>
     <string name="dialogPositiveButton">真的</string>
     <string name="dialogNegativeButton">假的</string>
+    <string name="dialogNormalButton">好的</string>
+    <string name="mapCalHelperTitleDescription">
+        這兩個是開啟地圖和行事曆的捷徑，設定後可從主畫面直接開啟，設定完成後檔案請勿刪除、移動、重命名，以上方法皆會使捷徑失效。
+        \n\n地圖檔案類型；JPG、PNG\n行事曆檔案類型：PDF
+    </string>
 
     <!-- Activity Setting -->
     <string name="generalSection">一般</string>
@@ -52,9 +57,9 @@
     <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
     <string name="mapCalSection">地圖與行事曆</string>
     <string name="schoolMapPickerTitle">自訂學校地圖</string>
-    <string name="schoolMapPickerSummary">長按離開按鈕即可顯示</string>
+    <string name="schoolMapPickerSummary">支援JPG、PNG</string>
     <string name="schoolCalendarPickerTitle">自訂學校行事曆</string>
-    <string name="schoolCalendarPickerSummary">支援PDF，使用 Google 雲端硬碟開啟</string>
+    <string name="schoolCalendarPickerSummary">支援 PDF</string>
     <string name="mapCalHelperTitle">這什麼?</string>
 
     <string name="columnSection">欄位設定</string>
@@ -73,7 +78,7 @@
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
 
     <!-- Campus Map Error Msg -->
-    <string name="campusMapErrorMsg">: (\n1. [設定] -> [自訂校園地圖] 選擇你的圖片 \n2. 目前無法讀取除手機內部空間外的圖，研究中
+    <string name="campusMapErrorMsg">: (\n[設定] -> [自訂校園地圖] 選擇你的圖片
     </string>
 
     <!-- PDF Error Msg -->

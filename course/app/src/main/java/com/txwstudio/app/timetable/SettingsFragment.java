@@ -101,14 +101,26 @@ public class SettingsFragment extends PreferenceFragment implements
      * */
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        int permission = ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (preference.getKey().equals("mapCalHelper")) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+            dialog.setMessage(R.string.mapCalHelperTitleDescription);
+            dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {}
+            });
+            dialog.show();
+        }
 
-        if (permission == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
 
-        } else if (preference.getKey().equals("schoolMapPicker")) {
+//        int permission = ContextCompat.checkSelfPermission(getContext(),
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//
+//        if (permission == PackageManager.PERMISSION_DENIED) {
+//            ActivityCompat.requestPermissions(getActivity(),
+//                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
+//
+//        } else 
+            if (preference.getKey().equals("schoolMapPicker")) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -119,15 +131,6 @@ public class SettingsFragment extends PreferenceFragment implements
             intent.setType("application/pdf");
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
             startActivityForResult(intent, CALENDAR_REQUEST_CODE);
-
-        } else if (preference.getKey().equals("mapCalHelper")) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-            dialog.setMessage("PlaceHolder");
-            dialog.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {}
-            });
-            dialog.show();
         }
 
         return false;

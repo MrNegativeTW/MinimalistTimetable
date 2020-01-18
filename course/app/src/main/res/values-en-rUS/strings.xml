@@ -54,4 +54,5 @@
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
     <string name="mapCalSection">Map and Celandar</string>
     <string name="mapCalHelperTitle">What is this?</string>
+    <string name="dialogNormalButton">OK</string>
 </resources>
