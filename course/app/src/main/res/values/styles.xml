@@ -5,8 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/darkMode_colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/darkMode_colorPrimaryDark</item>
-        <item name="colorAccent">@color/white</item>
-        <item name="fabButtonColor">@color/darkMode_colorAccent</item>
+        <item name="colorAccent">@color/darkMode_colorAccent</item>
+        <item name="fabButtonColor">@color/fabButtonColor</item>
         <item name="PopupOverlay">@style/AppTheme.PopupOverlay</item>
         <item name="iconColor">@color/white</item>
     </style>
@@ -27,7 +27,7 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/lightMode_colorAccent</item>
-        <item name="fabButtonColor">@color/darkMode_colorAccent</item>
+        <item name="fabButtonColor">@color/fabButtonColor</item>
         <item name="PopupOverlay">@style/LightTheme.PopupOverlay</item>
         <item name="iconColor">@color/gray</item>
     </style>
