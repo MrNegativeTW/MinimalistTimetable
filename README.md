@@ -42,12 +42,12 @@ Don't spend time on landscape screen.
 - No one wants to use this app : (
 
 ## Requirement
-![](https://img.shields.io/badge/MinSDK-23-green.svg?style=flat-square)
-![](https://img.shields.io/badge/TargetSdk-28-green.svg?style=flat-square)
+![](https://img.shields.io/badge/minSdk-23-green.svg?style=flat-square)
+![](https://img.shields.io/badge/targetSdk-28-green.svg?style=flat-square)
 ![](https://img.shields.io/badge/compileSdk-28-green.svg?style=flat-square)
 - Android Studio 3.4.2
-- Gradle Version: 4.6
-- Android Gradle Plugin Version: 3.2.1
+- Gradle Version: 5.1.1
+- Android Gradle Plugin Version: 3.4.2
 - Android Phone with Android 8.0 instelled (Recommend)
 
 
