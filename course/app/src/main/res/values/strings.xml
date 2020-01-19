@@ -74,6 +74,11 @@
     <string name="contactMessage">Bug 回報、功能請求</string>
     <string name="versionTitle">版本 1.0</string>
     <string name="versionMessage" translatable="false">Made with ❤ in Taiwan</string>
+    <string name="versionChangelogTitle">更新紀錄</string>
+    <string name="versionChangelogMessage">
+        - 新增行事曆捷徑\n- 修復 SD 卡無法讀取問題\n- 修復深色主題沒有突出顏色的問題\n- 優化聯繫作者表單
+    </string>
+
 
     <!-- File Read Error Msg -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>

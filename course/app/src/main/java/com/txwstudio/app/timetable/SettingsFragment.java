@@ -1,33 +1,21 @@
 package com.txwstudio.app.timetable;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.UriPermission;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
-import androidx.documentfile.provider.DocumentFile;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-
-
-import java.util.List;
-
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
@@ -62,9 +50,11 @@ public class SettingsFragment extends PreferenceFragment implements
         Preference schoolMapPicker = findPreference("schoolMapPicker");
         Preference schoolCalendarPicker = findPreference("schoolCalendarPicker");
         Preference mapCalHelper = findPreference("mapCalHelper");
+        Preference versionChangelog = findPreference("versionChangelog");
         schoolMapPicker.setOnPreferenceClickListener(this);
         schoolCalendarPicker.setOnPreferenceClickListener(this);
         mapCalHelper.setOnPreferenceClickListener(this);
+        versionChangelog.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -101,15 +91,49 @@ public class SettingsFragment extends PreferenceFragment implements
      * */
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals("mapCalHelper")) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-            dialog.setMessage(R.string.mapCalHelperTitleDescription);
-            dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {}
-            });
-            dialog.show();
+        String key = preference.getKey();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        switch (key){
+            case "mapCalHelper":
+                dialog.setMessage(R.string.mapCalHelperTitleDescription);
+                dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {}
+                });
+                dialog.show();
+                break;
+
+            case "versionChangelog":
+                dialog.setTitle(R.string.versionChangelogTitle)
+                      .setMessage(R.string.versionChangelogMessage);
+                dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {}
+                });
+                dialog.show();
+                break;
         }
+
+        // Remove soon.
+//        if (preference.getKey().equals("mapCalHelper")) {
+//            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+//            dialog.setMessage(R.string.mapCalHelperTitleDescription);
+//            dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {}
+//            });
+//            dialog.show();
+//        }
+//
+//        if (preference.getKey().equals("versionChangelog")) {
+//            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+//            dialog.setMessage(R.string.mapCalHelperTitleDescription);
+//            dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {}
+//            });
+//            dialog.show();
+//        }
 
         //No needed when using storage access framework, remove soon.
 //        int permission = ContextCompat.checkSelfPermission(getContext(),

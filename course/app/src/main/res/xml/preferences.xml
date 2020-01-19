@@ -60,6 +60,7 @@
     </Preference>
     <Preference
         android:icon="@drawable/ic_code_24dp"
+        android:key="versionChangelog"
         android:title="@string/versionTitle"
         android:summary="@string/versionMessage"/>
     </PreferenceCategory>

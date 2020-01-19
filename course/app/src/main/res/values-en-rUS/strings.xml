@@ -60,4 +60,8 @@
         \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
         \n\nMap: JPG、PNG\nCalendar: PDF
     </string>
+    <string name="versionChangelogTitle">Changelog</string>
+    <string name="versionChangelogMessage">
+        - Add calendar shortcut\n- Fix can\'t read from SD card\n- Add accent color for dark theme
+    </string>
 </resources>
