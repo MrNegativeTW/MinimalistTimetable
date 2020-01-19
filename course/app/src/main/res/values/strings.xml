@@ -72,7 +72,7 @@
     <string name="aboutSection">關於</string>
     <string name="contactTitle">聯繫作者</string>
     <string name="contactMessage">Bug 回報、功能請求</string>
-    <string name="versionTitle">版本 1.0</string>
+    <string name="versionTitle">版本 1.1</string>
     <string name="versionMessage" translatable="false">Made with ❤ in Taiwan</string>
     <string name="versionChangelogTitle">更新紀錄</string>
     <string name="versionChangelogMessage">

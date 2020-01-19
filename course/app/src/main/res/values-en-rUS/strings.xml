@@ -24,7 +24,7 @@
     <string name="lightModeSummary">Turn the light on, it is dark here.</string>
     <string name="tableTitle">Custom Table Name</string>
     <string name="tableTitleDefault">My Timetable</string>
-    <string name="versionTitle">Version 1.0</string>
+    <string name="versionTitle">Version 1.1</string>
     <string name="tableTitleMessage">Name to show on the main screen</string>
     <string name="contactMessage">Bug Report or feature request.</string>
     <string name="contactTitle">Contact Developers</string>
