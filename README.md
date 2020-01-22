@@ -4,9 +4,9 @@
 
 # 極簡課表 Minimalist Timetable
 
-![](https://img.shields.io/badge/Version-1.0.1-green.svg?style=flat-square)<br>
-上什麼? 時間? 哪裡? 地圖! 行事曆!<br>
-What? Where? When? Map! Calendar!<br>
+![](https://img.shields.io/badge/Version-1.1-green.svg?style=flat-square)<br>
+課表、地圖與行事曆<br>
+Timetable, Campus Map and Calendar<br>
 <a target="_blank" href="https://play.google.com/store/apps/details?id=com.txwstudio.app.timetable&hl=zh_TW">
   <img  src="https://i.imgur.com/S7MZfQ8.png" />
 </a>
@@ -14,8 +14,11 @@ What? Where? When? Map! Calendar!<br>
 </div>
 
 ## APP Preview
-<img src="https://lh3.googleusercontent.com/PCwL9UhYunI_-KtHvtd01FGwp1Lhdcmu1sddrTmJaNlgYC0_0wkH-pRk6VIh91WnaQ=w1324-h942-rw" width="240"><nobr>
-<img src="https://lh3.googleusercontent.com/KUxsVCDxka-XP08Y0nmDWhYwekra4HaYbnOdpu_-3YCTv-ndcJC5GRBh5hmgS_PQnuzb=w1324-h942-rw" width="240">
+<img src="https://i.imgur.com/vdshJ8X.gif" width="240"><nobr>
+<img src="https://i.imgur.com/kskAiaZ.jpg
+" width="240"><nobr>
+<img src="https://i.imgur.com/9S6W6BK.gif
+" width="240">
 
 ## Features
 **Fast Launch & Fast Close** <br>
@@ -45,7 +48,7 @@ Don't spend time on landscape screen.
 ![](https://img.shields.io/badge/minSdk-23-green.svg?style=flat-square)
 ![](https://img.shields.io/badge/targetSdk-28-green.svg?style=flat-square)
 ![](https://img.shields.io/badge/compileSdk-28-green.svg?style=flat-square)
-- Android Studio 3.4.2
+- Android Studio 3.5.3
 - Gradle Version: 5.1.1
 - Android Gradle Plugin Version: 3.4.2
 - Android Phone with Android 8.0 instelled (Recommend)
