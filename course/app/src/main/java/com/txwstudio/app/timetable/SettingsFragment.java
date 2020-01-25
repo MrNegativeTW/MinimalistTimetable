@@ -4,7 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -16,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+import java.util.Arrays;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
@@ -188,6 +193,7 @@ public class SettingsFragment extends PreferenceFragment implements
                 break;
             case CALENDAR_REQUEST_CODE:
                 prefName = CALENDAR_REQUEST_PREF_NAME;
+                createShortcut(data);
                 break;
         }
 
@@ -209,6 +215,26 @@ public class SettingsFragment extends PreferenceFragment implements
             editor.commit();
         } catch (Exception e) {
             Toast.makeText(getActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void createShortcut(Intent data) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            Uri fileUri = data.getData();
+            ShortcutManager shortcutManager = getContext().getSystemService(ShortcutManager.class);
+
+            ShortcutInfo shortcut = new ShortcutInfo.Builder(getContext(), "calendarShortcut")
+                    .setShortLabel(getString(R.string.menuCalendar))
+                    .setLongLabel(getString(R.string.menuCalendar))
+                    .setIcon(Icon.createWithResource(getContext(), R.mipmap.ic_event_note))
+                    .setIntent(new Intent(Intent.ACTION_VIEW)
+                            .setDataAndType(fileUri, "application/pdf")
+                            .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION))
+                    .build();
+
+            shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
         }
     }
 

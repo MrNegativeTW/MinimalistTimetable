@@ -134,20 +134,26 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int min) {
         String timeToShow = String.format("%02d:%02d", hourOfDay, min);
         String timeToSQL = String.format("%02d%02d", hourOfDay, min);
-        if (whichOne == "startTime") {
-            editStartTimeView.setText(timeToShow);
-            course.setCourseStartTime(timeToSQL);
-        } else if (whichOne == "endTime") {
-            editEndTimeView.setText(timeToShow);
-            course.setCourseEndTime(timeToSQL);
+        switch (whichOne) {
+            case "startTime":
+                editStartTimeView.setText(timeToShow);
+                course.setCourseStartTime(timeToSQL);
+                break;
+            case "endTime":
+                editEndTimeView.setText(timeToShow);
+                course.setCourseEndTime(timeToSQL);
+                break;
         }
     }
 
     public void setTimeButtonOnClick(View v) {
-        if (v.getId() == R.id.editStartTimeCardView) {
-            whichOne = "startTime";
-        } else if (v.getId() == R.id.editEndTimeCardView) {
-            whichOne = "endTime";
+        switch (v.getId()) {
+            case R.id.editStartTimeCardView:
+                whichOne = "startTime";
+                break;
+            case R.id.editEndTimeCardView:
+                whichOne = "endTime";
+                break;
         }
         DialogFragment startTimePicker = new TimePickerFragment();
         startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
@@ -170,23 +176,28 @@ public class CourseEditActivity extends AppCompatActivity implements TimePickerD
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menuSave) {
-            if (editCourseName.length() == 0 || editCoursePlace.length() == 0) {
-                if (editCourseName.length() == 0) {
-                    editCourseNameWrapper.setError(getString(R.string.errorNoEntry));
+
+        switch (id) {
+            case R.id.menuSave:
+                if (editCourseName.length() == 0 || editCoursePlace.length() == 0) {
+                    if (editCourseName.length() == 0) {
+                        editCourseNameWrapper.setError(getString(R.string.errorNoEntry));
+                    }
+                    if (editCoursePlace.length() == 0) {
+                        editCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
+                    }
+                } else {
+                    course.setCourseName(editCourseName.getText().toString());
+                    course.setCoursePlace(editCoursePlace.getText().toString());
+                    db.updateCourse(course, ID);
+                    finish();
                 }
-                if (editCoursePlace.length() == 0) {
-                    editCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
-                }
-            } else {
-                course.setCourseName(editCourseName.getText().toString());
-                course.setCoursePlace(editCoursePlace.getText().toString());
-                db.updateCourse(course, ID);
-                finish();
-            }
-        } else if (id == android.R.id.home) {
-            onBackPressed();
+                break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

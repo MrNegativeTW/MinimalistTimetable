@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_map"
+        android:shortcutDisabledMessage="@string/traffic_schoolMap"
+        android:shortcutId="compose"
+        android:shortcutLongLabel="@string/menuMap"
+        android:shortcutShortLabel="@string/menuMap">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.txwstudio.app.timetable.CampusMapActivity"
+            android:targetPackage="com.txwstudio.app.timetable" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

@@ -107,22 +107,28 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int min) {
         String timeToShow = String.format("%02d:%02d", hourOfDay, min);
         String timeToSQL = String.format("%02d%02d", hourOfDay, min);
-        if (whichOne == "startTime") {
-            addStartTimeView.setText(timeToShow);
-            courseStartTimeNewEntry = timeToSQL;
-            course.setCourseStartTime(timeToSQL);
-        } else if (whichOne == "endTime") {
-            addEndTimeView.setText(timeToShow);
-            courseEndTimeNewEntry = timeToSQL;
-            course.setCourseEndTime(timeToSQL);
+        switch (whichOne) {
+            case "startTime":
+                addStartTimeView.setText(timeToShow);
+                courseStartTimeNewEntry = timeToSQL;
+                course.setCourseStartTime(timeToSQL);
+                break;
+            case "endTime":
+                addEndTimeView.setText(timeToShow);
+                courseEndTimeNewEntry = timeToSQL;
+                course.setCourseEndTime(timeToSQL);
+                break;
         }
     }
 
     public void setTimeButtonOnClick(View v) {
-        if (v.getId() == R.id.startTimeCardView) {
-            whichOne = "startTime";
-        } else if (v.getId() == R.id.endTimeCardView) {
-            whichOne = "endTime";
+        switch (v.getId()) {
+            case R.id.startTimeCardView:
+                whichOne = "startTime";
+                break;
+            case R.id.endTimeCardView:
+                whichOne = "endTime";
+                break;
         }
         DialogFragment startTimePicker = new TimePickerFragment();
         startTimePicker.show(getSupportFragmentManager(), "startTimePicker");
@@ -144,30 +150,35 @@ public class CourseAddActivity extends AppCompatActivity implements TimePickerDi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menuSave) {
-            if (addCourseName.length() == 0 || addCoursePlace.length() == 0
-                    || courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
-                if (addCourseName.length() == 0) {
-                    addCourseNameWrapper.setError(getString(R.string.errorNoEntry));
-                }
-                if (addCoursePlace.length() == 0) {
-                    addCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
-                }
-                if (courseStartTimeNewEntry == "9999" || courseEndTimeNewEntry == "9999") {
-                    Toast.makeText(CourseAddActivity.this,
-                            R.string.errorNoTimeEntry, Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                course.setCourseName(addCourseName.getText().toString());
-                course.setCoursePlace(addCoursePlace.getText().toString());
-                DBHandler.addCourse(course);
 
-                // Exit activity
-                finish();
-            }
-        } else if (id == android.R.id.home) {
-            onBackPressed();
+        switch (id) {
+            case R.id.menuSave:
+                if (addCourseName.length() == 0 || addCoursePlace.length() == 0
+                        || courseStartTimeNewEntry.equals("9999") || courseEndTimeNewEntry.equals("9999")) {
+                    if (addCourseName.length() == 0) {
+                        addCourseNameWrapper.setError(getString(R.string.errorNoEntry));
+                    }
+                    if (addCoursePlace.length() == 0) {
+                        addCoursePlaceWrapper.setError(getString(R.string.errorNoEntry));
+                    }
+                    if (courseStartTimeNewEntry.equals("9999") || courseEndTimeNewEntry.equals("9999")) {
+                        Toast.makeText(CourseAddActivity.this,
+                                R.string.errorNoTimeEntry, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    course.setCourseName(addCourseName.getText().toString());
+                    course.setCoursePlace(addCoursePlace.getText().toString());
+                    DBHandler.addCourse(course);
+
+                    // Exit activity
+                    finish();
+                }
+                break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
