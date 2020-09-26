@@ -1,18 +1,19 @@
-package com.txwstudio.app.timetable;
+package com.txwstudio.app.timetable.Ui.Activity;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.TextView;
-import com.github.chrisbanes.photoview.PhotoView;
+
 import com.ortiz.touchview.TouchImageView;
-import static com.txwstudio.app.timetable.SettingsFragment.MAP_REQUEST_PREF_NAME;
+import com.txwstudio.app.timetable.R;
+import com.txwstudio.app.timetable.Util;
+
+import static com.txwstudio.app.timetable.Ui.Fragments.SettingsFragment.MAP_REQUEST_PREF_NAME;
 
 public class CampusMapActivity extends AppCompatActivity {
 

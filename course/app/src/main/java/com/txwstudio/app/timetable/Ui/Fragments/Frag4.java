@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Fragments;
+package com.txwstudio.app.timetable.Ui.Fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -12,12 +12,12 @@ import com.txwstudio.app.timetable.Adapter;
 import com.txwstudio.app.timetable.DBHandler;
 import com.txwstudio.app.timetable.R;
 
-public class Frag3 extends Fragment {
+public class Frag4 extends Fragment {
 
     private RecyclerView recyclerView;
     private DBHandler db;
 
-    public Frag3(){}
+    public Frag4(){}
 
     public void onStart() {
         super.onStart();
@@ -25,13 +25,13 @@ public class Frag3 extends Fragment {
         db = new DBHandler(getActivity());
 
         // Setup Adapter
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview3);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview4);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new Adapter(getActivity(), db.getCourse(2), 2));
+        recyclerView.setAdapter(new Adapter(getActivity(), db.getCourse(3), 3));
     }
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag3_layout, container, false);
+        return inflater.inflate(R.layout.frag4_layout, container, false);
     }
 }

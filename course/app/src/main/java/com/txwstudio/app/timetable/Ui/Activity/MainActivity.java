@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable;
+package com.txwstudio.app.timetable.Ui.Activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -17,7 +16,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,15 +23,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.Calendar;
 
-import com.txwstudio.app.timetable.Fragments.Frag1;
-import com.txwstudio.app.timetable.Fragments.Frag2;
-import com.txwstudio.app.timetable.Fragments.Frag3;
-import com.txwstudio.app.timetable.Fragments.Frag4;
-import com.txwstudio.app.timetable.Fragments.Frag5;
-import static com.txwstudio.app.timetable.SettingsFragment.restartSchedule;
+import com.txwstudio.app.timetable.R;
+import com.txwstudio.app.timetable.Ui.Fragments.Frag1;
+import com.txwstudio.app.timetable.Ui.Fragments.Frag2;
+import com.txwstudio.app.timetable.Ui.Fragments.Frag3;
+import com.txwstudio.app.timetable.Ui.Fragments.Frag4;
+import com.txwstudio.app.timetable.Ui.Fragments.Frag5;
+import static com.txwstudio.app.timetable.Ui.Fragments.SettingsFragment.restartSchedule;
 
 public class MainActivity extends AppCompatActivity {
 

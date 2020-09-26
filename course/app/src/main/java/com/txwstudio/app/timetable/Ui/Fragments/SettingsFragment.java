@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable;
+package com.txwstudio.app.timetable.Ui.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +20,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.txwstudio.app.timetable.R;
+
 import java.util.Arrays;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;

@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable;
+package com.txwstudio.app.timetable.Ui.Fragments;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

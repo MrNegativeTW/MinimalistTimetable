@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.txwstudio.app.timetable.Model.Course;
+import com.txwstudio.app.timetable.Ui.Activity.CourseEditActivity;
+
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
