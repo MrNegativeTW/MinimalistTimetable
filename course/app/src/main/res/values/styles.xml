@@ -9,6 +9,7 @@
         <item name="fabButtonColor">@color/fabButtonColor</item>
         <item name="PopupOverlay">@style/AppTheme.PopupOverlay</item>
         <item name="iconColor">@color/white</item>
+        <item name="editTextCardBackground">@color/materialDarkSurface</item>
     </style>
 
     <style name="AppTheme_NoActionBar" parent="AppTheme">
@@ -30,6 +31,7 @@
         <item name="fabButtonColor">@color/fabButtonColor</item>
         <item name="PopupOverlay">@style/LightTheme.PopupOverlay</item>
         <item name="iconColor">@color/gray</item>
+        <item name="editTextCardBackground">@color/grey200</item>
     </style>
 
     <style name="LightTheme_NoActionBar" parent="LightTheme">

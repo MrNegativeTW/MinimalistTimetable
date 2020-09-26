@@ -10,9 +10,19 @@
     <color name="lightMode_colorPrimaryDark">#fff</color>
     <color name="lightMode_colorAccent">#00875f</color>
 
+    <!-- Material Design Dark Theme -->
+    <color name="materialDarkBackground">#121212</color>
+    <color name="colorPrimaryDark_dark">#2d2d2d</color>
+    <color name="materialDarkSurface">#1d1d1d</color>
+    <color name="colorAccent_dark">#282828</color>
+
     <!-- Common -->
     <color name="white">#ffffff</color>
+    <color name="black">#000</color>
     <color name="gray">#7d8492</color>
+    <color name="grey200">#eeeeee</color>
+    <color name="grey550">#2f2f2f</color>
+    <color name="darkGrey">#707070</color>
     <color name="fabButtonColor">#52545a</color>
 
 </resources>
