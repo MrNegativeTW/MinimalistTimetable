@@ -4,4 +4,18 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="all_default_margin">16dp</dimen>
+    <dimen name="all_defaultHalf_margin">8dp</dimen>
+    <dimen name="all_defaultDouble_margin">32dp</dimen>
+    <dimen name="cardView_accidentEvent_height">40dp</dimen>
+
+    <dimen name="commonTextSize">16sp</dimen>
+    <dimen name="indent_normal">16dp</dimen>
+    <dimen name="indent_double">32dp</dimen>
+
+    <dimen name="margin_half">8dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_double_half">24dp</dimen>
+    <dimen name="margin_double">32dp</dimen>
 </resources>

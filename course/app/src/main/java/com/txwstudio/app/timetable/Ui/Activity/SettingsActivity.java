@@ -1,8 +1,12 @@
-package com.txwstudio.app.timetable;
+package com.txwstudio.app.timetable.Ui.Activity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.txwstudio.app.timetable.R;
+import com.txwstudio.app.timetable.Ui.Fragments.SettingsFragment;
+import com.txwstudio.app.timetable.Util;
 
 public class SettingsActivity extends AppCompatActivity {
 

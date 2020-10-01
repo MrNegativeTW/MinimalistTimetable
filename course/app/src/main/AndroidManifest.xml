@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -19,7 +19,6 @@
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <!-- Sample Banner AD ID: ca-app-pub-3940256099942544/6300978111 -->
-
         <!-- My AdMob App ID: ca-app-pub-3716797788275517~4461004551 -->
         <!-- addCourseAdView AD ID: ca-app-pub-3716797788275517/8623556949 -->
         <!-- addCourseAdView AD ID: ca-app-pub-3716797788275517/8911928028 -->
@@ -28,7 +27,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Ui.Activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -40,20 +39,25 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".CampusMapActivity"
+            android:name=".Ui.Activity.CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
         <activity
-            android:name=".CourseAddActivity"
+            android:name=".Ui.Activity.CourseEditorActivity"
+            android:label="@string/courseEditorActivityTitle"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ui.Activity.CourseAddActivity"
             android:label="@string/addCourseActivityTitle"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".CourseEditActivity"
+            android:name=".Ui.Activity.CourseEditActivity"
             android:label="@string/editCourseActivityTitle"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Ui.Activity.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
         <activity
@@ -68,7 +72,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

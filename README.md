@@ -15,10 +15,8 @@ Timetable, Campus Map and Calendar<br>
 
 ## APP Preview
 <img src="https://i.imgur.com/vdshJ8X.gif" width="240"><nobr>
-<img src="https://i.imgur.com/kskAiaZ.jpg
-" width="240"><nobr>
-<img src="https://i.imgur.com/9S6W6BK.gif
-" width="240">
+<img src="https://i.imgur.com/kskAiaZ.jpg" width="240"><nobr>
+<img src="https://i.imgur.com/9S6W6BK.gif" width="240">
 
 ## Features
 **Fast Launch & Fast Close** <br>
