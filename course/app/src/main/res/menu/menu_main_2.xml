@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:mContext="com.txwstudio.app.timetable.ui.Activity.MainActivity2">
+
+    <item
+        android:id="@+id/menuAdd"
+        android:icon="@drawable/ic_add_24dp"
+        android:title="@string/menuAddCourse"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuMap"
+        android:icon="@drawable/ic_map_24dp"
+        android:title="@string/menuMap"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuCalendar"
+        android:icon="@drawable/ic_event_note_24dp"
+        android:title="@string/menuCalendar"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuSettings"
+        android:icon="@drawable/ic_settings_24dp"
+        android:title="@string/menuSettings"
+        app:showAsAction="always" />
+</menu>

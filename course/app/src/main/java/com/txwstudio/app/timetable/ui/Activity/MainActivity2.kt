@@ -1,6 +1,9 @@
 package com.txwstudio.app.timetable.ui.Activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,6 +34,40 @@ class MainActivity2 : AppCompatActivity() {
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main_2, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menuAdd -> {
+//                /* Get the current day and set it as default when adding the course. */
+//                val autoWeekday: Int = mViewPager.getCurrentItem()
+//                val intent = Intent(this, CourseAddActivity::class.java)
+//                intent.putExtra("autoWeekday", autoWeekday)
+//                startActivity(intent)
+                return true
+            }
+            R.id.menuMap -> {
+//                val intent = Intent()
+//                intent.setClass(this@MainActivity, CampusMapActivity::class.java)
+//                startActivity(intent)
+                return true
+            }
+            R.id.menuCalendar -> {
+//                gotoCalendar()
+                return true
+            }
+            R.id.menuSettings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

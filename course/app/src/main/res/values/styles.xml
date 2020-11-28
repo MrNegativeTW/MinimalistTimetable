@@ -43,6 +43,8 @@
     <!-- NEW Light Theme -->
     <style name="AppTheme2" parent="Theme.MaterialComponents.DayNight">
         <item name="colorAccent">@color/lightMode_colorAccent</item>
+        <item name="fabButtonColor">@color/fabButtonColor</item>
+        <item name="iconColor">?attr/colorControlNormal</item>
     </style>
 
     <style name="AppTheme2.NoActionBar">
