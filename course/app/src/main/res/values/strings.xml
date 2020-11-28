@@ -32,7 +32,7 @@
     <string name="weekdaysInitValue">星期一</string>
     <string name="startTime">開始</string>
     <string name="endTime">結束</string>
-    
+
     <!-- Course Editor Activity -->
     <string name="courseEditor_courseNameTitle">課程名稱</string>
     <string name="courseEditor_courseNameEntry">例如：國文(一)</string>
@@ -98,5 +98,7 @@
     <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

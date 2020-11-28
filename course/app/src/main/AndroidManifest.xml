@@ -42,11 +42,6 @@
             android:name=".Ui.Activity.CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
         <activity
-            android:name=".Ui.Activity.CourseEditorActivity"
-            android:label="@string/courseEditorActivityTitle"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Ui.Activity.CourseAddActivity"
             android:label="@string/addCourseActivityTitle"
             android:screenOrientation="portrait"
