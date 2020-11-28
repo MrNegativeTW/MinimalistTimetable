@@ -1,9 +1,13 @@
 package com.txwstudio.app.timetable.ui.Activity
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,13 +20,14 @@ import kotlinx.android.synthetic.main.activity_main2.*
 
 class MainActivity2 : AppCompatActivity() {
 
+    private lateinit var viewPager: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         setupToolBar()
 
         val tabLayout: TabLayout = findViewById(R.id.tabLayout_mainActivity)
-        val viewPager: ViewPager2 = findViewById(R.id.viewPager_mainActivity)
+        viewPager = findViewById(R.id.viewPager_mainActivity)
 
         viewPager.adapter = CourseViewerPagerAdapter(this)
 
@@ -45,21 +50,21 @@ class MainActivity2 : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-//                /* Get the current day and set it as default when adding the course. */
-//                val autoWeekday: Int = mViewPager.getCurrentItem()
-//                val intent = Intent(this, CourseAddActivity::class.java)
-//                intent.putExtra("autoWeekday", autoWeekday)
-//                startActivity(intent)
+                /* Get the current day and set it as default when adding the course. */
+                val autoWeekday: Int = viewPager.currentItem
+                val intent = Intent(this, CourseAddActivity::class.java)
+                intent.putExtra("autoWeekday", autoWeekday)
+                startActivity(intent)
                 return true
             }
             R.id.menuMap -> {
-//                val intent = Intent()
-//                intent.setClass(this@MainActivity, CampusMapActivity::class.java)
-//                startActivity(intent)
+                val intent = Intent()
+                intent.setClass(this, CampusMapActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.menuCalendar -> {
-//                gotoCalendar()
+                gotoCalendar()
                 return true
             }
             R.id.menuSettings -> {
@@ -83,6 +88,27 @@ class MainActivity2 : AppCompatActivity() {
             WEEKDAY_4 -> getString(R.string.tab_text_4)
             WEEKDAY_5 -> getString(R.string.tab_text_5)
             else -> "null"
+        }
+    }
+
+    private fun gotoCalendar() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val pdfPath = prefs.getString("schoolCalendarPath", "")
+        val uri = Uri.parse(pdfPath)
+
+        val target = Intent(Intent.ACTION_VIEW)
+        target.setDataAndType(uri, "application/pdf")
+        target.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        val intent = Intent.createChooser(target, java.lang.String.valueOf(R.string.pdfOpenWithMsg))
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, R.string.pdfNoAppMsg, Toast.LENGTH_LONG).show()
+        } catch (e: SecurityException) {
+            Toast.makeText(this, R.string.pdfFileNotFound, Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, R.string.fileReadErrorMsg, Toast.LENGTH_LONG).show()
         }
     }
 }
