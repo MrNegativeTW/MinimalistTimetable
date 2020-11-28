@@ -99,6 +99,5 @@
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
