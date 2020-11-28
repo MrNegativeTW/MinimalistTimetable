@@ -52,15 +52,14 @@ class MainActivity2 : AppCompatActivity() {
             R.id.menuAdd -> {
                 /* Get the current day and set it as default when adding the course. */
                 val autoWeekday: Int = viewPager.currentItem
-                val intent = Intent(this, CourseAddActivity::class.java)
-                intent.putExtra("autoWeekday", autoWeekday)
+                val intent = Intent(this, CourseAddActivity::class.java).apply {
+                    putExtra("autoWeekday", autoWeekday)
+                }
                 startActivity(intent)
                 return true
             }
             R.id.menuMap -> {
-                val intent = Intent()
-                intent.setClass(this, CampusMapActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent().setClass(this, CampusMapActivity::class.java))
                 return true
             }
             R.id.menuCalendar -> {
@@ -68,8 +67,7 @@ class MainActivity2 : AppCompatActivity() {
                 return true
             }
             R.id.menuSettings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, SettingsActivity::class.java))
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -92,6 +90,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun gotoCalendar() {
+        // TODO(Fix Old PreferenceManager)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val pdfPath = prefs.getString("schoolCalendarPath", "")
         val uri = Uri.parse(pdfPath)
