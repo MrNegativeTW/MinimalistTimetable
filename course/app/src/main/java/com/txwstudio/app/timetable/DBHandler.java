@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.txwstudio.app.timetable.Model.Course;
+import com.txwstudio.app.timetable.model.Course;
 
 import java.util.ArrayList;
 
