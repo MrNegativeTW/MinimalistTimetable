@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Ui.courseeditor
+package com.txwstudio.app.timetable.ui.courseeditor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

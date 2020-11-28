@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Ui.Activity;
+package com.txwstudio.app.timetable.ui.Activity;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -13,7 +13,7 @@ import com.ortiz.touchview.TouchImageView;
 import com.txwstudio.app.timetable.R;
 import com.txwstudio.app.timetable.Util;
 
-import static com.txwstudio.app.timetable.Ui.Fragments.SettingsFragment.MAP_REQUEST_PREF_NAME;
+import static com.txwstudio.app.timetable.ui.Fragments.SettingsFragment.MAP_REQUEST_PREF_NAME;
 
 public class CampusMapActivity extends AppCompatActivity {
 

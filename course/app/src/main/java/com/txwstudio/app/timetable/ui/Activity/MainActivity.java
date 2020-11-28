@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Ui.Activity;
+package com.txwstudio.app.timetable.ui.Activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -26,12 +26,12 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import com.txwstudio.app.timetable.R;
-import com.txwstudio.app.timetable.Ui.Fragments.Frag1;
-import com.txwstudio.app.timetable.Ui.Fragments.Frag2;
-import com.txwstudio.app.timetable.Ui.Fragments.Frag3;
-import com.txwstudio.app.timetable.Ui.Fragments.Frag4;
-import com.txwstudio.app.timetable.Ui.Fragments.Frag5;
-import static com.txwstudio.app.timetable.Ui.Fragments.SettingsFragment.restartSchedule;
+import com.txwstudio.app.timetable.ui.Fragments.Frag1;
+import com.txwstudio.app.timetable.ui.Fragments.Frag2;
+import com.txwstudio.app.timetable.ui.Fragments.Frag3;
+import com.txwstudio.app.timetable.ui.Fragments.Frag4;
+import com.txwstudio.app.timetable.ui.Fragments.Frag5;
+import static com.txwstudio.app.timetable.ui.Fragments.SettingsFragment.restartSchedule;
 
 public class MainActivity extends AppCompatActivity {
 

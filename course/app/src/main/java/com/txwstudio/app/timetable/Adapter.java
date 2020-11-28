@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.txwstudio.app.timetable.model.Course;
-import com.txwstudio.app.timetable.Ui.Activity.CourseEditActivity;
+import com.txwstudio.app.timetable.ui.Activity.CourseEditActivity;
 
 import java.util.ArrayList;
 

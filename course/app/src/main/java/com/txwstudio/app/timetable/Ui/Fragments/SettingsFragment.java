@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Ui.Fragments;
+package com.txwstudio.app.timetable.ui.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
