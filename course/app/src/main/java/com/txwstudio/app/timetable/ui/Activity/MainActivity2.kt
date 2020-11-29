@@ -27,23 +27,9 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         setupToolBar()
-
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout_mainActivity)
-        viewPager = findViewById(R.id.viewPager_mainActivity)
-
-        viewPager.adapter = CourseViewerPagerAdapter(this)
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = getTabTitle(position)
-        }.attach()
-
+        setupTabLayoutAndViewPager()
         openTodayTimetable()
-
-        val fab: FloatingActionButton = findViewById(R.id.fab_mainActivity)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        subscribeUi()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -82,6 +68,17 @@ class MainActivity2 : AppCompatActivity() {
         setSupportActionBar(toolbar_mainActivity)
     }
 
+    private fun setupTabLayoutAndViewPager() {
+        val tabLayout: TabLayout = findViewById(R.id.tabLayout_mainActivity)
+        viewPager = findViewById(R.id.viewPager_mainActivity)
+
+        viewPager.adapter = CourseViewerPagerAdapter(this)
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = getTabTitle(position)
+        }.attach()
+    }
+
     private fun getTabTitle(position: Int): String? {
         return when (position) {
             WEEKDAY_1 -> getString(R.string.tab_text_1)
@@ -103,6 +100,14 @@ class MainActivity2 : AppCompatActivity() {
         val c = Calendar.getInstance()
         val date = c[Calendar.DAY_OF_WEEK]
         viewPager.setCurrentItem(if (date == 1) 6 else date - 2, false)
+    }
+
+    private fun subscribeUi() {
+        val fab: FloatingActionButton = findViewById(R.id.fab_mainActivity)
+        fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        }
     }
 
     private fun gotoCalendar() {
