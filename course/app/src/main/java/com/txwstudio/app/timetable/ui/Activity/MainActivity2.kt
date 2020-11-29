@@ -40,7 +40,6 @@ class MainActivity2 : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-                /* Get the current day and set it as default when adding the course. */
                 val autoWeekday: Int = viewPager.currentItem
                 val intent = Intent(this, CourseAddActivity::class.java).apply {
                     putExtra("autoWeekday", autoWeekday)
