@@ -17,10 +17,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.*
 import kotlinx.android.synthetic.main.activity_main2.*
+import java.util.*
 
 class MainActivity2 : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -34,6 +36,8 @@ class MainActivity2 : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
+
+        openTodayTimetable()
 
         val fab: FloatingActionButton = findViewById(R.id.fab_mainActivity)
         fab.setOnClickListener { view ->
@@ -87,6 +91,18 @@ class MainActivity2 : AppCompatActivity() {
             WEEKDAY_5 -> getString(R.string.tab_text_5)
             else -> "null"
         }
+    }
+
+    /**
+     * Automatically open today's timetable.
+     * TODO(Weekend Support)
+     * */
+    private fun openTodayTimetable() {
+        // Get day of the week, start from SUNDAY, int == 1.
+        // then open belongs today's tab.
+        val c = Calendar.getInstance()
+        val date = c[Calendar.DAY_OF_WEEK]
+        viewPager.setCurrentItem(if (date == 1) 6 else date - 2, false)
     }
 
     private fun gotoCalendar() {
