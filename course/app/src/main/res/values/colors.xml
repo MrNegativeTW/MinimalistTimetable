@@ -10,6 +10,13 @@
     <color name="lightMode_colorPrimaryDark">#fff</color>
     <color name="lightMode_colorAccent">#00875f</color>
 
+    <!-- Dark Theme for AppTheme2-->
+    <color name="colorAccentDark">#3399FF</color>
+    <color name="rippleColorDark">#33FFFFFF</color>
+    <color name="backgroundDark">#202125</color>
+    <color name="dialogDark">#242529</color>
+
+
     <!-- Material Design Dark Theme -->
     <color name="materialDarkBackground">#121212</color>
     <color name="colorPrimaryDark_dark">#2d2d2d</color>

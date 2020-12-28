@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.txwstudio.app.timetable.ui.activity.MainActivity2ViewModel" />
@@ -17,6 +18,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="4dp"
             android:background="?attr/colorSurface">
 
             <androidx.appcompat.widget.Toolbar
@@ -30,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicator="@drawable/tab_indicator"
-                app:tabIndicatorColor="?attr/colorPrimary"
+                app:tabIndicatorColor="@color/colorAccentDark"
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorHeight="3dp"
                 app:tabInlineLabel="true"
@@ -49,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_exit_24dp"
-            app:backgroundTint="?attr/fabButtonColor" />
+            android:src="@drawable/ic_exit_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
