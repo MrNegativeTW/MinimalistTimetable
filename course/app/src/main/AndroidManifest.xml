@@ -52,6 +52,11 @@
             android:name=".ui.activity.CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
         <activity
+            android:name=".ui.activity.CourseEditorActivity"
+            android:label="課程編輯器"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".ui.activity.CourseAddActivity"
             android:label="@string/addCourseActivityTitle"
             android:screenOrientation="portrait"

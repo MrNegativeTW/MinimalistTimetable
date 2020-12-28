@@ -1,4 +1,7 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
-class CourseEditorViewModel {
+import androidx.lifecycle.ViewModel
+
+class CourseEditorViewModel: ViewModel() {
+
 }

@@ -34,6 +34,9 @@
     <string name="endTime">結束</string>
 
     <!-- Course Editor Activity -->
+    <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
+    <string name="courseEditor_exitConfirmDialogMsg">您所輸入的資訊將「不會」被儲存</string>
+    <string name="courseEditor_saveCourse">儲存</string>
     <string name="courseEditor_courseNameTitle">課程名稱</string>
     <string name="courseEditor_courseNameEntry">例如：國文(一)</string>
     <string name="courseEditor_coursePlaceTitle">上課地點</string>
@@ -99,5 +102,9 @@
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- Common -->
+    <string name="all_confirm">確認</string>
+    <string name="all_cancel">取消</string>
 
 </resources>

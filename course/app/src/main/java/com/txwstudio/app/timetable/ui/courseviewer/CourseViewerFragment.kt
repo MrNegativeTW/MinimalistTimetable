@@ -26,7 +26,7 @@ class CourseViewerFragment : Fragment() {
     private var db: DBHandler? = null
 
     private lateinit var binding: FragmentCourseViewerBinding
-    private val viewModel: CourseViewerViewModel by viewModels()
+    private val courseViewerViewModel: CourseViewerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
