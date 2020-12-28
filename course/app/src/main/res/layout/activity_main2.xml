@@ -51,6 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorAccentDark"
+            app:tint="?attr/colorOnPrimary"
             android:src="@drawable/ic_exit_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
