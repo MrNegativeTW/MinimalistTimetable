@@ -18,8 +18,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:background="?attr/colorSurface">
+            android:background="?attr/colorSurface"
+            android:elevation="4dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_mainActivity2"
@@ -52,7 +52,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@color/colorAccentDark"
-            app:tint="?attr/colorOnPrimary"
-            android:src="@drawable/ic_exit_24dp" />
+            android:src="@drawable/ic_exit_24dp"
+            app:tint="?attr/colorOnPrimary" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
