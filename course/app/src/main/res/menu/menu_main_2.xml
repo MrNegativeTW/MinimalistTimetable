@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:mContext="com.txwstudio.app.timetable.ui.Activity.MainActivity2">
+    tools:mContext="com.txwstudio.app.timetable.ui.activity.MainActivity2">
 
     <item
         android:id="@+id/menuAdd"

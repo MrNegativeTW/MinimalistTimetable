@@ -27,7 +27,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".ui.Activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -39,7 +39,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".ui.Activity.MainActivity2"
+            android:name=".ui.activity.MainActivity2"
             android:label="@string/app_name"
             android:theme="@style/AppTheme2.NoActionBar"
             android:screenOrientation="portrait">
@@ -49,20 +49,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Activity.CampusMapActivity"
+            android:name=".ui.activity.CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
         <activity
-            android:name=".ui.Activity.CourseAddActivity"
+            android:name=".ui.activity.CourseAddActivity"
             android:label="@string/addCourseActivityTitle"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.Activity.CourseEditActivity"
+            android:name=".ui.activity.CourseEditActivity"
             android:label="@string/editCourseActivityTitle"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.Activity.SettingsActivity"
+            android:name=".ui.activity.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
         <activity

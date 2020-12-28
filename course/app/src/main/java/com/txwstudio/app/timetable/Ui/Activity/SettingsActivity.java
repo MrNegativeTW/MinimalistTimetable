@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.ui.Activity;
+package com.txwstudio.app.timetable.ui.activity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

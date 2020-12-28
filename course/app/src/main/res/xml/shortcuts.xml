@@ -9,7 +9,7 @@
         android:shortcutShortLabel="@string/menuMap">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.txwstudio.app.timetable.ui.Activity.CampusMapActivity"
+            android:targetClass="com.txwstudio.app.timetable.ui.activity.CampusMapActivity"
             android:targetPackage="com.txwstudio.app.timetable" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>

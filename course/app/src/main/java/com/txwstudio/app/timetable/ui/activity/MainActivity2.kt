@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.ui.Activity
+package com.txwstudio.app.timetable.ui.activity
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -8,7 +8,9 @@ import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +18,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.*
+import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 
@@ -23,9 +26,16 @@ class MainActivity2 : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
 
+    private lateinit var binding: ActivityMain2Binding
+    private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
+
+//        mainActivity2ViewModel = ViewModelProvider(this).get(MainActivity2ViewModel::class.java)
+        binding.viewModel = mainActivity2ViewModel
+
         setupToolBar()
         setupTabLayoutAndViewPager()
         openTodayTimetable()
