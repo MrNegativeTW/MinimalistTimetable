@@ -24,10 +24,10 @@ import java.util.*
 
 class MainActivity2 : AppCompatActivity() {
 
-    private lateinit var viewPager: ViewPager2
-
     private lateinit var binding: ActivityMain2Binding
     private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
+
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
