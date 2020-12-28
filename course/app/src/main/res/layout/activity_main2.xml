@@ -20,7 +20,13 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout_mainActivity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:tabIndicator="@drawable/tab_indicator"
+            app:tabIndicatorColor="?attr/colorPrimary"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="3dp"
+            app:tabInlineLabel="true"
+            app:tabMinWidth="75dp"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
