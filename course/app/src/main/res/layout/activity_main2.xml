@@ -20,13 +20,13 @@
             android:background="?attr/colorSurface">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_mainActivity"
+                android:id="@+id/toolbar_mainActivity2"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|snap" />
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout_mainActivity"
+                android:id="@+id/tabLayout_mainActivity2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicator="@drawable/tab_indicator"
@@ -38,13 +38,13 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager_mainActivity"
+            android:id="@+id/viewPager_mainActivity2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_mainActivity"
+            android:id="@+id/fab_mainActivity2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"

@@ -27,13 +27,10 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
     private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
 
-    private lateinit var viewPager: ViewPager2
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
-//        mainActivity2ViewModel = ViewModelProvider(this).get(MainActivity2ViewModel::class.java)
         binding.viewModel = mainActivity2ViewModel
 
         setupToolBar()
@@ -50,7 +47,7 @@ class MainActivity2 : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-                val autoWeekday: Int = viewPager.currentItem
+                val autoWeekday: Int = binding.viewPagerMainActivity2.currentItem
                 val intent = Intent(this, CourseAddActivity::class.java).apply {
                     putExtra("autoWeekday", autoWeekday)
                 }
@@ -74,16 +71,13 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun setupToolBar() {
-        setSupportActionBar(toolbar_mainActivity)
+        setSupportActionBar(toolbar_mainActivity2)
     }
 
     private fun setupTabLayoutAndViewPager() {
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout_mainActivity)
-        viewPager = findViewById(R.id.viewPager_mainActivity)
+        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this)
 
-        viewPager.adapter = CourseViewerPagerAdapter(this)
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        TabLayoutMediator(binding.tabLayoutMainActivity2, binding.viewPagerMainActivity2) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
     }
@@ -108,14 +102,12 @@ class MainActivity2 : AppCompatActivity() {
         // then open belongs today's tab.
         val c = Calendar.getInstance()
         val date = c[Calendar.DAY_OF_WEEK]
-        viewPager.setCurrentItem(if (date == 1) 6 else date - 2, false)
+        binding.viewPagerMainActivity2.setCurrentItem(if (date == 1) 6 else date - 2, false)
     }
 
     private fun subscribeUi() {
-        val fab: FloatingActionButton = findViewById(R.id.fab_mainActivity)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        binding.fabMainActivity2.setOnClickListener { view ->
+            finish()
         }
     }
 
