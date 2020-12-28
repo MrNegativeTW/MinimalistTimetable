@@ -1,16 +1,22 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
+import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,6 +72,17 @@ class CourseEditorFragment : BottomSheetDialogFragment() {
         subscribeUi()
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+
+        dialog.setOnShowListener {
+            val bottomSheet = dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            BottomSheetBehavior.from(bottomSheet).state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        return dialog
+    }
+
     private fun subscribeUi() {
         binding.buttonCourseEditorFragClose.setOnClickListener {
             val materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireActivity())
@@ -86,5 +103,10 @@ class CourseEditorFragment : BottomSheetDialogFragment() {
 
         }
 
+        val items = listOf("Material", "Design", "Components", "Android")
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+        (binding.dropDownCourseEditorFrag as? AutoCompleteTextView)?.setAdapter(adapter)
     }
+
+
 }
