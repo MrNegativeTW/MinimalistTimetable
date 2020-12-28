@@ -24,8 +24,6 @@ public class CampusMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_campus_map);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        WebView webview = (WebView) findViewById(R.id.traffic_schoolmap_webview);
-//        PhotoView photoView = (PhotoView) findViewById(R.id.photo_view);
         TouchImageView touchImageView = (TouchImageView) findViewById(R.id.touchImageView);
         TextView campusMapErrorMsg = (TextView) findViewById(R.id.campusMapErrorTextView);
 
@@ -35,22 +33,6 @@ public class CampusMapActivity extends AppCompatActivity {
         if (!mapPath.isEmpty()) {
             campusMapErrorMsg.setVisibility(View.INVISIBLE);
         }
-
-        /**Old method, remove soon.*/
-//        String mapPathString = "file://" + mapPath;
-//        Uri mapUri = Uri.parse(mapPathString);
-
-//        WebSettings webSettings = webview.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
-//        webSettings.setSupportZoom(true);
-//        webSettings.setBuiltInZoomControls(true);
-//        webSettings.setDisplayZoomControls(false);
-//        webview.setWebViewClient(new WebViewClient());
-//        webview.setInitialScale(150);
-//        webview.loadDataWithBaseURL("", "<img src='"+ mapPath + "' />",
-//                "text/html", "utf-8", null);
-
-//        photoView.setImageURI(mapUri);
 
         touchImageView.setImageURI(mapUri);
     }
