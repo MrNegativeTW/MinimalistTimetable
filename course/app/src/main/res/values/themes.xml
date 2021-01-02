@@ -9,6 +9,7 @@
         <!-- Theme colors -->
         <item name="colorPrimary">@color/colorAccentDark</item>
         <item name="iconColor">?attr/colorControlNormal</item>
-    </style>
+        <item name="editTextCardBackground">@color/grey200</item>
+    </style>s
 
 </resources>
