@@ -15,6 +15,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.*
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
+import com.txwstudio.app.timetable.model.Course
+import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorFragment
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
@@ -44,12 +46,12 @@ class MainActivity2 : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-//                val autoWeekday: Int = binding.viewPagerMainActivity2.currentItem
-//                val intent = Intent(this, CourseAddActivity::class.java).apply {
-//                    putExtra("autoWeekday", autoWeekday)
-//                }
-//                startActivity(intent)
-                CourseEditorFragment().show(supportFragmentManager, "")
+                val autoWeekday: Int = binding.viewPagerMainActivity2.currentItem
+                val intent = Intent(this, CourseEditorActivity::class.java).apply {
+                    putExtra("autoWeekday", autoWeekday)
+                }
+                startActivity(intent)
+//                CourseEditorFragment().show(supportFragmentManager, "")
                 return true
             }
             R.id.menuMap -> {

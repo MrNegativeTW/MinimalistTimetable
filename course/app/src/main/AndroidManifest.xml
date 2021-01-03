@@ -41,21 +41,21 @@
         <activity
             android:name=".ui.activity.MainActivity2"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme2"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.courseeditor.CourseEditorActivity"
+            android:label="@string/courseEditorActivityTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
             android:name=".ui.activity.CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
-        <activity
-            android:name=".ui.activity.CourseEditorActivity"
-            android:label="課程編輯器"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.CourseAddActivity"
             android:label="@string/addCourseActivityTitle"
