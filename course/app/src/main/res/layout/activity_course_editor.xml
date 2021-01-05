@@ -109,7 +109,7 @@
                         app:endIconMode="dropdown_menu">
 
                         <AutoCompleteTextView
-                            android:id="@+id/dropDown_courseEditorAct_courseBeginTime"
+                            android:id="@+id/textView_courseEditorAct_courseBeginTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none" />
@@ -128,7 +128,7 @@
                         app:endIconMode="dropdown_menu">
 
                         <AutoCompleteTextView
-                            android:id="@+id/dropDown_courseEditorAct_courseEndTime"
+                            android:id="@+id/textView_courseEditorAct_courseEndTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none" />
