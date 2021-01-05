@@ -1,10 +1,15 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.txwstudio.app.timetable.DBHandler
+import com.txwstudio.app.timetable.model.Course
+import com.txwstudio.app.timetable.model.Course2
 
-class CourseEditorViewModel : ViewModel() {
+class CourseEditorViewModel(application: Application) : AndroidViewModel(application) {
 
     var courseName = MutableLiveData<String>()
     var coursePlace = MutableLiveData<String>()
@@ -63,6 +68,21 @@ class CourseEditorViewModel : ViewModel() {
         }
 
         Log.i("TESTTT", "${courseName.value} | ${coursePlace.value} | " +
-                "${courseWeekday.value} | ${courseBeginTime.value} | ${courseEndTime.value}")
+                "${courseBeginTime.value} | ${courseEndTime.value} | ${courseWeekday.value}")
+
+        val course = Course()
+        course.courseName = courseName.value
+        course.coursePlace = coursePlace.value
+        course.courseStartTime = courseBeginTime.value
+        course.courseEndTime = courseEndTime.value
+        course.courseWeekday = courseWeekday.value!!
+
+        val course2 = Course2(
+                courseName = courseName.value,
+                coursePlace = coursePlace.value,
+                courseBeginTime = courseBeginTime.value,
+                courseEndTime = courseEndTime.value,
+                courseWeekday = courseWeekday.value)
+        DBHandler(getApplication()).addCourse(course)
     }
 }

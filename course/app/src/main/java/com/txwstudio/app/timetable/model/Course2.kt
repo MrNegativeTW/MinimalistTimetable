@@ -5,7 +5,7 @@ data class Course2(
         var coursePlace: String?,
         var courseBeginTime: String?,
         var courseEndTime: String?,
-        var courseTeacher: String?,
-        var Id: Int?,
-        var courseWeekday: Int? = 0
+        var courseWeekday: Int? = 0,
+        var courseTeacher: String? = "",
+        var Id: Int? = -1
 )
