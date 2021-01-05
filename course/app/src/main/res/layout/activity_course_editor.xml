@@ -97,6 +97,7 @@
                     android:weightSum="2">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_courseEditorAct_courseBeginTimeEntry"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -116,6 +117,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_courseEditorAct_courseEndTimeEntry"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -15,6 +15,8 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CourseEditorActivity : AppCompatActivity() {
 
@@ -30,11 +32,12 @@ class CourseEditorActivity : AppCompatActivity() {
 
     @TimeFormat
     private var clockFormat = 0
+    private val formatter = SimpleDateFormat("a hh:mm", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_course_editor)
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_course_editor)
         binding.viewModel = courseEditorViewModel
 
         setupToolBar()
@@ -75,7 +78,9 @@ class CourseEditorActivity : AppCompatActivity() {
 
     private fun setupToolBar() {
         setSupportActionBar(binding.toolbarCourseEditorAct)
-        supportActionBar?.title = if (!isEditMode) "Add Course" else "Edit Course"
+        supportActionBar?.title = if (!isEditMode) {
+            getString(R.string.courseEditor_titleAdd)
+        } else getString(R.string.courseEditor_titleAdd)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
     }
@@ -94,16 +99,17 @@ class CourseEditorActivity : AppCompatActivity() {
         }
 
         // Select course begin time
-        binding.dropDownCourseEditorActCourseBeginTime.setOnClickListener {
-            showMaterialTimePicker()
+        binding.textViewCourseEditorActCourseBeginTime.setOnClickListener {
+            showMaterialTimePicker(0)
         }
 
         // Select course end time
-        binding.dropDownCourseEditorActCourseEndTime.setOnClickListener {
-            showMaterialTimePicker()
+        binding.textViewCourseEditorActCourseEndTime.setOnClickListener {
+            showMaterialTimePicker(1)
         }
 
-        // Show Error
+
+        // Show Error, TODO(Bind these shit into xml)
         courseEditorViewModel.courseNameError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = true
@@ -121,14 +127,60 @@ class CourseEditorActivity : AppCompatActivity() {
                 binding.tilCourseEditorActCoursePlaceEntry.isErrorEnabled = false
             }
         }
+
+        courseEditorViewModel.courseBeginTimeError.observe(this) {
+            if (it) {
+                binding.tilCourseEditorActCourseBeginTimeEntry.isErrorEnabled = true
+                binding.tilCourseEditorActCourseBeginTimeEntry.error = getString(R.string.courseEditor_noEntry)
+            } else {
+                binding.tilCourseEditorActCourseBeginTimeEntry.isErrorEnabled = false
+            }
+        }
+
+        courseEditorViewModel.courseEndTimeError.observe(this) {
+            if (it) {
+                binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = true
+                binding.tilCourseEditorActCourseEndTimeEntry.error = getString(R.string.courseEditor_noEntry)
+            } else {
+                binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = false
+            }
+        }
     }
 
-    private fun showMaterialTimePicker() {
+    // TODO(Architecture)
+    private fun showMaterialTimePicker(beginOrEnd: Int) {
         val isSystem24Hour = DateFormat.is24HourFormat(this)
         clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
         val materialTimePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(clockFormat)
                 .build()
         materialTimePicker.show(supportFragmentManager, "selectCourseBeginTime")
+
+        materialTimePicker.addOnPositiveButtonClickListener {
+            val newHour = materialTimePicker.hour
+            val newMinute = materialTimePicker.minute
+            this.onTimeSet(newHour, newMinute, beginOrEnd)
+        }
+    }
+
+    // TODO(Architecture)
+    private fun onTimeSet(newHour: Int, newMinute: Int, beginOrEnd: Int) {
+        // Frontend
+        val cal = Calendar.getInstance()
+        cal[Calendar.HOUR_OF_DAY] = newHour
+        cal[Calendar.MINUTE] = newMinute
+        cal.isLenient = false
+        val format: String = formatter.format(cal.time)
+
+        // Backend
+        val timeToDatabase = String.format("%02d%02d", newHour, newMinute)
+
+        if (beginOrEnd == 0) {
+            binding.textViewCourseEditorActCourseBeginTime.setText(format)
+            courseEditorViewModel.courseBeginTime.value = timeToDatabase
+        } else {
+            binding.textViewCourseEditorActCourseEndTime.setText(format)
+            courseEditorViewModel.courseEndTime.value = timeToDatabase
+        }
     }
 }

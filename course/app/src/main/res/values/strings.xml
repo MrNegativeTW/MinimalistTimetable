@@ -34,6 +34,8 @@
     <string name="endTime">結束</string>
 
     <!-- Course Editor Activity -->
+    <string name="courseEditor_titleAdd">新增課程</string>
+    <string name="courseEditor_titleEdit">編輯課程</string>
     <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
     <string name="courseEditor_exitConfirmDialogMsg">您所輸入的資訊將「不會」被儲存</string>
     <string name="courseEditor_saveCourse">儲存</string>
