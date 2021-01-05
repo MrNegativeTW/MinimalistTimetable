@@ -46,9 +46,9 @@ class MainActivity2 : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-                val autoWeekday: Int = binding.viewPagerMainActivity2.currentItem
+                val currentViewPagerItem: Int = binding.viewPagerMainActivity2.currentItem
                 val intent = Intent(this, CourseEditorActivity::class.java).apply {
-                    putExtra("autoWeekday", autoWeekday)
+                    putExtra("currentViewPagerItem", currentViewPagerItem)
                 }
                 startActivity(intent)
 //                CourseEditorFragment().show(supportFragmentManager, "")

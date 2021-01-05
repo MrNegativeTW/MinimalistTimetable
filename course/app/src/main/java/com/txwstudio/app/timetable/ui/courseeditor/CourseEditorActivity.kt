@@ -30,6 +30,9 @@ class CourseEditorActivity : AppCompatActivity() {
 
     private var isEditMode = false
 
+    private val currentViewPagerItem by lazy { intent.getIntExtra("currentViewPagerItem", 0) }
+    private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
+
     @TimeFormat
     private var clockFormat = 0
     private val formatter = SimpleDateFormat("a hh:mm", Locale.getDefault())
@@ -42,7 +45,7 @@ class CourseEditorActivity : AppCompatActivity() {
 
         setupToolBar()
 
-        clockFormat = TimeFormat.CLOCK_12H
+        setupWeekday()
 
         subscribeUi()
     }
@@ -59,20 +62,24 @@ class CourseEditorActivity : AppCompatActivity() {
                 return true
             }
             android.R.id.home -> {
-                MaterialAlertDialogBuilder(this).apply {
-                    setTitle(R.string.courseEditor_exitConfirmDialogTitle)
-                    setMessage(R.string.courseEditor_exitConfirmDialogMsg)
-                    setPositiveButton(R.string.all_confirm) { _, _ ->
-                        finish()
-                    }
-                    setNegativeButton(R.string.all_cancel) { _, _ ->
-
-                    }
-                    show()
-                }
+                onBackPressed()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        MaterialAlertDialogBuilder(this).apply {
+            setTitle(R.string.courseEditor_exitConfirmDialogTitle)
+            setMessage(R.string.courseEditor_exitConfirmDialogMsg)
+            setPositiveButton(R.string.all_confirm) { _, _ ->
+                super.onBackPressed()
+            }
+            setNegativeButton(R.string.all_cancel) { _, _ ->
+
+            }
+            show()
         }
     }
 
@@ -85,17 +92,17 @@ class CourseEditorActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
     }
 
-    private fun subscribeUi() {
-
-        /* Get the current day and set it as default when adding the course. */
-        val autoWeekday = intent.getIntExtra("autoWeekday", 0)
-
-        // Select weekday dialog
-        val items = resources.getStringArray(R.array.weekdayList)
-        val adapter = ArrayAdapter(this, R.layout.list_item, items)
+    private fun setupWeekday() {
+        binding.dropDownCourseEditorAct.setText(weekdayArray[currentViewPagerItem])
+        val adapter = ArrayAdapter(this, R.layout.list_item, weekdayArray)
         (binding.dropDownCourseEditorAct as? AutoCompleteTextView)?.setAdapter(adapter)
+        courseEditorViewModel.courseWeekday.value = currentViewPagerItem
+    }
+
+    private fun subscribeUi() {
+        // Select weekday dialog
         binding.dropDownCourseEditorAct.setOnItemClickListener { adapterView, view, position, rowId ->
-            Log.i("TESTTT", "$position")
+            courseEditorViewModel.courseWeekday.value = position
         }
 
         // Select course begin time

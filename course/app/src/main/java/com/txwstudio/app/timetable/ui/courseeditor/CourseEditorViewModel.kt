@@ -10,7 +10,7 @@ class CourseEditorViewModel : ViewModel() {
     var coursePlace = MutableLiveData<String>()
     var courseBeginTime = MutableLiveData<String>()
     var courseEndTime = MutableLiveData<String>()
-    var courseWeekday = MutableLiveData<String>()
+    var courseWeekday = MutableLiveData<Int>(0)
     var courseTeacher = MutableLiveData<String>()
 
     var courseNameError = MutableLiveData<Boolean>()
