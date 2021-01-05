@@ -50,6 +50,7 @@
         </activity>
         <activity
             android:name=".ui.courseeditor.CourseEditorActivity"
+            android:exported="true"
             android:label="@string/courseEditorActivityTitle"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
