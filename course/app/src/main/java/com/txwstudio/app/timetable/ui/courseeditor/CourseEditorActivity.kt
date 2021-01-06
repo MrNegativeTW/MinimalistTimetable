@@ -32,6 +32,7 @@ class CourseEditorActivity : AppCompatActivity() {
     private val courseEditorViewModel: CourseEditorViewModel by viewModels()
 
     private var isEditMode = false
+    private var courseIdInDatabase = 0
 
     private val currentViewPagerItem by lazy { intent.getIntExtra("currentViewPagerItem", 0) }
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
@@ -47,8 +48,12 @@ class CourseEditorActivity : AppCompatActivity() {
         binding.viewModel = courseEditorViewModel
 
         setupToolBar()
-        setupWeekday()
+
+        isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
+        courseIdInDatabase = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
+
         checkIsEditMode()
+        setupWeekday()
         subscribeUi()
     }
 
@@ -98,20 +103,28 @@ class CourseEditorActivity : AppCompatActivity() {
      * Check is opened as edit mode or not, if yes, let viewModel know.
      * */
     private fun checkIsEditMode() {
-        isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
         if (isEditMode) {
             courseEditorViewModel.isEditMode.value = isEditMode
-            courseEditorViewModel.courseId.value = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
+            courseEditorViewModel.courseId.value = courseIdInDatabase
             courseEditorViewModel.setupValueForEditing()
         }
     }
 
+    /**
+     * Set text by is edit mode or not.
+     * Little hack here, the text and real value is not associate
+     * */
     private fun setupWeekday() {
-        binding.dropDownCourseEditorAct.setText(weekdayArray[currentViewPagerItem])
+        if (isEditMode) {
+            binding.dropDownCourseEditorAct.setText(weekdayArray[courseEditorViewModel.courseWeekday.value!!])
+        } else {
+            binding.dropDownCourseEditorAct.setText(weekdayArray[currentViewPagerItem])
+            courseEditorViewModel.courseWeekday.value = currentViewPagerItem
+        }
         val adapter = ArrayAdapter(this, R.layout.list_item, weekdayArray)
         (binding.dropDownCourseEditorAct as? AutoCompleteTextView)?.setAdapter(adapter)
-        courseEditorViewModel.courseWeekday.value = currentViewPagerItem
     }
+
 
     private fun subscribeUi() {
         // Select weekday dialog
