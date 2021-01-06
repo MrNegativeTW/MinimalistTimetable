@@ -22,27 +22,24 @@ class CourseViewerFragment : Fragment() {
         }
     }
 
-    private var weekday: Int? = null
-    private var db: DBHandler? = null
-
     private lateinit var binding: FragmentCourseViewerBinding
     private val courseViewerViewModel: CourseViewerViewModel by viewModels()
+
+    private var weekday: Int? = null
+    private lateinit var db: DBHandler
+
+    private lateinit var adapter: Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             weekday = it.getInt(WHICH_WEEKDAY)
         }
-
-        db = DBHandler(requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentCourseViewerBinding.inflate(inflater, container, false)
-
-        val adapter = Adapter(requireActivity(), db!!.getCourse(weekday!!), weekday!!)
-        binding.recyclerViewCourseViewer.adapter = adapter
 
         return binding.root
     }
@@ -51,5 +48,18 @@ class CourseViewerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // TODO: Use the ViewModel
     }
+
+    /**
+     * Because of lifecycle, the code below will not work inside onViewCreated,
+     * therefore I move these into onStart, just like the old one.
+     * */
+    override fun onStart() {
+        super.onStart()
+
+        db = DBHandler(requireActivity())
+        adapter = Adapter(requireActivity(), db.getCourse(weekday!!), weekday!!)
+        binding.recyclerViewCourseViewer.adapter = adapter
+    }
+
 
 }
