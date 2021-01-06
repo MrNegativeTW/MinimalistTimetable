@@ -116,7 +116,7 @@ class CourseEditorActivity : AppCompatActivity() {
         }
 
 
-        // Show Error, TODO(Bind these shit into xml)
+        // Show Error, TODO(Bind these shit into xml, but it won't work)
         courseEditorViewModel.courseNameError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = true
