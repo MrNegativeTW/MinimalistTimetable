@@ -70,19 +70,12 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
         Log.i("TESTTT", "${courseName.value} | ${coursePlace.value} | " +
                 "${courseBeginTime.value} | ${courseEndTime.value} | ${courseWeekday.value}")
 
-        val course = Course()
-        course.courseName = courseName.value
-        course.coursePlace = coursePlace.value
-        course.courseStartTime = courseBeginTime.value
-        course.courseEndTime = courseEndTime.value
-        course.courseWeekday = courseWeekday.value!!
-
         val course2 = Course2(
                 courseName = courseName.value,
                 coursePlace = coursePlace.value,
                 courseBeginTime = courseBeginTime.value,
                 courseEndTime = courseEndTime.value,
                 courseWeekday = courseWeekday.value)
-        DBHandler(getApplication()).addCourse(course)
+        DBHandler(getApplication()).addCourse(course2)
     }
 }
