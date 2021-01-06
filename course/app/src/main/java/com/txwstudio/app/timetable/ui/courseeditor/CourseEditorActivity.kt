@@ -186,7 +186,6 @@ class CourseEditorActivity : AppCompatActivity() {
         }
     }
 
-    // TODO(Architecture)
     private fun showMaterialTimePicker(beginOrEnd: Int) {
         val isSystem24Hour = DateFormat.is24HourFormat(this)
         clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
