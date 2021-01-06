@@ -46,10 +46,10 @@ class CourseEditorActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_course_editor)
         binding.viewModel = courseEditorViewModel
 
-        setupToolBar()
-
         isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
         courseIdInDatabase = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
+
+        setupToolBar()
 
         checkIsEditMode()
         setupWeekday()
@@ -94,7 +94,9 @@ class CourseEditorActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarCourseEditorAct)
         supportActionBar?.title = if (!isEditMode) {
             getString(R.string.courseEditor_titleAdd)
-        } else getString(R.string.courseEditor_titleAdd)
+        } else {
+            getString(R.string.courseEditor_titleEdit)
+        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
     }
