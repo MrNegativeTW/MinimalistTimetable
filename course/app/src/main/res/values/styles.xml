@@ -9,6 +9,7 @@
         <item name="fabButtonColor">@color/fabButtonColor</item>
         <item name="PopupOverlay">@style/AppTheme.PopupOverlay</item>
         <item name="iconColor">@color/white</item>
+        <item name="editTextCardBackground">@color/materialDarkSurface</item>
     </style>
 
     <style name="AppTheme_NoActionBar" parent="AppTheme">
@@ -16,10 +17,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat" >
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat">
         <item name="android:colorBackground">@color/darkMode_colorAccent</item>
     </style>
-
 
     <!-- Light Theme -->
     <style name="LightTheme" parent="Theme.AppCompat.Light">
@@ -30,6 +30,7 @@
         <item name="fabButtonColor">@color/fabButtonColor</item>
         <item name="PopupOverlay">@style/LightTheme.PopupOverlay</item>
         <item name="iconColor">@color/gray</item>
+        <item name="editTextCardBackground">@color/grey200</item>
     </style>
 
     <style name="LightTheme_NoActionBar" parent="LightTheme">
@@ -38,4 +39,5 @@
     </style>
 
     <style name="LightTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

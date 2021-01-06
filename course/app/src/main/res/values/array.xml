@@ -7,6 +7,13 @@
         <item>星期四</item>
         <item>星期五</item>
     </array>
+    <array name="weekdayList">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+    </array>
     <array name="schoolMapMode">
         <item>WebView</item>
         <item>PhotoView</item>

@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Ui.Fragments;
+package com.txwstudio.app.timetable.ui.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,9 +14,10 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.txwstudio.app.timetable.R;
 
 import java.util.Arrays;
+
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
@@ -92,31 +94,33 @@ public class SettingsFragment extends PreferenceFragment implements
 
     /**
      * onPreferenceClick()
-     *
+     * <p>
      * schoolMapPicker: Send request code and start an intent for result.
      * schoolCalendarPicker: Send request code and start an intent for result.
      * mapCalHelper: Show what to do with above function in preference screen.
-     * */
+     */
     @Override
     public boolean onPreferenceClick(Preference preference) {
         String key = preference.getKey();
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-        switch (key){
+        switch (key) {
             case "mapCalHelper":
                 dialog.setMessage(R.string.mapCalHelperTitleDescription);
                 dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
                 });
                 dialog.show();
                 break;
 
             case "versionChangelog":
                 dialog.setTitle(R.string.versionChangelogTitle)
-                      .setMessage(R.string.versionChangelogMessage);
+                        .setMessage(R.string.versionChangelogMessage);
                 dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
                 });
                 dialog.show();
                 break;
@@ -186,11 +190,11 @@ public class SettingsFragment extends PreferenceFragment implements
      * Keyword: Storage Access Framework.
      *
      * @param requestCode: Receive code and decide which preference to write.
-     * @param data: File uri
-     * */
+     * @param data:        File uri
+     */
     private void handleSelectedFile(int requestCode, Intent data) {
         String prefName = "";
-        switch (requestCode){
+        switch (requestCode) {
             case MAP_REQUEST_CODE:
                 prefName = MAP_REQUEST_PREF_NAME;
                 break;

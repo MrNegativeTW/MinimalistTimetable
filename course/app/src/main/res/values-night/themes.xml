@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme2" parent="Theme.MaterialComponents.DayNight">
+        <!-- AppBar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- Theme colors -->
+        <item name="colorPrimary">@color/colorAccentDark</item>
+        <item name="iconColor">?attr/colorControlNormal</item>
+        <item name="editTextCardBackground">@color/materialDarkSurface</item>
+    </style>
+
+</resources>

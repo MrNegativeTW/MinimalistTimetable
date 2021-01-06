@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="@string/generalSection">
+
+    <PreferenceCategory android:title="@string/generalSection">
+
         <EditTextPreference
+            android:defaultValue="Table"
             android:icon="@drawable/ic_label_outline_24dp"
             android:key="tableTitle_Pref"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="@string/tableTitle"
             android:summary="@string/tableTitleMessage"
-            android:defaultValue="Table" />
+            android:title="@string/tableTitle" />
+
         <CheckBoxPreference
+            android:defaultValue="false"
             android:icon="@drawable/ic_lightbulb_outline_24dp"
             android:key="lightMode_Pref"
-            android:title="@string/lightMode"
             android:summary="@string/lightModeSummary"
-            android:defaultValue="false" />
+            android:title="@string/lightMode" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/mapCalSection">
+    <PreferenceCategory android:title="@string/mapCalSection">
+
         <Preference
             android:icon="@drawable/ic_map_24dp"
             android:key="schoolMapPicker"
-            android:title="@string/schoolMapPickerTitle"
-            android:summary="@string/schoolMapPickerSummary"/>
+            android:summary="@string/schoolMapPickerSummary"
+            android:title="@string/schoolMapPickerTitle" />
+
         <Preference
             android:icon="@drawable/ic_event_note_24dp"
             android:key="schoolCalendarPicker"
-            android:title="@string/schoolCalendarPickerTitle"
-            android:summary="@string/schoolCalendarPickerSummary"/>
+            android:summary="@string/schoolCalendarPickerSummary"
+            android:title="@string/schoolCalendarPickerTitle" />
+
         <Preference
             android:icon="@drawable/ic_help_outline_24dp"
             android:key="mapCalHelper"
-            android:title="@string/mapCalHelperTitle"/>
+            android:title="@string/mapCalHelperTitle" />
     </PreferenceCategory>
 
     <!--<PreferenceCategory
@@ -48,20 +52,22 @@
             android:summary="@string/teacherColSummary"/>
     </PreferenceCategory>-->
 
-    <PreferenceCategory
-        android:title="@string/aboutSection">
-    <Preference
-        android:icon="@drawable/ic_bug_24dp"
-        android:title="@string/contactTitle"
-        android:summary="@string/contactMessage">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="http://bit.ly/timetableFeedback"/>
-    </Preference>
-    <Preference
-        android:icon="@drawable/ic_code_24dp"
-        android:key="versionChangelog"
-        android:title="@string/versionTitle"
-        android:summary="@string/versionMessage"/>
+    <PreferenceCategory android:title="@string/aboutSection">
+
+        <Preference
+            android:icon="@drawable/ic_bug_24dp"
+            android:summary="@string/contactMessage"
+            android:title="@string/contactTitle">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://bit.ly/timetableFeedback" />
+        </Preference>
+
+        <Preference
+            android:icon="@drawable/ic_code_24dp"
+            android:key="versionChangelog"
+            android:summary="@string/versionMessage"
+            android:title="@string/versionTitle" />
     </PreferenceCategory>
+
 </PreferenceScreen>

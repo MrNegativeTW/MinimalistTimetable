@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:mContext="com.txwstudio.app.timetable.Ui.Activity.MainActivity">
+    tools:mContext="com.txwstudio.app.timetable.ui.activity.MainActivity">
 
     <item
         android:id="@+id/menuSave"
-        android:icon="@drawable/ic_check_24dp"
+        android:icon="@drawable/ic_baseline_send_24"
         android:title="@string/saveCourse"
         app:showAsAction="always" />
 </menu>

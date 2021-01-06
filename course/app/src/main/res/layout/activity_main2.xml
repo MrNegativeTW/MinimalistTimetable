@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.txwstudio.app.timetable.ui.activity.MainActivity2ViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.MainActivity2">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
+            android:elevation="4dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_mainActivity2"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|snap" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout_mainActivity2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicator="@drawable/tab_indicator"
+                app:tabIndicatorColor="@color/colorAccentDark"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorHeight="3dp"
+                app:tabInlineLabel="true"
+                app:tabMinWidth="75dp" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager_mainActivity2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_mainActivity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorAccentDark"
+            android:src="@drawable/ic_exit_24dp"
+            app:borderWidth="0dp"
+            app:tint="?attr/colorOnPrimary" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

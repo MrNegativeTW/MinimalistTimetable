@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.Ui.Activity;
+package com.txwstudio.app.timetable.ui.activity;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -18,9 +18,9 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.txwstudio.app.timetable.DBHandler;
-import com.txwstudio.app.timetable.Model.Course;
+import com.txwstudio.app.timetable.model.Course;
 import com.txwstudio.app.timetable.R;
-import com.txwstudio.app.timetable.Ui.Fragments.TimePickerFragment;
+import com.txwstudio.app.timetable.ui.Fragments.TimePickerFragment;
 import com.txwstudio.app.timetable.Util;
 
 public class CourseAddActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
