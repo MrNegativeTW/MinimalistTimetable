@@ -13,7 +13,7 @@
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00 ~ 12:00"
+            tools:text="00:00 ~ 12:00"
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         <TextView
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item"
             android:paddingTop="8dp"
-            android:text="Computer Science"
+            tools:text="Computer Science"
             android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="Location"
+            tools:text="Location"
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
 </RelativeLayout>
