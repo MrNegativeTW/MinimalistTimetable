@@ -19,9 +19,9 @@ public class CampusMapActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Util.setupTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campus_map);
+        setSupportActionBar(findViewById(R.id.toolbar_campusMapAct));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TouchImageView touchImageView = (TouchImageView) findViewById(R.id.touchImageView);
