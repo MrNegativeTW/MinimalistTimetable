@@ -18,6 +18,9 @@ import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
+const val INTENT_EXTRA_IS_EDIT_MODE = "is_edit_mode"
+const val INTENT_EXTRA_COURSE_ID = "course_id"
+
 class CourseEditorActivity : AppCompatActivity() {
 
     /**
@@ -44,9 +47,8 @@ class CourseEditorActivity : AppCompatActivity() {
         binding.viewModel = courseEditorViewModel
 
         setupToolBar()
-
         setupWeekday()
-
+        checkIsEditMode()
         subscribeUi()
     }
 
@@ -90,6 +92,18 @@ class CourseEditorActivity : AppCompatActivity() {
         } else getString(R.string.courseEditor_titleAdd)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
+    }
+
+    /**
+     * Check is opened as edit mode or not, if yes, let viewModel know.
+     * */
+    private fun checkIsEditMode() {
+        isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
+        if (isEditMode) {
+            courseEditorViewModel.isEditMode.value = isEditMode
+            courseEditorViewModel.courseId.value = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
+            courseEditorViewModel.setupValueForEditing()
+        }
     }
 
     private fun setupWeekday() {
@@ -151,6 +165,11 @@ class CourseEditorActivity : AppCompatActivity() {
             } else {
                 binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = false
             }
+        }
+
+        // Close current activity
+        courseEditorViewModel.isSaveToFinish.observe(this) {
+            if (it) finish()
         }
     }
 

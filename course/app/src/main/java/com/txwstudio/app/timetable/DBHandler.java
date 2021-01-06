@@ -141,6 +141,30 @@ public class DBHandler extends SQLiteOpenHelper {
         return courseArrayList;
     }
 
+    public Course2 getCourseById2(int ID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Course2 course2 = null;
+
+        String selection = COURSE_ID + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(ID)};
+        Cursor data = db.query(TIMETABLE, null, selection, selectionArgs,
+                null, null, null);
+
+        while (data.moveToNext()) {
+            course2 = new Course2(
+                    data.getString(data.getColumnIndex(COURSE_NAME)),
+                    data.getString(data.getColumnIndex(COURSE_PLACE)),
+                    data.getString(data.getColumnIndex(COURSE_START_TIME)),
+                    data.getString(data.getColumnIndex(COURSE_END_TIME)),
+                    data.getInt(data.getColumnIndex(COURSE_WEEKDAY)),
+                    "",
+                    data.getInt(data.getColumnIndex(COURSE_ID)));
+        }
+        data.close();
+        db.close();
+        return course2;
+    }
+
 
     /**
      * Delete course.
@@ -166,5 +190,18 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put(COURSE_END_TIME, course.getCourseEndTime());
         db.update(TIMETABLE, contentValues, COURSE_ID + " = " + ID, null);
         db.close();
+    }
+
+    public boolean updateCourse(Course2 course2, int ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COURSE_NAME, course2.getCourseName());
+        contentValues.put(COURSE_PLACE, course2.getCoursePlace());
+        contentValues.put(COURSE_START_TIME, course2.getCourseBeginTime());
+        contentValues.put(COURSE_END_TIME, course2.getCourseEndTime());
+        contentValues.put(COURSE_WEEKDAY, course2.getCourseWeekday());
+        long testResult = db.update(TIMETABLE, contentValues, COURSE_ID + " = " + ID, null);
+        db.close();
+        return testResult != -1;
     }
 }

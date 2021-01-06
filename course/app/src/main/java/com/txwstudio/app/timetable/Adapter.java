@@ -3,6 +3,7 @@ package com.txwstudio.app.timetable;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,18 +16,23 @@ import android.widget.Toast;
 
 import com.txwstudio.app.timetable.model.Course;
 import com.txwstudio.app.timetable.ui.activity.CourseEditActivity;
+import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity;
+import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt;
 
 import java.util.ArrayList;
+
+import static com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt.INTENT_EXTRA_COURSE_ID;
+import static com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt.INTENT_EXTRA_IS_EDIT_MODE;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity mContext;
-//    private Context mContext;
+    //    private Context mContext;
     private ArrayList<Course> courseArrayList;
     DBHandler db;
     private int fragment;
 
-    public Adapter(Activity mContext, ArrayList<Course> arrayList, int fragment){
+    public Adapter(Activity mContext, ArrayList<Course> arrayList, int fragment) {
         this.mContext = mContext;
         this.courseArrayList = arrayList;
         this.fragment = fragment;
@@ -60,9 +66,9 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         String endTimeFormat = endTime.replaceAll("..(?!$)", "$0:");
         String timeToShow = startTimeFormat + " ~ " + endTimeFormat;
 
-        ((Item)holder).textView.setText(timeToShow);
-        ((Item)holder).textView2.setText(Name);
-        ((Item)holder).textView3.setText(Place);
+        ((Item) holder).textView.setText(timeToShow);
+        ((Item) holder).textView2.setText(Name);
+        ((Item) holder).textView3.setText(Place);
 
 
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +94,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         int ID = courseArrayList.get(position).getID();
                         switch (i) {
                             case 0:
-                                Intent intent = new Intent(mContext, CourseEditActivity.class);
-                                intent.putExtra("ID", ID);
+//                                Intent intent = new Intent(mContext, CourseEditActivity.class);
+//                                intent.putExtra("ID", ID);
+                                Intent intent = new Intent(mContext, CourseEditorActivity.class);
+                                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true);
+                                intent.putExtra(INTENT_EXTRA_COURSE_ID, ID);
                                 mContext.startActivity(intent);
                                 courseArrayList.clear();
                                 courseArrayList = db.getCourse(fragment);
