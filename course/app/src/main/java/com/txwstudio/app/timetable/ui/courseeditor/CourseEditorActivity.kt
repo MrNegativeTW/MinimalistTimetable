@@ -2,7 +2,6 @@ package com.txwstudio.app.timetable.ui.courseeditor
 
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -55,6 +54,7 @@ class CourseEditorActivity : AppCompatActivity() {
         checkIsEditMode()
         setupWeekday()
         subscribeUi()
+        subscribeUiForError()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -125,7 +125,6 @@ class CourseEditorActivity : AppCompatActivity() {
         (binding.dropDownCourseEditorAct as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
-
     private fun subscribeUi() {
         // Select weekday dialog
         binding.dropDownCourseEditorAct.setOnItemClickListener { adapterView, view, position, rowId ->
@@ -142,8 +141,25 @@ class CourseEditorActivity : AppCompatActivity() {
             showMaterialTimePicker(1)
         }
 
+        courseEditorViewModel.courseBeginTime.observe(this) {
+            binding.textViewCourseEditorActCourseBeginTime.setText(displayFormattedTime((it)))
+        }
 
-        // Show Error, TODO(Bind these shit into xml, but it won't work)
+        courseEditorViewModel.courseEndTime.observe(this) {
+            binding.textViewCourseEditorActCourseEndTime.setText(displayFormattedTime((it)))
+        }
+
+        // Close current activity
+        courseEditorViewModel.isSaveToFinish.observe(this) {
+            if (it) finish()
+        }
+    }
+
+    /**
+     * Subscribe Ui for error event.
+     * TODO(Want to bind these shit into xml, but it won't work, shit)
+     * */
+    private fun subscribeUiForError() {
         courseEditorViewModel.courseNameError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = true
@@ -179,11 +195,6 @@ class CourseEditorActivity : AppCompatActivity() {
                 binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = false
             }
         }
-
-        // Close current activity
-        courseEditorViewModel.isSaveToFinish.observe(this) {
-            if (it) finish()
-        }
     }
 
     private fun showMaterialTimePicker(beginOrEnd: Int) {
@@ -201,24 +212,26 @@ class CourseEditorActivity : AppCompatActivity() {
         }
     }
 
-    // TODO(Architecture)
     private fun onTimeSet(newHour: Int, newMinute: Int, beginOrEnd: Int) {
-        // Frontend
-        val cal = Calendar.getInstance()
-        cal[Calendar.HOUR_OF_DAY] = newHour
-        cal[Calendar.MINUTE] = newMinute
-        cal.isLenient = false
-        val format: String = formatter.format(cal.time)
-
-        // Backend
         val timeToDatabase = String.format("%02d%02d", newHour, newMinute)
 
         if (beginOrEnd == 0) {
-            binding.textViewCourseEditorActCourseBeginTime.setText(format)
             courseEditorViewModel.courseBeginTime.value = timeToDatabase
         } else {
-            binding.textViewCourseEditorActCourseEndTime.setText(format)
             courseEditorViewModel.courseEndTime.value = timeToDatabase
         }
+    }
+
+    private fun displayFormattedTime(time: String): String {
+        val cal = Calendar.getInstance()
+
+        val temp = StringBuilder().append(time)
+        val h = temp.substring(0, 2)
+        val m = temp.substring(2, 4)
+
+        cal[Calendar.HOUR_OF_DAY] = h.toInt()
+        cal[Calendar.MINUTE] = m.toInt()
+        cal.isLenient = false
+        return formatter.format(cal.time)
     }
 }

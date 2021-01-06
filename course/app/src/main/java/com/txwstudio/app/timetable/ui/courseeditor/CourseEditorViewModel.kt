@@ -28,6 +28,8 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
 
     var openTimePicker = MutableLiveData<Boolean>(false)
     var pickBeginOrEnd = MutableLiveData<Int>()
+    var courseBeginTimeForEdit = MutableLiveData<Int>()
+    var courseEndTimeForEdit = MutableLiveData<Int>()
 
     var isSaveToFinish = MutableLiveData<Boolean>(false)
 
