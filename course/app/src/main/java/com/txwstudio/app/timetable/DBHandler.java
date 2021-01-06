@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.txwstudio.app.timetable.model.Course;
+import com.txwstudio.app.timetable.model.Course2;
 
 import java.util.ArrayList;
 
@@ -33,9 +34,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 COURSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COURSE_NAME + " TEXT," +
                 COURSE_PLACE + " TEXT," +
-                COURSE_WEEKDAY+ " INTERGER," +
-                COURSE_START_TIME +" TEXT," +
-                COURSE_END_TIME +" TEXT" +
+                COURSE_WEEKDAY + " INTERGER," +
+                COURSE_START_TIME + " TEXT," +
+                COURSE_END_TIME + " TEXT" +
                 ")";
 
         db.execSQL(createTable);
@@ -49,14 +50,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     /**
-     * Methods for Course things.
+     * Add course.
      *
-     * addCourse(): Adding data from CourseAddActivity.Activity
-     * getCourse(): Called by 5 fragments, will return a ArrayList, and send to Adapter.
-     * getCourseById(): Called when editing details, return 1 course one time.
-     * deleteCourse(): Delete course by ID, called by every new adapter.
-     * updateCourse():
-     * */
+     * @return True for success, False for failed. (-1 == failed)
+     */
     public boolean addCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -74,7 +71,23 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    public boolean addCourse(Course2 course2) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COURSE_NAME, course2.getCourseName());
+        contentValues.put(COURSE_PLACE, course2.getCoursePlace());
+        contentValues.put(COURSE_WEEKDAY, course2.getCourseWeekday());
+        contentValues.put(COURSE_START_TIME, course2.getCourseBeginTime());
+        contentValues.put(COURSE_END_TIME, course2.getCourseEndTime());
+        long testResult = db.insert(TIMETABLE, null, contentValues);
+        db.close();
+        return testResult != -1;
+    }
 
+
+    /**
+     * Get course information by list.
+     */
     public ArrayList<Course> getCourse(int dayWanted) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Course> courseArrayList = new ArrayList<>();
@@ -84,9 +97,9 @@ public class DBHandler extends SQLiteOpenHelper {
         String[] selectionArgs = new String[]{String.valueOf(dayWanted)};
         String orderBy = COURSE_START_TIME + " ASC";
         Cursor data = db.query(TIMETABLE, null, selection, selectionArgs,
-                                        null, null, orderBy);
+                null, null, orderBy);
 
-        while(data.moveToNext()) {
+        while (data.moveToNext()) {
             course = new Course();
             course.setID(data.getInt(data.getColumnIndex(COURSE_ID)));
             course.setCourseName(data.getString(data.getColumnIndex(COURSE_NAME)));
@@ -100,18 +113,20 @@ public class DBHandler extends SQLiteOpenHelper {
         return courseArrayList;
     }
 
-
+    /**
+     * Get course information once.
+     */
     public ArrayList<Course> getCourseById(int ID) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Course> courseArrayList = new ArrayList<>();
         Course course;
 
         String selection = COURSE_ID + " = ?";
-        String[] selectionArgs = new String[] {String.valueOf(ID)};
+        String[] selectionArgs = new String[]{String.valueOf(ID)};
         Cursor data = db.query(TIMETABLE, null, selection, selectionArgs,
-                                        null, null, null);
+                null, null, null);
 
-        while(data.moveToNext()){
+        while (data.moveToNext()) {
             course = new Course();
             course.setID(data.getInt(data.getColumnIndex(COURSE_ID)));
             course.setCourseName(data.getString(data.getColumnIndex(COURSE_NAME)));
@@ -127,6 +142,9 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Delete course.
+     */
     public void deleteCourse(int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         String IDD = String.valueOf(ID);
@@ -135,6 +153,9 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Update course.
+     */
     public void updateCourse(Course course, int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
