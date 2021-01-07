@@ -20,30 +20,30 @@
     <string name="traffic_schoolMap">Map</string>
     <string name="startTime">Starts</string>
     <string name="endTime">Ends</string>
-    <string name="lightMode">Light Theme</string>
-    <string name="lightModeSummary">Turn the light on, it is dark here.</string>
-    <string name="tableTitle">Custom Table Name</string>
-    <string name="tableTitleDefault">My Timetable</string>
-    <string name="versionTitle">Version 1.1</string>
-    <string name="tableTitleMessage">Name to show on the main screen</string>
-    <string name="contactMessage">Bug Report or feature request.</string>
-    <string name="contactTitle">Contact Developers</string>
-    <string name="aboutSection">About</string>
-    <string name="generalSection">General</string>
-    <string name="schoolMapPickerTitle">Custom Campus Map</string>
+    <string name="settings_lightModeTitle">Light Theme</string>
+    <string name="settings_lightModeSummary">Turn the light on, it is dark here.</string>
+    <string name="settings_timetableTitle">Custom Table Name</string>
+    <string name="settings_timetableTitleDefaultValue">My Timetable</string>
+    <string name="settings_versionTitle">Version 1.1</string>
+    <string name="settings_timetableTitleSummary">Name to show on the main screen</string>
+    <string name="settings_contactSummary">Bug Report or feature request.</string>
+    <string name="settings_contactTitle">Contact Developers</string>
+    <string name="settings_sectionAbout">About</string>
+    <string name="settings_sectionGeneral">General</string>
+    <string name="settings_campusMapPickerTitle">Custom Campus Map</string>
     <array name="dialog">
         <item>Edit</item>
         <item>Delete</item>
     </array>
-    <string name="schoolMapPickerSummary">Support JPG and PNG</string>
+    <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
     <string name="saveCourse">Save</string>
     <string name="errorNoTimeEntry">Enter time</string>
     <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
     <string name="menuMap">Map</string>
     <string name="weekdaysInitValue">Mon</string>
     <string name="menuCalendar">Calendar</string>
-    <string name="schoolCalendarPickerTitle">Custom School Calendar</string>
-    <string name="schoolCalendarPickerSummary">Support PDF</string>
+    <string name="settings_schoolCalendarPickerTitle">Custom School Calendar</string>
+    <string name="settings_schoolCalendarPickerSummary">Support PDF</string>
     <string name="pdfNoAppMsg">Install Google Drive first</string>
     <string name="pdfOpenWithMsg">Open PDF with</string>
     <string name="dialogNegativeButton">Hell No</string>
@@ -52,16 +52,16 @@
     <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
     <string name="fileReadErrorMsg">Unknown error, please try again.</string>
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
-    <string name="mapCalSection">Map and Celandar</string>
-    <string name="mapCalHelperTitle">What is this?</string>
+    <string name="settings_sectionMapCalendar">Map and Celandar</string>
+    <string name="settings_sectionMapCalendarHelperTitle">What is this?</string>
     <string name="dialogNormalButton">OK</string>
     <string name="mapCalHelperTitleDescription">
         1. These two are the shortcut of the map/calendar, can be opened from the main screen.
         \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
         \n\nMap: JPG、PNG\nCalendar: PDF
     </string>
-    <string name="versionChangelogTitle">Changelog</string>
-    <string name="versionChangelogMessage">
+    <string name="settings_changelogTitle">Changelog</string>
+    <string name="settings_changelogMessage">
         - Add calendar shortcut\n- Fix can\'t read from SD card\n- Add accent color for dark theme
     </string>
 </resources>

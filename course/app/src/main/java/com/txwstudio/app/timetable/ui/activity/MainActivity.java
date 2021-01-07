@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             Intent refresh = getIntent();
             startActivity(refresh);
         }
-        toolbar.setTitle(sharedPref.getString("tableTitle_Pref", String.valueOf(R.string.tableTitleDefault)));
+        toolbar.setTitle(sharedPref.getString("tableTitle_Pref", String.valueOf(R.string.settings_timetableTitleDefaultValue)));
     }
 
 

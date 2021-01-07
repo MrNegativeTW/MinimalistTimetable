@@ -68,34 +68,34 @@
         \n\n地圖支援：JPG、PNG\n行事曆支援：PDF
     </string>
 
-    <!-- Activity Setting -->
-    <string name="generalSection">一般</string>
-    <string name="tableTitle">自訂課表名稱</string>
-    <string name="tableTitleMessage">自訂要顯示在主畫面的名稱</string>
-    <string name="tableTitleDefault">我的課表</string>
-    <string name="lightMode">淺色主題</string>
-    <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
-    <string name="mapCalSection">地圖與行事曆</string>
-    <string name="schoolMapPickerTitle">自訂學校地圖</string>
-    <string name="schoolMapPickerSummary">支援 JPG、PNG</string>
-    <string name="schoolCalendarPickerTitle">自訂學校行事曆</string>
-    <string name="schoolCalendarPickerSummary">支援 PDF</string>
-    <string name="mapCalHelperTitle">這什麼?</string>
+    <!-- Setting Activity -->
+    <string name="settings_sectionGeneral">一般</string>
+    <string name="settings_timetableTitle">課表名稱</string>
+    <string name="settings_timetableTitleSummary">我的課表</string>
+    <string name="settings_timetableTitleDefaultValue">我的課表</string>
+    <string name="settings_lightModeTitle">淺色主題</string>
+    <string name="settings_lightModeSummary">這裡太黑暗了，幫我開燈</string>
+    <string name="settings_sectionMapCalendar">地圖與行事曆</string>
+    <string name="settings_campusMapPickerTitle">自訂學校地圖</string>
+    <string name="settings_campusMapPickerSummary">支援 JPG、PNG</string>
+    <string name="settings_schoolCalendarPickerTitle">自訂學校行事曆</string>
+    <string name="settings_schoolCalendarPickerSummary">支援 PDF</string>
+    <string name="settings_sectionMapCalendarHelperTitle">這什麼?</string>
 
-    <string name="columnSection">欄位設定</string>
-    <string name="weekendColTitle">週末欄位</string>
-    <string name="weekendColSummary">開啟禮拜六日欄位</string>
-    <string name="teacherColTitle">教師欄位</string>
-    <string name="teacherColSummary">在課表顯示教師名稱</string>
+    <string name="settings_sectionColumn">欄位設定</string>
+    <string name="settings_weekendColTitle">週末欄位</string>
+    <string name="settings_weekendColSummary">開啟禮拜六日欄位</string>
+    <string name="settings_teacherColTitle">教師欄位</string>
+    <string name="settings_teacherColSummary">在課表顯示教師名稱</string>
 
-    <string name="aboutSection">關於</string>
-    <string name="contactTitle">聯繫作者</string>
-    <string name="contactMessage">Bug 回報、功能請求</string>
-    <string name="versionTitle">版本 1.1</string>
-    <string name="versionMessage" translatable="false">Made with ❤ in Taiwan</string>
-    <string name="versionChangelogTitle">更新紀錄</string>
-    <string name="versionChangelogMessage">
-        - 新增行事曆捷徑\n- 修復 SD 卡無法讀取問題\n- 修復深色主題沒有突出顏色的問題\n- 優化聯繫作者表單
+    <string name="settings_sectionAbout">關於</string>
+    <string name="settings_contactTitle">聯繫作者</string>
+    <string name="settings_contactSummary">Bug 回報、功能請求</string>
+    <string name="settings_versionTitle">版本 2.0</string>
+    <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
+    <string name="settings_changelogTitle">更新紀錄</string>
+    <string name="settings_changelogMessage">
+        - 大更新
     </string>
 
 

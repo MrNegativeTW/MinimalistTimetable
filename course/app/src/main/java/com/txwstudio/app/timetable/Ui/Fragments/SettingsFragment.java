@@ -85,7 +85,7 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals("tableTitle_Pref")) {
             editTextPreference.setSummary(sharedPreferences
-                    .getString("tableTitle_Pref", String.valueOf(R.string.tableTitleMessage)));
+                    .getString("tableTitle_Pref", String.valueOf(R.string.settings_timetableTitleSummary)));
         }
         if (key.equals("lightMode_Pref")) {
             restartSchedule = true;
@@ -115,8 +115,8 @@ public class SettingsFragment extends PreferenceFragment implements
                 break;
 
             case "versionChangelog":
-                dialog.setTitle(R.string.versionChangelogTitle)
-                        .setMessage(R.string.versionChangelogMessage);
+                dialog.setTitle(R.string.settings_changelogTitle)
+                        .setMessage(R.string.settings_changelogMessage);
                 dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

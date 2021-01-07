@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/generalSection">
+    <PreferenceCategory android:title="@string/settings_sectionGeneral">
 
         <EditTextPreference
-            android:defaultValue="Table"
+            android:defaultValue="@string/settings_timetableTitleDefaultValue"
             android:icon="@drawable/ic_label_outline_24dp"
             android:key="tableTitle_Pref"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:summary="@string/tableTitleMessage"
-            android:title="@string/tableTitle" />
+            android:summary="@string/settings_timetableTitleSummary"
+            android:title="@string/settings_timetableTitle" />
 
         <CheckBoxPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_lightbulb_outline_24dp"
             android:key="lightMode_Pref"
-            android:summary="@string/lightModeSummary"
-            android:title="@string/lightMode" />
+            android:summary="@string/settings_lightModeSummary"
+            android:title="@string/settings_lightModeTitle" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/mapCalSection">
+    <PreferenceCategory android:title="@string/settings_sectionMapCalendar">
 
         <Preference
             android:icon="@drawable/ic_map_24dp"
             android:key="schoolMapPicker"
-            android:summary="@string/schoolMapPickerSummary"
-            android:title="@string/schoolMapPickerTitle" />
+            android:summary="@string/settings_campusMapPickerSummary"
+            android:title="@string/settings_campusMapPickerTitle" />
 
         <Preference
             android:icon="@drawable/ic_event_note_24dp"
             android:key="schoolCalendarPicker"
-            android:summary="@string/schoolCalendarPickerSummary"
-            android:title="@string/schoolCalendarPickerTitle" />
+            android:summary="@string/settings_schoolCalendarPickerSummary"
+            android:title="@string/settings_schoolCalendarPickerTitle" />
 
         <Preference
             android:icon="@drawable/ic_help_outline_24dp"
             android:key="mapCalHelper"
-            android:title="@string/mapCalHelperTitle" />
+            android:title="@string/settings_sectionMapCalendarHelperTitle" />
     </PreferenceCategory>
 
     <!--<PreferenceCategory
@@ -52,12 +52,12 @@
             android:summary="@string/teacherColSummary"/>
     </PreferenceCategory>-->
 
-    <PreferenceCategory android:title="@string/aboutSection">
+    <PreferenceCategory android:title="@string/settings_sectionAbout">
 
         <Preference
             android:icon="@drawable/ic_bug_24dp"
-            android:summary="@string/contactMessage"
-            android:title="@string/contactTitle">
+            android:summary="@string/settings_contactSummary"
+            android:title="@string/settings_contactTitle">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="http://bit.ly/timetableFeedback" />
@@ -66,8 +66,8 @@
         <Preference
             android:icon="@drawable/ic_code_24dp"
             android:key="versionChangelog"
-            android:summary="@string/versionMessage"
-            android:title="@string/versionTitle" />
+            android:summary="@string/settings_versionSummary"
+            android:title="@string/settings_versionTitle" />
     </PreferenceCategory>
 
 </PreferenceScreen>
