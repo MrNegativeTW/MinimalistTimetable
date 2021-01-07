@@ -1,7 +1,9 @@
 package com.txwstudio.app.timetable.ui.settings
 
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -9,6 +11,8 @@ import com.txwstudio.app.timetable.R
 
 private const val PREFERENCE_MAP_CAL_HELPER = "pref_mapCalHelper"
 private const val PREFERENCE_CHANGELOG = "pref_changelog"
+
+private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
 
 class SettingsFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
@@ -35,6 +39,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         when (preference?.key) {
             "pref_mapCalHelper" -> {
                 showDialog(PREFERENCE_MAP_CAL_HELPER)
+            }
+            "pref_bugReport" -> {
+                val customTabsIntent = CustomTabsIntent.Builder().build()
+                customTabsIntent.launchUrl(requireContext(), Uri.parse(BUG_REPORT_LINK))
             }
             "pref_changelog" -> {
                 showDialog(PREFERENCE_CHANGELOG)

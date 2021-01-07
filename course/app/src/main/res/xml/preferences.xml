@@ -56,11 +56,9 @@
 
         <Preference
             android:icon="@drawable/ic_bug_24dp"
+            android:key="pref_bugReport"
             android:summary="@string/settings_contactSummary"
             android:title="@string/settings_contactTitle">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="http://bit.ly/timetableFeedback" />
         </Preference>
 
         <Preference
