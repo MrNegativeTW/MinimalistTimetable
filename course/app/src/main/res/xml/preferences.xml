@@ -24,13 +24,13 @@
 
         <Preference
             android:icon="@drawable/ic_map_24dp"
-            android:key="schoolMapPicker"
+            android:key="pref_campusMapPicker"
             android:summary="@string/settings_campusMapPickerSummary"
             android:title="@string/settings_campusMapPickerTitle" />
 
         <Preference
             android:icon="@drawable/ic_event_note_24dp"
-            android:key="schoolCalendarPicker"
+            android:key="pref_schoolCalendarPicker"
             android:summary="@string/settings_schoolCalendarPickerSummary"
             android:title="@string/settings_schoolCalendarPickerTitle" />
 
