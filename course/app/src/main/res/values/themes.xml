@@ -15,7 +15,7 @@
 
         <!-- Theme colors -->
         <item name="colorPrimary">@color/colorAccentDark</item>
-        <item name="iconColor">?attr/colorControlNormal</item>
+        <item name="iconColor">@color/gray</item>
         <item name="editTextCardBackground">@color/grey200</item>
 
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Transition</item>

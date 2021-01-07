@@ -8,7 +8,7 @@
 
         <!-- Theme colors -->
         <item name="colorPrimary">@color/colorAccentDark</item>
-        <item name="iconColor">?attr/colorControlNormal</item>
+        <item name="iconColor">@android:color/white</item>
         <item name="editTextCardBackground">@color/materialDarkSurface</item>
 
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Transition</item>
