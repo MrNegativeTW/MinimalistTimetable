@@ -1,6 +1,7 @@
 package com.txwstudio.app.timetable.ui.settings
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
@@ -9,6 +10,7 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import androidx.preference.EditTextPreference
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.preference.Preference
@@ -34,6 +36,19 @@ private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
 
 class SettingsFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private lateinit var editTextPreference: EditTextPreference
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // Set summary, improve ux
+        editTextPreference = findPreference("tableTitle_Pref")!!
+        editTextPreference.summary = PreferenceManager
+                .getDefaultSharedPreferences(requireContext())
+                .getString("tableTitle_Pref",
+                        getString(R.string.settings_timetableTitleDefaultValue))
+    }
 
     override fun onResume() {
         super.onResume()
@@ -85,7 +100,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             "tableTitle_Pref" -> {
-
+                editTextPreference.summary =
+                        sharedPreferences?.getString("tableTitle_Pref",
+                                java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
             }
             "lightMode_Pref" -> {
 
