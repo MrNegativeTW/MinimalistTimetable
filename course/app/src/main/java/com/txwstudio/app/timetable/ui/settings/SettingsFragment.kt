@@ -1,7 +1,6 @@
 package com.txwstudio.app.timetable.ui.settings
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
@@ -10,9 +9,9 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.preference.EditTextPreference
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
