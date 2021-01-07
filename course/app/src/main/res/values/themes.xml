@@ -15,6 +15,7 @@
 
         <!-- Theme colors -->
         <item name="colorPrimary">@color/colorAccentDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="iconColor">@color/gray</item>
         <item name="editTextCardBackground">@color/grey200</item>
 
