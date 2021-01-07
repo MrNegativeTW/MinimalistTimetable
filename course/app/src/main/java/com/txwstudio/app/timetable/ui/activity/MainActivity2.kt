@@ -2,22 +2,21 @@ package com.txwstudio.app.timetable.ui.activity
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.preference.PreferenceManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.*
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
-import com.txwstudio.app.timetable.model.Course
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
-import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorFragment
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 
@@ -26,16 +25,27 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
     private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
 
+    private lateinit var sharedPref: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
         binding.viewModel = mainActivity2ViewModel
 
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+
         setupToolBar()
         setupTabLayoutAndViewPager()
         openTodayTimetable()
         subscribeUi()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        supportActionBar?.title =
+                sharedPref.getString("tableTitle_Pref",
+                        getString(R.string.settings_timetableTitleDefaultValue))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
