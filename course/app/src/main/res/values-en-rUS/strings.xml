@@ -53,9 +53,9 @@
     <string name="fileReadErrorMsg">Unknown error, please try again.</string>
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
     <string name="settings_sectionMapCalendar">Map and Celandar</string>
-    <string name="settings_sectionMapCalendarHelperTitle">What is this?</string>
+    <string name="settings_mapCalendarHelperTitle">What is this?</string>
     <string name="dialogNormalButton">OK</string>
-    <string name="mapCalHelperTitleDescription">
+    <string name="settings_mapCalendarHelperMessage">
         1. These two are the shortcut of the map/calendar, can be opened from the main screen.
         \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
         \n\nMap: JPG、PNG\nCalendar: PDF

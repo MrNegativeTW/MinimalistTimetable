@@ -105,7 +105,7 @@ public class SettingsFragment extends PreferenceFragment implements
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         switch (key) {
             case "mapCalHelper":
-                dialog.setMessage(R.string.mapCalHelperTitleDescription);
+                dialog.setMessage(R.string.settings_mapCalendarHelperMessage);
                 dialog.setPositiveButton(R.string.dialogNormalButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

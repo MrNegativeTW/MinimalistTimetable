@@ -36,8 +36,8 @@
 
         <Preference
             android:icon="@drawable/ic_help_outline_24dp"
-            android:key="mapCalHelper"
-            android:title="@string/settings_sectionMapCalendarHelperTitle" />
+            android:key="pref_mapCalHelper"
+            android:title="@string/settings_mapCalendarHelperTitle" />
     </PreferenceCategory>
 
     <!--<PreferenceCategory
@@ -65,7 +65,7 @@
 
         <Preference
             android:icon="@drawable/ic_code_24dp"
-            android:key="versionChangelog"
+            android:key="pref_changelog"
             android:summary="@string/settings_versionSummary"
             android:title="@string/settings_versionTitle" />
     </PreferenceCategory>
