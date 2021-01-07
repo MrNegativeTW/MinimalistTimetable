@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/button_courseEditorFrag_save">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -51,7 +51,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/courseEditor_courseNameTitle">
+                    android:hint="@string/courseEditor_courseNameTitle"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editText_courseEditorAct_courseNameEntry"
@@ -67,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/courseEditor_coursePlaceTitle">
+                    android:hint="@string/courseEditor_coursePlaceTitle"
+                    app:layout_constraintTop_toBottomOf="@id/til_courseEditorAct_courseNameEntry">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editText_courseEditorAct_coursePlaceEntry"
@@ -77,12 +81,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorAct_courseWeekdayEntry"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/courseEditor_courseWeekdayTitle">
+                    android:hint="@string/courseEditor_courseWeekdayTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorAct_coursePlaceEntry">
 
                     <AutoCompleteTextView
                         android:id="@+id/dropDown_courseEditorAct"
@@ -91,52 +97,49 @@
                         android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorAct_courseBeginTimeEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:weightSum="2">
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_half"
+                    android:hint="@string/courseEditor_courseBeginTitle"
+                    app:endIconDrawable="@drawable/ic_baseline_edit_24"
+                    app:endIconMode="dropdown_menu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/til_courseEditorAct_courseEndTimeEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorAct_courseWeekdayEntry">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_courseEditorAct_courseBeginTimeEntry"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
+                    <AutoCompleteTextView
+                        android:id="@+id/textView_courseEditorAct_courseBeginTime"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_normal"
-                        android:layout_marginTop="@dimen/margin_normal"
-                        android:layout_marginEnd="@dimen/margin_half"
-                        android:layout_weight="1"
-                        android:hint="@string/courseEditor_courseBeginTitle"
-                        app:endIconDrawable="@drawable/ic_baseline_edit_24"
-                        app:endIconMode="dropdown_menu">
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <AutoCompleteTextView
-                            android:id="@+id/textView_courseEditorAct_courseBeginTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorAct_courseEndTimeEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:hint="@string/courseEditor_courseEndTitle"
+                    app:endIconDrawable="@drawable/ic_baseline_edit_24"
+                    app:endIconMode="dropdown_menu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/til_courseEditorAct_courseBeginTimeEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorAct_courseWeekdayEntry">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_courseEditorAct_courseEndTimeEntry"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
+                    <AutoCompleteTextView
+                        android:id="@+id/textView_courseEditorAct_courseEndTime"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_half"
-                        android:layout_marginTop="@dimen/margin_normal"
-                        android:layout_marginEnd="@dimen/margin_normal"
-                        android:layout_weight="1"
-                        android:hint="@string/courseEditor_courseEndTitle"
-                        app:endIconDrawable="@drawable/ic_baseline_edit_24"
-                        app:endIconMode="dropdown_menu">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/textView_courseEditorAct_courseEndTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-            </LinearLayout>
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
