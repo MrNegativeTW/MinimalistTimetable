@@ -11,12 +11,11 @@
             android:singleLine="true"
             android:title="@string/settings_timetableTitle" />
 
-        <CheckBoxPreference
+        <Preference
             android:defaultValue="false"
-            android:icon="@drawable/ic_lightbulb_outline_24dp"
-            android:key="lightMode_Pref"
-            android:summary="@string/settings_lightModeSummary"
-            android:title="@string/settings_lightModeTitle" />
+            android:icon="@drawable/ic_outline_format_paint_24"
+            android:key="pref_theme"
+            android:title="@string/settings_themeTitle" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_sectionMapCalendar">
@@ -39,17 +38,22 @@
             android:title="@string/settings_mapCalendarHelperTitle" />
     </PreferenceCategory>
 
-    <!--<PreferenceCategory
-        android:title="@string/columnSection">
+    <PreferenceCategory android:title="@string/settings_sectionTimetable">
+
+        <Preference
+            android:icon="@drawable/ic_outline_notifications_active_24"
+            android:key="pref_notificationBeforeClass"
+            android:title="@string/settings_notificationBeforeClassTitle" />
         <CheckBoxPreference
-            android:icon="@drawable/ic_bug_24dp"
-            android:title="@string/weekendColTitle"
-            android:summary="@string/weekendColSummary" />
+            android:summary="@string/settings_weekendColSummary"
+            android:title="@string/settings_weekendColTitle" />
         <CheckBoxPreference
-            android:icon="@drawable/ic_code_24dp"
-            android:title="@string/teacherColTitle"
-            android:summary="@string/teacherColSummary"/>
-    </PreferenceCategory>-->
+            android:summary="@string/settings_teacherColSummary"
+            android:title="@string/settings_teacherColTitle" />
+        <CheckBoxPreference
+            android:summary="@string/settings_weekdayLengthLongSummary"
+            android:title="@string/settings_weekdayLengthLongTitle" />
+    </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_sectionAbout">
 
@@ -57,8 +61,7 @@
             android:icon="@drawable/ic_bug_24dp"
             android:key="pref_bugReport"
             android:summary="@string/settings_contactSummary"
-            android:title="@string/settings_contactTitle">
-        </Preference>
+            android:title="@string/settings_contactTitle"></Preference>
 
         <Preference
             android:icon="@drawable/ic_code_24dp"
