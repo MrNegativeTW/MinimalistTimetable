@@ -93,14 +93,15 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun getTabTitle(position: Int): String? {
-        return when (position) {
-            WEEKDAY_1 -> getString(R.string.tab_text_1)
-            WEEKDAY_2 -> getString(R.string.tab_text_2)
-            WEEKDAY_3 -> getString(R.string.tab_text_3)
-            WEEKDAY_4 -> getString(R.string.tab_text_4)
-            WEEKDAY_5 -> getString(R.string.tab_text_5)
-            else -> "null"
-        }
+        return resources.getStringArray(R.array.weekdayList)[position]
+//        return when (position) {
+//            WEEKDAY_1 -> getString(R.string.tab_text_1)
+//            WEEKDAY_2 -> getString(R.string.tab_text_2)
+//            WEEKDAY_3 -> getString(R.string.tab_text_3)
+//            WEEKDAY_4 -> getString(R.string.tab_text_4)
+//            WEEKDAY_5 -> getString(R.string.tab_text_5)
+//            else -> "null"
+//        }
     }
 
     /**
