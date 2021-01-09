@@ -14,9 +14,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.adapter.*
+import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_TABLE_TITLE
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKDAY_LENGTH_LONG
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 
@@ -26,6 +28,9 @@ class MainActivity2 : AppCompatActivity() {
     private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
 
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var prefTableTitle: String
+    private var prefWeekendCol = false
+    private var prefWeekdayLengthLong = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,16 +41,15 @@ class MainActivity2 : AppCompatActivity() {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         setupToolBar()
-        setupTabLayoutAndViewPager()
         openTodayTimetable()
         subscribeUi()
     }
 
     override fun onResume() {
         super.onResume()
-        supportActionBar?.title =
-                sharedPref.getString("tableTitle_Pref",
-                        getString(R.string.settings_timetableTitleDefaultValue))
+        getPrefValue()
+        setupTabLayoutAndViewPager()
+        supportActionBar?.title = prefTableTitle
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -80,6 +84,13 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
+    private fun getPrefValue() {
+        prefTableTitle = sharedPref.getString(PREFERENCE_TABLE_TITLE,
+                getString(R.string.settings_timetableTitleDefaultValue))!!
+        prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+        prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+    }
+
     private fun setupToolBar() {
         setSupportActionBar(toolbar_mainActivity2)
     }
@@ -93,15 +104,12 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun getTabTitle(position: Int): String? {
-        return resources.getStringArray(R.array.weekdayList)[position]
-//        return when (position) {
-//            WEEKDAY_1 -> getString(R.string.tab_text_1)
-//            WEEKDAY_2 -> getString(R.string.tab_text_2)
-//            WEEKDAY_3 -> getString(R.string.tab_text_3)
-//            WEEKDAY_4 -> getString(R.string.tab_text_4)
-//            WEEKDAY_5 -> getString(R.string.tab_text_5)
-//            else -> "null"
-//        }
+        val array = if (prefWeekdayLengthLong) {
+            R.array.weekdayList
+        } else {
+            R.array.weekdayListShort
+        }
+        return resources.getStringArray(array)[position]
     }
 
     /**

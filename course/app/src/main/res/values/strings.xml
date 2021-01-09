@@ -9,7 +9,7 @@
     <string name="editCourseActivityTitle">編輯課程</string>
     <string name="title_activity_settings">設定</string>
 
-    <!-- 分頁名稱 -->
+    <!-- 分頁名稱 Remove soon -->
     <string name="tab_text_1">一</string>
     <string name="tab_text_2">二</string>
     <string name="tab_text_3">三</string>
