@@ -45,17 +45,20 @@
             android:key="pref_notificationBeforeClass"
             android:title="@string/settings_notificationBeforeClassTitle" />
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="pref_weekendCol"
             android:summary="@string/settings_weekendColSummary"
             android:title="@string/settings_weekendColTitle" />
         <CheckBoxPreference
+            android:key="pref_weekdayLengthLong"
+            android:defaultValue="false"
+            android:summary="@string/settings_weekdayLengthLongSummary"
+            android:title="@string/settings_weekdayLengthLongTitle" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="pref_teacherCol"
             android:summary="@string/settings_teacherColSummary"
             android:title="@string/settings_teacherColTitle" />
-        <CheckBoxPreference
-            android:key="pref_weekdayLengthLong"
-            android:summary="@string/settings_weekdayLengthLongSummary"
-            android:title="@string/settings_weekdayLengthLongTitle" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_sectionAbout">
@@ -64,7 +67,7 @@
             android:icon="@drawable/ic_bug_24dp"
             android:key="pref_bugReport"
             android:summary="@string/settings_contactSummary"
-            android:title="@string/settings_contactTitle"></Preference>
+            android:title="@string/settings_contactTitle" />
 
         <Preference
             android:icon="@drawable/ic_code_24dp"
