@@ -45,12 +45,15 @@
             android:key="pref_notificationBeforeClass"
             android:title="@string/settings_notificationBeforeClassTitle" />
         <CheckBoxPreference
+            android:key="pref_weekendCol"
             android:summary="@string/settings_weekendColSummary"
             android:title="@string/settings_weekendColTitle" />
         <CheckBoxPreference
+            android:key="pref_teacherCol"
             android:summary="@string/settings_teacherColSummary"
             android:title="@string/settings_teacherColTitle" />
         <CheckBoxPreference
+            android:key="pref_weekdayLengthLong"
             android:summary="@string/settings_weekdayLengthLongSummary"
             android:title="@string/settings_weekdayLengthLongTitle" />
     </PreferenceCategory>
