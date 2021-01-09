@@ -19,6 +19,7 @@ import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
 import com.txwstudio.app.timetable.ui.settings.PREFERENCE_TABLE_TITLE
 import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKDAY_LENGTH_LONG
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKEND_COL
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 
@@ -87,7 +88,7 @@ class MainActivity2 : AppCompatActivity() {
     private fun getPrefValue() {
         prefTableTitle = sharedPref.getString(PREFERENCE_TABLE_TITLE,
                 getString(R.string.settings_timetableTitleDefaultValue))!!
-        prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+        prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
     }
 
@@ -96,7 +97,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun setupTabLayoutAndViewPager() {
-        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this)
+        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
 
         TabLayoutMediator(binding.tabLayoutMainActivity2, binding.viewPagerMainActivity2) { tab, position ->
             tab.text = getTabTitle(position)
