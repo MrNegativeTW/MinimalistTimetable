@@ -19,9 +19,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
 import java.util.*
 
+const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 private const val PREFERENCE_MAP_PICKER = "pref_campusMapPicker"
 private const val PREFERENCE_CALENDAR_PICKER = "pref_schoolCalendarPicker"
 private const val PREFERENCE_MAP_CAL_HELPER = "pref_mapCalHelper"
+const val PREFERENCE_WEEKEND_COL = "pref_weekendCol"
+const val PREFERENCE_WEEKDAY_LENGTH_LONG = "pref_weekdayLengthLong"
+private const val PREFERENCE_TEACHER_COL = "pref_teacherCol"
 private const val PREFERENCE_CHANGELOG = "pref_changelog"
 
 private const val PREFERENCE_NAME_MAP_REQUEST = "schoolMapPath"
@@ -42,10 +46,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         super.onActivityCreated(savedInstanceState)
 
         // Set summary, improve ux
-        editTextPreference = findPreference("tableTitle_Pref")!!
+        editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
         editTextPreference.summary = PreferenceManager
                 .getDefaultSharedPreferences(requireContext())
-                .getString("tableTitle_Pref",
+                .getString(PREFERENCE_TABLE_TITLE,
                         getString(R.string.settings_timetableTitleDefaultValue))
     }
 
@@ -98,13 +102,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            "tableTitle_Pref" -> {
+            PREFERENCE_TABLE_TITLE -> {
                 editTextPreference.summary =
-                        sharedPreferences?.getString("tableTitle_Pref",
+                        sharedPreferences?.getString(PREFERENCE_TABLE_TITLE,
                                 java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
-            }
-            "lightMode_Pref" -> {
-
             }
         }
     }
