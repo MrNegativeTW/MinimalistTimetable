@@ -105,7 +105,7 @@
         \n- 加入週末與教師欄位
         \n- 介面大更新，以前的好醜
     </string>
-
+    <!-- Setting Activity End -->
 
     <!-- File Read Error Msg -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
