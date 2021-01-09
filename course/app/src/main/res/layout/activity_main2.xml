@@ -30,6 +30,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout_mainActivity2"
                 android:layout_width="match_parent"
+                app:tabMode="auto"
                 android:layout_height="wrap_content"
                 app:tabIndicator="@drawable/tab_indicator"
                 app:tabIndicatorColor="@color/colorAccentDark"
