@@ -13,7 +13,7 @@ import com.ortiz.touchview.TouchImageView;
 import com.txwstudio.app.timetable.R;
 import com.txwstudio.app.timetable.Util;
 
-import static com.txwstudio.app.timetable.ui.Fragments.SettingsFragment.MAP_REQUEST_PREF_NAME;
+import static com.txwstudio.app.timetable.ui.settings.SettingsFragmentKt.PREFERENCE_NAME_CALENDAR_REQUEST;
 
 public class CampusMapActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class CampusMapActivity extends AppCompatActivity {
         TextView campusMapErrorMsg = (TextView) findViewById(R.id.campusMapErrorTextView);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String mapPath = prefs.getString(MAP_REQUEST_PREF_NAME, "");
+        String mapPath = prefs.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "");
         Uri mapUri = Uri.parse(mapPath);
         if (!mapPath.isEmpty()) {
             campusMapErrorMsg.setVisibility(View.INVISIBLE);

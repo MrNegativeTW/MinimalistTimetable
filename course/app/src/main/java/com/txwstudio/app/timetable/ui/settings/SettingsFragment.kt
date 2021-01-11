@@ -29,7 +29,7 @@ private const val PREFERENCE_TEACHER_COL = "pref_teacherCol"
 private const val PREFERENCE_CHANGELOG = "pref_changelog"
 
 private const val PREFERENCE_NAME_MAP_REQUEST = "schoolMapPath"
-private const val PREFERENCE_NAME_CALENDAR_REQUEST = "schoolCalendarPath"
+const val PREFERENCE_NAME_CALENDAR_REQUEST = "schoolCalendarPath"
 private const val PREFERENCE_NAME_EMPTY = "ohThisIsAEmptySlot"
 
 private const val REQUEST_CODE_MAP = 0
