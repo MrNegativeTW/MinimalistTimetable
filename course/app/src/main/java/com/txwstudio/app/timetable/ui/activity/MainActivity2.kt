@@ -17,6 +17,7 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_NAME_CALENDAR_REQUEST
 import com.txwstudio.app.timetable.ui.settings.PREFERENCE_TABLE_TITLE
 import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKDAY_LENGTH_LONG
 import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKEND_COL
@@ -32,6 +33,7 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var prefTableTitle: String
     private var prefWeekendCol = false
     private var prefWeekdayLengthLong = false
+    private lateinit var prefCalendarPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +92,7 @@ class MainActivity2 : AppCompatActivity() {
                 getString(R.string.settings_timetableTitleDefaultValue))!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+        prefCalendarPath = sharedPref.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "")!!
     }
 
     private fun setupToolBar() {
@@ -132,10 +135,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun gotoCalendar() {
-        // TODO(Fix Old PreferenceManager)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val pdfPath = prefs.getString("schoolCalendarPath", "")
-        val uri = Uri.parse(pdfPath)
+        val uri = Uri.parse(prefCalendarPath)
 
         val target = Intent(Intent.ACTION_VIEW)
         target.setDataAndType(uri, "application/pdf")
