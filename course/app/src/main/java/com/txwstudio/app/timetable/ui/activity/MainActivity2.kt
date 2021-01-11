@@ -42,7 +42,6 @@ class MainActivity2 : AppCompatActivity() {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         setupToolBar()
-        openTodayTimetable()
         subscribeUi()
     }
 
@@ -50,6 +49,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onResume()
         getPrefValue()
         setupTabLayoutAndViewPager()
+        openTodayTimetable()
         supportActionBar?.title = prefTableTitle
     }
 
@@ -122,7 +122,7 @@ class MainActivity2 : AppCompatActivity() {
         // then open belongs today's tab.
         val c = Calendar.getInstance()
         val date = c[Calendar.DAY_OF_WEEK]
-        binding.viewPagerMainActivity2.setCurrentItem(if (date == 1) 6 else date - 2, false)
+        binding.viewPagerMainActivity2.setCurrentItem(if (date == 1) 8 else date - 2, false)
     }
 
     private fun subscribeUi() {
