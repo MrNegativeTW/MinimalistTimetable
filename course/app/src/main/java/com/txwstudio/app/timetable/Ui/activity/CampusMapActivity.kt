@@ -12,6 +12,8 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.ui.settings.PREFERENCE_NAME_MAP_REQUEST
 
 class CampusMapActivity : AppCompatActivity() {
+
+    // TODO(Refactor need)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_campus_map)
