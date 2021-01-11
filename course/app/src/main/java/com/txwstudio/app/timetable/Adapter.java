@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.txwstudio.app.timetable.model.Course;
-import com.txwstudio.app.timetable.ui.activity.CourseEditActivity;
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity;
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt;
 
@@ -94,8 +93,6 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         int ID = courseArrayList.get(position).getID();
                         switch (i) {
                             case 0:
-//                                Intent intent = new Intent(mContext, CourseEditActivity.class);
-//                                intent.putExtra("ID", ID);
                                 Intent intent = new Intent(mContext, CourseEditorActivity.class);
                                 intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true);
                                 intent.putExtra(INTENT_EXTRA_COURSE_ID, ID);
