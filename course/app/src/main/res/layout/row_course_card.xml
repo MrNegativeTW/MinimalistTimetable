@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_normal"
+        android:background="#4aa285"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_normal">
+
+            <TextView
+                android:id="@+id/textView_courseCard_beginTime"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                tools:text="09:00" />
+
+            <TextView
+                android:id="@+id/textView_courseCard_endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_courseCard_courseLocation"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                tools:text="12:00" />
+
+            <TextView
+                android:id="@+id/textView_courseCard_courseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textView_courseCard_beginTime"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_toEndOf="@id/textView_courseCard_beginTime"
+                android:textAppearance="@android:style/TextAppearance.Material.Large"
+                tools:text="Computer Science" />
+
+            <TextView
+                android:id="@+id/textView_courseCard_courseLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_courseCard_courseName"
+                android:layout_alignStart="@id/textView_courseCard_courseName"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                tools:text="at A301" />
+
+            <TextView
+                android:id="@+id/textView_courseCard_courseTeacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_courseCard_courseName"
+                android:layout_toEndOf="@id/textView_courseCard_courseLocation"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                tools:text=", by Prof. Hsu" />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
