@@ -10,11 +10,6 @@
     <string name="errorNoEntry">Give me something</string>
     <string name="menuSettings">Settings</string>
     <string name="menuAddCourse">Add</string>
-    <string name="tab_text_5">Fri</string>
-    <string name="tab_text_4">Thu</string>
-    <string name="tab_text_3">Wed</string>
-    <string name="tab_text_2">Tue</string>
-    <string name="tab_text_1">Mon</string>
     <string name="editCourseActivityTitle">Edit Detail</string>
     <string name="addCourseActivityTitle">Add Course</string>
     <string name="traffic_schoolMap">Map</string>

@@ -9,13 +9,6 @@
     <string name="editCourseActivityTitle">編輯課程</string>
     <string name="title_activity_settings">設定</string>
 
-    <!-- 分頁名稱 Remove soon -->
-    <string name="tab_text_1">一</string>
-    <string name="tab_text_2">二</string>
-    <string name="tab_text_3">三</string>
-    <string name="tab_text_4">四</string>
-    <string name="tab_text_5">五</string>
-
     <!-- 右上角目錄 -->
     <string name="menuAddCourse">新增</string>
     <string name="menuMap">地圖</string>
