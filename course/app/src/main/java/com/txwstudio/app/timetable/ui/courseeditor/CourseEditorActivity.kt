@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -56,6 +57,9 @@ class CourseEditorActivity : AppCompatActivity() {
         sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
 
         setupToolBar()
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adViewCourseEditorAct.loadAd(adRequest)
 
         checkIsEditMode()
         setupWeekday()

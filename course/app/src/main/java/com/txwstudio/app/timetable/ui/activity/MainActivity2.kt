@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
@@ -45,6 +46,7 @@ class MainActivity2 : AppCompatActivity() {
 
         setupToolBar()
         subscribeUi()
+        MobileAds.initialize(this)
     }
 
     override fun onResume() {
