@@ -9,10 +9,13 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.preference.*
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
 import java.util.*
@@ -102,6 +105,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
                         sharedPreferences?.getString(PREFERENCE_TABLE_TITLE,
                                 java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
             }
+            PREFERENCE_THEME -> {
+                val value = sharedPreferences?.getString(PREFERENCE_THEME, "-1")?.toInt()
+                AppCompatDelegate.setDefaultNightMode(value!!)
+            }
         }
     }
 
@@ -112,7 +119,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
 
         editTextPreference.summary = prefManager.getString(PREFERENCE_TABLE_TITLE,
-                        getString(R.string.settings_timetableTitleDefaultValue))
+                getString(R.string.settings_timetableTitleDefaultValue))
     }
 
     /**

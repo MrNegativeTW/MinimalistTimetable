@@ -31,7 +31,7 @@
         <item>深色</item>
     </string-array>
     <string-array name="prefThemeEntriesValues">
-        <item>0</item>
+        <item>-1</item>
         <item>1</item>
         <item>2</item>
     </string-array>
