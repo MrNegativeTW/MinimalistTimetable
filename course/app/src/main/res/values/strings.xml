@@ -5,8 +5,6 @@
     <string name="main_activity">課表</string>
     <string name="traffic_schoolMap">地圖</string>
     <string name="courseEditorActivityTitle">課程編輯器</string>
-    <string name="addCourseActivityTitle">新增課程</string>
-    <string name="editCourseActivityTitle">編輯課程</string>
     <string name="title_activity_settings">設定</string>
 
     <!-- 右上角目錄 -->
@@ -15,23 +13,11 @@
     <string name="menuCalendar">行事曆</string>
     <string name="menuSettings">設定</string>
 
-    <!-- Activity Add/Edit Course -->
-    <string name="errorNoEntry">這裡沒打到喔</string>
-    <string name="errorNoTimeEntry">輸入時間</string>
-    <string name="saveCourse">儲存</string>
-    <string name="addCourseName">課程</string>
-    <string name="addCoursePlace">地點</string>
-    <string name="weekdays">星期</string>
-    <string name="weekdaysInitValue">星期一</string>
-    <string name="startTime">開始</string>
-    <string name="endTime">結束</string>
-
     <!-- Course Editor Activity -->
     <string name="courseEditor_titleAdd">新增課程</string>
     <string name="courseEditor_titleEdit">編輯課程</string>
     <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
     <string name="courseEditor_exitConfirmDialogMsg">您所輸入的資訊將「不會」被儲存</string>
-    <string name="courseEditor_saveCourse">儲存</string>
     <string name="courseEditor_courseNameTitle">課程名稱</string>
     <string name="courseEditor_courseNameEntry">國文(一)</string>
     <string name="courseEditor_coursePlaceTitle">上課地點</string>
@@ -54,7 +40,6 @@
     <string name="dialogConfirmDelete">確定刪除?</string>
     <string name="dialogPositiveButton">真的</string>
     <string name="dialogNegativeButton">假的</string>
-    <string name="dialogNormalButton">好的</string>
 
     <!-- Setting Activity -->
     <string name="settings_sectionGeneral">一般</string>
@@ -64,7 +49,7 @@
     <string name="settings_themeTitle">主題</string>
 
     <string name="settings_sectionMapCalendar">地圖與行事曆</string>
-    <string name="settings_campusMapPickerTitle">自訂學校地圖</string>
+    <string name="settings_campusMapPickerTitle">學校地圖</string>
     <string name="settings_campusMapPickerSummary">支援 JPG、PNG</string>
     <string name="settings_schoolCalendarPickerTitle">自訂學校行事曆</string>
     <string name="settings_schoolCalendarPickerSummary">支援 PDF</string>
@@ -93,8 +78,8 @@
     <string name="settings_changelogTitle">更新紀錄</string>
     <string name="settings_changelogMessage">
         - 把整個 APP 用新語言重寫了一遍，真心不唬
-        \n- 加入週末與教師欄位
-        \n- 介面大更新，以前的好醜
+        \n- 加入週末欄位
+        \n- 介面小更新
     </string>
     <!-- Setting Activity End -->
 
@@ -109,11 +94,11 @@
     <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
     <!-- Common -->
     <string name="all_confirm">確認</string>
     <string name="all_cancel">取消</string>
     <string name="all_ohIsError">歐歐，出錯惹</string>
+    <string name="all_save">儲存</string>
 
 </resources>

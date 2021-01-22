@@ -4,40 +4,28 @@
     <string name="main_activity">Timetable</string>
     <string name="title_activity_settings">Settings</string>
     <string name="dialogDeleted">Deleted</string>
-    <string name="weekdays">Day</string>
-    <string name="addCoursePlace">Room</string>
-    <string name="addCourseName">Subject</string>
-    <string name="errorNoEntry">Give me something</string>
     <string name="menuSettings">Settings</string>
     <string name="menuAddCourse">Add</string>
-    <string name="editCourseActivityTitle">Edit Detail</string>
-    <string name="addCourseActivityTitle">Add Course</string>
     <string name="traffic_schoolMap">Map</string>
-    <string name="startTime">Starts</string>
-    <string name="endTime">Ends</string>
-    <string name="settings_lightModeTitle">Light Theme</string>
-    <string name="settings_lightModeSummary">Turn the light on, it is dark here.</string>
-    <string name="settings_timetableTitle">Custom Table Name</string>
+    <string name="settings_timetableTitle">Table Name</string>
     <string name="settings_timetableTitleDefaultValue">My Timetable</string>
-    <string name="settings_versionTitle">Version 1.1</string>
+    <string name="settings_versionTitle">Version 2.0</string>
     <string name="settings_timetableTitleSummary">Name to show on the main screen</string>
     <string name="settings_contactSummary">Bug Report or feature request.</string>
     <string name="settings_contactTitle">Contact Developers</string>
     <string name="settings_sectionAbout">About</string>
     <string name="settings_sectionGeneral">General</string>
-    <string name="settings_campusMapPickerTitle">Custom Campus Map</string>
+    <string name="settings_campusMapPickerTitle">Campus Map</string>
     <array name="dialog">
         <item>Edit</item>
         <item>Delete</item>
     </array>
     <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
-    <string name="saveCourse">Save</string>
-    <string name="errorNoTimeEntry">Enter time</string>
+    <string name="all_save">Save</string>
     <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
     <string name="menuMap">Map</string>
-    <string name="weekdaysInitValue">Mon</string>
     <string name="menuCalendar">Calendar</string>
-    <string name="settings_schoolCalendarPickerTitle">Custom School Calendar</string>
+    <string name="settings_schoolCalendarPickerTitle">Calendar</string>
     <string name="settings_schoolCalendarPickerSummary">Support PDF</string>
     <string name="pdfNoAppMsg">Install Google Drive first</string>
     <string name="pdfOpenWithMsg">Open PDF with</string>
@@ -49,14 +37,43 @@
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
     <string name="settings_sectionMapCalendar">Map and Celandar</string>
     <string name="settings_mapCalendarHelperTitle">What is this?</string>
-    <string name="dialogNormalButton">OK</string>
     <string name="settings_mapCalendarHelperMessage">
-        1. These two are the shortcut of the map/calendar, can be opened from the main screen.
+        1. These two are the shortcut of the map/calendar, they can be opened from the main screen.
         \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
         \n\nMap: JPG、PNG\nCalendar: PDF
     </string>
     <string name="settings_changelogTitle">Changelog</string>
     <string name="settings_changelogMessage">
-        - Add calendar shortcut\n- Fix can\'t read from SD card\n- Add accent color for dark theme
+        - Refactor almost the entire app
+        \n- UI update
+        \n- Add weekend
     </string>
+    <string name="courseEditorActivityTitle">Course Editor</string>
+    <string name="courseEditor_titleAdd">Add Course</string>
+    <string name="courseEditor_titleEdit">Edit Details</string>
+    <string name="courseEditor_courseNameTitle">Name</string>
+    <string name="courseEditor_courseNameEntry">Intro to Computer Science</string>
+    <string name="courseEditor_courseBeginTitle">Begin</string>
+    <string name="courseEditor_courseEndTitle">End</string>
+    <string name="courseEditor_courseBeginEntry">00:00</string>
+    <string name="courseEditor_courseEndEntry">00:00</string>
+    <string name="courseEditor_exitConfirmDialogTitle">Confirm EXIT</string>
+    <string name="courseEditor_exitConfirmDialogMsg">The information you just entered will not be SAVED !</string>
+    <string name="all_cancel">Cancel</string>
+    <string name="all_confirm">Confirm</string>
+    <string name="all_ohIsError">Something went wrong…</string>
+    <string name="settings_weekdayLengthLongSummary">e.g. Monday</string>
+    <string name="settings_weekendColTitle">Enable Weekend</string>
+    <string name="settings_weekendColSummary">Show Saturday and Sunday</string>
+    <string name="settings_teacherColTitle">Show Prof Name (Under Dev)</string>
+    <string name="settings_themeTitle">Theme</string>
+    <string name="settings_teacherColSummary">e.g. Franklin</string>
+    <string name="settings_sectionTimetable">Timetable</string>
+    <string name="settings_notificationBeforeClassTitle">Noti Before Class (Under Dev)</string>
+    <string name="settings_notificationBeforeClassSummary">Send notification before class</string>
+    <string name="settings_weekdayLengthLongTitle">Show Full Weekday Name</string>
+    <string name="courseEditor_coursePlaceTitle">Location</string>
+    <string name="courseEditor_courseWeekdayTitle">Day</string>
+    <string name="courseEditor_coursePlaceEntry">Surrey Campus</string>
+    <string name="courseEditor_noEntry">No Entry Here</string>
 </resources>

@@ -6,6 +6,6 @@
     <item
         android:id="@+id/menuSave"
         android:icon="@drawable/ic_baseline_send_24"
-        android:title="@string/saveCourse"
+        android:title="@string/all_save"
         app:showAsAction="always" />
 </menu>

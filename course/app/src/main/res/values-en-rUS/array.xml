@@ -6,8 +6,8 @@
         <item>Wednesday</item>
         <item>Thursday</item>
         <item>Friday</item>
-        <item>saturday</item>
-        <item>sunday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
     </array>
     <array name="weekdayListShort">
         <item>Mon</item>
