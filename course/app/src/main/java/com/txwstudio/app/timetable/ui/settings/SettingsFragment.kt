@@ -9,17 +9,16 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.preference.EditTextPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
+import androidx.preference.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
 import java.util.*
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
+const val PREFERENCE_THEME = "pref_theme"
 private const val PREFERENCE_MAP_PICKER = "pref_campusMapPicker"
 private const val PREFERENCE_CALENDAR_PICKER = "pref_schoolCalendarPicker"
 private const val PREFERENCE_MAP_CAL_HELPER = "pref_mapCalHelper"
@@ -40,17 +39,13 @@ private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
 class SettingsFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private lateinit var prefManager: SharedPreferences
     private lateinit var editTextPreference: EditTextPreference
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        // Set summary, improve ux
-        editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
-        editTextPreference.summary = PreferenceManager
-                .getDefaultSharedPreferences(requireContext())
-                .getString(PREFERENCE_TABLE_TITLE,
-                        getString(R.string.settings_timetableTitleDefaultValue))
+        prefManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        setInitSummary()
     }
 
     override fun onResume() {
@@ -108,6 +103,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
                                 java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
             }
         }
+    }
+
+    /**
+     * Set summary when open preference screen.
+     * */
+    private fun setInitSummary() {
+        editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
+
+        editTextPreference.summary = prefManager.getString(PREFERENCE_TABLE_TITLE,
+                        getString(R.string.settings_timetableTitleDefaultValue))
     }
 
     /**

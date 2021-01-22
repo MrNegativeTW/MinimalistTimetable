@@ -17,6 +17,7 @@
             android:entryValues="@array/prefThemeEntriesValues"
             android:icon="@drawable/ic_outline_format_paint_24"
             android:key="pref_theme"
+            android:summary="%s"
             android:title="@string/settings_themeTitle" />
     </PreferenceCategory>
 

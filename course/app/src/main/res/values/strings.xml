@@ -69,8 +69,6 @@
     <string name="settings_timetableTitleSummary">我的課表</string>
     <string name="settings_timetableTitleDefaultValue">我的課表</string>
     <string name="settings_themeTitle">主題</string>
-    <string name="settings_lightModeTitle">淺色主題</string>
-    <string name="settings_lightModeSummary">這裡太黑暗了，幫我開燈</string>
 
     <string name="settings_sectionMapCalendar">地圖與行事曆</string>
     <string name="settings_campusMapPickerTitle">自訂學校地圖</string>
