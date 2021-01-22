@@ -43,7 +43,8 @@
 
     <PreferenceCategory android:title="@string/settings_sectionTimetable">
 
-        <Preference
+        <ListPreference
+            android:enabled="false"
             android:icon="@drawable/ic_outline_notifications_active_24"
             android:key="pref_notificationBeforeClass"
             android:title="@string/settings_notificationBeforeClassTitle" />
@@ -59,6 +60,7 @@
             android:title="@string/settings_weekdayLengthLongTitle" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:enabled="false"
             android:key="pref_teacherCol"
             android:summary="@string/settings_teacherColSummary"
             android:title="@string/settings_teacherColTitle" />
