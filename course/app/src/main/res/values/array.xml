@@ -25,14 +25,14 @@
         <item>六</item>
         <item>日</item>
     </array>
-    <array name="schoolMapMode">
-        <item>WebView</item>
-        <item>PhotoView</item>
-        <item>TouchImageView</item>
-    </array>
-    <array name="schoolMapModeValues">
+    <string-array name="prefThemeEntries">
+        <item>跟隨系統</item>
+        <item>淺色</item>
+        <item>深色</item>
+    </string-array>
+    <string-array name="prefThemeEntriesValues">
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </array>
+    </string-array>
 </resources>

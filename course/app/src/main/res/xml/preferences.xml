@@ -11,8 +11,10 @@
             android:singleLine="true"
             android:title="@string/settings_timetableTitle" />
 
-        <Preference
-            android:defaultValue="false"
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/prefThemeEntries"
+            android:entryValues="@array/prefThemeEntriesValues"
             android:icon="@drawable/ic_outline_format_paint_24"
             android:key="pref_theme"
             android:title="@string/settings_themeTitle" />
@@ -50,8 +52,8 @@
             android:summary="@string/settings_weekendColSummary"
             android:title="@string/settings_weekendColTitle" />
         <CheckBoxPreference
-            android:key="pref_weekdayLengthLong"
             android:defaultValue="false"
+            android:key="pref_weekdayLengthLong"
             android:summary="@string/settings_weekdayLengthLongSummary"
             android:title="@string/settings_weekdayLengthLongTitle" />
         <CheckBoxPreference
