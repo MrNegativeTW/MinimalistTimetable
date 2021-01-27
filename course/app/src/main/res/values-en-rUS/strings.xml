@@ -76,4 +76,8 @@
     <string name="courseEditor_courseWeekdayTitle">Day</string>
     <string name="courseEditor_coursePlaceEntry">Surrey Campus</string>
     <string name="courseEditor_noEntry">No Entry Here</string>
+    <string name="courseCardDialog_editCourseInfo">Edit</string>
+    <string name="courseCardDialog_deleteCourse">Delete</string>
+    <string name="courseCardDialog_message">New semester?\\nEdit it instead of deleting it!</string>
+    <string name="courseCardDialog_title">You want ... ?</string>
 </resources>
