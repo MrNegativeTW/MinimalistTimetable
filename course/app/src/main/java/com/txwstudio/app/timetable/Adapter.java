@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.txwstudio.app.timetable.model.Course;
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity;
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt;
@@ -85,32 +86,63 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-                dialog.setItems(R.array.dialog, new DialogInterface.OnClickListener() {
+//                AlertDialog.Builder materialDialog = new AlertDialog.Builder(mContext);
+                MaterialAlertDialogBuilder materialDialog = new MaterialAlertDialogBuilder(mContext);
+                materialDialog.setTitle(R.string.courseCardDialog_title);
+                materialDialog.setMessage(R.string.courseCardDialog_message);
+                materialDialog.setNeutralButton(R.string.courseCardDialog_deleteCourse, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         db = new DBHandler(mContext);
                         int ID = courseArrayList.get(position).getID();
-                        switch (i) {
-                            case 0:
-                                Intent intent = new Intent(mContext, CourseEditorActivity.class);
-                                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true);
-                                intent.putExtra(INTENT_EXTRA_COURSE_ID, ID);
-                                mContext.startActivity(intent);
-                                courseArrayList.clear();
-                                courseArrayList = db.getCourse(fragment);
-                                notifyDataSetChanged();
-                                break;
-                            case 1:
-                                db.deleteCourse(ID);
-                                courseArrayList.remove(position);
-                                notifyDataSetChanged();
-                                Toast.makeText(mContext, R.string.dialogDeleted, Toast.LENGTH_SHORT).show();
-                                break;
-                        }
+                        db.deleteCourse(ID);
+                        courseArrayList.remove(position);
+                        notifyDataSetChanged();
+                        Toast.makeText(mContext, R.string.dialogDeleted, Toast.LENGTH_SHORT).show();
                     }
                 });
-                dialog.show();
+                materialDialog.setPositiveButton(R.string.courseCardDialog_editCourseInfo, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        db = new DBHandler(mContext);
+                        int ID = courseArrayList.get(position).getID();
+                        Intent intent = new Intent(mContext, CourseEditorActivity.class);
+                        intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true);
+                        intent.putExtra(INTENT_EXTRA_COURSE_ID, ID);
+                        mContext.startActivity(intent);
+                        courseArrayList.clear();
+                        courseArrayList = db.getCourse(fragment);
+                        notifyDataSetChanged();
+                    }
+                });
+                materialDialog.show();
+
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+//                dialog.setItems(R.array.dialog, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        db = new DBHandler(mContext);
+//                        int ID = courseArrayList.get(position).getID();
+//                        switch (i) {
+//                            case 0:
+//                                Intent intent = new Intent(mContext, CourseEditorActivity.class);
+//                                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true);
+//                                intent.putExtra(INTENT_EXTRA_COURSE_ID, ID);
+//                                mContext.startActivity(intent);
+//                                courseArrayList.clear();
+//                                courseArrayList = db.getCourse(fragment);
+//                                notifyDataSetChanged();
+//                                break;
+//                            case 1:
+//                                db.deleteCourse(ID);
+//                                courseArrayList.remove(position);
+//                                notifyDataSetChanged();
+//                                Toast.makeText(mContext, R.string.dialogDeleted, Toast.LENGTH_SHORT).show();
+//                                break;
+//                        }
+//                    }
+//                });
+//                dialog.show();
 
                 return true;
             } // .onLongClick

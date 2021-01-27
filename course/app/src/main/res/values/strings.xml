@@ -30,6 +30,12 @@
     <string name="courseEditor_courseEndEntry">00:00</string>
     <string name="courseEditor_noEntry">未填寫</string>
 
+    <!-- Course Card Dialog  -->
+    <string name="courseCardDialog_title">下好離手</string>
+    <string name="courseCardDialog_message">換新學期嗎？\n別刪除了，直接編輯吧！</string>
+    <string name="courseCardDialog_editCourseInfo">編輯</string>
+    <string name="courseCardDialog_deleteCourse">刪除</string>
+
     <!-- Dialog -->
     <string name="dialogDeleted">已刪除</string>
     <array name="dialog">
