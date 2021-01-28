@@ -170,7 +170,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/close/baseline_close_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialiconsoutlined/format_paint/outline_format_paint_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -180,8 +180,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_close_24" />
-                            <entry key="sourceFile" value="C:\Users\Trevor\Documents\GitHub\MinimalistTimetable\course" />
+                            <entry key="outputName" value="ic_outline_format_paint_24" />
+                            <entry key="sourceFile" value="/C:\Users\Trevor\Documents\GitHub\MinimalistTimetable\course" />
                           </map>
                         </option>
                       </PersistentState>

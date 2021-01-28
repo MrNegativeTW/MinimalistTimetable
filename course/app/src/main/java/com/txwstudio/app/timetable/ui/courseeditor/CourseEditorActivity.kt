@@ -1,5 +1,6 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.Menu
@@ -9,11 +10,14 @@ import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKEND_COL
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,6 +36,7 @@ class CourseEditorActivity : AppCompatActivity() {
 
     private var isEditMode = false
     private var courseIdInDatabase = 0
+    private lateinit var sharedPref: SharedPreferences
 
     private val currentViewPagerItem by lazy { intent.getIntExtra("currentViewPagerItem", 0) }
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
@@ -48,8 +53,13 @@ class CourseEditorActivity : AppCompatActivity() {
 
         isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
         courseIdInDatabase = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
 
         setupToolBar()
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adViewCourseEditorAct.loadAd(adRequest)
 
         checkIsEditMode()
         setupWeekday()

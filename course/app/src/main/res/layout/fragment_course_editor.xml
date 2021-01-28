@@ -51,7 +51,7 @@
                     android:backgroundTint="@color/colorAccentDark"
                     android:minWidth="0dp"
                     android:paddingHorizontal="@dimen/margin_12"
-                    android:text="@string/courseEditor_saveCourse"
+                    android:text="@string/all_save"
                     app:cornerRadius="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

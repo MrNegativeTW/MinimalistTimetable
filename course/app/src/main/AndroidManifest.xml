@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme2"
         tools:ignore="GoogleAppIndexingWarning">
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
@@ -27,7 +27,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivity2"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -39,36 +39,16 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".ui.activity.MainActivity2"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ui.courseeditor.CourseEditorActivity"
             android:exported="true"
             android:label="@string/courseEditorActivityTitle"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.CampusMapActivity"
             android:label="@string/traffic_schoolMap" />
         <activity
-            android:name=".ui.activity.CourseAddActivity"
-            android:label="@string/addCourseActivityTitle"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".ui.activity.CourseEditActivity"
-            android:label="@string/editCourseActivityTitle"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".ui.activity.SettingsActivity"
+            android:exported="true"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
         <activity

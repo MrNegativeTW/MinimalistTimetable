@@ -5,16 +5,7 @@
     <string name="main_activity">課表</string>
     <string name="traffic_schoolMap">地圖</string>
     <string name="courseEditorActivityTitle">課程編輯器</string>
-    <string name="addCourseActivityTitle">新增課程</string>
-    <string name="editCourseActivityTitle">編輯課程</string>
     <string name="title_activity_settings">設定</string>
-
-    <!-- 分頁名稱 -->
-    <string name="tab_text_1">一</string>
-    <string name="tab_text_2">二</string>
-    <string name="tab_text_3">三</string>
-    <string name="tab_text_4">四</string>
-    <string name="tab_text_5">五</string>
 
     <!-- 右上角目錄 -->
     <string name="menuAddCourse">新增</string>
@@ -22,23 +13,11 @@
     <string name="menuCalendar">行事曆</string>
     <string name="menuSettings">設定</string>
 
-    <!-- Activity Add/Edit Course -->
-    <string name="errorNoEntry">這裡沒打到喔</string>
-    <string name="errorNoTimeEntry">輸入時間</string>
-    <string name="saveCourse">儲存</string>
-    <string name="addCourseName">課程</string>
-    <string name="addCoursePlace">地點</string>
-    <string name="weekdays">星期</string>
-    <string name="weekdaysInitValue">星期一</string>
-    <string name="startTime">開始</string>
-    <string name="endTime">結束</string>
-
     <!-- Course Editor Activity -->
     <string name="courseEditor_titleAdd">新增課程</string>
     <string name="courseEditor_titleEdit">編輯課程</string>
     <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
     <string name="courseEditor_exitConfirmDialogMsg">您所輸入的資訊將「不會」被儲存</string>
-    <string name="courseEditor_saveCourse">儲存</string>
     <string name="courseEditor_courseNameTitle">課程名稱</string>
     <string name="courseEditor_courseNameEntry">國文(一)</string>
     <string name="courseEditor_coursePlaceTitle">上課地點</string>
@@ -51,6 +30,12 @@
     <string name="courseEditor_courseEndEntry">00:00</string>
     <string name="courseEditor_noEntry">未填寫</string>
 
+    <!-- Course Card Dialog  -->
+    <string name="courseCardDialog_title">下好離手</string>
+    <string name="courseCardDialog_message">換新學期嗎？\n別刪除了，直接編輯吧！</string>
+    <string name="courseCardDialog_editCourseInfo">編輯</string>
+    <string name="courseCardDialog_deleteCourse">刪除</string>
+
     <!-- Dialog -->
     <string name="dialogDeleted">已刪除</string>
     <array name="dialog">
@@ -61,43 +46,48 @@
     <string name="dialogConfirmDelete">確定刪除?</string>
     <string name="dialogPositiveButton">真的</string>
     <string name="dialogNegativeButton">假的</string>
-    <string name="dialogNormalButton">好的</string>
-    <string name="mapCalHelperTitleDescription">
+
+    <!-- Setting Activity -->
+    <string name="settings_sectionGeneral">一般</string>
+    <string name="settings_timetableTitle">課表名稱</string>
+    <string name="settings_timetableTitleSummary">我的課表</string>
+    <string name="settings_timetableTitleDefaultValue">我的課表</string>
+    <string name="settings_themeTitle">主題</string>
+
+    <string name="settings_sectionMapCalendar">地圖與行事曆</string>
+    <string name="settings_campusMapPickerTitle">學校地圖</string>
+    <string name="settings_campusMapPickerSummary">支援 JPG、PNG</string>
+    <string name="settings_schoolCalendarPickerTitle">學校行事曆</string>
+    <string name="settings_schoolCalendarPickerSummary">支援 PDF</string>
+    <string name="settings_mapCalendarHelperTitle">這什麼?</string>
+    <string name="settings_mapCalendarHelperMessage">
         1. 這兩個是開啟地圖和行事曆的捷徑，設定後可從主畫面直接開啟。
         \n\n2. 設定後檔案請勿刪除、移動、重命名，以上方法皆會使捷徑失效。
         \n\n地圖支援：JPG、PNG\n行事曆支援：PDF
     </string>
 
-    <!-- Activity Setting -->
-    <string name="generalSection">一般</string>
-    <string name="tableTitle">自訂課表名稱</string>
-    <string name="tableTitleMessage">自訂要顯示在主畫面的名稱</string>
-    <string name="tableTitleDefault">我的課表</string>
-    <string name="lightMode">淺色主題</string>
-    <string name="lightModeSummary">這裡太黑暗了，幫我開燈</string>
-    <string name="mapCalSection">地圖與行事曆</string>
-    <string name="schoolMapPickerTitle">自訂學校地圖</string>
-    <string name="schoolMapPickerSummary">支援 JPG、PNG</string>
-    <string name="schoolCalendarPickerTitle">自訂學校行事曆</string>
-    <string name="schoolCalendarPickerSummary">支援 PDF</string>
-    <string name="mapCalHelperTitle">這什麼?</string>
+    <string name="settings_sectionTimetable">課表</string>
+    <string name="settings_notificationBeforeClassTitle">課前通知(開發中)</string>
+    <string name="settings_notificationBeforeClassSummary">上課前傳送通知</string>
+    <string name="settings_weekendColTitle">週末欄位</string>
+    <string name="settings_weekendColSummary">開啟禮拜六日欄位</string>
+    <string name="settings_weekdayLengthLongTitle">顯示完整星期名稱</string>
+    <string name="settings_weekdayLengthLongSummary">例如：「星期一」</string>
+    <string name="settings_teacherColTitle">教師欄位(開發中)</string>
+    <string name="settings_teacherColSummary">顯示教師名稱</string>
 
-    <string name="columnSection">欄位設定</string>
-    <string name="weekendColTitle">週末欄位</string>
-    <string name="weekendColSummary">開啟禮拜六日欄位</string>
-    <string name="teacherColTitle">教師欄位</string>
-    <string name="teacherColSummary">在課表顯示教師名稱</string>
-
-    <string name="aboutSection">關於</string>
-    <string name="contactTitle">聯繫作者</string>
-    <string name="contactMessage">Bug 回報、功能請求</string>
-    <string name="versionTitle">版本 1.1</string>
-    <string name="versionMessage" translatable="false">Made with ❤ in Taiwan</string>
-    <string name="versionChangelogTitle">更新紀錄</string>
-    <string name="versionChangelogMessage">
-        - 新增行事曆捷徑\n- 修復 SD 卡無法讀取問題\n- 修復深色主題沒有突出顏色的問題\n- 優化聯繫作者表單
+    <string name="settings_sectionAbout">關於</string>
+    <string name="settings_contactTitle">聯繫作者</string>
+    <string name="settings_contactSummary">Bug 回報、功能請求</string>
+    <string name="settings_versionTitle">版本 2.0</string>
+    <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
+    <string name="settings_changelogTitle">更新紀錄</string>
+    <string name="settings_changelogMessage">
+        - 把整個 APP 用新語言重寫了一遍，真心不唬
+        \n- 加入週末欄位
+        \n- 介面小更新
     </string>
-
+    <!-- Setting Activity End -->
 
     <!-- File Read Error Msg -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
@@ -110,10 +100,11 @@
     <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
     <!-- Common -->
     <string name="all_confirm">確認</string>
     <string name="all_cancel">取消</string>
+    <string name="all_ohIsError">歐歐，出錯惹</string>
+    <string name="all_save">儲存</string>
 
 </resources>

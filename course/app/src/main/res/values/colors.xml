@@ -12,6 +12,7 @@
 
     <!-- Dark Theme for AppTheme2-->
     <color name="colorAccentDark">#3399FF</color>
+    <color name="colorPrimaryDark">#006ccb</color>
     <color name="rippleColorDark">#33FFFFFF</color>
     <color name="backgroundDark">#202125</color>
     <color name="dialogDark">#242529</color>

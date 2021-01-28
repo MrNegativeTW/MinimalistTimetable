@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="add_course_item">
-        <item>星期一</item>
-        <item>星期二</item>
-        <item>星期三</item>
-        <item>星期四</item>
-        <item>星期五</item>
-    </array>
     <array name="weekdayList">
         <item>星期一</item>
         <item>星期二</item>
         <item>星期三</item>
         <item>星期四</item>
         <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
     </array>
-    <array name="schoolMapMode">
-        <item>WebView</item>
-        <item>PhotoView</item>
-        <item>TouchImageView</item>
+    <array name="weekdayListShort">
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+        <item>日</item>
     </array>
-    <array name="schoolMapModeValues">
-        <item>0</item>
+    <string-array name="prefThemeEntries">
+        <item>跟隨系統</item>
+        <item>淺色</item>
+        <item>深色</item>
+    </string-array>
+    <string-array name="prefThemeEntriesValues">
+        <item>-1</item>
         <item>1</item>
         <item>2</item>
-    </array>
+    </string-array>
 </resources>

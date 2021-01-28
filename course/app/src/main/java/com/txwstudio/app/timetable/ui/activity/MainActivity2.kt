@@ -2,22 +2,26 @@ package com.txwstudio.app.timetable.ui.activity
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.adapter.*
+import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
-import com.txwstudio.app.timetable.model.Course
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
-import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorFragment
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_NAME_CALENDAR_REQUEST
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_TABLE_TITLE
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKDAY_LENGTH_LONG
+import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKEND_COL
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 
@@ -26,20 +30,35 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
     private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var prefTableTitle: String
+    private var prefWeekendCol = false
+    private var prefWeekdayLengthLong = false
+    private lateinit var prefCalendarPath: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
         binding.viewModel = mainActivity2ViewModel
 
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+
         setupToolBar()
+        subscribeUi()
+        MobileAds.initialize(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getPrefValue()
         setupTabLayoutAndViewPager()
         openTodayTimetable()
-        subscribeUi()
+        supportActionBar?.title = prefTableTitle
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main_2, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
@@ -70,12 +89,20 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
+    private fun getPrefValue() {
+        prefTableTitle = sharedPref.getString(PREFERENCE_TABLE_TITLE,
+                getString(R.string.settings_timetableTitleDefaultValue))!!
+        prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
+        prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+        prefCalendarPath = sharedPref.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "")!!
+    }
+
     private fun setupToolBar() {
         setSupportActionBar(toolbar_mainActivity2)
     }
 
     private fun setupTabLayoutAndViewPager() {
-        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this)
+        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
 
         TabLayoutMediator(binding.tabLayoutMainActivity2, binding.viewPagerMainActivity2) { tab, position ->
             tab.text = getTabTitle(position)
@@ -83,14 +110,12 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun getTabTitle(position: Int): String? {
-        return when (position) {
-            WEEKDAY_1 -> getString(R.string.tab_text_1)
-            WEEKDAY_2 -> getString(R.string.tab_text_2)
-            WEEKDAY_3 -> getString(R.string.tab_text_3)
-            WEEKDAY_4 -> getString(R.string.tab_text_4)
-            WEEKDAY_5 -> getString(R.string.tab_text_5)
-            else -> "null"
+        val array = if (prefWeekdayLengthLong) {
+            R.array.weekdayList
+        } else {
+            R.array.weekdayListShort
         }
+        return resources.getStringArray(array)[position]
     }
 
     /**
@@ -102,7 +127,7 @@ class MainActivity2 : AppCompatActivity() {
         // then open belongs today's tab.
         val c = Calendar.getInstance()
         val date = c[Calendar.DAY_OF_WEEK]
-        binding.viewPagerMainActivity2.setCurrentItem(if (date == 1) 6 else date - 2, false)
+        binding.viewPagerMainActivity2.setCurrentItem(if (date == 1) 8 else date - 2, false)
     }
 
     private fun subscribeUi() {
@@ -112,10 +137,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun gotoCalendar() {
-        // TODO(Fix Old PreferenceManager)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val pdfPath = prefs.getString("schoolCalendarPath", "")
-        val uri = Uri.parse(pdfPath)
+        val uri = Uri.parse(prefCalendarPath)
 
         val target = Intent(Intent.ACTION_VIEW)
         target.setDataAndType(uri, "application/pdf")
