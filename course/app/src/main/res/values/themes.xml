@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Animation.Activity.Transition" parent="android:Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/fragment_open_enter</item>
-        <item name="android:activityOpenExitAnimation">@anim/fragment_open_exit</item>
-        <item name="android:activityCloseEnterAnimation">@anim/fragment_close_enter</item>
-        <item name="android:activityCloseExitAnimation">@anim/fragment_close_exit</item>
-    </style>
-
     <style name="AppTheme2" parent="Theme.MaterialComponents.DayNight">
         <!-- AppBar -->
         <item name="windowActionBar">false</item>
@@ -20,6 +13,7 @@
         <item name="editTextCardBackground">@color/grey200</item>
 
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Transition</item>
+        <item name="divLineBackground">@color/googleAppLightTheme_colorDivLine</item>
     </style>
 
 </resources>

@@ -12,6 +12,8 @@
         <item name="editTextCardBackground">@color/materialDarkSurface</item>
 
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Transition</item>
+
+        <item name="divLineBackground">@color/googleAppDarkTheme_colorDivLine</item>
     </style>
 
 </resources>

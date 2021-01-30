@@ -40,4 +40,17 @@
 
     <style name="LightTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+        <style name="Animation.Activity.Transition" parent="android:Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fragment_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/fragment_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fragment_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/fragment_close_exit</item>
+    </style>
+
+    <style name="DivLine">
+        <item name="android:background">?attr/divLineBackground</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
 </resources>
