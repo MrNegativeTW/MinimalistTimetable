@@ -3,6 +3,20 @@
 
 ## [Unreleased]
 ### Added
+- New preference page for about information
+
+### Changed
+
+### Deprecated
+
+### Removed
+### Fixed
+- Theme return to default after restart 
+
+### Security
+
+## [2.0] - 2021-01-29
+### Added
 - Support `DayNight` theme system
 - Add Weekend support
 - Add different weekday length (Mon or Monday)
