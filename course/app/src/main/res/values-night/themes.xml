@@ -8,6 +8,7 @@
 
         <!-- Theme colors -->
         <item name="colorPrimary">@color/colorAccentDark</item>
+        <item name="colorSecondary">@color/colorPrimaryDark</item>
         <item name="iconColor">@android:color/white</item>
         <item name="editTextCardBackground">@color/materialDarkSurface</item>
 
