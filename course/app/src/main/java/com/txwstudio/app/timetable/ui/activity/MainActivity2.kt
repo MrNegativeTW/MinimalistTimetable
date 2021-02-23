@@ -18,10 +18,10 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_NAME_CALENDAR_REQUEST
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_TABLE_TITLE
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKDAY_LENGTH_LONG
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKEND_COL
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUEST
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 

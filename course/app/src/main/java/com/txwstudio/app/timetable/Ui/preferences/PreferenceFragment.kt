@@ -39,7 +39,7 @@ private const val REQUEST_CODE_CALENDAR = 1
 
 private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
 
-class SettingsFragment : PreferenceFragmentCompat(),
+class PreferenceFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var prefManager: SharedPreferences

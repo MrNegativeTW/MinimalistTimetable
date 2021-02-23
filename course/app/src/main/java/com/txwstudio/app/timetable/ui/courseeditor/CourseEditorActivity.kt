@@ -17,7 +17,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_WEEKEND_COL
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
 import java.text.SimpleDateFormat
 import java.util.*
 

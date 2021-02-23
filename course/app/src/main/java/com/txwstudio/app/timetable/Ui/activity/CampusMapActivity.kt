@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.ortiz.touchview.TouchImageView
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_NAME_MAP_REQUEST
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_MAP_REQUEST
 
 class CampusMapActivity : AppCompatActivity() {
 

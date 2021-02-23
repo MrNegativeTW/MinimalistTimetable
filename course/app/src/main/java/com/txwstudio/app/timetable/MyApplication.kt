@@ -3,7 +3,7 @@ package com.txwstudio.app.timetable
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
-import com.txwstudio.app.timetable.ui.settings.PREFERENCE_THEME
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_THEME
 
 
 class MyApplication : Application() {
