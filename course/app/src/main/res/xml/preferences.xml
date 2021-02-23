@@ -12,7 +12,7 @@
             android:title="@string/settings_timetableTitle" />
 
         <ListPreference
-            android:defaultValue="0"
+            android:defaultValue="-1"
             android:entries="@array/prefThemeEntries"
             android:entryValues="@array/prefThemeEntriesValues"
             android:icon="@drawable/ic_outline_format_paint_24"
