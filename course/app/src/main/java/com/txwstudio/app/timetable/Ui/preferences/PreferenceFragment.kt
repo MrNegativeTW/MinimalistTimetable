@@ -93,7 +93,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 val customTabsIntent = CustomTabsIntent.Builder().build()
                 customTabsIntent.launchUrl(requireContext(), Uri.parse(BUG_REPORT_LINK))
             }
-//            PREFERENCE_CHANGELOG -> showDialog(PREFERENCE_CHANGELOG)
         }
         return super.onPreferenceTreeClick(preference)
     }
@@ -143,12 +142,10 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         val materialAlertDialog = MaterialAlertDialogBuilder(requireContext())
         val title = when (which) {
             PREFERENCE_MAP_CAL_HELPER -> R.string.settings_mapCalendarHelperTitle
-            PREFERENCE_CHANGELOG -> R.string.settings_changelogTitle
             else -> R.string.all_ohIsError
         }
         val message = when (which) {
             PREFERENCE_MAP_CAL_HELPER -> R.string.settings_mapCalendarHelperMessage
-            PREFERENCE_CHANGELOG -> R.string.settings_changelogMessage
             else -> R.string.all_ohIsError
         }
         materialAlertDialog.apply {
