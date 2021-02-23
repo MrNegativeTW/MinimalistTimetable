@@ -82,7 +82,7 @@ class MainActivity2 : AppCompatActivity() {
                 return true
             }
             R.id.menuSettings -> {
-                startActivity(Intent(this, SettingsActivity::class.java))
+                startActivity(Intent(this, PreferenceActivity::class.java))
                 return true
             }
             else -> super.onOptionsItemSelected(item)

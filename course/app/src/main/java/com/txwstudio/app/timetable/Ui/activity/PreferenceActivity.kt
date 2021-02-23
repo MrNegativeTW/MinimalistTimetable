@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.txwstudio.app.timetable.R
 import kotlinx.android.synthetic.main.activity_settings.*
 
-class SettingsActivity : AppCompatActivity() {
+class PreferenceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
