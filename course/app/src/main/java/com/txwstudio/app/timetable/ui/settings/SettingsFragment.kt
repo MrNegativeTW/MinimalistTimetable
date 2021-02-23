@@ -93,7 +93,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 val customTabsIntent = CustomTabsIntent.Builder().build()
                 customTabsIntent.launchUrl(requireContext(), Uri.parse(BUG_REPORT_LINK))
             }
-            PREFERENCE_CHANGELOG -> showDialog(PREFERENCE_CHANGELOG)
+//            PREFERENCE_CHANGELOG -> showDialog(PREFERENCE_CHANGELOG)
         }
         return super.onPreferenceTreeClick(preference)
     }

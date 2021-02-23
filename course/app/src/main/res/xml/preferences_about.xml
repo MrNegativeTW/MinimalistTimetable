@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory>
+        <Preference
+            android:key="prefAbout_version"
+            android:summary="Stable 2.0.1"
+            android:title="版本"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="prefAbout_changelog"
+            android:title="更新日誌"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="prefAbout_openSource"
+            android:title="開放原始碼授權"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+<!--    <PreferenceCategory>-->
+<!--        <Preference-->
+<!--            android:key="prefAbout_officialSite"-->
+<!--            android:summary="https://"-->
+<!--            android:title="網站"-->
+<!--            app:iconSpaceReserved="false" />-->
+
+<!--        <Preference-->
+<!--            android:key="prefAbout_github"-->
+<!--            android:title="GitHub"-->
+<!--            app:iconSpaceReserved="false" />-->
+<!--    </PreferenceCategory>-->
+</PreferenceScreen>

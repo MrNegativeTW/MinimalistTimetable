@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="@string/settings_sectionGeneral">
 
@@ -78,7 +79,8 @@
             android:icon="@drawable/ic_code_24dp"
             android:key="pref_changelog"
             android:summary="@string/settings_versionSummary"
-            android:title="@string/settings_versionTitle" />
+            android:title="@string/settings_versionTitle"
+            app:fragment="com.txwstudio.app.timetable.ui.preferences.PreferencesAboutFragment" />
     </PreferenceCategory>
 
 </PreferenceScreen>
