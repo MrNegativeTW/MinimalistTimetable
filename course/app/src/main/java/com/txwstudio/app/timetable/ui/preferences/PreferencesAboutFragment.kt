@@ -18,7 +18,7 @@ private const val PREFERENCE_ABOUT_GITHUB = "prefAbout_github"
 private const val CHANGELOG_LINK = "prefAbout_changelog"
 private const val OPEN_SOURCE_LINK = "prefAbout_openSource"
 private const val OFFICIAL_SITE_LINK = "prefAbout_officialSite"
-private const val GITHUB_LINK = "prefAbout_officialSite"
+private const val GITHUB_LINK = "https://github.com/MrNegativeTW/MinimalistTimetable"
 
 class PreferencesAboutFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
