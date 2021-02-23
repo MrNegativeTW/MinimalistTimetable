@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.ui.settings
+package com.txwstudio.app.timetable.ui.preferences
 
 import android.app.Activity
 import android.content.Intent
