@@ -5,16 +5,16 @@
         <Preference
             android:key="prefAbout_version"
             android:summary="Stable 2.0.1"
-            android:title="版本"
+            android:title="@string/prefAbout_versionTitle"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="prefAbout_changelog"
-            android:title="更新日誌"
+            android:title="@string/prefAbout_changelogTitle"
             app:iconSpaceReserved="false" />
 
         <Preference
             android:key="prefAbout_openSource"
-            android:title="開放原始碼授權"
+            android:title="@string/prefAbout_openSourceTitle"
             app:iconSpaceReserved="false" />
 
 <!--    <PreferenceCategory>-->

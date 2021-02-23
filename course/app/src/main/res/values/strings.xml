@@ -47,7 +47,7 @@
     <string name="dialogPositiveButton">真的</string>
     <string name="dialogNegativeButton">假的</string>
 
-    <!-- Setting Activity -->
+    <!-- Preference Activity -->
     <string name="settings_sectionGeneral">一般</string>
     <string name="settings_timetableTitle">課表名稱</string>
     <string name="settings_timetableTitleSummary">我的課表</string>
@@ -81,13 +81,13 @@
     <string name="settings_contactSummary">Bug 回報、功能請求</string>
     <string name="settings_versionTitle">版本 2.0</string>
     <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
-    <string name="settings_changelogTitle">更新紀錄</string>
-    <string name="settings_changelogMessage">
-        - 把整個 APP 用新語言重寫了一遍，真心不唬
-        \n- 加入週末欄位
-        \n- 介面小更新
-    </string>
-    <!-- Setting Activity End -->
+    <!-- Preference Activity End -->
+
+    <!-- Preference About Activity -->
+    <string name="prefAbout_versionTitle">版本</string>
+    <string name="prefAbout_changelogTitle">更新日誌</string>
+    <string name="prefAbout_openSourceTitle">開放原始碼授權</string>
+    <!-- Preference About Activity End -->
 
     <!-- File Read Error Msg -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>

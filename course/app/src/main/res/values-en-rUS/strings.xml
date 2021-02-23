@@ -42,12 +42,6 @@
         \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
         \n\nMap: JPG、PNG\nCalendar: PDF
     </string>
-    <string name="settings_changelogTitle">Changelog</string>
-    <string name="settings_changelogMessage">
-        - Refactor almost the entire app
-        \n- UI update
-        \n- Add weekend
-    </string>
     <string name="courseEditorActivityTitle">Course Editor</string>
     <string name="courseEditor_titleAdd">Add Course</string>
     <string name="courseEditor_titleEdit">Edit Details</string>
@@ -80,4 +74,7 @@
     <string name="courseCardDialog_deleteCourse">Delete</string>
     <string name="courseCardDialog_message">New semester?\\nEdit it instead of deleting it!</string>
     <string name="courseCardDialog_title">You want ... ?</string>
+    <string name="prefAbout_versionTitle">Version</string>
+    <string name="prefAbout_changelogTitle">Changelog</string>
+    <string name="prefAbout_openSourceTitle">Open Source Library</string>
 </resources>
