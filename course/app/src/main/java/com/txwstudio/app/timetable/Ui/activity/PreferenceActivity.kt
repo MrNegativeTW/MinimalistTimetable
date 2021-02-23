@@ -7,14 +7,14 @@ import androidx.fragment.app.commit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.txwstudio.app.timetable.R
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_preference.*
 
 class PreferenceActivity : AppCompatActivity(),
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_preference)
         setSupportActionBar(toolbar_settingsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
