@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory>
         <Preference
             android:key="prefAbout_version"
             android:summary="Stable 2.0.1"
@@ -17,7 +16,6 @@
             android:key="prefAbout_openSource"
             android:title="開放原始碼授權"
             app:iconSpaceReserved="false" />
-    </PreferenceCategory>
 
 <!--    <PreferenceCategory>-->
 <!--        <Preference-->
