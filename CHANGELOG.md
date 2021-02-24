@@ -1,5 +1,4 @@
 # Changelog
-好奇極簡課表都更新了什麼嗎？這裡把一切都記錄起來了！
 
 ## [Unreleased]
 ### Added
@@ -10,6 +9,7 @@
 ### Deprecated
 
 ### Removed
+
 ### Fixed
 - Theme return to default after restart 
 
@@ -26,13 +26,6 @@
 - TabIndicator style now looks like Google's app.
 - Primary color change to blue, why? No idea.
 
-### Deprecated
-- `Turn the lights on` theme setting
-
 ### Removed
+- `Turn the lights on` theme setting
 - Long press on exit button to open map
-
-### Fixed
-### Security
-
-## [1.1] - 2020-01-01
