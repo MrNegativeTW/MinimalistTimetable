@@ -1,10 +1,9 @@
 # 更新日誌
 
 > [English version](https://github.com/MrNegativeTW/MinimalistTimetable/blob/master/CHANGELOG_en.md)
-
+> 
 ## [Unreleased]
 ### Added
-- 新的關於頁面
 
 ### Changed
 
@@ -13,9 +12,15 @@
 ### Removed
 
 ### Fixed
-- 設定為深色主題後跳回淺色的問題
 
 ### Security
+
+## [2.0.1] - 2021-02-24
+### Added
+- 新的關於頁面
+
+### Fixed
+- 設定為深色主題後跳回淺色的問題
 
 ## [2.0] - 2021-01-29
 ### Added
