@@ -12,10 +12,10 @@
             android:title="@string/prefAbout_changelogTitle"
             app:iconSpaceReserved="false" />
 
-        <Preference
-            android:key="prefAbout_openSource"
-            android:title="@string/prefAbout_openSourceTitle"
-            app:iconSpaceReserved="false" />
+<!--        <Preference-->
+<!--            android:key="prefAbout_openSource"-->
+<!--            android:title="@string/prefAbout_openSourceTitle"-->
+<!--            app:iconSpaceReserved="false" />-->
 
 <!--    <PreferenceCategory>-->
 <!--        <Preference-->
