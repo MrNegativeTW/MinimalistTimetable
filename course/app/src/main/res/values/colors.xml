@@ -24,6 +24,11 @@
     <color name="materialDarkSurface">#1d1d1d</color>
     <color name="colorAccent_dark">#282828</color>
 
+    <!-- Google App Dark Theme -->
+    <color name="googleAppDarkTheme_colorBackground">#202124</color>
+    <color name="googleAppLightTheme_colorDivLine">#DADCE0</color>
+    <color name="googleAppDarkTheme_colorDivLine">#5F6368</color>
+
     <!-- Common -->
     <color name="white">#ffffff</color>
     <color name="black">#000</color>

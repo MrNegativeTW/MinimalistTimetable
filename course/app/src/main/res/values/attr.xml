@@ -4,4 +4,5 @@
     <attr name="PopupOverlay" format="reference"/>
     <attr name="iconColor" format="color" />
     <attr name="editTextCardBackground" format="color"/>
+    <attr name="divLineBackground" format="color"/>
 </resources>

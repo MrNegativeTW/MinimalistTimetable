@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.ui.settings
+package com.txwstudio.app.timetable.ui.preferences
 
 import android.app.Activity
 import android.content.Intent
@@ -39,7 +39,7 @@ private const val REQUEST_CODE_CALENDAR = 1
 
 private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
 
-class SettingsFragment : PreferenceFragmentCompat(),
+class PreferenceFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var prefManager: SharedPreferences
@@ -93,7 +93,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 val customTabsIntent = CustomTabsIntent.Builder().build()
                 customTabsIntent.launchUrl(requireContext(), Uri.parse(BUG_REPORT_LINK))
             }
-            PREFERENCE_CHANGELOG -> showDialog(PREFERENCE_CHANGELOG)
         }
         return super.onPreferenceTreeClick(preference)
     }
@@ -143,12 +142,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val materialAlertDialog = MaterialAlertDialogBuilder(requireContext())
         val title = when (which) {
             PREFERENCE_MAP_CAL_HELPER -> R.string.settings_mapCalendarHelperTitle
-            PREFERENCE_CHANGELOG -> R.string.settings_changelogTitle
             else -> R.string.all_ohIsError
         }
         val message = when (which) {
             PREFERENCE_MAP_CAL_HELPER -> R.string.settings_mapCalendarHelperMessage
-            PREFERENCE_CHANGELOG -> R.string.settings_changelogMessage
             else -> R.string.all_ohIsError
         }
         materialAlertDialog.apply {
