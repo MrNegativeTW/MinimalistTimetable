@@ -39,11 +39,11 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
     fun setupValueForEditing() {
         courseId.value?.let {
             val course = DBHandler(getApplication()).getCourseById2(it)
-            courseName.value = course.courseName
-            coursePlace.value = course.coursePlace
-            courseBeginTime.value = course.courseBeginTime
-            courseEndTime.value = course.courseEndTime
-            courseWeekday.value = course.courseWeekday
+            courseName.value = course.courseName ?: "-"
+            coursePlace.value = course.coursePlace ?: "-"
+            courseBeginTime.value = course.courseBeginTime ?: "0000"
+            courseEndTime.value = course.courseEndTime ?: "0000"
+            courseWeekday.value = course.courseWeekday ?: 1
         }
     }
 
