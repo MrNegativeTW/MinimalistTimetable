@@ -2,7 +2,6 @@
 
 ## [Unreleased]
 ### Added
-- New preference page for about information
 
 ### Changed
 
@@ -11,9 +10,15 @@
 ### Removed
 
 ### Fixed
-- Theme return to default after restart 
 
 ### Security
+
+## [2.0.1] - 2021-02-24
+### Added
+- New preference page for about information
+
+### Fixed
+- Theme return to default after restart 
 
 ## [2.0] - 2021-01-29
 ### Added
