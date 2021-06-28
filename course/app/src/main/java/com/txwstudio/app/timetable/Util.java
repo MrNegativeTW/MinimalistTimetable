@@ -19,41 +19,6 @@ public class Util extends Activity {
 
     public Util() {}
 
-    public static void setupTheme(Activity activity) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
-        activity.setTheme(sharedPref.getBoolean("lightMode_Pref", false) ?
-                            R.style.LightTheme : R.style.AppTheme);
-    }
-
-
-    /**
-     * Prevent from losing data when accidentally pressed the back button.
-     * Here we use a dialog to confirm the action.
-     *
-     * @param activity The activity.
-     * */
-    public static void onBackPressedDialog(final Activity activity){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-        dialog.setMessage(R.string.dialogConfirmExit);
-        dialog.setPositiveButton(R.string.dialogPositiveButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.finish();
-            }
-        });
-        dialog.setNegativeButton(R.string.dialogNegativeButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        dialog.show();
-    }
-
-
-
-
-
     /** https://stackoverflow.com/questions/8215308/using-context-in-a-fragment
      * Get a file path from a Uri. This will get the the path for Storage Access
      * Framework Documents, as well as the _data field for the MediaStore and
