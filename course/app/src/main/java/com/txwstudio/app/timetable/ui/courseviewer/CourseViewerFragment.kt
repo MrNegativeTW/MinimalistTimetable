@@ -38,9 +38,8 @@ class CourseViewerFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = FragmentCourseViewerBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
