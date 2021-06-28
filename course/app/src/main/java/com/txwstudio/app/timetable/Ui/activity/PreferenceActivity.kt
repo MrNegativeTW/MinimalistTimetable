@@ -3,19 +3,22 @@ package com.txwstudio.app.timetable.ui.activity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.commit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.txwstudio.app.timetable.R
-import kotlinx.android.synthetic.main.activity_preference.*
+import com.txwstudio.app.timetable.databinding.ActivityPreferenceBinding
 
 class PreferenceActivity : AppCompatActivity(),
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
+    private lateinit var binding: ActivityPreferenceBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_preference)
-        setSupportActionBar(toolbar_settingsAct)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_preference)
+        setSupportActionBar(binding.toolbarSettingsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

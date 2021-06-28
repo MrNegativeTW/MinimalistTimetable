@@ -22,7 +22,6 @@ import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
-import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
 
 class MainActivity2 : AppCompatActivity() {
@@ -98,7 +97,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun setupToolBar() {
-        setSupportActionBar(toolbar_mainActivity2)
+        setSupportActionBar(binding.toolbarMainActivity2)
     }
 
     private fun setupTabLayoutAndViewPager() {
