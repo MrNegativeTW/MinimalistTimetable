@@ -40,6 +40,7 @@ class MainActivity2 : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
         binding.viewModel = mainActivity2ViewModel
+        binding.lifecycleOwner = this
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
