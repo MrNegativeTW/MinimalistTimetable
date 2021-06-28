@@ -39,8 +39,6 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
-        binding.viewModel = mainActivity2ViewModel
-
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         setupToolBar()
