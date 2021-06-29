@@ -20,5 +20,6 @@ class CourseCardViewModel(course3: Course3) {
     val courseEndTime
         get() = course.courseEndTime?.replace("..(?!$)".toRegex(), "$0:")
 
-    val profName = course.profName
+    val profName
+        get() = if (!course.profName.isNullOrBlank()) ", ${course.profName}" else ""
 }
