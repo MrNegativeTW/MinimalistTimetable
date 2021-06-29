@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.data.Course3
-import com.txwstudio.app.timetable.data.CourseRepository
 import com.txwstudio.app.timetable.databinding.RowCourseCardBinding
+import com.txwstudio.app.timetable.ui.courseviewer.CourseViewerViewModel
 import com.txwstudio.app.timetable.viewmodels.CourseCardViewModel
 
-class CourseCardAdapter(private val repository: CourseRepository) :
+class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
     ListAdapter<Course3, CourseCardAdapter.ViewHolder>(CourseCardComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,10 +40,11 @@ class CourseCardAdapter(private val repository: CourseRepository) :
                 MaterialAlertDialogBuilder(binding.root.context).apply {
                     setTitle(R.string.courseCardDialog_title)
                     setMessage(R.string.courseCardDialog_message)
-                    setNeutralButton(R.string.courseCardDialog_deleteCourse) {_, _ ->
-                        deleteCourse()
+                    setNeutralButton(R.string.courseCardDialog_deleteCourse) { _, _ ->
+                        // Call CourseViewerViewModel.delete to delete the course from db.
+                        binding.viewModel?.course?.let { viewModel.deleteCourse(it) }
                     }
-                    setPositiveButton(R.string.courseCardDialog_editCourseInfo) {_, _ ->
+                    setPositiveButton(R.string.courseCardDialog_editCourseInfo) { _, _ ->
                         editCourse()
                     }
                     show()
@@ -57,10 +58,6 @@ class CourseCardAdapter(private val repository: CourseRepository) :
                 viewModel = CourseCardViewModel(item)
                 executePendingBindings()
             }
-        }
-
-        private fun deleteCourse() {
-            Log.i("TESTTT", "So you want to delete this course")
         }
 
         private fun editCourse() {

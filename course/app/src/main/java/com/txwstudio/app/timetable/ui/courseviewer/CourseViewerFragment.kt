@@ -62,7 +62,7 @@ class CourseViewerFragment : Fragment() {
 //        binding.viewModel = courseViewerViewModel
 //        binding.lifecycleOwner = viewLifecycleOwner
 
-        val courseCardAdapter = CourseCardAdapter((requireActivity().application as MyApplication).courseRepository)
+        val courseCardAdapter = CourseCardAdapter(courseViewerViewModel)
         binding.recyclerViewCourseViewer.adapter = courseCardAdapter
 
         subscribeUi(courseCardAdapter)

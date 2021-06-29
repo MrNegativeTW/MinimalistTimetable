@@ -4,7 +4,7 @@ import com.txwstudio.app.timetable.data.Course3
 
 class CourseCardViewModel(course3: Course3) {
 
-    private val course = course3
+    val course = course3
 
     val id = course.id
 
