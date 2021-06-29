@@ -3,11 +3,6 @@
 buildscript {
 
     ext {
-        // Sdk and tools
-        compileSdkVersion = 30
-        minSdkVersion = 23
-        targetSdkVersion = 30
-
         // App dependencies
         coroutinesVersion = '1.4.2'
         gradleVersion = '4.2.1'
