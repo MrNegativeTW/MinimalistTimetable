@@ -92,8 +92,10 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun getPrefValue() {
-        prefTableTitle = sharedPref.getString(PREFERENCE_TABLE_TITLE,
-                getString(R.string.settings_timetableTitleDefaultValue))!!
+        prefTableTitle = sharedPref.getString(
+            PREFERENCE_TABLE_TITLE,
+            getString(R.string.settings_timetableTitleDefaultValue)
+        )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
         prefCalendarPath = sharedPref.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "")!!
@@ -106,7 +108,10 @@ class MainActivity2 : AppCompatActivity() {
     private fun setupTabLayoutAndViewPager() {
         binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
 
-        TabLayoutMediator(binding.tabLayoutMainActivity2, binding.viewPagerMainActivity2) { tab, position ->
+        TabLayoutMediator(
+            binding.tabLayoutMainActivity2,
+            binding.viewPagerMainActivity2
+        ) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
     }
