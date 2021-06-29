@@ -1,17 +1,20 @@
 package com.txwstudio.app.timetable.ui.courseviewer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.ItemTouchHelper
 import com.txwstudio.app.timetable.Adapter
 import com.txwstudio.app.timetable.DBHandler
 import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
+import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
+import com.txwstudio.app.timetable.ui.courseeditor.INTENT_EXTRA_COURSE_ID
+import com.txwstudio.app.timetable.ui.courseeditor.INTENT_EXTRA_IS_EDIT_MODE
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
@@ -51,16 +54,10 @@ class CourseViewerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val factory = CourseViewerViewModelFactory((requireActivity().application as MyApplication).repository)
-//        courseViewerViewModel = ViewModelProvider(this, factory).get(CourseViewerViewModel::class.java)
-
         binding = FragmentCourseViewerBinding.inflate(inflater, container, false).apply {
             viewModel = courseViewerViewModel
             lifecycleOwner = viewLifecycleOwner
         }
-
-//        binding.viewModel = courseViewerViewModel
-//        binding.lifecycleOwner = viewLifecycleOwner
 
         val courseCardAdapter = CourseCardAdapter(courseViewerViewModel)
         binding.recyclerViewCourseViewer.adapter = courseCardAdapter
@@ -85,17 +82,22 @@ class CourseViewerFragment : Fragment() {
 //        db = DBHandler(requireActivity())
 //        adapter = Adapter(requireActivity(), db.getCourse(weekday!!), weekday!!)
 //        binding.recyclerViewCourseViewer.adapter = adapter
-
-//        val courseCardAdapter = CourseCardAdapter()
-//        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
-//        courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
-//            it?.let { courseCardAdapter.submitList(it) }
-//        }
     }
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
         courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
             it?.let { courseCardAdapter.submitList(it) }
+        }
+
+        // Observe LiveData in viewModel, once it changed,
+        // open CourseEditorActivity to edit course info.
+        courseViewerViewModel.targetCourseIdToEdit.observe(viewLifecycleOwner) {
+            if (it != -1) {
+                val intent = Intent(requireActivity(), CourseEditorActivity::class.java)
+                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true)
+                intent.putExtra(INTENT_EXTRA_COURSE_ID, it)
+                startActivity(intent)
+            }
         }
     }
 

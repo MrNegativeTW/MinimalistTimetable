@@ -14,8 +14,16 @@ class CourseViewerViewModel(
     val courseByWeekday: LiveData<List<Course3>> =
         repository.getCourseByWeekday(weekday).asLiveData()
 
+    var targetCourseIdToEdit = MutableLiveData<Int>(-1)
+
     fun insert(course: Course3) = viewModelScope.launch {
         repository.insertCourse(course)
+    }
+
+    fun editCourse(courseId: Int) {
+        targetCourseIdToEdit.value = courseId
+        // Roll back to default value
+//        courseIdWantToEdit.value = -1
     }
 
     fun deleteCourse(course: Course3) = viewModelScope.launch {

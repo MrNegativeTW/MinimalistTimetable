@@ -1,6 +1,5 @@
 package com.txwstudio.app.timetable.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -41,11 +40,12 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
                     setTitle(R.string.courseCardDialog_title)
                     setMessage(R.string.courseCardDialog_message)
                     setNeutralButton(R.string.courseCardDialog_deleteCourse) { _, _ ->
-                        // Call CourseViewerViewModel.delete to delete the course from db.
+                        // Call CourseViewerViewModel.deleteCourse to delete the course from db.
                         binding.viewModel?.course?.let { viewModel.deleteCourse(it) }
                     }
                     setPositiveButton(R.string.courseCardDialog_editCourseInfo) { _, _ ->
-                        editCourse()
+                        // Call CourseViewerViewModel.editCourse to edit the course info.
+                        binding.viewModel?.id?.let { viewModel.editCourse(it) }
                     }
                     show()
                 }
@@ -58,10 +58,6 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
                 viewModel = CourseCardViewModel(item)
                 executePendingBindings()
             }
-        }
-
-        private fun editCourse() {
-            Log.i("TESTTT", "Perform edit course")
         }
     }
 
