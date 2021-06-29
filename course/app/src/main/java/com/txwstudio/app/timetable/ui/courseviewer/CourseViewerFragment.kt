@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.txwstudio.app.timetable.Adapter
 import com.txwstudio.app.timetable.DBHandler
+import com.txwstudio.app.timetable.MyApplication
+import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
@@ -23,9 +26,16 @@ class CourseViewerFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentCourseViewerBinding
-    private val courseViewerViewModel: CourseViewerViewModel by viewModels()
 
-    private var weekday: Int? = null
+    //    private lateinit var courseViewerViewModel: CourseViewerViewModel
+    private val courseViewerViewModel: CourseViewerViewModel by viewModels {
+        CourseViewerViewModelFactory(
+            (requireActivity().application as MyApplication).courseRepository,
+            weekday!!
+        )
+    }
+
+    private var weekday: Int? = 0
     private lateinit var db: DBHandler
 
     private lateinit var adapter: Adapter
@@ -41,14 +51,28 @@ class CourseViewerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCourseViewerBinding.inflate(inflater, container, false)
+//        val factory = CourseViewerViewModelFactory((requireActivity().application as MyApplication).repository)
+//        courseViewerViewModel = ViewModelProvider(this, factory).get(CourseViewerViewModel::class.java)
+
+        binding = FragmentCourseViewerBinding.inflate(inflater, container, false).apply {
+            viewModel = courseViewerViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+//        binding.viewModel = courseViewerViewModel
+//        binding.lifecycleOwner = viewLifecycleOwner
+
+        val courseCardAdapter = CourseCardAdapter((requireActivity().application as MyApplication).courseRepository)
+        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
+
+        subscribeUi(courseCardAdapter)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = courseViewerViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+//        binding.viewModel = courseViewerViewModel
+//        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /**
@@ -58,10 +82,21 @@ class CourseViewerFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        db = DBHandler(requireActivity())
-        adapter = Adapter(requireActivity(), db.getCourse(weekday!!), weekday!!)
-        binding.recyclerViewCourseViewer.adapter = adapter
+//        db = DBHandler(requireActivity())
+//        adapter = Adapter(requireActivity(), db.getCourse(weekday!!), weekday!!)
+//        binding.recyclerViewCourseViewer.adapter = adapter
+
+//        val courseCardAdapter = CourseCardAdapter()
+//        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
+//        courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
+//            it?.let { courseCardAdapter.submitList(it) }
+//        }
     }
 
+    private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
+        courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
+            it?.let { courseCardAdapter.submitList(it) }
+        }
+    }
 
 }
