@@ -8,10 +8,12 @@ import com.txwstudio.app.timetable.DBHandler
 import com.txwstudio.app.timetable.model.Course2
 import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
 
-class CourseEditorViewModel(application: Application) : AndroidViewModel(application) {
+class CourseEditorViewModel(
+    private val repository: CourseRepository,
+    private val courseId: Int
+) : ViewModel() {
 
     var isEditMode = MutableLiveData<Boolean>(false)
-    var courseId = MutableLiveData<Int>(0)
 
     var courseName = MutableLiveData<String>()
     var coursePlace = MutableLiveData<String>()
@@ -120,6 +122,17 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
         } else {
             // Edit Mode
             isSaveToFinish.value = DBHandler(getApplication()).updateCourse(course2, courseId.value!!)
+class CourseEditorViewModelFactory(
+    private val repository: CourseRepository,
+    private val courseId: Int
+) :
+    ViewModelProvider.Factory {
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CourseEditorViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CourseEditorViewModel(repository, courseId) as T
         }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

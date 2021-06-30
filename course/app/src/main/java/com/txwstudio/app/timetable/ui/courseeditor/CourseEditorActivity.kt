@@ -31,7 +31,12 @@ class CourseEditorActivity : AppCompatActivity() {
      * */
 
     private lateinit var binding: ActivityCourseEditorBinding
-    private val courseEditorViewModel: CourseEditorViewModel by viewModels()
+    private val courseEditorViewModel: CourseEditorViewModel by viewModels {
+        CourseEditorViewModelFactory(
+            (application as MyApplication).courseRepository,
+            courseId!!
+        )
+    }
 
     private var courseId: Int? = -1
     private lateinit var sharedPref: SharedPreferences
