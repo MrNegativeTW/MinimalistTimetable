@@ -175,7 +175,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.courseNameError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCourseNameEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCourseNameEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = false
             }
@@ -184,7 +185,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.coursePlaceError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCoursePlaceEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCoursePlaceEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCoursePlaceEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCoursePlaceEntry.isErrorEnabled = false
             }
@@ -193,7 +195,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.courseBeginTimeError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseBeginTimeEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCourseBeginTimeEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCourseBeginTimeEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCourseBeginTimeEntry.isErrorEnabled = false
             }
@@ -202,7 +205,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.courseEndTimeError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCourseEndTimeEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCourseEndTimeEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = false
             }
@@ -213,8 +217,8 @@ class CourseEditorActivity : AppCompatActivity() {
         val isSystem24Hour = DateFormat.is24HourFormat(this)
         clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
         val materialTimePicker = MaterialTimePicker.Builder()
-                .setTimeFormat(clockFormat)
-                .build()
+            .setTimeFormat(clockFormat)
+            .build()
         materialTimePicker.show(supportFragmentManager, "selectCourseBeginTime")
 
         materialTimePicker.addOnPositiveButtonClickListener {
