@@ -26,4 +26,6 @@ class CourseRepository(private val courseDao: CourseDao) {
     fun getCourseByWeekday(weekday: Int): Flow<List<Course3>> {
         return courseDao.getCourseByWeekday(weekday)
     }
+
+    fun getCourseById(courseId: Int) = courseDao.getCourseById(courseId)
 }
