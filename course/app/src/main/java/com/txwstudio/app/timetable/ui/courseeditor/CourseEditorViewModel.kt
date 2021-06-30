@@ -18,14 +18,14 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
     var courseBeginTime = MutableLiveData<String>()
     var courseEndTime = MutableLiveData<String>()
     var courseWeekday = MutableLiveData<Int>(0)
-    var courseTeacher = MutableLiveData<String>()
+    var courseProf = MutableLiveData<String>()
 
     var courseNameError = MutableLiveData<Boolean>()
     var coursePlaceError = MutableLiveData<Boolean>()
     var courseBeginTimeError = MutableLiveData<Boolean>()
     var courseEndTimeError = MutableLiveData<Boolean>()
     var courseWeekdayError = MutableLiveData<Boolean>()
-    var courseTeacherError = MutableLiveData<Boolean>()
+    var courseProfError = MutableLiveData<Boolean>()
 
     var openTimePicker = MutableLiveData<Boolean>(false)
     var pickBeginOrEnd = MutableLiveData<Int>()
@@ -91,8 +91,11 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
      * User clicked save, start process it.
      * */
     fun saveFired() {
-        Log.i("TESTTT", "${courseName.value} | ${coursePlace.value} | " +
-                "${courseBeginTime.value} | ${courseEndTime.value} | ${courseWeekday.value}")
+        Log.i(
+            "TESTTT", "${courseName.value} | ${coursePlace.value} | " +
+                    " | ${courseProf.value} | ${courseWeekday.value}" +
+                    " | ${courseBeginTime.value} | ${courseEndTime.value}"
+        )
 
         // Check entries
         if (isRequiredEntriesEmpty()) {
