@@ -17,12 +17,9 @@ import android.widget.Toast;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.txwstudio.app.timetable.model.Course;
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity;
-import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt;
 
 import java.util.ArrayList;
 
-import static com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt.INTENT_EXTRA_COURSE_ID;
-import static com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivityKt.INTENT_EXTRA_IS_EDIT_MODE;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -107,8 +104,8 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         db = new DBHandler(mContext);
                         int ID = courseArrayList.get(position).getID();
                         Intent intent = new Intent(mContext, CourseEditorActivity.class);
-                        intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true);
-                        intent.putExtra(INTENT_EXTRA_COURSE_ID, ID);
+                        intent.putExtra("INTENT_EXTRA_IS_EDIT_MODE", true);
+                        intent.putExtra("INTENT_EXTRA_COURSE_ID", ID);
                         mContext.startActivity(intent);
                         courseArrayList.clear();
                         courseArrayList = db.getCourse(fragment);

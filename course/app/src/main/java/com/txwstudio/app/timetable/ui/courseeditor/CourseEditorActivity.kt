@@ -18,11 +18,10 @@ import com.google.android.material.timepicker.TimeFormat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
 import java.text.SimpleDateFormat
 import java.util.*
-
-const val INTENT_EXTRA_IS_EDIT_MODE = "is_edit_mode"
-const val INTENT_EXTRA_COURSE_ID = "course_id"
 
 class CourseEditorActivity : AppCompatActivity() {
 
@@ -34,8 +33,7 @@ class CourseEditorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCourseEditorBinding
     private val courseEditorViewModel: CourseEditorViewModel by viewModels()
 
-    private var isEditMode = false
-    private var courseIdInDatabase = 0
+    private var courseId: Int? = -1
     private lateinit var sharedPref: SharedPreferences
 
     private val currentViewPagerItem by lazy { intent.getIntExtra("currentViewPagerItem", 0) }
@@ -48,11 +46,12 @@ class CourseEditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        courseId =
+            intent.getIntExtra(INTENT_EXTRA_COURSE_ID, INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_course_editor)
         binding.viewModel = courseEditorViewModel
 
-        isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
-        courseIdInDatabase = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
 

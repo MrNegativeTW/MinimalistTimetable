@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.txwstudio.app.timetable.DBHandler
 import com.txwstudio.app.timetable.model.Course2
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
 
 class CourseEditorViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,6 +34,13 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
 
     var isSaveToFinish = MutableLiveData<Boolean>(false)
 
+    init {
+        Log.i("TESTTT", "courseId is: ${courseId}")
+        if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
+            // If course id is provided, means we are in edit mode.
+            isEditMode.value = true
+        }
+    }
     /**
      * If start in edit mode, get course information from database, then set to screen.
      * */

@@ -13,8 +13,7 @@ import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
-import com.txwstudio.app.timetable.ui.courseeditor.INTENT_EXTRA_COURSE_ID
-import com.txwstudio.app.timetable.ui.courseeditor.INTENT_EXTRA_IS_EDIT_MODE
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
@@ -68,8 +67,6 @@ class CourseViewerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.viewModel = courseViewerViewModel
-//        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /**
@@ -94,7 +91,7 @@ class CourseViewerFragment : Fragment() {
         courseViewerViewModel.targetCourseIdToEdit.observe(viewLifecycleOwner) {
             if (it != -1) {
                 val intent = Intent(requireActivity(), CourseEditorActivity::class.java)
-                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true)
+//                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true)
                 intent.putExtra(INTENT_EXTRA_COURSE_ID, it)
                 startActivity(intent)
             }
