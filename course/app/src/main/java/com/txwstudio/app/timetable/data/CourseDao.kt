@@ -12,7 +12,7 @@ interface CourseDao {
     fun getCourseByWeekday(weekday: Int): Flow<List<Course3>>
 
     @Query("SELECT * FROM timeTable WHERE id = :id")
-    fun getCourseById(id: Int): Flow<Course3>
+    suspend fun getCourseById(id: Int): Course3
 
     @Insert
     suspend fun insertCourse(course: Course3): Long
