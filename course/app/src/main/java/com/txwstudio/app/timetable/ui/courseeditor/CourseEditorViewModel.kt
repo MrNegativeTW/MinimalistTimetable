@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
-import com.txwstudio.app.timetable.model.Course2
 import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class CourseEditorViewModel(
     private val repository: CourseRepository,
@@ -38,10 +38,10 @@ class CourseEditorViewModel(
     var courseBeginTimeForEdit = MutableLiveData<Int>()
     var courseEndTimeForEdit = MutableLiveData<Int>()
 
-    var isSaveToFinish = MutableLiveData<Boolean>(false)
+    var isSavedSuccessfully = MutableLiveData<Boolean>(false)
 
     init {
-        Log.i("TESTTT", "courseId is: ${courseId}")
+        Log.i("TESTTT", "courseId is: ${courseId}") // TODO(Remove it)
         if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
             // Edit mode, if course id is provided.
             isEditMode.value = true
@@ -118,22 +118,37 @@ class CourseEditorViewModel(
         }
 
         // Making cake
-        val course2 = Course2(
+        val course = Course3(
+            id = null,
             courseName = courseName.value,
             coursePlace = coursePlace.value,
-            courseBeginTime = courseBeginTime.value,
+            courseWeekday = courseWeekday.value,
+            courseStartTime = courseBeginTime.value,
             courseEndTime = courseEndTime.value,
-            courseWeekday = courseWeekday.value
+            profName = courseProf.value
         )
 
         // Done
         if (isEditMode.value != true) {
             // Add Mode
-//            isSaveToFinish.value = DBHandler(getApplication()).addCourse(course2)
+            viewModelScope.launch {
+                try {
+                    val result = repository.insertCourse(course)
+                    isSavedSuccessfully.value = true
+                } catch (e: Exception){
+                    Log.i("TESTTT", "insert failed")
+                }
+            }
         } else {
             // Edit Mode
-//            isSaveToFinish.value =
-//                DBHandler(getApplication()).updateCourse(course2, courseId.value!!)
+            viewModelScope.launch {
+                try {
+                    val result = repository.insertCourse(course)
+                    isSavedSuccessfully.value = true
+                } catch (e: Exception){
+                    Log.i("TESTTT", "update failed")
+                }
+            }
         }
     }
 }

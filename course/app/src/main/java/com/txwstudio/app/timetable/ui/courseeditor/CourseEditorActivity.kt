@@ -159,7 +159,7 @@ class CourseEditorActivity : AppCompatActivity() {
         }
 
         // Close current activity
-        courseEditorViewModel.isSaveToFinish.observe(this) {
+        courseEditorViewModel.isSavedSuccessfully.observe(this) {
             if (it) finish()
         }
     }
