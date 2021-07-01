@@ -10,7 +10,8 @@ import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALU
 
 class CourseEditorViewModel(
     private val repository: CourseRepository,
-    private val courseId: Int
+    private val courseId: Int,
+    private val currentViewPagerItem: Int
 ) : ViewModel() {
 
     var isEditMode = MutableLiveData<Boolean>(false)
@@ -124,14 +125,15 @@ class CourseEditorViewModel(
             isSaveToFinish.value = DBHandler(getApplication()).updateCourse(course2, courseId.value!!)
 class CourseEditorViewModelFactory(
     private val repository: CourseRepository,
-    private val courseId: Int
+    private val courseId: Int,
+    private val currentViewPagerItem: Int
 ) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CourseEditorViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return CourseEditorViewModel(repository, courseId) as T
+            return CourseEditorViewModel(repository, courseId, currentViewPagerItem) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

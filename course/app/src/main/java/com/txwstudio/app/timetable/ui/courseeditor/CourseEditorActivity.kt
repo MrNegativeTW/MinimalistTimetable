@@ -34,7 +34,8 @@ class CourseEditorActivity : AppCompatActivity() {
     private val courseEditorViewModel: CourseEditorViewModel by viewModels {
         CourseEditorViewModelFactory(
             (application as MyApplication).courseRepository,
-            courseId!!
+            courseId!!,
+            currentViewPagerItem
         )
     }
 
