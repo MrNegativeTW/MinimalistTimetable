@@ -1,12 +1,15 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.txwstudio.app.timetable.DBHandler
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.txwstudio.app.timetable.data.Course3
+import com.txwstudio.app.timetable.data.CourseRepository
 import com.txwstudio.app.timetable.model.Course2
 import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
+import kotlinx.coroutines.launch
 
 class CourseEditorViewModel(
     private val repository: CourseRepository,
@@ -18,10 +21,10 @@ class CourseEditorViewModel(
 
     var courseName = MutableLiveData<String>()
     var coursePlace = MutableLiveData<String>()
+    var courseProf = MutableLiveData<String?>()
     var courseBeginTime = MutableLiveData<String>()
     var courseEndTime = MutableLiveData<String>()
     var courseWeekday = MutableLiveData<Int>(0)
-    var courseProf = MutableLiveData<String>()
 
     var courseNameError = MutableLiveData<Boolean>()
     var coursePlaceError = MutableLiveData<Boolean>()
@@ -40,21 +43,27 @@ class CourseEditorViewModel(
     init {
         Log.i("TESTTT", "courseId is: ${courseId}")
         if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
-            // If course id is provided, means we are in edit mode.
+            // Edit mode, if course id is provided.
             isEditMode.value = true
+            setupValueForEditing()
+        } else {
+            // Add mode, no course id is provided.
+            courseWeekday.value = currentViewPagerItem
         }
     }
+
     /**
      * If start in edit mode, get course information from database, then set to screen.
      * */
-    fun setupValueForEditing() {
-        courseId.value?.let {
-            val course = DBHandler(getApplication()).getCourseById2(it)
-            courseName.value = course.courseName ?: "-"
-            coursePlace.value = course.coursePlace ?: "-"
-            courseBeginTime.value = course.courseBeginTime ?: "0000"
-            courseEndTime.value = course.courseEndTime ?: "0000"
-            courseWeekday.value = course.courseWeekday ?: 1
+    private fun setupValueForEditing() {
+        viewModelScope.launch {
+            val courseInfo = repository.getCourseById(courseId)
+            courseName.postValue(courseInfo.courseName!!)
+            coursePlace.postValue(courseInfo.coursePlace!!)
+            courseProf.postValue(courseInfo.profName)
+            courseWeekday.postValue(courseInfo.courseWeekday!!)
+            courseBeginTime.postValue(courseInfo.courseStartTime!!)
+            courseEndTime.postValue(courseInfo.courseEndTime!!)
         }
     }
 
@@ -110,19 +119,25 @@ class CourseEditorViewModel(
 
         // Making cake
         val course2 = Course2(
-                courseName = courseName.value,
-                coursePlace = coursePlace.value,
-                courseBeginTime = courseBeginTime.value,
-                courseEndTime = courseEndTime.value,
-                courseWeekday = courseWeekday.value)
+            courseName = courseName.value,
+            coursePlace = coursePlace.value,
+            courseBeginTime = courseBeginTime.value,
+            courseEndTime = courseEndTime.value,
+            courseWeekday = courseWeekday.value
+        )
 
         // Done
         if (isEditMode.value != true) {
             // Add Mode
-            isSaveToFinish.value = DBHandler(getApplication()).addCourse(course2)
+//            isSaveToFinish.value = DBHandler(getApplication()).addCourse(course2)
         } else {
             // Edit Mode
-            isSaveToFinish.value = DBHandler(getApplication()).updateCourse(course2, courseId.value!!)
+//            isSaveToFinish.value =
+//                DBHandler(getApplication()).updateCourse(course2, courseId.value!!)
+        }
+    }
+}
+
 class CourseEditorViewModelFactory(
     private val repository: CourseRepository,
     private val courseId: Int,

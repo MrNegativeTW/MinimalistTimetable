@@ -15,6 +15,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
@@ -63,14 +64,12 @@ class CourseEditorActivity : AppCompatActivity() {
         sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
 
         setupToolBar()
+        setupWeekdayDropdown()
+        subscribeUi()
+        subscribeUiForError()
 
         val adRequest = AdRequest.Builder().build()
         binding.adViewCourseEditorAct.loadAd(adRequest)
-
-        checkIsEditMode()
-        setupWeekday()
-        subscribeUi()
-        subscribeUiForError()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -81,7 +80,7 @@ class CourseEditorActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuSave -> {
-                binding.viewModel?.saveFired()
+                courseEditorViewModel.saveFired()
                 return true
             }
             android.R.id.home -> {
@@ -108,45 +107,37 @@ class CourseEditorActivity : AppCompatActivity() {
 
     private fun setupToolBar() {
         setSupportActionBar(binding.toolbarCourseEditorAct)
-        supportActionBar?.title = if (!isEditMode) {
-            getString(R.string.courseEditor_titleAdd)
-        } else {
-            getString(R.string.courseEditor_titleEdit)
-        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
-    }
 
-    /**
-     * Check is opened as edit mode or not, if yes, let viewModel know.
-     * */
-    private fun checkIsEditMode() {
-        if (isEditMode) {
-            courseEditorViewModel.isEditMode.value = isEditMode
-            courseEditorViewModel.courseId.value = courseIdInDatabase
-            courseEditorViewModel.setupValueForEditing()
+        courseEditorViewModel.isEditMode.observe(this) {
+            // Set actionBar text base on mode.
+            supportActionBar?.title = if (it) {
+                getString(R.string.courseEditor_titleEdit)
+            } else {
+                getString(R.string.courseEditor_titleAdd)
+            }
         }
     }
 
     /**
-     * Set text by is edit mode or not.
-     * Little hack here, the text and real value is not associate
+     * Set weekday selector text by is edit mode or not.
+     * Little hack here, the text and real value is not associate.
      * */
-    private fun setupWeekday() {
-        if (isEditMode) {
-            binding.dropDownCourseEditorAct.setText(weekdayArray[courseEditorViewModel.courseWeekday.value!!])
-        } else {
-            binding.dropDownCourseEditorAct.setText(weekdayArray[currentViewPagerItem])
-            courseEditorViewModel.courseWeekday.value = currentViewPagerItem
-        }
+    private fun setupWeekdayDropdown() {
         val adapter = ArrayAdapter(this, R.layout.list_item, weekdayArray)
         (binding.dropDownCourseEditorAct as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun subscribeUi() {
-        // Select weekday dialog
+        // Handle selection of weekday dropdown.
         binding.dropDownCourseEditorAct.setOnItemClickListener { adapterView, view, position, rowId ->
             courseEditorViewModel.courseWeekday.value = position
+        }
+
+        // Change weekday dropdown text. In order to set init text when is edit mode, observe it.
+        courseEditorViewModel.courseWeekday.observe(this) {
+            binding.dropDownCourseEditorAct.setText(weekdayArray[it], false)
         }
 
         // Select course begin time
