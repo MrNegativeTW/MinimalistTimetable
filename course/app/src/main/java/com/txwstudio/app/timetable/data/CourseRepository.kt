@@ -27,5 +27,5 @@ class CourseRepository(private val courseDao: CourseDao) {
         return courseDao.getCourseByWeekday(weekday)
     }
 
-    fun getCourseById(courseId: Int) = courseDao.getCourseById(courseId)
+    suspend fun getCourseById(courseId: Int) = courseDao.getCourseById(courseId)
 }
