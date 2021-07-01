@@ -13,9 +13,7 @@ class CourseRepository(private val courseDao: CourseDao) {
     // off the main thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertCourse(course: Course3) {
-        courseDao.insertCourse(course)
-    }
+    suspend fun insertCourse(course: Course3) = courseDao.insertCourse(course)
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
