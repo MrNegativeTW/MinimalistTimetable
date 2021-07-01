@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  * */
 @Entity(tableName = "timeTable")
 data class Course3(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Int? = 0,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Int?,
     @ColumnInfo(name = "courseName") var courseName: String?,
     @ColumnInfo(name = "coursePlace") var coursePlace: String?,
     @ColumnInfo(name = "courseWeekday") var courseWeekday: Int?,
