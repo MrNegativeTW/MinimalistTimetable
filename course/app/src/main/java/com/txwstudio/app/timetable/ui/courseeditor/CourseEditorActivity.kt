@@ -56,6 +56,7 @@ class CourseEditorActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_course_editor)
         binding.viewModel = courseEditorViewModel
+        binding.lifecycleOwner = this
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
