@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.txwstudio.app.timetable.Adapter
-import com.txwstudio.app.timetable.DBHandler
 import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
@@ -29,7 +27,6 @@ class CourseViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentCourseViewerBinding
 
-    //    private lateinit var courseViewerViewModel: CourseViewerViewModel
     private val courseViewerViewModel: CourseViewerViewModel by viewModels {
         CourseViewerViewModelFactory(
             (requireActivity().application as MyApplication).courseRepository,
@@ -38,9 +35,6 @@ class CourseViewerFragment : Fragment() {
     }
 
     private var weekday: Int? = 0
-    private lateinit var db: DBHandler
-
-    private lateinit var adapter: Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,10 +69,6 @@ class CourseViewerFragment : Fragment() {
      * */
     override fun onStart() {
         super.onStart()
-
-//        db = DBHandler(requireActivity())
-//        adapter = Adapter(requireActivity(), db.getCourse(weekday!!), weekday!!)
-//        binding.recyclerViewCourseViewer.adapter = adapter
     }
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
@@ -91,7 +81,6 @@ class CourseViewerFragment : Fragment() {
         courseViewerViewModel.targetCourseIdToEdit.observe(viewLifecycleOwner) {
             if (it != -1) {
                 val intent = Intent(requireActivity(), CourseEditorActivity::class.java)
-//                intent.putExtra(INTENT_EXTRA_IS_EDIT_MODE, true)
                 intent.putExtra(INTENT_EXTRA_COURSE_ID, it)
                 startActivity(intent)
             }

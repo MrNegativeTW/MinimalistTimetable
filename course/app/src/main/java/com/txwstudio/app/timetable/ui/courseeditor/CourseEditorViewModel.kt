@@ -42,7 +42,6 @@ class CourseEditorViewModel(
     var isSavedSuccessfully = MutableLiveData<Boolean>(false)
 
     init {
-        Log.i("TESTTT", "courseId is: ${courseId}") // TODO(Remove it)
         if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
             // Edit mode, if course id is provided.
             isEditMode.value = true
