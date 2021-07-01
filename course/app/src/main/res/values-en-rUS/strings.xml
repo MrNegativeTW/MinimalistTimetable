@@ -59,9 +59,7 @@
     <string name="settings_weekdayLengthLongSummary">e.g. Monday</string>
     <string name="settings_weekendColTitle">Enable Weekend</string>
     <string name="settings_weekendColSummary">Show Saturday and Sunday</string>
-    <string name="settings_teacherColTitle">Show Prof Name (Under Dev)</string>
     <string name="settings_themeTitle">Theme</string>
-    <string name="settings_teacherColSummary">e.g. Franklin</string>
     <string name="settings_sectionTimetable">Timetable</string>
     <string name="settings_notificationBeforeClassTitle">Noti Before Class (Under Dev)</string>
     <string name="settings_notificationBeforeClassSummary">Send notification before class</string>
