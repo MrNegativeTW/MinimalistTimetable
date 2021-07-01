@@ -8,6 +8,12 @@ import kotlinx.coroutines.flow.Flow
  * */
 class CourseRepository(private val courseDao: CourseDao) {
 
+    fun getCourseByWeekday(weekday: Int): Flow<List<Course3>> {
+        return courseDao.getCourseByWeekday(weekday)
+    }
+
+    suspend fun getCourseById(courseId: Int) = courseDao.getCourseById(courseId)
+
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
@@ -17,13 +23,12 @@ class CourseRepository(private val courseDao: CourseDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun updateCourse(course: Course3) = courseDao.updateCourse(course)
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun deleteCourse(course: Course3) {
         courseDao.deleteCourse(course)
     }
 
-    fun getCourseByWeekday(weekday: Int): Flow<List<Course3>> {
-        return courseDao.getCourseByWeekday(weekday)
-    }
-
-    suspend fun getCourseById(courseId: Int) = courseDao.getCourseById(courseId)
 }

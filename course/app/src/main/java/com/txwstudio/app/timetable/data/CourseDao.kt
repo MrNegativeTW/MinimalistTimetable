@@ -1,9 +1,6 @@
 package com.txwstudio.app.timetable.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,6 +13,9 @@ interface CourseDao {
 
     @Insert
     suspend fun insertCourse(course: Course3): Long
+
+    @Update
+    suspend fun updateCourse(course: Course3)
 
     @Delete
     suspend fun deleteCourse(course: Course3)
