@@ -159,11 +159,11 @@ class CourseEditorActivity : AppCompatActivity() {
         }
 
         courseEditorViewModel.courseBeginTime.observe(this) {
-            binding.textViewCourseEditorActCourseBeginTime.setText(displayFormattedTime((it)))
+            binding.textViewCourseEditorActCourseBeginTime.setText(displayFormattedTime(it))
         }
 
         courseEditorViewModel.courseEndTime.observe(this) {
-            binding.textViewCourseEditorActCourseEndTime.setText(displayFormattedTime((it)))
+            binding.textViewCourseEditorActCourseEndTime.setText(displayFormattedTime(it))
         }
 
         // Close current activity
