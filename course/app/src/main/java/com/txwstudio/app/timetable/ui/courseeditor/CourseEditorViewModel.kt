@@ -19,6 +19,7 @@ class CourseEditorViewModel(
 
     var isEditMode = MutableLiveData<Boolean>(false)
 
+    private var courseIdFromDatabase = MutableLiveData<Int>(null)
     var courseName = MutableLiveData<String>()
     var coursePlace = MutableLiveData<String>()
     var courseProf = MutableLiveData<String?>()
@@ -58,6 +59,7 @@ class CourseEditorViewModel(
     private fun setupValueForEditing() {
         viewModelScope.launch {
             val courseInfo = repository.getCourseById(courseId)
+            courseIdFromDatabase.postValue(courseInfo.id!!)
             courseName.postValue(courseInfo.courseName!!)
             coursePlace.postValue(courseInfo.coursePlace!!)
             courseProf.postValue(courseInfo.profName)
@@ -119,7 +121,7 @@ class CourseEditorViewModel(
 
         // Making cake
         val course = Course3(
-            id = null,
+            id = courseIdFromDatabase.value,
             courseName = courseName.value,
             coursePlace = coursePlace.value,
             courseWeekday = courseWeekday.value,
@@ -133,7 +135,7 @@ class CourseEditorViewModel(
             // Add Mode
             viewModelScope.launch {
                 try {
-                    val result = repository.insertCourse(course)
+                    repository.insertCourse(course)
                     isSavedSuccessfully.value = true
                 } catch (e: Exception){
                     Log.i("TESTTT", "insert failed")
@@ -143,7 +145,7 @@ class CourseEditorViewModel(
             // Edit Mode
             viewModelScope.launch {
                 try {
-                    val result = repository.insertCourse(course)
+                    repository.updateCourse(course)
                     isSavedSuccessfully.value = true
                 } catch (e: Exception){
                     Log.i("TESTTT", "update failed")
