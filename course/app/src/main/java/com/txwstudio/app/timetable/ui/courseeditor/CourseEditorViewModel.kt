@@ -1,49 +1,70 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.txwstudio.app.timetable.DBHandler
-import com.txwstudio.app.timetable.model.Course2
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.txwstudio.app.timetable.data.Course3
+import com.txwstudio.app.timetable.data.CourseRepository
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
-class CourseEditorViewModel(application: Application) : AndroidViewModel(application) {
+class CourseEditorViewModel(
+    private val repository: CourseRepository,
+    private val courseId: Int,
+    private val currentViewPagerItem: Int
+) : ViewModel() {
 
     var isEditMode = MutableLiveData<Boolean>(false)
-    var courseId = MutableLiveData<Int>(0)
 
+    private var courseIdFromDatabase = MutableLiveData<Int>(null)
     var courseName = MutableLiveData<String>()
     var coursePlace = MutableLiveData<String>()
+    var courseProf = MutableLiveData<String?>()
     var courseBeginTime = MutableLiveData<String>()
     var courseEndTime = MutableLiveData<String>()
     var courseWeekday = MutableLiveData<Int>(0)
-    var courseTeacher = MutableLiveData<String>()
 
     var courseNameError = MutableLiveData<Boolean>()
     var coursePlaceError = MutableLiveData<Boolean>()
     var courseBeginTimeError = MutableLiveData<Boolean>()
     var courseEndTimeError = MutableLiveData<Boolean>()
     var courseWeekdayError = MutableLiveData<Boolean>()
-    var courseTeacherError = MutableLiveData<Boolean>()
+    var courseProfError = MutableLiveData<Boolean>()
 
     var openTimePicker = MutableLiveData<Boolean>(false)
     var pickBeginOrEnd = MutableLiveData<Int>()
     var courseBeginTimeForEdit = MutableLiveData<Int>()
     var courseEndTimeForEdit = MutableLiveData<Int>()
 
-    var isSaveToFinish = MutableLiveData<Boolean>(false)
+    var isSavedSuccessfully = MutableLiveData<Boolean>(false)
+
+    init {
+        if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
+            // Edit mode, if course id is provided.
+            isEditMode.value = true
+            setupValueForEditing()
+        } else {
+            // Add mode, no course id is provided.
+            courseWeekday.value = currentViewPagerItem
+        }
+    }
 
     /**
      * If start in edit mode, get course information from database, then set to screen.
      * */
-    fun setupValueForEditing() {
-        courseId.value?.let {
-            val course = DBHandler(getApplication()).getCourseById2(it)
-            courseName.value = course.courseName ?: "-"
-            coursePlace.value = course.coursePlace ?: "-"
-            courseBeginTime.value = course.courseBeginTime ?: "0000"
-            courseEndTime.value = course.courseEndTime ?: "0000"
-            courseWeekday.value = course.courseWeekday ?: 1
+    private fun setupValueForEditing() {
+        viewModelScope.launch {
+            val courseInfo = repository.getCourseById(courseId)
+            courseIdFromDatabase.postValue(courseInfo.id!!)
+            courseName.postValue(courseInfo.courseName!!)
+            coursePlace.postValue(courseInfo.coursePlace!!)
+            courseProf.postValue(courseInfo.profName)
+            courseWeekday.postValue(courseInfo.courseWeekday!!)
+            courseBeginTime.postValue(courseInfo.courseStartTime!!)
+            courseEndTime.postValue(courseInfo.courseEndTime!!)
         }
     }
 
@@ -83,8 +104,11 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
      * User clicked save, start process it.
      * */
     fun saveFired() {
-        Log.i("TESTTT", "${courseName.value} | ${coursePlace.value} | " +
-                "${courseBeginTime.value} | ${courseEndTime.value} | ${courseWeekday.value}")
+        Log.i(
+            "TESTTT", "${courseName.value} | ${coursePlace.value} | " +
+                    " | ${courseProf.value} | ${courseWeekday.value}" +
+                    " | ${courseBeginTime.value} | ${courseEndTime.value}"
+        )
 
         // Check entries
         if (isRequiredEntriesEmpty()) {
@@ -95,20 +119,53 @@ class CourseEditorViewModel(application: Application) : AndroidViewModel(applica
         }
 
         // Making cake
-        val course2 = Course2(
-                courseName = courseName.value,
-                coursePlace = coursePlace.value,
-                courseBeginTime = courseBeginTime.value,
-                courseEndTime = courseEndTime.value,
-                courseWeekday = courseWeekday.value)
+        val course = Course3(
+            id = courseIdFromDatabase.value,
+            courseName = courseName.value,
+            coursePlace = coursePlace.value,
+            courseWeekday = courseWeekday.value,
+            courseStartTime = courseBeginTime.value,
+            courseEndTime = courseEndTime.value,
+            profName = courseProf.value
+        )
 
         // Done
         if (isEditMode.value != true) {
             // Add Mode
-            isSaveToFinish.value = DBHandler(getApplication()).addCourse(course2)
+            viewModelScope.launch {
+                try {
+                    repository.insertCourse(course)
+                    isSavedSuccessfully.value = true
+                } catch (e: Exception){
+                    Log.i("TESTTT", "insert failed")
+                }
+            }
         } else {
             // Edit Mode
-            isSaveToFinish.value = DBHandler(getApplication()).updateCourse(course2, courseId.value!!)
+            viewModelScope.launch {
+                try {
+                    repository.updateCourse(course)
+                    isSavedSuccessfully.value = true
+                } catch (e: Exception){
+                    Log.i("TESTTT", "update failed")
+                }
+            }
         }
+    }
+}
+
+class CourseEditorViewModelFactory(
+    private val repository: CourseRepository,
+    private val courseId: Int,
+    private val currentViewPagerItem: Int
+) :
+    ViewModelProvider.Factory {
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CourseEditorViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CourseEditorViewModel(repository, courseId, currentViewPagerItem) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

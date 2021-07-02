@@ -1,7 +1,47 @@
 package com.txwstudio.app.timetable.ui.courseviewer
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.txwstudio.app.timetable.data.Course3
+import com.txwstudio.app.timetable.data.CourseRepository
+import kotlinx.coroutines.launch
 
-class CourseViewerViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class CourseViewerViewModel(
+    private val repository: CourseRepository,
+    private val weekday: Int
+) :
+    ViewModel() {
+
+    val courseByWeekday: LiveData<List<Course3>> =
+        repository.getCourseByWeekday(weekday).asLiveData()
+
+    var targetCourseIdToEdit = MutableLiveData<Int>(-1)
+
+    fun insert(course: Course3) = viewModelScope.launch {
+        repository.insertCourse(course)
+    }
+
+    fun editCourse(courseId: Int) {
+        targetCourseIdToEdit.value = courseId
+        // Roll back to default value
+//        courseIdWantToEdit.value = -1
+    }
+
+    fun deleteCourse(course: Course3) = viewModelScope.launch {
+        repository.deleteCourse(course)
+    }
+}
+
+class CourseViewerViewModelFactory(
+    private val repository: CourseRepository,
+    private val weekday: Int
+) :
+    ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CourseViewerViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CourseViewerViewModel(repository, weekday) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }

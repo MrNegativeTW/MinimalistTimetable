@@ -59,12 +59,6 @@
             android:key="pref_weekdayLengthLong"
             android:summary="@string/settings_weekdayLengthLongSummary"
             android:title="@string/settings_weekdayLengthLongTitle" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:enabled="false"
-            android:key="pref_teacherCol"
-            android:summary="@string/settings_teacherColSummary"
-            android:title="@string/settings_teacherColTitle" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_sectionAbout">

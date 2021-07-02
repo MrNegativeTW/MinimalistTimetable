@@ -15,14 +15,14 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityCourseEditorBinding
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID
+import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
 import java.text.SimpleDateFormat
 import java.util.*
-
-const val INTENT_EXTRA_IS_EDIT_MODE = "is_edit_mode"
-const val INTENT_EXTRA_COURSE_ID = "course_id"
 
 class CourseEditorActivity : AppCompatActivity() {
 
@@ -32,10 +32,15 @@ class CourseEditorActivity : AppCompatActivity() {
      * */
 
     private lateinit var binding: ActivityCourseEditorBinding
-    private val courseEditorViewModel: CourseEditorViewModel by viewModels()
+    private val courseEditorViewModel: CourseEditorViewModel by viewModels {
+        CourseEditorViewModelFactory(
+            (application as MyApplication).courseRepository,
+            courseId!!,
+            currentViewPagerItem
+        )
+    }
 
-    private var isEditMode = false
-    private var courseIdInDatabase = 0
+    private var courseId: Int? = -1
     private lateinit var sharedPref: SharedPreferences
 
     private val currentViewPagerItem by lazy { intent.getIntExtra("currentViewPagerItem", 0) }
@@ -48,23 +53,23 @@ class CourseEditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        courseId =
+            intent.getIntExtra(INTENT_EXTRA_COURSE_ID, INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_course_editor)
         binding.viewModel = courseEditorViewModel
+        binding.lifecycleOwner = this
 
-        isEditMode = intent.getBooleanExtra(INTENT_EXTRA_IS_EDIT_MODE, false)
-        courseIdInDatabase = intent.getIntExtra(INTENT_EXTRA_COURSE_ID, 0)
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
 
         setupToolBar()
+        setupWeekdayDropdown()
+        subscribeUi()
+        subscribeUiForError()
 
         val adRequest = AdRequest.Builder().build()
         binding.adViewCourseEditorAct.loadAd(adRequest)
-
-        checkIsEditMode()
-        setupWeekday()
-        subscribeUi()
-        subscribeUiForError()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,7 +80,7 @@ class CourseEditorActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuSave -> {
-                binding.viewModel?.saveFired()
+                courseEditorViewModel.saveFired()
                 return true
             }
             android.R.id.home -> {
@@ -102,45 +107,37 @@ class CourseEditorActivity : AppCompatActivity() {
 
     private fun setupToolBar() {
         setSupportActionBar(binding.toolbarCourseEditorAct)
-        supportActionBar?.title = if (!isEditMode) {
-            getString(R.string.courseEditor_titleAdd)
-        } else {
-            getString(R.string.courseEditor_titleEdit)
-        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
-    }
 
-    /**
-     * Check is opened as edit mode or not, if yes, let viewModel know.
-     * */
-    private fun checkIsEditMode() {
-        if (isEditMode) {
-            courseEditorViewModel.isEditMode.value = isEditMode
-            courseEditorViewModel.courseId.value = courseIdInDatabase
-            courseEditorViewModel.setupValueForEditing()
+        courseEditorViewModel.isEditMode.observe(this) {
+            // Set actionBar text base on mode.
+            supportActionBar?.title = if (it) {
+                getString(R.string.courseEditor_titleEdit)
+            } else {
+                getString(R.string.courseEditor_titleAdd)
+            }
         }
     }
 
     /**
-     * Set text by is edit mode or not.
-     * Little hack here, the text and real value is not associate
+     * Set weekday selector text by is edit mode or not.
+     * Little hack here, the text and real value is not associate.
      * */
-    private fun setupWeekday() {
-        if (isEditMode) {
-            binding.dropDownCourseEditorAct.setText(weekdayArray[courseEditorViewModel.courseWeekday.value!!])
-        } else {
-            binding.dropDownCourseEditorAct.setText(weekdayArray[currentViewPagerItem])
-            courseEditorViewModel.courseWeekday.value = currentViewPagerItem
-        }
+    private fun setupWeekdayDropdown() {
         val adapter = ArrayAdapter(this, R.layout.list_item, weekdayArray)
         (binding.dropDownCourseEditorAct as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun subscribeUi() {
-        // Select weekday dialog
+        // Handle selection of weekday dropdown.
         binding.dropDownCourseEditorAct.setOnItemClickListener { adapterView, view, position, rowId ->
             courseEditorViewModel.courseWeekday.value = position
+        }
+
+        // Change weekday dropdown text. In order to set init text when is edit mode, observe it.
+        courseEditorViewModel.courseWeekday.observe(this) {
+            binding.dropDownCourseEditorAct.setText(weekdayArray[it], false)
         }
 
         // Select course begin time
@@ -154,15 +151,15 @@ class CourseEditorActivity : AppCompatActivity() {
         }
 
         courseEditorViewModel.courseBeginTime.observe(this) {
-            binding.textViewCourseEditorActCourseBeginTime.setText(displayFormattedTime((it)))
+            binding.textViewCourseEditorActCourseBeginTime.setText(displayFormattedTime(it))
         }
 
         courseEditorViewModel.courseEndTime.observe(this) {
-            binding.textViewCourseEditorActCourseEndTime.setText(displayFormattedTime((it)))
+            binding.textViewCourseEditorActCourseEndTime.setText(displayFormattedTime(it))
         }
 
         // Close current activity
-        courseEditorViewModel.isSaveToFinish.observe(this) {
+        courseEditorViewModel.isSavedSuccessfully.observe(this) {
             if (it) finish()
         }
     }
@@ -175,7 +172,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.courseNameError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCourseNameEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCourseNameEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCourseNameEntry.isErrorEnabled = false
             }
@@ -184,7 +182,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.coursePlaceError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCoursePlaceEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCoursePlaceEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCoursePlaceEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCoursePlaceEntry.isErrorEnabled = false
             }
@@ -193,7 +192,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.courseBeginTimeError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseBeginTimeEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCourseBeginTimeEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCourseBeginTimeEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCourseBeginTimeEntry.isErrorEnabled = false
             }
@@ -202,7 +202,8 @@ class CourseEditorActivity : AppCompatActivity() {
         courseEditorViewModel.courseEndTimeError.observe(this) {
             if (it) {
                 binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = true
-                binding.tilCourseEditorActCourseEndTimeEntry.error = getString(R.string.courseEditor_noEntry)
+                binding.tilCourseEditorActCourseEndTimeEntry.error =
+                    getString(R.string.courseEditor_noEntry)
             } else {
                 binding.tilCourseEditorActCourseEndTimeEntry.isErrorEnabled = false
             }
@@ -213,8 +214,8 @@ class CourseEditorActivity : AppCompatActivity() {
         val isSystem24Hour = DateFormat.is24HourFormat(this)
         clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
         val materialTimePicker = MaterialTimePicker.Builder()
-                .setTimeFormat(clockFormat)
-                .build()
+            .setTimeFormat(clockFormat)
+            .build()
         materialTimePicker.show(supportFragmentManager, "selectCourseBeginTime")
 
         materialTimePicker.addOnPositiveButtonClickListener {

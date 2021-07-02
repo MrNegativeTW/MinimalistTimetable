@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.txwstudio.app.timetable.viewmodels.CourseCardViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/courseCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_normal"
         android:background="#4aa285"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground">
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,10 +28,11 @@
 
             <TextView
                 android:id="@+id/textView_courseCard_beginTime"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@{viewModel.courseStartTime}"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 tools:text="09:00" />
 
@@ -35,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/textView_courseCard_courseLocation"
+                android:text="@{viewModel.courseEndTime}"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 tools:text="12:00" />
 
@@ -46,6 +53,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/margin_normal"
                 android:layout_toEndOf="@id/textView_courseCard_beginTime"
+                android:text="@{viewModel.courseName}"
                 android:textAppearance="@android:style/TextAppearance.Material.Large"
                 tools:text="Computer Science" />
 
@@ -55,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView_courseCard_courseName"
                 android:layout_alignStart="@id/textView_courseCard_courseName"
+                android:text="@{viewModel.coursePlace}"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 tools:text="at A301" />
 
@@ -64,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView_courseCard_courseName"
                 android:layout_toEndOf="@id/textView_courseCard_courseLocation"
+                android:text="@{viewModel.profName}"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 tools:text=", by Prof. Hsu" />
 

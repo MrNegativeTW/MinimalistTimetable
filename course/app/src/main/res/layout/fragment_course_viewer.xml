@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.txwstudio.app.timetable.ui.courseviewer.CourseViewerViewModel" />
     </data>
 
     <FrameLayout
@@ -17,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_course_card" />
     </FrameLayout>
 </layout>

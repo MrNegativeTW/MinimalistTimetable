@@ -22,6 +22,7 @@
     <string name="courseEditor_courseNameEntry">國文(一)</string>
     <string name="courseEditor_coursePlaceTitle">上課地點</string>
     <string name="courseEditor_coursePlaceEntry">A 棟 101</string>
+    <string name="courseEditor_courseProfTitle">授課教師 (選填)</string>
     <string name="courseEditor_courseWeekdayTitle">上課星期</string>
     <string name="courseEditor_courseWeekdayEntry">請選擇</string>
     <string name="courseEditor_courseBeginTitle">開始時間</string>
@@ -73,8 +74,6 @@
     <string name="settings_weekendColSummary">開啟禮拜六日欄位</string>
     <string name="settings_weekdayLengthLongTitle">顯示完整星期名稱</string>
     <string name="settings_weekdayLengthLongSummary">例如：「星期一」</string>
-    <string name="settings_teacherColTitle">教師欄位(開發中)</string>
-    <string name="settings_teacherColSummary">顯示教師名稱</string>
 
     <string name="settings_sectionAbout">關於</string>
     <string name="settings_contactTitle">聯繫作者</string>

@@ -22,8 +22,9 @@ import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
-import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
+
+private const val CALENDAR_DATA_TYPE = "application/pdf"
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -41,6 +42,7 @@ class MainActivity2 : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
         binding.viewModel = mainActivity2ViewModel
+        binding.lifecycleOwner = this
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
@@ -78,7 +80,7 @@ class MainActivity2 : AppCompatActivity() {
                 return true
             }
             R.id.menuCalendar -> {
-                gotoCalendar()
+                openCalendar()
                 return true
             }
             R.id.menuSettings -> {
@@ -90,31 +92,32 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun getPrefValue() {
-        prefTableTitle = sharedPref.getString(PREFERENCE_TABLE_TITLE,
-                getString(R.string.settings_timetableTitleDefaultValue))!!
+        prefTableTitle = sharedPref.getString(
+            PREFERENCE_TABLE_TITLE,
+            getString(R.string.settings_timetableTitleDefaultValue)
+        )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
         prefCalendarPath = sharedPref.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "")!!
     }
 
     private fun setupToolBar() {
-        setSupportActionBar(toolbar_mainActivity2)
+        setSupportActionBar(binding.toolbarMainActivity2)
     }
 
     private fun setupTabLayoutAndViewPager() {
         binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
 
-        TabLayoutMediator(binding.tabLayoutMainActivity2, binding.viewPagerMainActivity2) { tab, position ->
+        TabLayoutMediator(
+            binding.tabLayoutMainActivity2,
+            binding.viewPagerMainActivity2
+        ) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
     }
 
     private fun getTabTitle(position: Int): String? {
-        val array = if (prefWeekdayLengthLong) {
-            R.array.weekdayList
-        } else {
-            R.array.weekdayListShort
-        }
+        val array = if (prefWeekdayLengthLong) R.array.weekdayList else R.array.weekdayListShort
         return resources.getStringArray(array)[position]
     }
 
@@ -136,21 +139,29 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    private fun gotoCalendar() {
+    /**
+     * Create an intent chooser to open calendar.
+     * */
+    private fun openCalendar() {
         val uri = Uri.parse(prefCalendarPath)
 
         val target = Intent(Intent.ACTION_VIEW)
-        target.setDataAndType(uri, "application/pdf")
+        target.setDataAndType(uri, CALENDAR_DATA_TYPE)
         target.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
         val intent = Intent.createChooser(target, java.lang.String.valueOf(R.string.pdfOpenWithMsg))
+
         try {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
+            // Suitable app not found.
             Toast.makeText(this, R.string.pdfNoAppMsg, Toast.LENGTH_LONG).show()
         } catch (e: SecurityException) {
+            // File not found.
             Toast.makeText(this, R.string.pdfFileNotFound, Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
+            // Unknown exception.
             Toast.makeText(this, R.string.fileReadErrorMsg, Toast.LENGTH_LONG).show()
         }
     }

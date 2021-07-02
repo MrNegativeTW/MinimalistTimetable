@@ -81,6 +81,23 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorAct_courseProfEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:hint="@string/courseEditor_courseProfTitle"
+                    app:layout_constraintTop_toBottomOf="@id/til_courseEditorAct_coursePlaceEntry">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText_courseEditorAct_courseProfEntry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.courseProf}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_courseEditorAct_courseWeekdayEntry"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
@@ -88,7 +105,7 @@
                     android:layout_marginHorizontal="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:hint="@string/courseEditor_courseWeekdayTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorAct_coursePlaceEntry">
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorAct_courseProfEntry">
 
                     <AutoCompleteTextView
                         android:id="@+id/dropDown_courseEditorAct"

@@ -14,9 +14,9 @@ Timetable, Campus Map and Calendar<br>
 </a><br>
 
 ![](https://img.shields.io/badge/build-failed,%20just%20like%20everything%20else%20in%20my%20life-red.svg?style=flat-square)
-![](https://img.shields.io/badge/Version-2.0-green.svg?style=flat-square)
 ![](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)
-![](https://img.shields.io/badge/Min%20Android-6-blue.svg?style=flat-square)
+![](https://img.shields.io/badge/Android%20Studio-4.2.1+-32DE84?style=flat-square)
+![](https://img.shields.io/badge/Android-6.0+-32DE84?style=flat-square)
 
 <p align="center">
   <a href="#preview">Preview</a> •
@@ -40,25 +40,22 @@ Only shows the essential information about the course.
 **Easy to read** <br>
 Large size text, easy to read when outdoor.
 
-**Dark Theme** <br>
-System Default, Light, or Dark!
-
 **Campus Map** <br>
 Freshman? Set your campus map for fast access!
 
 **Calendar** <br>
 Shortcuts for calendar access!
 
+**Dark Theme** <br>
+System Default, Light or Dark.
+
 **Portrait Only** <br>
 Don't spend time on landscape screen.
 
 ## Dev Requirement
-![](https://img.shields.io/badge/minSdk-23-green.svg?style=flat-square)
-![](https://img.shields.io/badge/targetSdk-30-green.svg?style=flat-square)
-![](https://img.shields.io/badge/compileSdk-30-green.svg?style=flat-square)
-- Android Studio 4.0
-- Gradle Version: 6.1.2
-- Android Gradle Plugin Version: 4.1.1
+- Android Studio 4.2.1
+- Gradle Version: 6.7.1
+- Android Gradle Plugin Version: 4.2.1
 - A dummy file called `apikey.properties`
 
 ## License
