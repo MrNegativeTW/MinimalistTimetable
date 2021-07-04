@@ -20,9 +20,6 @@
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <!-- Sample Banner AD ID: ca-app-pub-3940256099942544/6300978111 -->
-        <!-- My AdMob App ID: ca-app-pub-3716797788275517~4461004551 -->
-        <!-- addCourseAdView AD ID: ca-app-pub-3716797788275517/8623556949 -->
-        <!-- addCourseAdView AD ID: ca-app-pub-3716797788275517/8911928028 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
@@ -33,8 +30,10 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
