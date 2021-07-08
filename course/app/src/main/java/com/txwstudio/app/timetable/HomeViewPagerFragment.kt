@@ -1,17 +1,26 @@
 package com.txwstudio.app.timetable
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
 import com.txwstudio.app.timetable.ui.activity.CampusMapActivity
 import com.txwstudio.app.timetable.ui.activity.PreferenceActivity
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUEST
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
+import com.txwstudio.app.timetable.utilities.CALENDAR_DATA_TYPE
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,12 +40,19 @@ class HomeViewPagerFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeViewPagerBinding
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var prefTableTitle: String
+    private var prefWeekendCol = false
+    private var prefWeekdayLengthLong = false
+    private lateinit var prefCalendarPath: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext())
     }
 
     override fun onCreateView(
@@ -44,20 +60,23 @@ class HomeViewPagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
-        val tabLayout = binding.tabLayoutHomeFrag
-        val viewPager = binding.viewPagerHomeFrag
 
-        viewPager.adapter = CourseViewerPagerAdapter(this, false)
-
-        // Set the icon and text for each tab
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = getTabTitle(position)
-        }.attach()
-
-        setupToolBar()
-        openTodayTimetable()
+        // Fab, one thing it does very well is to close your app.
+        binding.fabHomeFrag.setOnClickListener { requireActivity().finish() }
 
         return binding.root
+    }
+
+    /**
+     * TODO: Fix wired UX, it opens today's timetable when onResume.
+     * Bad experience when after added the course.
+     * */
+    override fun onResume() {
+        super.onResume()
+        getPrefValue()
+        setupToolBar()
+        setupTabLayoutAndViewPager()
+        openTodayTimetable()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -67,8 +86,6 @@ class HomeViewPagerFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-                Log.i("TESTTT", "menuAdd")
-                binding.coordinatorLayout.fitsSystemWindows = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment()
                 findNavController().navigate(a)
@@ -79,7 +96,7 @@ class HomeViewPagerFragment : Fragment() {
                 return true
             }
             R.id.menuCalendar -> {
-                Log.i("TESTTT", "menuCalendar")
+                openCalendar()
                 return true
             }
             R.id.menuSettings -> {
@@ -90,15 +107,47 @@ class HomeViewPagerFragment : Fragment() {
         }
     }
 
-    private fun getTabTitle(position: Int): String? {
-        val array = R.array.weekdayList
-        return resources.getStringArray(array)[position]
+    /**
+     * Get preference value in order to decide what UI should to be present.
+     * */
+    private fun getPrefValue() {
+        prefTableTitle = sharedPref.getString(
+            PREFERENCE_TABLE_TITLE,
+            getString(R.string.settings_timetableTitleDefaultValue)
+        )!!
+        prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
+        prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+        prefCalendarPath = sharedPref.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "")!!
     }
 
+    /**
+     * Set support action and it's title, also enable options menu.
+     * */
     private fun setupToolBar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
-        (activity as AppCompatActivity).supportActionBar!!.title = "Title"
+        (activity as AppCompatActivity).supportActionBar!!.title = prefTableTitle
+
         setHasOptionsMenu(true)
+    }
+
+    /**
+     * Set adapter for view pager and bind tab layout to it.
+     * */
+    private fun setupTabLayoutAndViewPager() {
+        binding.viewPagerHomeFrag.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
+
+        // Set the icon and text for each tab
+        TabLayoutMediator(binding.tabLayoutHomeFrag, binding.viewPagerHomeFrag) { tab, position ->
+            tab.text = getTabTitle(position)
+        }.attach()
+    }
+
+    /**
+     * Get weekdays string as Mon or Monday base on user's preference.
+     * */
+    private fun getTabTitle(position: Int): String? {
+        val array = if (prefWeekdayLengthLong) R.array.weekdayList else R.array.weekdayListShort
+        return resources.getStringArray(array)[position]
     }
 
     /**
@@ -109,6 +158,34 @@ class HomeViewPagerFragment : Fragment() {
         val c = Calendar.getInstance()
         val date = c[Calendar.DAY_OF_WEEK]
         binding.viewPagerHomeFrag.setCurrentItem(if (date == 1) 8 else date - 2, false)
+    }
+
+    /**
+     * Create an intent chooser to open calendar.
+     * */
+    private fun openCalendar() {
+        val uri = Uri.parse(prefCalendarPath)
+
+        val target = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, CALENDAR_DATA_TYPE)
+            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        val intent = Intent.createChooser(target, java.lang.String.valueOf(R.string.pdfOpenWithMsg))
+
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            // Suitable app not found.
+            Snackbar.make(requireView(), R.string.pdfNoAppMsg, Snackbar.LENGTH_SHORT).show()
+        } catch (e: SecurityException) {
+            // File not found.
+            Snackbar.make(requireView(), R.string.pdfFileNotFound, Snackbar.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            // Unknown exception.
+            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     companion object {
