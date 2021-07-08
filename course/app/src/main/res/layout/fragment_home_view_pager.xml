@@ -46,6 +46,16 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_homeFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorAccentDark"
+            android:src="@drawable/ic_exit_24dp"
+            app:borderWidth="0dp"
+            app:tint="?attr/colorOnPrimary" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
