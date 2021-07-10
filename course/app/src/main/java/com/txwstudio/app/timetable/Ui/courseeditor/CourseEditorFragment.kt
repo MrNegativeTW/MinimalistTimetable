@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -24,6 +25,7 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0
 private const val TAG_TIME_PICKER_END_TIME = 1
+
 /**
  * A simple [Fragment] subclass.
  * Use the [CourseEditorFragment.newInstance] factory method to
@@ -58,14 +60,14 @@ class CourseEditorFragment : Fragment() {
         CourseEditorViewModelFactory(
             (requireActivity().application as MyApplication).courseRepository,
             courseId!!,
-            currentViewPagerItem
+            args.currentViewPagerItem
         )
     }
 
+    private val args: CourseEditorFragmentArgs by navArgs()
+
     private var courseId: Int? = -1
 
-    //    private val currentViewPagerItem by lazy { intent.getIntExtra("currentViewPagerItem", 0) }
-    private val currentViewPagerItem = 0
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

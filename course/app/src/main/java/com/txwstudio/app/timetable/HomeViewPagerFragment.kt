@@ -87,7 +87,9 @@ class HomeViewPagerFragment : Fragment() {
         return when (item.itemId) {
             R.id.menuAdd -> {
                 val a =
-                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment()
+                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
+                        currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
+                    )
                 findNavController().navigate(a)
                 return true
             }
