@@ -94,7 +94,8 @@ class HomeViewPagerFragment : Fragment() {
                 return true
             }
             R.id.menuMap -> {
-                startActivity(Intent().setClass(requireContext(), CampusMapActivity::class.java))
+                val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
+                findNavController().navigate(a)
                 return true
             }
             R.id.menuCalendar -> {

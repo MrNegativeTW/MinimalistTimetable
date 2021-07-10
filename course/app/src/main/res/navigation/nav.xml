@@ -26,6 +26,13 @@
                 app:argType="integer"
                 android:defaultValue="-1" />
         </action>
+        <action
+            android:id="@+id/action_homeViewPagerFragment_to_mapsViewerFragment"
+            app:destination="@id/mapsViewerFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/courseEditorFragment"
@@ -38,4 +45,8 @@
             android:name="courseId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsViewerFragment"
+        android:name="com.txwstudio.app.timetable.ui.mapsviewer.MapsViewerFragment"
+        android:label="MapsViewerFragment" />
 </navigation>
