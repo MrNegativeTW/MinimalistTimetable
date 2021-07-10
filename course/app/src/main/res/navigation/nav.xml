@@ -17,10 +17,15 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" >
-        <argument
-            android:name="currentViewPagerItem"
-            app:argType="integer"
-            android:defaultValue="0" /></action>
+            <argument
+                android:name="currentViewPagerItem"
+                app:argType="integer"
+                android:defaultValue="0" />
+            <argument
+                android:name="courseId"
+                app:argType="integer"
+                android:defaultValue="-1" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/courseEditorFragment"
@@ -28,6 +33,9 @@
         android:label="CourseEditorFragment" >
         <argument
             android:name="currentViewPagerItem"
+            app:argType="integer" />
+        <argument
+            android:name="courseId"
             app:argType="integer" />
     </fragment>
 </navigation>

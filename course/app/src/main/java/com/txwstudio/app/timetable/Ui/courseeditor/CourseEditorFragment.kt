@@ -59,14 +59,12 @@ class CourseEditorFragment : Fragment() {
     private val courseEditorViewModel: CourseEditorViewModel by viewModels {
         CourseEditorViewModelFactory(
             (requireActivity().application as MyApplication).courseRepository,
-            courseId!!,
+            args.courseId,
             args.currentViewPagerItem
         )
     }
 
     private val args: CourseEditorFragmentArgs by navArgs()
-
-    private var courseId: Int? = -1
 
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
 

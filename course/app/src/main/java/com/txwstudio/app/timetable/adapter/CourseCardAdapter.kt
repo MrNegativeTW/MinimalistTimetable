@@ -2,10 +2,12 @@ package com.txwstudio.app.timetable.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.txwstudio.app.timetable.HomeViewPagerFragmentDirections
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.databinding.RowCourseCardBinding
@@ -44,13 +46,22 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
                         binding.viewModel?.course?.let { viewModel.deleteCourse(it) }
                     }
                     setPositiveButton(R.string.courseCardDialog_editCourseInfo) { _, _ ->
-                        // Call CourseViewerViewModel.editCourse to edit the course info.
-                        binding.viewModel?.id?.let { viewModel.editCourse(it) }
+                        binding.viewModel?.id?.let {
+                            navigateToEdit(it)
+                        }
                     }
                     show()
                 }
                 true
             }
+        }
+
+        private fun navigateToEdit(courseId: Int) {
+            val direction =
+                HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
+                    courseId = courseId
+                )
+            binding.root.findNavController().navigate(direction)
         }
 
         fun bind(item: Course3) {
