@@ -8,14 +8,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.ActivityMain2Binding
 import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUEST
@@ -29,7 +27,6 @@ private const val CALENDAR_DATA_TYPE = "application/pdf"
 class MainActivity2 : AppCompatActivity() {
 
     private lateinit var binding: ActivityMain2Binding
-    private val mainActivity2ViewModel: MainActivity2ViewModel by viewModels()
 
     private lateinit var sharedPref: SharedPreferences
     private lateinit var prefTableTitle: String
@@ -40,9 +37,6 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
-
-        binding.viewModel = mainActivity2ViewModel
-        binding.lifecycleOwner = this
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
@@ -76,7 +70,7 @@ class MainActivity2 : AppCompatActivity() {
                 return true
             }
             R.id.menuMap -> {
-                startActivity(Intent().setClass(this, CampusMapActivity::class.java))
+//                startActivity(Intent().setClass(this, CampusMapActivity::class.java))
                 return true
             }
             R.id.menuCalendar -> {
@@ -106,7 +100,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun setupTabLayoutAndViewPager() {
-        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
+//        binding.viewPagerMainActivity2.adapter = CourseViewerPagerAdapter(this, prefWeekendCol)
 
         TabLayoutMediator(
             binding.tabLayoutMainActivity2,
