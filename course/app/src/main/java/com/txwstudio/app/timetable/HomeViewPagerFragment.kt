@@ -14,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
-import com.txwstudio.app.timetable.ui.activity.CampusMapActivity
 import com.txwstudio.app.timetable.ui.activity.PreferenceActivity
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUEST
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
@@ -94,7 +93,8 @@ class HomeViewPagerFragment : Fragment() {
                 return true
             }
             R.id.menuMap -> {
-                val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
+                val a =
+                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
                 findNavController().navigate(a)
                 return true
             }
