@@ -48,5 +48,9 @@
     <fragment
         android:id="@+id/mapsViewerFragment"
         android:name="com.txwstudio.app.timetable.ui.mapsviewer.MapsViewerFragment"
-        android:label="MapsViewerFragment" />
+        android:label="MapsViewerFragment">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="timetable://open_maps_viewer" />
+    </fragment>
 </navigation>
