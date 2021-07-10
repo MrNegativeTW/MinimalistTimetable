@@ -19,41 +19,10 @@ import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0
 private const val TAG_TIME_PICKER_END_TIME = 1
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CourseEditorFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CourseEditorFragment : Fragment() {
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CourseEditorFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String) =
-            CourseEditorFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                }
-            }
-    }
-
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
 
     private lateinit var binding: FragmentCourseEditorBinding
     private val courseEditorViewModel: CourseEditorViewModel by viewModels {
@@ -67,13 +36,6 @@ class CourseEditorFragment : Fragment() {
     private val args: CourseEditorFragmentArgs by navArgs()
 
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
