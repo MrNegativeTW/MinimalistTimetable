@@ -13,7 +13,7 @@ const val WEEKDAY_5 = 4
 const val WEEKDAY_6 = 5
 const val WEEKDAY_7 = 6
 
-class CourseViewerPagerAdapter(fragment: FragmentActivity, enableWeekend: Boolean) :
+class CourseViewerPagerAdapter(fragment: Fragment, enableWeekend: Boolean) :
         FragmentStateAdapter(fragment) {
 
     private val enableWeekends = enableWeekend
