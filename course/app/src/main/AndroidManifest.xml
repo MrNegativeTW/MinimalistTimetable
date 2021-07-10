@@ -18,6 +18,25 @@
         android:theme="@style/AppTheme2"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <!-- This activity is for testing android navigation -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="課表測試"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <nav-graph android:value="@navigation/nav" />
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <!-- Sample Banner AD ID: ca-app-pub-3940256099942544/6300978111 -->
         <meta-data
@@ -43,9 +62,6 @@
             android:exported="true"
             android:label="@string/courseEditorActivityTitle"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.CampusMapActivity"
-            android:label="@string/traffic_schoolMap" />
         <activity
             android:name=".ui.activity.PreferenceActivity"
             android:exported="true"
