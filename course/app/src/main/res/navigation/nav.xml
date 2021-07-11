@@ -9,22 +9,22 @@
         android:id="@+id/homeViewPagerFragment"
         android:name="com.txwstudio.app.timetable.HomeViewPagerFragment"
         android:label="HomeViewPagerFragment"
-        tools:layout="@layout/fragment_home_view_pager" >
+        tools:layout="@layout/fragment_home_view_pager">
         <action
             android:id="@+id/action_homeViewPagerFragment_to_courseEditorFragment"
             app:destination="@id/courseEditorFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
-            app:popExitAnim="@anim/fragment_close_exit" >
+            app:popExitAnim="@anim/fragment_close_exit">
             <argument
                 android:name="currentViewPagerItem"
-                app:argType="integer"
-                android:defaultValue="0" />
+                android:defaultValue="0"
+                app:argType="integer" />
             <argument
                 android:name="courseId"
-                app:argType="integer"
-                android:defaultValue="-1" />
+                android:defaultValue="-1"
+                app:argType="integer" />
         </action>
         <action
             android:id="@+id/action_homeViewPagerFragment_to_mapsViewerFragment"
@@ -37,7 +37,8 @@
     <fragment
         android:id="@+id/courseEditorFragment"
         android:name="com.txwstudio.app.timetable.ui.courseeditor.CourseEditorFragment"
-        android:label="CourseEditorFragment" >
+        android:label="CourseEditorFragment"
+        tools:layout="@layout/fragment_course_editor">
         <argument
             android:name="currentViewPagerItem"
             app:argType="integer" />
@@ -48,7 +49,8 @@
     <fragment
         android:id="@+id/mapsViewerFragment"
         android:name="com.txwstudio.app.timetable.ui.mapsviewer.MapsViewerFragment"
-        android:label="MapsViewerFragment">
+        android:label="MapsViewerFragment"
+        tools:layout="@layout/fragment_maps_viewer">
         <deepLink
             android:id="@+id/deepLink2"
             app:uri="timetable://open_maps_viewer" />
