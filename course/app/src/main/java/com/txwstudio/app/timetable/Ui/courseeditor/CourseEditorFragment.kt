@@ -5,6 +5,7 @@ import android.text.format.DateFormat
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,6 +37,13 @@ class CourseEditorFragment : Fragment() {
     private val args: CourseEditorFragmentArgs by navArgs()
 
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            exitConfirmDialog()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
