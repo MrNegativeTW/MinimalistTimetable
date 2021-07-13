@@ -29,7 +29,7 @@
                 android:layout_height="?attr/actionBarSize" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
@@ -164,6 +164,6 @@
                     app:adUnitId="@string/COURSE_EDITOR_AD_ID"
                     app:layout_constraintTop_toBottomOf="@+id/til_courseEditorFrag_courseBeginTimeEntry" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
