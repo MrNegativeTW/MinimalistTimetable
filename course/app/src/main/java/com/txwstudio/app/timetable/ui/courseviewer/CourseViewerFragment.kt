@@ -70,7 +70,9 @@ class CourseViewerFragment : Fragment() {
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
         courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
-            it?.let { courseCardAdapter.submitList(it) }
+            binding.linearLayoutCourseViewerEmptyMsg.visibility =
+                if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
+            it.let { courseCardAdapter.submitList(it) }
         }
     }
 

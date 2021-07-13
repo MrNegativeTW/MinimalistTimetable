@@ -13,7 +13,11 @@
     <string name="menuCalendar">行事曆</string>
     <string name="menuSettings">設定</string>
 
-    <!-- Course Editor Activity -->
+    <!-- Course Viewer -->
+    <string name="courseViewer_noClassToday">今天沒課，回去睡覺</string>
+    <string name="courseViewer_iconZzzDescription">睡覺的圖案</string>
+
+    <!-- Course Editor -->
     <string name="courseEditor_titleAdd">新增課程</string>
     <string name="courseEditor_titleEdit">編輯課程</string>
     <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>

@@ -21,6 +21,31 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/row_course_card" />
+            tools:listitem="@layout/row_course_card"
+            tools:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_courseViewer_emptyMsg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="@dimen/margin_half"
+                android:contentDescription="@string/courseViewer_iconZzzDescription"
+                android:src="@drawable/ic_zzz" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/courseViewer_noClassToday"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        </LinearLayout>
+
     </FrameLayout>
+
 </layout>
