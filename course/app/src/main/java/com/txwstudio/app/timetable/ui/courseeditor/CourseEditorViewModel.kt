@@ -154,6 +154,15 @@ class CourseEditorViewModel(
     }
 }
 
+/**
+ * Factory of Course Editor ViewModel
+ *
+ * @param repository CourseRepository in this project.
+ * @param courseId Default value is -1, passing course id to get into edit mode.
+ * @param currentViewPagerItem Default value is 0, which is Monday.
+ *                             Passing current viewpager item to automatic set weekday.
+ * @return CourseEditorViewModel
+ * */
 class CourseEditorViewModelFactory(
     private val repository: CourseRepository,
     private val courseId: Int,

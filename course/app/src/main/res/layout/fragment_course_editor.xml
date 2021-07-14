@@ -16,121 +16,94 @@
         tools:context=".ui.courseeditor.CourseEditorFragment">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout_courseEditorFrag"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="?attr/colorSurface"
+            android:elevation="4dp"
+            android:fitsSystemWindows="true">
 
-            <LinearLayout
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_courseEditorFrag"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/button_courseEditorFrag_close"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_normal"
-                    android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/ic_baseline_close_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_courseEditorFrag_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_normal"
-                    android:backgroundTint="@color/colorAccentDark"
-                    android:minWidth="0dp"
-                    android:paddingHorizontal="@dimen/margin_12"
-                    android:text="@string/all_save"
-                    app:cornerRadius="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
+                android:layout_height="?attr/actionBarSize" />
         </com.google.android.material.appbar.AppBarLayout>
 
-
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?actionBarSize"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/button_courseEditorFrag_save">
+            app:layout_constraintTop_toTopOf="@id/appBarLayout_courseEditorFrag">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/all_default_margin">
 
-                <!-- Course Name -->
-<!--                <TextView-->
-<!--                    android:id="@+id/textView_courseEditor_courseNameTitle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="@dimen/all_default_margin"-->
-<!--                    android:text="@string/courseEditor_courseNameTitle" />-->
-
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:layout_marginHorizontal="@dimen/margin_normal"
-                    android:hint="@string/courseEditor_courseNameTitle">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_courseEditor_courseNameEntry"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Course Place -->
-<!--                <TextView-->
-<!--                    android:id="@+id/textView_courseEditor_coursePlaceTitle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="@dimen/all_default_margin"-->
-<!--                    android:text="@string/courseEditor_coursePlaceTitle" />-->
-
-                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorFrag_courseNameEntry"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/courseEditor_coursePlaceTitle">
+                    android:hint="@string/courseEditor_courseNameTitle"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_courseEditor_coursePlaceEntry"
+                        android:id="@+id/editText_courseEditorFrag_courseNameEntry"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.courseName}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Weekday Picker -->
-<!--                <TextView-->
-<!--                    android:id="@+id/textView_courseEditor_courseWeekdayTitle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="@dimen/all_default_margin"-->
-<!--                    android:text="@string/courseEditor_courseWeekdayTitle" />-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorFrag_coursePlaceEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:hint="@string/courseEditor_coursePlaceTitle"
+                    app:layout_constraintTop_toBottomOf="@id/til_courseEditorFrag_courseNameEntry">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText_courseEditorFrag_coursePlaceEntry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.coursePlace}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorFrag_courseProfEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:hint="@string/courseEditor_courseProfTitle"
+                    app:layout_constraintTop_toBottomOf="@id/til_courseEditorFrag_coursePlaceEntry">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText_courseEditorFrag_courseProfEntry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.courseProf}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorFrag_courseWeekdayEntry"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/courseEditor_courseWeekdayTitle">
+                    android:hint="@string/courseEditor_courseWeekdayTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorFrag_courseProfEntry">
 
                     <AutoCompleteTextView
                         android:id="@+id/dropDown_courseEditorFrag"
@@ -139,7 +112,58 @@
                         android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorFrag_courseBeginTimeEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_half"
+                    android:hint="@string/courseEditor_courseBeginTitle"
+                    app:endIconDrawable="@drawable/ic_baseline_edit_24"
+                    app:endIconMode="dropdown_menu"
+                    app:layout_constraintEnd_toStartOf="@id/til_courseEditorFrag_courseEndTimeEntry"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorFrag_courseWeekdayEntry">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/textView_courseEditorFrag_courseBeginTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_courseEditorFrag_courseEndTimeEntry"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:hint="@string/courseEditor_courseEndTitle"
+                    app:endIconDrawable="@drawable/ic_baseline_edit_24"
+                    app:endIconMode="dropdown_menu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/til_courseEditorFrag_courseBeginTimeEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorFrag_courseWeekdayEntry">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/textView_courseEditorFrag_courseEndTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView_courseEditorFrag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    app:adSize="BANNER"
+                    app:adUnitId="@string/COURSE_EDITOR_AD_ID"
+                    app:layout_constraintTop_toBottomOf="@+id/til_courseEditorFrag_courseBeginTimeEntry" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.txwstudio.app.timetable.ui.activity.MainActivity2ViewModel" />
-    </data>
-
+    <!--
+     Note: even though the IDs for the CoordinatorLayout and the AppBarLayout unused in HomeViewPagerFragment, they are
+     both required to preserve the toolbar scroll / collapse state when navigating to a new screen and then coming back.
+    -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.activity.MainActivity2">
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager_homeFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorSurface"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:fitsSystemWindows="true">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_mainActivity2"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_homeFrag"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|snap" />
+                android:layout_height="?attr/actionBarSize" />
 
+            <!-- Override tabIconTint attribute of style with selector -->
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout_mainActivity2"
+                android:id="@+id/tabLayout_homeFrag"
                 android:layout_width="match_parent"
-                app:tabMode="auto"
                 android:layout_height="wrap_content"
                 app:tabIndicator="@drawable/tab_indicator"
                 app:tabIndicatorColor="@color/colorAccentDark"
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorHeight="3dp"
                 app:tabInlineLabel="true"
-                app:tabMinWidth="75dp" />
+                app:tabMinWidth="75dp"
+                app:tabMode="auto" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager_mainActivity2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_mainActivity2"
+            android:id="@+id/fab_homeFrag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
@@ -57,4 +56,5 @@
             app:borderWidth="0dp"
             app:tint="?attr/colorOnPrimary" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

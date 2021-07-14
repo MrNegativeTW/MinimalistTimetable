@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.courseeditor.CourseEditorFragment">
+
+        <com.ortiz.touchview.TouchImageView
+            android:id="@+id/touchImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_mapsViewerFrag"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <TextView
+            android:id="@+id/textView_mapsViewerFrag_mapsNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="@string/campusMapErrorMsg" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

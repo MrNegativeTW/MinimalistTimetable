@@ -1,6 +1,5 @@
 package com.txwstudio.app.timetable.ui.courseviewer
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,6 @@ import androidx.fragment.app.viewModels
 import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
-import com.txwstudio.app.timetable.ui.courseeditor.CourseEditorActivity
-import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
@@ -73,17 +70,9 @@ class CourseViewerFragment : Fragment() {
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
         courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
-            it?.let { courseCardAdapter.submitList(it) }
-        }
-
-        // Observe LiveData in viewModel, once it changed,
-        // open CourseEditorActivity to edit course info.
-        courseViewerViewModel.targetCourseIdToEdit.observe(viewLifecycleOwner) {
-            if (it != -1) {
-                val intent = Intent(requireActivity(), CourseEditorActivity::class.java)
-                intent.putExtra(INTENT_EXTRA_COURSE_ID, it)
-                startActivity(intent)
-            }
+            binding.linearLayoutCourseViewerEmptyMsg.visibility =
+                if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
+            it.let { courseCardAdapter.submitList(it) }
         }
     }
 
