@@ -23,6 +23,9 @@ import java.util.*
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0
 private const val TAG_TIME_PICKER_END_TIME = 1
 
+/**
+ * An editor to add or edit the class info.
+ * */
 class CourseEditorFragment : Fragment() {
 
     private lateinit var binding: FragmentCourseEditorBinding
