@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_preference"
+    app:startDestination="@id/preferenceFragment">
+
+    <fragment
+        android:id="@+id/preferenceFragment"
+        android:name="com.txwstudio.app.timetable.ui.preferences.PreferenceFragment"
+        android:label="PreferenceFragment" >
+        <action
+            android:id="@+id/action_preferenceFragment_to_preferencesAboutFragment"
+            app:destination="@id/preferencesAboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/preferencesAboutFragment"
+        android:name="com.txwstudio.app.timetable.ui.preferences.PreferencesAboutFragment"
+        android:label="PreferencesAboutFragment" />
+</navigation>
