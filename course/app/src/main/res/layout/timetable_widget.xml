@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/margin_half"
         android:layout_marginTop="@dimen/margin_half"
         android:text="星期三"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?attr/appWidgetTextColor" />
 
     <TextView
@@ -24,7 +24,7 @@
         app:drawableTint="?attr/appWidgetTextColor"
         android:layout_marginEnd="@dimen/margin_normal"
         android:text="行事曆"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?attr/appWidgetTextColor"
         app:drawableStartCompat="@drawable/ic_event_note_24dp" />
 
@@ -36,7 +36,7 @@
         android:layout_marginTop="@dimen/margin_half"
         android:layout_marginEnd="@dimen/margin_half"
         android:text="地圖"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?attr/appWidgetTextColor"
         app:drawableStartCompat="@drawable/ic_map_24dp"
         app:drawableTint="?attr/appWidgetTextColor" />
