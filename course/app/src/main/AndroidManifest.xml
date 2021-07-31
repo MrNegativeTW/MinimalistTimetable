@@ -62,7 +62,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <receiver android:name="com.txwstudio.app.timetable.widget.TimetableWidget">
+        <receiver android:name="com.txwstudio.app.timetable.widget.TimetableWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

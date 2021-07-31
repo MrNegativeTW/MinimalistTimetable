@@ -7,6 +7,7 @@
     android:theme="@style/ThemeOverlay.Course.AppWidgetContainer">
 
     <TextView
+        android:id="@+id/textView_appwidget_weekday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,13 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_half"
-        android:layout_toStartOf="@+id/textView_widget_openMap"
-        app:drawableTint="?attr/appWidgetTextColor"
         android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_toStartOf="@+id/textView_widget_openMap"
         android:text="行事曆"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?attr/appWidgetTextColor"
-        app:drawableStartCompat="@drawable/ic_event_note_24dp" />
+        app:drawableStartCompat="@drawable/ic_event_note_24dp"
+        app:drawableTint="?attr/appWidgetTextColor" />
 
     <TextView
         android:id="@+id/textView_widget_openMap"
@@ -54,4 +55,10 @@
         android:textColor="?attr/appWidgetTextColor"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
+
+    <ListView
+        android:id="@+id/listview_appwidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textView_appwidget_weekday" />
 </RelativeLayout>
