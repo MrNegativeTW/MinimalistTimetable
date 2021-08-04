@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/widget_item"
     android:layout_width="match_parent"
-    android:layout_height="46dp"
-    android:paddingLeft="25dp"
-    android:gravity="center_vertical"
-    android:background="#F0F0F0"
-    android:textColor="#232323"
-    android:textSize="20sp"
-    tools:text="Text Here"/>
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/margin_12"
+    android:paddingTop="@dimen/margin_12">
+
+    <TextView
+        android:id="@+id/textView_widget_courseBeginTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:textColor="?attr/appWidgetTextColor"
+        android:textSize="20sp"
+        tools:text="09:00" />
+
+    <TextView
+        android:id="@+id/textView_widget_courseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_toStartOf="@id/textView_widget_coursePlace"
+        android:layout_toEndOf="@+id/textView_widget_courseBeginTime"
+        android:gravity="center_vertical"
+        android:textColor="?attr/appWidgetTextColor"
+        android:textSize="20sp"
+        tools:text="CMPT110" />
+
+    <TextView
+        android:id="@+id/textView_widget_coursePlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:textColor="?attr/appWidgetTextColor"
+        android:textSize="20sp"
+        tools:text="Room" />
+</RelativeLayout>

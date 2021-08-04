@@ -62,7 +62,9 @@ class StackRemoteViewsFactory(
         // We construct a remote views item based on our widget item xml file, and set the
         // text based on the position.
         val views = RemoteViews(mContext.packageName, R.layout.widget_course_card).apply {
-            setTextViewText(R.id.widget_item, mWidgetItems[position].courseName)
+            setTextViewText(R.id.textView_widget_courseBeginTime, mWidgetItems[position].courseStartTime)
+            setTextViewText(R.id.textView_widget_courseName, mWidgetItems[position].courseName)
+            setTextViewText(R.id.textView_widget_coursePlace, mWidgetItems[position].coursePlace)
         }
         // Next, we set a fill-intent which will be used to fill-in the pending intent template
         // which is set on the collection view in StackWidgetProvider.
