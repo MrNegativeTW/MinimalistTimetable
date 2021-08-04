@@ -2,13 +2,11 @@ package com.txwstudio.app.timetable.widget
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.data.AppDatabase
 import com.txwstudio.app.timetable.data.Course3
-import kotlinx.coroutines.flow.toList
 import java.util.*
 
 class TimetableWidgetService : RemoteViewsService() {
@@ -62,10 +60,15 @@ class StackRemoteViewsFactory(
         // We construct a remote views item based on our widget item xml file, and set the
         // text based on the position.
         val views = RemoteViews(mContext.packageName, R.layout.widget_course_card).apply {
-            setTextViewText(R.id.textView_widget_courseBeginTime, mWidgetItems[position].courseStartTime)
+            // Format time to human-friendly format
+            val courseBeginTime =
+                mWidgetItems[position].courseStartTime?.replace("..(?!$)".toRegex(), "$0:")
+
+            setTextViewText(R.id.textView_widget_courseBeginTime, courseBeginTime)
             setTextViewText(R.id.textView_widget_courseName, mWidgetItems[position].courseName)
             setTextViewText(R.id.textView_widget_coursePlace, mWidgetItems[position].coursePlace)
         }
+
         // Next, we set a fill-intent which will be used to fill-in the pending intent template
         // which is set on the collection view in StackWidgetProvider.
 
