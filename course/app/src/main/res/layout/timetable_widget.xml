@@ -62,6 +62,14 @@
         android:textColor="?attr/appWidgetTextColor"
         android:textSize="16sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/widget_stillInBetaMessage"
+        android:textColor="?attr/divLineBackground" />
+
     <ListView
         android:id="@+id/listview_appwidget"
         android:layout_width="match_parent"

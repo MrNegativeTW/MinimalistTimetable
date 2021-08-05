@@ -71,11 +71,13 @@
     <string name="courseCardDialog_editCourseInfo">Edit</string>
     <string name="courseCardDialog_deleteCourse">Delete</string>
     <string name="courseCardDialog_message">New semester?\\nEdit it instead of deleting it!</string>
-    <string name="courseCardDialog_title">You want ... ?</string>
+    <string name="courseCardDialog_title">You want … ?</string>
     <string name="prefAbout_versionTitle">Version</string>
     <string name="prefAbout_changelogTitle">Changelog</string>
     <string name="prefAbout_openSourceTitle">Open Source Library</string>
     <string name="courseEditor_courseProfTitle">Prof. (Optional)</string>
     <string name="courseViewer_iconZzzDescription">sleep icon</string>
     <string name="courseViewer_noClassToday">No class today</string>
+    <string name="widget_stillInBetaMessage">The widget is still in beta</string>
+    <string name="widget_noClassToday">No class today.</string>
 </resources>

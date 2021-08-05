@@ -95,6 +95,7 @@
 
     <!-- [Start] Widget -->
     <string name="widget_noClassToday">今天沒課</string>
+    <string name="widget_stillInBetaMessage">小工具為測試版</string>
     <!-- [End] Widget -->
 
     <!-- File Read Error Msg -->
