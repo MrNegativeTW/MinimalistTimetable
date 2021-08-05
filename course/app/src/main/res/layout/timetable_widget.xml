@@ -55,14 +55,12 @@
         android:id="@+id/appwidget_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/divider_widget"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="?attr/appWidgetBackgroundColor"
-        android:text="Example"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/widget_noClassToday"
         android:textColor="?attr/appWidgetTextColor"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:textSize="16sp" />
 
     <ListView
         android:id="@+id/listview_appwidget"
