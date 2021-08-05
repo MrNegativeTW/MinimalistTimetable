@@ -92,12 +92,16 @@ internal fun updateAppWidget(
     val c = Calendar.getInstance()
     val date = c[Calendar.DAY_OF_WEEK]
     val array = R.array.weekdayList
-    val weekdayText = context.resources.getStringArray(array)[if (date == 1) 8 else date - 2]
+
+    // If DAY_OF_WEEK is 1 (SUNDAY), get string from array index 6.
+    // If DAY_OF_WEEK is 2 ~ 7 (MONDAY ~ SATURDAY), get string from array index (2 ~ 7) - 1.
+    val weekdayText = context.resources.getStringArray(array)[if (date == 1) 6 else date - 2]
 
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.timetable_widget).apply {
         setTextViewText(R.id.textView_appwidget_weekday, weekdayText)
         setRemoteAdapter(R.id.listview_appwidget, intent)
+        setEmptyView(R.id.listview_appwidget, R.id.appwidget_text)
     }
 
     // Instruct the widget manager to update the widget
