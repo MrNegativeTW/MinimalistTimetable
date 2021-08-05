@@ -9,6 +9,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.RemoteViews
 import com.txwstudio.app.timetable.R
+import java.util.*
 
 /**
  * Implementation of App Widget functionality.
@@ -29,6 +30,7 @@ class TimetableWidgetProvider : AppWidgetProvider() {
      * If intent action equals date or time change events, update widget content.
      */
     override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
         val action = intent.action
         if (action.equals(Intent.ACTION_DATE_CHANGED)
             || action.equals(Intent.ACTION_TIMEZONE_CHANGED)
@@ -45,6 +47,7 @@ class TimetableWidgetProvider : AppWidgetProvider() {
                 )
 
             for (appWidgetId in appWidgetIds) {
+                updateAppWidget(context, appWidgetManager, appWidgetId)
                 appWidgetManager.notifyAppWidgetViewDataChanged(
                     appWidgetId,
                     R.id.listview_appwidget
@@ -52,7 +55,6 @@ class TimetableWidgetProvider : AppWidgetProvider() {
             }
 
         }
-        super.onReceive(context, intent)
     }
 
     override fun onUpdate(
@@ -87,9 +89,14 @@ internal fun updateAppWidget(
         data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
     }
 
+    val c = Calendar.getInstance()
+    val date = c[Calendar.DAY_OF_WEEK]
+    val array = R.array.weekdayList
+    val weekdayText = context.resources.getStringArray(array)[if (date == 1) 8 else date - 2]
+
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.timetable_widget).apply {
-        setTextViewText(R.id.appwidget_text, "io")
+        setTextViewText(R.id.textView_appwidget_weekday, weekdayText)
         setRemoteAdapter(R.id.listview_appwidget, intent)
     }
 
