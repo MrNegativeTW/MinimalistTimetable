@@ -12,6 +12,9 @@ import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
+/**
+ * A fragment that Display the classes for the specific day.
+ * */
 class CourseViewerFragment : Fragment() {
 
     companion object {

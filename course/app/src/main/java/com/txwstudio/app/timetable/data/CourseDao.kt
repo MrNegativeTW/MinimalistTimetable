@@ -8,6 +8,9 @@ interface CourseDao {
     @Query("SELECT * FROM timeTable WHERE courseWeekday = :weekday ORDER BY courseStartTime ASC")
     fun getCourseByWeekday(weekday: Int): Flow<List<Course3>>
 
+    @Query("SELECT * FROM timeTable WHERE courseWeekday = :weekday ORDER BY courseStartTime ASC")
+    fun getCourseByWeekdayAsList(weekday: Int): List<Course3>
+
     @Query("SELECT * FROM timeTable WHERE id = :id")
     suspend fun getCourseById(id: Int): Course3
 

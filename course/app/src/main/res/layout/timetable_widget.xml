@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:padding="@dimen/widget_margin"
+    android:theme="@style/ThemeOverlay.Course.AppWidgetContainer">
+
+    <TextView
+        android:id="@+id/textView_appwidget_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_12"
+        android:textColor="?attr/appWidgetTextColor"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView_widget_openCalendarIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_half"
+        android:layout_toStartOf="@id/imageView_widget_openMapIcon"
+        android:padding="@dimen/margin_12"
+        android:src="@drawable/ic_event_note_24dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imageView_widget_openMapIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="4dp"
+        android:padding="@dimen/margin_12"
+        android:src="@drawable/ic_map_24dp" />
+
+    <LinearLayout
+        android:id="@+id/divider_widget"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/textView_appwidget_weekday"
+        android:layout_marginTop="@dimen/margin_12"
+        android:background="?attr/divLineBackground" />
+
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider_widget"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/widget_noClassToday"
+        android:textColor="?attr/appWidgetTextColor"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/widget_stillInBetaMessage"
+        android:textColor="?attr/divLineBackground" />
+
+    <ListView
+        android:id="@+id/listview_appwidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider_widget"
+        android:clipToPadding="false"
+        android:divider="#00000000"
+        android:paddingBottom="@dimen/margin_normal" />
+</RelativeLayout>

@@ -17,4 +17,15 @@
         <item name="divLineBackground">@color/googleAppDarkTheme_colorDivLine</item>
     </style>
 
+    <style name="ThemeOverlay.Course.AppWidgetContainer" parent="">
+        <!--        <item name="appWidgetBackgroundColor">@color/light_blue_900</item>-->
+        <!--        <item name="appWidgetTextColor">@color/light_blue_200</item>-->
+        <item name="appWidgetBackgroundColor">@color/materialDarkSurface</item>
+        <item name="appWidgetTextColor">@color/white</item>
+        <item name="divLineBackground">@color/googleAppDarkTheme_colorDivLine</item>
+
+        <!-- For calendar and map icon -->
+        <item name="iconColor">@color/white</item>
+    </style>
+
 </resources>

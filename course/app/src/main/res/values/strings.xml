@@ -1,23 +1,26 @@
 <resources>
     <string name="app_name">極簡課表</string>
 
-    <!-- Activity Title -->
+    <!-- [Start] Activity Title -->
     <string name="main_activity">課表</string>
     <string name="traffic_schoolMap">地圖</string>
     <string name="courseEditorActivityTitle">課程編輯器</string>
     <string name="title_activity_settings">設定</string>
+    <!-- [End] Activity Title -->
 
-    <!-- 右上角目錄 -->
+    <!-- [Start] Home page menu -->
     <string name="menuAddCourse">新增</string>
     <string name="menuMap">地圖</string>
     <string name="menuCalendar">行事曆</string>
     <string name="menuSettings">設定</string>
+    <!-- [End] Home page menu -->
 
-    <!-- Course Viewer -->
+    <!-- [Start] Course Viewer -->
     <string name="courseViewer_noClassToday">今天沒課，回去睡覺</string>
     <string name="courseViewer_iconZzzDescription">睡覺的圖案</string>
+    <!-- [End] Course Viewer -->
 
-    <!-- Course Editor -->
+    <!-- [Start] Course Editor -->
     <string name="courseEditor_titleAdd">新增課程</string>
     <string name="courseEditor_titleEdit">編輯課程</string>
     <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
@@ -34,25 +37,23 @@
     <string name="courseEditor_courseEndTitle">結束時間</string>
     <string name="courseEditor_courseEndEntry">00:00</string>
     <string name="courseEditor_noEntry">未填寫</string>
+    <!-- [End] Course Editor -->
 
-    <!-- Course Card Dialog  -->
+    <!-- [Start] Course Card Dialog  -->
     <string name="courseCardDialog_title">下好離手</string>
     <string name="courseCardDialog_message">換新學期嗎？\n別刪除了，直接編輯吧！</string>
     <string name="courseCardDialog_editCourseInfo">編輯</string>
     <string name="courseCardDialog_deleteCourse">刪除</string>
+    <!-- [End] Course Card Dialog  -->
 
     <!-- Dialog -->
     <string name="dialogDeleted">已刪除</string>
-    <array name="dialog">
-        <item>編輯</item>
-        <item>刪除</item>
-    </array>
     <string name="dialogConfirmExit">確定離開?</string>
     <string name="dialogConfirmDelete">確定刪除?</string>
     <string name="dialogPositiveButton">真的</string>
     <string name="dialogNegativeButton">假的</string>
 
-    <!-- Preference Activity -->
+    <!-- [Start] Preference Activity -->
     <string name="settings_sectionGeneral">一般</string>
     <string name="settings_timetableTitle">課表名稱</string>
     <string name="settings_timetableTitleSummary">我的課表</string>
@@ -84,13 +85,18 @@
     <string name="settings_contactSummary">Bug 回報、功能請求</string>
     <string name="settings_versionTitle">版本 2.0</string>
     <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
-    <!-- Preference Activity End -->
+    <!-- [End] Preference Activity -->
 
-    <!-- Preference About Activity -->
+    <!-- [Start] Preference About Activity -->
     <string name="prefAbout_versionTitle">版本</string>
     <string name="prefAbout_changelogTitle">更新日誌</string>
     <string name="prefAbout_openSourceTitle">開放原始碼授權</string>
-    <!-- Preference About Activity End -->
+    <!-- [End] Preference About Activity End -->
+
+    <!-- [Start] Widget -->
+    <string name="widget_noClassToday">今天沒課</string>
+    <string name="widget_stillInBetaMessage">小工具為測試版</string>
+    <!-- [End] Widget -->
 
     <!-- File Read Error Msg -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>

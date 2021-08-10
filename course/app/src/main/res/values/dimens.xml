@@ -20,4 +20,8 @@
     <dimen name="margin_double_half">24dp</dimen>
     <dimen name="margin_double">32dp</dimen>
     <dimen name="margin_double_double">64dp</dimen>
+
+    <dimen name="widget_margin">0dp</dimen>
+
+    <dimen name="app_widget_background_corner_radius">16dp</dimen>
 </resources>

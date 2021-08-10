@@ -13,6 +13,9 @@ import androidx.preference.PreferenceManager
 import com.txwstudio.app.timetable.databinding.FragmentMapsViewerBinding
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_MAP_REQUEST
 
+/**
+ * Implementation of TouchImageView.
+ */
 class MapsViewerFragment : Fragment() {
 
     companion object {

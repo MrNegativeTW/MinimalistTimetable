@@ -53,4 +53,8 @@
         <item name="android:layout_height">1dp</item>
     </style>
 
+    <style name="DivLine.Widget" parent="DivLine">
+        <item name="android:layout_height">4dp</item>
+    </style>
+
 </resources>
