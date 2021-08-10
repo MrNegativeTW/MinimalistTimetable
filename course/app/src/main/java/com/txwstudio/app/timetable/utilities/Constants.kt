@@ -10,3 +10,5 @@ const val INTENT_EXTRA_COURSE_ID = "course_id"
 const val INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE = -1
 
 const val CALENDAR_DATA_TYPE = "application/pdf"
+
+const val INTENT_OPEN_MAPS_VIEWER = "com.txwstudio.app.timetable.OPEN_MAPS_VIEWER"

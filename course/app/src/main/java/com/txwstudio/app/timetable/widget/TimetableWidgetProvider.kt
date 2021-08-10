@@ -9,6 +9,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.RemoteViews
 import com.txwstudio.app.timetable.R
+import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
 import java.util.*
 
 /**
@@ -32,7 +33,8 @@ class TimetableWidgetProvider : AppWidgetProvider() {
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
         val action = intent.action
-        if (action.equals(Intent.ACTION_DATE_CHANGED)
+        if (action.equals(INTENT_TIMETABLE_CHANGED)
+            || action.equals(Intent.ACTION_DATE_CHANGED)
             || action.equals(Intent.ACTION_TIMEZONE_CHANGED)
             || action.equals(Intent.ACTION_TIME_CHANGED)
         ) {
