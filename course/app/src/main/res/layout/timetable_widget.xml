@@ -23,14 +23,15 @@
         android:layout_marginEnd="@dimen/margin_half"
         android:layout_toStartOf="@id/imageView_widget_openMapIcon"
         android:padding="@dimen/margin_12"
-        android:src="@drawable/ic_event_note_24dp" />
+        android:src="@drawable/ic_event_note_24dp"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/imageView_widget_openMapIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginEnd="4dp"
         android:padding="@dimen/margin_12"
         android:src="@drawable/ic_map_24dp" />
 
