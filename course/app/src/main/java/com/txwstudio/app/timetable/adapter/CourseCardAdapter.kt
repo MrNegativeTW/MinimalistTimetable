@@ -78,7 +78,7 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
         }
 
         override fun areContentsTheSame(oldItem: Course3, newItem: Course3): Boolean {
-            return oldItem.courseName == newItem.courseName
+            return oldItem == newItem
         }
     }
 }
