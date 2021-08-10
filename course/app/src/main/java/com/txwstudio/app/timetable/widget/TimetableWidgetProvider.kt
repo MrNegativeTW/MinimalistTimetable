@@ -38,7 +38,7 @@ class TimetableWidgetProvider : AppWidgetProvider() {
             || action.equals(Intent.ACTION_TIMEZONE_CHANGED)
             || action.equals(Intent.ACTION_TIME_CHANGED)
         ) {
-//            Log.i("TEST", "onReceive")
+            Log.i("TEST", "onReceive")
             val appWidgetManager = AppWidgetManager.getInstance(context)
             val appWidgetIds =
                 appWidgetManager.getAppWidgetIds(
@@ -50,10 +50,6 @@ class TimetableWidgetProvider : AppWidgetProvider() {
 
             for (appWidgetId in appWidgetIds) {
                 updateAppWidget(context, appWidgetManager, appWidgetId)
-                appWidgetManager.notifyAppWidgetViewDataChanged(
-                    appWidgetId,
-                    R.id.listview_appwidget
-                )
             }
 
         }
@@ -108,4 +104,8 @@ internal fun updateAppWidget(
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
+    appWidgetManager.notifyAppWidgetViewDataChanged(
+        appWidgetId,
+        R.id.listview_appwidget
+    )
 }
