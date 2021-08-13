@@ -83,12 +83,13 @@
     <string name="settings_sectionAbout">關於</string>
     <string name="settings_contactTitle">聯繫作者</string>
     <string name="settings_contactSummary">Bug 回報、功能請求</string>
-    <string name="settings_versionTitle">版本 2.0</string>
+    <string name="settings_versionTitle">版本 2.1</string>
     <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
     <!-- [End] Preference Activity -->
 
     <!-- [Start] Preference About Activity -->
     <string name="prefAbout_versionTitle">版本</string>
+    <string name="prefAbout_versionSummary" translatable="false">Beta 2.1</string>
     <string name="prefAbout_changelogTitle">更新日誌</string>
     <string name="prefAbout_openSourceTitle">開放原始碼授權</string>
     <!-- [End] Preference About Activity End -->

@@ -9,17 +9,13 @@
     <string name="traffic_schoolMap">Map</string>
     <string name="settings_timetableTitle">Table Name</string>
     <string name="settings_timetableTitleDefaultValue">My Timetable</string>
-    <string name="settings_versionTitle">Version 2.0</string>
+    <string name="settings_versionTitle">Version 2.1</string>
     <string name="settings_timetableTitleSummary">Name to show on the main screen</string>
     <string name="settings_contactSummary">Bug Report or feature request.</string>
     <string name="settings_contactTitle">Contact Developers</string>
     <string name="settings_sectionAbout">About</string>
     <string name="settings_sectionGeneral">General</string>
     <string name="settings_campusMapPickerTitle">Campus Map</string>
-    <array name="dialog">
-        <item>Edit</item>
-        <item>Delete</item>
-    </array>
     <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
     <string name="all_save">Save</string>
     <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>

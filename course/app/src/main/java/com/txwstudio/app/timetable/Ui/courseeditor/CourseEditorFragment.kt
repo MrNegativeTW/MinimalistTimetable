@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -66,6 +67,12 @@ class CourseEditorFragment : Fragment() {
         subscribeUiForError()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val adRequest = AdRequest.Builder().build()
+        binding.adViewCourseEditorFrag.loadAd(adRequest)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
