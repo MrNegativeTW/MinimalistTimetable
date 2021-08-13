@@ -18,8 +18,6 @@
         android:theme="@style/AppTheme2"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-        <!-- Sample Banner AD ID: ca-app-pub-3940256099942544/6300978111 -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -48,6 +46,8 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
 
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- Sample Banner AD ID: ca-app-pub-3940256099942544/6300978111 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
@@ -65,10 +65,10 @@
         <receiver android:name="com.txwstudio.app.timetable.widget.TimetableWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.intent.action.DATE_CHANGED"/>
-                <action android:name="android.intent.action.TIME_SET"/>
-                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
-                <action android:name="com.txwstudio.app.timetable.TIMETABLE_CHANGED"/>
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="com.txwstudio.app.timetable.TIMETABLE_CHANGED" />
             </intent-filter>
 
             <meta-data
@@ -76,7 +76,8 @@
                 android:resource="@xml/timetable_widget_info" />
         </receiver>
 
-        <service android:name=".widget.TimetableWidgetService"
+        <service
+            android:name=".widget.TimetableWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
