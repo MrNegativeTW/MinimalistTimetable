@@ -83,7 +83,7 @@
     <string name="settings_sectionAbout">關於</string>
     <string name="settings_contactTitle">聯繫作者</string>
     <string name="settings_contactSummary">Bug 回報、功能請求</string>
-    <string name="settings_versionTitle">版本 2.0</string>
+    <string name="settings_versionTitle">版本 2.1</string>
     <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
     <!-- [End] Preference Activity -->
 

@@ -9,7 +9,7 @@
     <string name="traffic_schoolMap">Map</string>
     <string name="settings_timetableTitle">Table Name</string>
     <string name="settings_timetableTitleDefaultValue">My Timetable</string>
-    <string name="settings_versionTitle">Version 2.0</string>
+    <string name="settings_versionTitle">Version 2.1</string>
     <string name="settings_timetableTitleSummary">Name to show on the main screen</string>
     <string name="settings_contactSummary">Bug Report or feature request.</string>
     <string name="settings_contactTitle">Contact Developers</string>
