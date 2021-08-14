@@ -44,7 +44,6 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
                     setNeutralButton(R.string.courseCardDialog_deleteCourse) { _, _ ->
                         // Call CourseViewerViewModel.deleteCourse to delete the course from db.
                         rowCourseCardBinding.viewModel?.course?.let { viewModel.deleteCourse(it) }
-
                     }
                     setPositiveButton(R.string.courseCardDialog_editCourseInfo) { _, _ ->
                         rowCourseCardBinding.viewModel?.id?.let {
