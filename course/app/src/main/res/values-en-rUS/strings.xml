@@ -18,7 +18,7 @@
     <string name="settings_campusMapPickerTitle">Campus Map</string>
     <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
     <string name="all_save">Save</string>
-    <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
+    <string name="campusMapErrorMsg">[Settings] -> [Campus Map] and select your image.</string>
     <string name="menuMap">Map</string>
     <string name="menuCalendar">Calendar</string>
     <string name="settings_schoolCalendarPickerTitle">Calendar</string>
