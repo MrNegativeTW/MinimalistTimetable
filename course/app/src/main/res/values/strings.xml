@@ -69,6 +69,7 @@
     <string name="settings_mapCalendarHelperMessage">
         1. 這兩個是開啟地圖和行事曆的捷徑，設定後可從主畫面直接開啟。
         \n\n2. 設定後檔案請勿刪除、移動、重命名，以上方法皆會使捷徑失效。
+        \n\n3. 圖檔若過大將導致地圖開啟時崩潰，建議轉檔轉小一點。
         \n\n地圖支援：JPG、PNG\n行事曆支援：PDF
     </string>
 
