@@ -33,20 +33,20 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
     }
 
     inner class ViewHolder(
-        private val binding: RowCourseCardBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+        private val rowCourseCardBinding: RowCourseCardBinding
+    ) : RecyclerView.ViewHolder(rowCourseCardBinding.root) {
 
         init {
-            binding.courseCard.setOnLongClickListener {
-                MaterialAlertDialogBuilder(binding.root.context).apply {
+            rowCourseCardBinding.courseCard.setOnLongClickListener {
+                MaterialAlertDialogBuilder(rowCourseCardBinding.root.context).apply {
                     setTitle(R.string.courseCardDialog_title)
                     setMessage(R.string.courseCardDialog_message)
                     setNeutralButton(R.string.courseCardDialog_deleteCourse) { _, _ ->
                         // Call CourseViewerViewModel.deleteCourse to delete the course from db.
-                        binding.viewModel?.course?.let { viewModel.deleteCourse(it) }
+                        rowCourseCardBinding.viewModel?.course?.let { viewModel.deleteCourse(it) }
                     }
                     setPositiveButton(R.string.courseCardDialog_editCourseInfo) { _, _ ->
-                        binding.viewModel?.id?.let {
+                        rowCourseCardBinding.viewModel?.id?.let {
                             navigateToEdit(it)
                         }
                     }
@@ -61,11 +61,11 @@ class CourseCardAdapter(private val viewModel: CourseViewerViewModel) :
                 HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
                     courseId = courseId
                 )
-            binding.root.findNavController().navigate(direction)
+            rowCourseCardBinding.root.findNavController().navigate(direction)
         }
 
         fun bind(item: Course3) {
-            binding.apply {
+            rowCourseCardBinding.apply {
                 viewModel = CourseCardViewModel(item)
                 executePendingBindings()
             }

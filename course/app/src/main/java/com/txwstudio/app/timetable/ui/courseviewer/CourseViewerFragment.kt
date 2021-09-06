@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.txwstudio.app.timetable.MyApplication
+import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
+import kotlinx.coroutines.flow.collect
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
@@ -72,9 +76,26 @@ class CourseViewerFragment : Fragment() {
     }
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
+        // Display "delete success" message when the course got deleted.
+        // From: CodingInFlow
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            courseViewerViewModel.courseViewerEvent.collect { event ->
+                when (event) {
+                    is CourseViewerViewModel.CourseViewerEvent.ShowUndoDeleteMessage -> {
+                        Snackbar.make(requireView(), R.string.dialogDeleted, Snackbar.LENGTH_LONG)
+                            .show()
+                    }
+                }
+            }
+        }
+
+        // Observe database change then update the UI.
         courseViewerViewModel.courseByWeekday.observe(viewLifecycleOwner) {
+            // Set no class message.
             binding.linearLayoutCourseViewerEmptyMsg.visibility =
                 if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
+
+            // Submit course list to adapter.
             it.let { courseCardAdapter.submitList(it) }
         }
     }

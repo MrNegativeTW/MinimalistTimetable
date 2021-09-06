@@ -18,7 +18,7 @@
     <string name="settings_campusMapPickerTitle">Campus Map</string>
     <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
     <string name="all_save">Save</string>
-    <string name="campusMapErrorMsg">: (\n1. [Settings] -> [Custom Campus Map] and select your image. \n2. Only can read the image from Internal storage for now.</string>
+    <string name="campusMapErrorMsg">[Settings] -> [Campus Map] and select your image.</string>
     <string name="menuMap">Map</string>
     <string name="menuCalendar">Calendar</string>
     <string name="settings_schoolCalendarPickerTitle">Calendar</string>
@@ -31,11 +31,12 @@
     <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
     <string name="fileReadErrorMsg">Unknown error, please try again.</string>
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
-    <string name="settings_sectionMapCalendar">Map and Celandar</string>
-    <string name="settings_mapCalendarHelperTitle">What is this?</string>
+    <string name="settings_sectionMapCalendar">Map and Calendar</string>
+    <string name="settings_mapCalendarHelperTitle">What are these?</string>
     <string name="settings_mapCalendarHelperMessage">
-        1. These two are the shortcut of the map/calendar, they can be opened from the main screen.
-        \n\n2. DO NOT delete/move/rename the file, that will make the shortcut invalid.
+        1. These two are the shortcuts of the map/calendar, they can be accessed from the main screen.
+        \n\n2. DO NOT delete/move/rename the file, that will invalid the shortcuts.
+        \n\n3. If the size of the photo is too large can cause crashes when opening the map, consider making it smaller.
         \n\nMap: JPG、PNG\nCalendar: PDF
     </string>
     <string name="courseEditorActivityTitle">Course Editor</string>
@@ -63,10 +64,10 @@
     <string name="courseEditor_coursePlaceTitle">Location</string>
     <string name="courseEditor_courseWeekdayTitle">Day</string>
     <string name="courseEditor_coursePlaceEntry">Surrey Campus</string>
-    <string name="courseEditor_noEntry">No Entry Here</string>
+    <string name="courseEditor_noEntry">Required</string>
     <string name="courseCardDialog_editCourseInfo">Edit</string>
     <string name="courseCardDialog_deleteCourse">Delete</string>
-    <string name="courseCardDialog_message">New semester?\\nEdit it instead of deleting it!</string>
+    <string name="courseCardDialog_message">New semester?\nEdit it instead of deleting it!</string>
     <string name="courseCardDialog_title">You want … ?</string>
     <string name="prefAbout_versionTitle">Version</string>
     <string name="prefAbout_changelogTitle">Changelog</string>
