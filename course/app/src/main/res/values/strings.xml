@@ -89,7 +89,7 @@
 
     <!-- [Start] Preference About Activity -->
     <string name="prefAbout_versionTitle">版本</string>
-    <string name="prefAbout_versionSummary" translatable="false">Beta 2.1</string>
+    <string name="prefAbout_versionSummary" translatable="false">v2.1-beta.2</string>
     <string name="prefAbout_changelogTitle">更新日誌</string>
     <string name="prefAbout_openSourceTitle">開放原始碼授權</string>
     <!-- [End] Preference About Activity End -->
