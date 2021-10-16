@@ -9,9 +9,11 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityPreferenceBinding
+import com.txwstudio.app.timetable.ui.preferences.PreferenceFragment
 
-class PreferenceActivity : AppCompatActivity(),
-        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+class PreferenceActivity : AppCompatActivity() {
+
+    // , PreferenceFragmentCompat.OnPreferenceStartFragmentCallback
 
     private lateinit var binding: ActivityPreferenceBinding
 
@@ -20,6 +22,8 @@ class PreferenceActivity : AppCompatActivity(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preference)
         setSupportActionBar(binding.toolbarSettingsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, PreferenceFragment())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -32,26 +36,26 @@ class PreferenceActivity : AppCompatActivity(),
         }
     }
 
-    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat?, pref: Preference): Boolean {
-        // Instantiate the new Fragment
-        val args = pref.extras
-        val fragment = supportFragmentManager.fragmentFactory.instantiate(
-                classLoader,
-                pref.fragment)
-        fragment.arguments = args
-        fragment.setTargetFragment(caller, 0)
-
-        // Replace the existing Fragment with the new Fragment
-        supportFragmentManager.commit {
-            setCustomAnimations(
-                    R.anim.fade_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.fade_out
-            )
-            replace(R.id.fragment_container_view, fragment)
-            addToBackStack(null)
-        }
-        return true
-    }
+//    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat?, pref: Preference): Boolean {
+//        // Instantiate the new Fragment
+//        val args = pref.extras
+//        val fragment = supportFragmentManager.fragmentFactory.instantiate(
+//                classLoader,
+//                pref.fragment)
+//        fragment.arguments = args
+//        fragment.setTargetFragment(caller, 0)
+//
+//        // Replace the existing Fragment with the new Fragment
+//        supportFragmentManager.commit {
+//            setCustomAnimations(
+//                    R.anim.fade_in,
+//                    R.anim.fade_out,
+//                    R.anim.fade_in,
+//                    R.anim.fade_out
+//            )
+//            replace(R.id.fragment_container_view, fragment)
+//            addToBackStack(null)
+//        }
+//        return true
+//    }
 }
