@@ -43,12 +43,13 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var prefManager: SharedPreferences
-    private lateinit var editTextPreference: EditTextPreference
+//    private lateinit var editTextPreference: EditTextPreference
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         prefManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        setInitSummary()
+//        PreferenceManager.setDefaultValues(requireContext(), R.xml.preferences, false)
+//        setInitSummary()
     }
 
     override fun onResume() {
@@ -99,11 +100,11 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            PREFERENCE_TABLE_TITLE -> {
-                editTextPreference.summary =
-                        sharedPreferences?.getString(PREFERENCE_TABLE_TITLE,
-                                java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
-            }
+//            PREFERENCE_TABLE_TITLE -> {
+//                editTextPreference.summary =
+//                        sharedPreferences?.getString(PREFERENCE_TABLE_TITLE,
+//                                java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
+//            }
             PREFERENCE_THEME -> {
                 val value = sharedPreferences?.getString(PREFERENCE_THEME, "-1")?.toInt()
                 AppCompatDelegate.setDefaultNightMode(value!!)
@@ -114,12 +115,12 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     /**
      * Set summary when open preference screen.
      * */
-    private fun setInitSummary() {
-        editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
-
-        editTextPreference.summary = prefManager.getString(PREFERENCE_TABLE_TITLE,
-                getString(R.string.settings_timetableTitleDefaultValue))
-    }
+//    private fun setInitSummary() {
+//        editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
+//
+//        editTextPreference.summary = prefManager.getString(PREFERENCE_TABLE_TITLE,
+//                getString(R.string.settings_timetableTitleDefaultValue))
+//    }
 
     /**
      * Start an activity for picking file
