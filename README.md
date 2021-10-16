@@ -15,7 +15,7 @@ Timetable, Campus Map and Calendar<br>
 
 ![](https://img.shields.io/badge/build-failed,%20just%20like%20everything%20else%20in%20my%20life-red.svg?style=flat-square)
 ![](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)
-![](https://img.shields.io/badge/Android%20Studio-4.2.1+-32DE84?style=flat-square)
+![](https://img.shields.io/badge/Android%20Studio-Arctic%20Fox%20|%202020.3.1-32DE84?style=flat-square)
 ![](https://img.shields.io/badge/Android-6.0+-32DE84?style=flat-square)
 
 <p align="center">
