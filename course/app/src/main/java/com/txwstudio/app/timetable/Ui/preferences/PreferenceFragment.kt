@@ -77,7 +77,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.preferences)
+        setPreferencesFromResource(R.xml.preferences, rootKey)
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
