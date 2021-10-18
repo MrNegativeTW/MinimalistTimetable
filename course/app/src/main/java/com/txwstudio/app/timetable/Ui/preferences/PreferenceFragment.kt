@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -44,13 +43,11 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var prefManager: SharedPreferences
-//    private lateinit var editTextPreference: EditTextPreference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
 //        PreferenceManager.setDefaultValues(requireContext(), R.xml.preferences, false)
-//        setInitSummary()
     }
 
     override fun onResume() {
@@ -112,16 +109,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             }
         }
     }
-
-    /**
-     * Set summary when open preference screen.
-     * */
-//    private fun setInitSummary() {
-//        editTextPreference = findPreference(PREFERENCE_TABLE_TITLE)!!
-//
-//        editTextPreference.summary = prefManager.getString(PREFERENCE_TABLE_TITLE,
-//                getString(R.string.settings_timetableTitleDefaultValue))
-//    }
 
     /**
      * Start an activity for picking file
