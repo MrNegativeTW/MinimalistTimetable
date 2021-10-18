@@ -20,12 +20,24 @@ class PreferenceActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preference)
+
         setSupportActionBar(binding.toolbarSettingsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbarSettingsAct.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
 
             }
         }
+    }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        if (supportFragmentManager.popBackStackImmediate()) {
+            return true
+        }
+        return super.onSupportNavigateUp()
     }
 
     override fun onPreferenceStartFragment(
