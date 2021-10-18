@@ -12,6 +12,7 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityPreferenceBinding
 import com.txwstudio.app.timetable.ui.preferences.PreferenceFragment
 
+private const val TITLE_TAG = "settingsActivityTitle"
 
 class PreferenceActivity : AppCompatActivity(),
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -36,10 +37,18 @@ class PreferenceActivity : AppCompatActivity(),
             title = savedInstanceState.getCharSequence(TITLE_TAG)
         }
 
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                setTitle(R.string.title_activity_settings)
             }
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        // Save current activity title so we can set it again after a configuration change
+        outState.putCharSequence(TITLE_TAG, title)
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         if (supportFragmentManager.popBackStackImmediate()) {
@@ -68,6 +77,7 @@ class PreferenceActivity : AppCompatActivity(),
             replace(R.id.fragment_container_view, fragment)
             addToBackStack(null)
         }
+        title = pref.title
         return true
     }
 }
