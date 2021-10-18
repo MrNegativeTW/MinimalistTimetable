@@ -77,6 +77,7 @@ class PreferenceActivity : AppCompatActivity(),
             replace(R.id.fragment_container_view, fragment)
             addToBackStack(null)
         }
+        binding.appBarLayoutSettingsAct.setExpanded(true, true)
         title = pref.title
         return true
     }
