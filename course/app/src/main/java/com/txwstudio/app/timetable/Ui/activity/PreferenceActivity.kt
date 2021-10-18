@@ -1,9 +1,10 @@
 package com.txwstudio.app.timetable.ui.activity
 
 import android.os.Bundle
-import android.view.MenuItem
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -27,6 +28,13 @@ class PreferenceActivity : AppCompatActivity(),
             onBackPressed()
         }
 
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, PreferenceFragment())
+                .commit()
+        } else {
+            title = savedInstanceState.getCharSequence(TITLE_TAG)
+        }
 
             }
         }
