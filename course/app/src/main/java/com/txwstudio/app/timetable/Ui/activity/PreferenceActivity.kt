@@ -11,9 +11,9 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.ActivityPreferenceBinding
 import com.txwstudio.app.timetable.ui.preferences.PreferenceFragment
 
-class PreferenceActivity : AppCompatActivity() {
 
-    // , PreferenceFragmentCompat.OnPreferenceStartFragmentCallback
+class PreferenceActivity : AppCompatActivity(),
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private lateinit var binding: ActivityPreferenceBinding
 
