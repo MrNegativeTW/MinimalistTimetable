@@ -23,16 +23,8 @@ class PreferenceActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarSettingsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, PreferenceFragment())
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
             }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
