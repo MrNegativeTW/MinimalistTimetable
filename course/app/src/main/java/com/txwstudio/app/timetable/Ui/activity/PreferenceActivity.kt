@@ -36,26 +36,26 @@ class PreferenceActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat?, pref: Preference): Boolean {
-//        // Instantiate the new Fragment
-//        val args = pref.extras
-//        val fragment = supportFragmentManager.fragmentFactory.instantiate(
-//                classLoader,
-//                pref.fragment)
-//        fragment.arguments = args
-//        fragment.setTargetFragment(caller, 0)
-//
-//        // Replace the existing Fragment with the new Fragment
-//        supportFragmentManager.commit {
-//            setCustomAnimations(
-//                    R.anim.fade_in,
-//                    R.anim.fade_out,
-//                    R.anim.fade_in,
-//                    R.anim.fade_out
-//            )
-//            replace(R.id.fragment_container_view, fragment)
-//            addToBackStack(null)
-//        }
-//        return true
-//    }
+    override fun onPreferenceStartFragment(
+        caller: PreferenceFragmentCompat,
+        pref: Preference
+    ): Boolean {
+        // Instantiate the new Fragment
+        val args = pref.extras
+        val fragment = supportFragmentManager.fragmentFactory.instantiate(
+            classLoader,
+            pref.fragment
+        ).apply {
+            arguments = args
+            // setTargetFragment(caller, 0) // deprecated in java
+        }
+
+        // Replace the existing Fragment with the new Fragment
+        supportFragmentManager.commit {
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            replace(R.id.fragment_container_view, fragment)
+            addToBackStack(null)
+        }
+        return true
+    }
 }
