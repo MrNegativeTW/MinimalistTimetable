@@ -33,6 +33,9 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_homeViewPagerFragment_to_preferenceActivity"
+            app:destination="@id/preferenceActivity" />
     </fragment>
     <fragment
         android:id="@+id/courseEditorFragment"
@@ -55,4 +58,8 @@
             android:id="@+id/deepLink2"
             app:uri="timetable://open_maps_viewer" />
     </fragment>
+    <activity
+        android:id="@+id/preferenceActivity"
+        android:name="com.txwstudio.app.timetable.ui.activity.PreferenceActivity"
+        android:label="PreferenceActivity" />
 </navigation>
