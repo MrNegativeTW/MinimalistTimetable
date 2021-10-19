@@ -9,11 +9,9 @@
     <string name="traffic_schoolMap">Map</string>
     <string name="settings_timetableTitle">Table Name</string>
     <string name="settings_timetableTitleDefaultValue">My Timetable</string>
-    <string name="settings_versionTitle">Version 2.1</string>
     <string name="settings_timetableTitleSummary">Name to show on the main screen</string>
     <string name="settings_contactSummary">Bug Report or feature request.</string>
     <string name="settings_contactTitle">Contact Developers</string>
-    <string name="settings_sectionAbout">About</string>
     <string name="settings_sectionGeneral">General</string>
     <string name="settings_campusMapPickerTitle">Campus Map</string>
     <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
@@ -77,4 +75,6 @@
     <string name="courseViewer_noClassToday">No class today</string>
     <string name="widget_stillInBetaMessage">The widget is still in beta</string>
     <string name="widget_noClassToday">No class today.</string>
+    <string name="settings_sectionOther">Others</string>
+    <string name="settings_aboutTitle">About</string>
 </resources>
