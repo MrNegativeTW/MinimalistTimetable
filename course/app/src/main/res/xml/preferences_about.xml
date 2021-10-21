@@ -2,31 +2,33 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <Preference
-            android:key="prefAbout_version"
-            android:summary="@string/prefAbout_versionSummary"
-            android:title="@string/prefAbout_versionTitle"
-            app:iconSpaceReserved="false" />
-        <Preference
-            android:key="prefAbout_changelog"
-            android:title="@string/prefAbout_changelogTitle"
-            app:iconSpaceReserved="false" />
+    <Preference
+        android:key="prefAbout_version"
+        android:summary="@string/prefAbout_versionSummary"
+        android:title="@string/prefAbout_versionTitle"
+        app:iconSpaceReserved="false" />
 
-<!--        <Preference-->
-<!--            android:key="prefAbout_openSource"-->
-<!--            android:title="@string/prefAbout_openSourceTitle"-->
-<!--            app:iconSpaceReserved="false" />-->
+    <Preference
+        android:key="prefAbout_changelog"
+        android:title="@string/prefAbout_changelogTitle"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false" />
 
-<!--    <PreferenceCategory>-->
-<!--        <Preference-->
-<!--            android:key="prefAbout_officialSite"-->
-<!--            android:summary="https://"-->
-<!--            android:title="網站"-->
-<!--            app:iconSpaceReserved="false" />-->
+    <Preference
+        android:key="prefAbout_openSource"
+        android:title="@string/prefAbout_openSourceTitle"
+        app:iconSpaceReserved="false" />
 
-<!--        <Preference-->
-<!--            android:key="prefAbout_github"-->
-<!--            android:title="GitHub"-->
-<!--            app:iconSpaceReserved="false" />-->
-<!--    </PreferenceCategory>-->
+    <!--    <PreferenceCategory>-->
+    <!--        <Preference-->
+    <!--            android:key="prefAbout_officialSite"-->
+    <!--            android:summary="https://"-->
+    <!--            android:title="網站"-->
+    <!--            app:iconSpaceReserved="false" />-->
+
+    <!--        <Preference-->
+    <!--            android:key="prefAbout_github"-->
+    <!--            android:title="GitHub"-->
+    <!--            app:iconSpaceReserved="false" />-->
+    <!--    </PreferenceCategory>-->
 </PreferenceScreen>
