@@ -26,9 +26,10 @@ Timetable, Campus Map and Calendar<br>
 </div>
 
 ## Preview
-<img src="https://i.imgur.com/vdshJ8X.gif" width="240"><nobr>
-<img src="https://i.imgur.com/kskAiaZ.jpg" width="240"><nobr>
-<img src="https://i.imgur.com/9S6W6BK.gif" width="240">
+<img src="https://play-lh.googleusercontent.com/FYwGrnzU1nv1BB9CmjZP3Z8JTEzcGfG5S37DpezXNnj2WWXNmntaQKyOis8BJnGaLIs=w1920-h947-rw" width="200"><nobr>
+<img src="https://play-lh.googleusercontent.com/tbrTF6tkAtpHTaJCG-gxNK28xuoZQMGaSUOUPqPQyOe3VNQGpOAvLj8mzHEDVij6Sg=w1920-h947-rw" width="200"><nobr>
+<img src="https://play-lh.googleusercontent.com/9q1exfqBIFRzYYEUozpatujyk-CuPhxCn4teRmLCnBG-GTR1hSXV7w4xir3kzXHGjA=w1920-h947-rw" width="200"><nobr>
+<img src="https://play-lh.googleusercontent.com/5IjmQ5Cj1_PJEM3pDJfpI8qjbOP9xBrhCNmZfceAxW1LVLL1tJigghPv7z0DlZx1XCw=w1920-h947-rw" width="200">
 
 ## Features
 **Fast Launch & Fast Close** <br>
