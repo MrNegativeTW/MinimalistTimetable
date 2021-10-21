@@ -96,11 +96,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-//            PREFERENCE_TABLE_TITLE -> {
-//                editTextPreference.summary =
-//                        sharedPreferences?.getString(PREFERENCE_TABLE_TITLE,
-//                                java.lang.String.valueOf(R.string.settings_timetableTitleSummary))
-//            }
             PREFERENCE_THEME -> {
                 val value = sharedPreferences?.getString(PREFERENCE_THEME, "-1")?.toInt()
                 AppCompatDelegate.setDefaultNightMode(value!!)
