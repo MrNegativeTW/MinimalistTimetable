@@ -23,7 +23,7 @@ class PreferencesAboutFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.preferences_about)
+        setPreferencesFromResource(R.xml.preferences_about, rootKey)
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
