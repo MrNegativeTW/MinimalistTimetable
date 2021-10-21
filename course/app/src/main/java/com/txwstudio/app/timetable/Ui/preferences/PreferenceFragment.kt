@@ -27,6 +27,7 @@ private const val PREFERENCE_CALENDAR_PICKER = "pref_schoolCalendarPicker"
 private const val PREFERENCE_MAP_CAL_HELPER = "pref_mapCalHelper"
 const val PREFERENCE_WEEKEND_COL = "pref_weekendCol"
 const val PREFERENCE_WEEKDAY_LENGTH_LONG = "pref_weekdayLengthLong"
+private const val PREFERENCE_BUG_REPORT = "pref_bugReport"
 
 const val PREFERENCE_NAME_MAP_REQUEST = "schoolMapPath"
 const val PREFERENCE_NAME_CALENDAR_REQUEST = "schoolCalendarPath"
@@ -85,8 +86,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             PREFERENCE_MAP_PICKER -> showPicker(REQUEST_CODE_MAP)
             PREFERENCE_CALENDAR_PICKER -> showPicker(REQUEST_CODE_CALENDAR)
             PREFERENCE_MAP_CAL_HELPER -> showDialog(PREFERENCE_MAP_CAL_HELPER)
-
-            "pref_bugReport" -> {
+            PREFERENCE_BUG_REPORT -> {
                 val customTabsIntent = CustomTabsIntent.Builder().build()
                 customTabsIntent.launchUrl(requireContext(), Uri.parse(BUG_REPORT_LINK))
             }
