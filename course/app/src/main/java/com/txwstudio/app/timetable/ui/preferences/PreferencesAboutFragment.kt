@@ -11,6 +11,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.mikepenz.aboutlibraries.Libs
 import com.txwstudio.app.timetable.R
+import com.txwstudio.app.timetable.BuildConfig
 
 private const val PREFERENCE_ABOUT_VERSION = "prefAbout_version"
 private const val PREFERENCE_ABOUT_CHANGELOG = "prefAbout_changelog"
@@ -28,6 +29,8 @@ class PreferencesAboutFragment : PreferenceFragmentCompat(),
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences_about, rootKey)
+
+        findPreference<Preference>(PREFERENCE_ABOUT_VERSION)?.summary = BuildConfig.VERSION_NAME
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {

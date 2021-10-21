@@ -4,7 +4,6 @@
 
     <Preference
         android:key="prefAbout_version"
-        android:summary="@string/prefAbout_versionSummary"
         android:title="@string/prefAbout_versionTitle"
         app:iconSpaceReserved="false" />
 
