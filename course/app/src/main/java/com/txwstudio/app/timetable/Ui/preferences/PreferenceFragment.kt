@@ -27,8 +27,6 @@ private const val PREFERENCE_CALENDAR_PICKER = "pref_schoolCalendarPicker"
 private const val PREFERENCE_MAP_CAL_HELPER = "pref_mapCalHelper"
 const val PREFERENCE_WEEKEND_COL = "pref_weekendCol"
 const val PREFERENCE_WEEKDAY_LENGTH_LONG = "pref_weekdayLengthLong"
-private const val PREFERENCE_TEACHER_COL = "pref_teacherCol"
-private const val PREFERENCE_CHANGELOG = "pref_changelog"
 
 const val PREFERENCE_NAME_MAP_REQUEST = "schoolMapPath"
 const val PREFERENCE_NAME_CALENDAR_REQUEST = "schoolCalendarPath"
