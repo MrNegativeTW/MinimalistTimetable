@@ -1,6 +1,7 @@
 package com.txwstudio.app.timetable.ui.preferences
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
@@ -11,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.preference.Preference
@@ -39,9 +41,47 @@ private const val REQUEST_CODE_CALENDAR = 1
 private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
 
 class PreferenceFragment : PreferenceFragmentCompat(),
-        Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+    Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var prefManager: SharedPreferences
+
+    private val getMapContract = registerForActivityResult(MyContract()) { documentUri ->
+        if (documentUri == null) {
+            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+        } else {
+            //  Persist the permission across restarts.
+            requireActivity().contentResolver.takePersistableUriPermission(
+                documentUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            // Save the document to [SharedPreferences].
+            prefManager.edit().putString(
+                PREFERENCE_NAME_MAP_REQUEST,
+                documentUri.toString()
+            ).commit()
+        }
+    }
+
+    private val getCalendarContract = registerForActivityResult(MyContract()) { documentUri ->
+        if (documentUri == null) {
+            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+        } else {
+            //  Persist the permission across restarts.
+            requireActivity().contentResolver.takePersistableUriPermission(
+                documentUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            createShortcut(documentUri)
+
+            // Save the document to [SharedPreferences].
+            prefManager.edit().putString(
+                PREFERENCE_NAME_CALENDAR_REQUEST,
+                documentUri.toString()
+            ).commit()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,6 +101,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     /**
      * Handle file section, invoked by showPicker().
+     *
+     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
      * */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -83,8 +125,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         when (preference?.key) {
-            PREFERENCE_MAP_PICKER -> showPicker(REQUEST_CODE_MAP)
-            PREFERENCE_CALENDAR_PICKER -> showPicker(REQUEST_CODE_CALENDAR)
+            PREFERENCE_MAP_PICKER -> getMapContract.launch(REQUEST_CODE_MAP)
+            PREFERENCE_CALENDAR_PICKER -> getCalendarContract.launch(REQUEST_CODE_CALENDAR)
             PREFERENCE_MAP_CAL_HELPER -> showDialog(PREFERENCE_MAP_CAL_HELPER)
             PREFERENCE_BUG_REPORT -> {
                 val customTabsIntent = CustomTabsIntent.Builder().build()
@@ -105,6 +147,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     /**
      * Start an activity for picking file
+     *
+     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
      * */
     private fun showPicker(requestCode: Int) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -144,6 +188,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
      *
      * @param requestCode Receive code and decide which preference to write.
      * @param data File uri
+     *
+     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
      */
     private fun handleSelectedFile(requestCode: Int, data: Intent) {
         val prefName = when (requestCode) {
@@ -167,8 +213,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             requireActivity().contentResolver.takePersistableUriPermission(fileUri!!, takeFlags)
             val filePath = fileUri.toString()
 
-            /**Old method, remove soon. */
-//            String filePath = Util.getPath(getContext(), fileUri);
             val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
             val editor = prefs.edit()
             editor.putString(prefName, filePath)
@@ -181,6 +225,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     /**
      * Create shortcut it user set calendar path.
+     *
+     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
      * */
     private fun createShortcut(data: Intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -198,4 +244,50 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             shortcutManager.dynamicShortcuts = Arrays.asList(shortcut)
         }
     }
+
+    /**
+     * Create shortcut if user set calendar path.
+     */
+    private fun createShortcut(documentUri: Uri) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            val shortcutManager = requireContext().getSystemService(ShortcutManager::class.java)
+            val shortcut = ShortcutInfo.Builder(context, "calendarShortcut")
+                .setShortLabel(getString(R.string.menuCalendar))
+                .setLongLabel(getString(R.string.menuCalendar))
+                .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
+                .setIntent(
+                    Intent(Intent.ACTION_VIEW)
+                        .setDataAndType(documentUri, "application/pdf")
+                        .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                )
+                .build()
+            shortcutManager.dynamicShortcuts = listOf(shortcut)
+        }
+    }
+}
+
+/**
+ * For picking up file.
+ * */
+class MyContract : ActivityResultContract<Int, Uri?>() {
+
+    override fun createIntent(context: Context, input: Int?): Intent {
+        return Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type = when (input) {
+                REQUEST_CODE_MAP -> "image/*"
+                REQUEST_CODE_CALENDAR -> "application/pdf"
+                else -> "image/*"
+            }
+            putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+        }
+    }
+
+    override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+        if (resultCode != Activity.RESULT_OK) {
+            return null
+        }
+        return intent?.data
+    }
+
 }
