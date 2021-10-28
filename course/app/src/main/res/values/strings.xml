@@ -99,17 +99,19 @@
     <string name="widget_stillInBetaMessage">小工具為測試版</string>
     <!-- [End] Widget -->
 
-    <!-- File Read Error Msg -->
+    <!-- [Start] Preference File Message -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
+    <!-- [End] Preference File Message -->
 
-    <!-- Campus Map Error Msg -->
-    <string name="campusMapErrorMsg">[設定] -> [自訂學校地圖] 選擇你的圖片
-    </string>
+    <!-- [Start] Maps Viewer Fragment -->
+    <string name="campusMapErrorMsg">[設定] -> [自訂學校地圖] 選擇你的圖片</string>
+    <!-- [End] Maps Viewer Fragment -->
 
-    <!-- PDF Error Msg -->
+    <!-- [Start] PDF Error Message -->
     <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
+    <!-- [End] PDF Error Message -->
 
     <!-- Common -->
     <string name="all_confirm">確認</string>
