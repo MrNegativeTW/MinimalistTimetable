@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="@string/settings_sectionGeneral">
@@ -10,7 +10,8 @@
             android:key="tableTitle_Pref"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="@string/settings_timetableTitle" />
+            android:title="@string/settings_timetableTitle"
+            app:useSimpleSummaryProvider="true" />
 
         <ListPreference
             android:defaultValue="-1"
@@ -61,7 +62,7 @@
             android:title="@string/settings_weekdayLengthLongTitle" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_sectionAbout">
+    <PreferenceCategory android:title="@string/settings_sectionOther">
 
         <Preference
             android:icon="@drawable/ic_bug_24dp"
@@ -70,11 +71,11 @@
             android:title="@string/settings_contactTitle" />
 
         <Preference
-            android:icon="@drawable/ic_code_24dp"
-            android:key="pref_changelog"
-            android:summary="@string/settings_versionSummary"
-            android:title="@string/settings_versionTitle"
+            android:icon="@drawable/ic_info_outline_24dp"
+            android:key="pref_gotoAboutPage"
+            android:summary="@string/settings_aboutSummary"
+            android:title="@string/settings_aboutTitle"
             app:fragment="com.txwstudio.app.timetable.ui.preferences.PreferencesAboutFragment" />
     </PreferenceCategory>
 
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

@@ -4,9 +4,14 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import com.mikepenz.aboutlibraries.LibsBuilder
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.mikepenz.aboutlibraries.Libs
 import com.txwstudio.app.timetable.R
+import com.txwstudio.app.timetable.BuildConfig
 
 private const val PREFERENCE_ABOUT_VERSION = "prefAbout_version"
 private const val PREFERENCE_ABOUT_CHANGELOG = "prefAbout_changelog"
@@ -23,7 +28,9 @@ class PreferencesAboutFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.preferences_about)
+        setPreferencesFromResource(R.xml.preferences_about, rootKey)
+
+        findPreference<Preference>(PREFERENCE_ABOUT_VERSION)?.summary = BuildConfig.VERSION_NAME
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
@@ -34,7 +41,19 @@ class PreferencesAboutFragment : PreferenceFragmentCompat(),
         val customTabsIntent = CustomTabsIntent.Builder().build()
         when (preference?.key) {
             PREFERENCE_ABOUT_CHANGELOG -> customTabsIntent.launchUrl(requireContext(), Uri.parse(CHANGELOG_LINK))
-            PREFERENCE_ABOUT_OPEN_SOURCE -> customTabsIntent.launchUrl(requireContext(), Uri.parse(OPEN_SOURCE_LINK))
+            PREFERENCE_ABOUT_OPEN_SOURCE -> {
+                val fragment = LibsBuilder()
+                    .withFields(R.string::class.java.fields) // in some cases it may be needed to provide the R class, if it can not be automatically resolved
+                    .withLibraryModification("aboutlibraries", Libs.LibraryFields.LIBRARY_NAME, "_AboutLibraries") // optionally apply modifications for library information
+                    .supportFragment()
+                requireActivity().supportFragmentManager.commit {
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    replace(R.id.fragment_container_view, fragment)
+                    setReorderingAllowed(true)
+                    addToBackStack("name")
+                }
+
+            }
             PREFERENCE_ABOUT_OFFICIAL_SITE -> customTabsIntent.launchUrl(requireContext(), Uri.parse(OFFICIAL_SITE_LINK))
             PREFERENCE_ABOUT_GITHUB -> customTabsIntent.launchUrl(requireContext(), Uri.parse(GITHUB_LINK))
         }

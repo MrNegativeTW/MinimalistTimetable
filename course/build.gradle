@@ -6,26 +6,31 @@ buildscript {
         // App dependencies
         coroutinesVersion = '1.4.2'
         gradleVersion = '4.2.2'
-        kotlinVersion = '1.5.20'
+        kotlinVersion = '1.5.31'
         roomVersion = '2.3.0'
+        latestAboutLibsRelease = '8.9.4'
     }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+        classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:$latestAboutLibsRelease"
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
 }

@@ -1,5 +1,6 @@
 package com.txwstudio.app.timetable
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
@@ -103,7 +104,13 @@ class HomeViewPagerFragment : Fragment() {
                 return true
             }
             R.id.menuSettings -> {
-                startActivity(Intent(requireContext(), PreferenceActivity::class.java))
+                val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
+                findNavController().navigate(a)
+                /**
+                 * Maybe use startActivityForResult
+                 * {@link #getPrefValue}
+                 * */
+//                startActivity(Intent(requireContext(), PreferenceActivity::class.java))
                 return true
             }
             else -> super.onOptionsItemSelected(item)

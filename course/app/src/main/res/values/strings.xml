@@ -53,7 +53,7 @@
     <string name="dialogPositiveButton">真的</string>
     <string name="dialogNegativeButton">假的</string>
 
-    <!-- [Start] Preference Activity -->
+    <!-- [Start] Preference Fragment -->
     <string name="settings_sectionGeneral">一般</string>
     <string name="settings_timetableTitle">課表名稱</string>
     <string name="settings_timetableTitleSummary">我的課表</string>
@@ -81,36 +81,37 @@
     <string name="settings_weekdayLengthLongTitle">顯示完整星期名稱</string>
     <string name="settings_weekdayLengthLongSummary">例如：「星期一」</string>
 
-    <string name="settings_sectionAbout">關於</string>
+    <string name="settings_sectionOther">其他</string>
     <string name="settings_contactTitle">聯繫作者</string>
     <string name="settings_contactSummary">Bug 回報、功能請求</string>
-    <string name="settings_versionTitle">版本 2.1</string>
-    <string name="settings_versionSummary" translatable="false">Made with ❤ in Taiwan</string>
-    <!-- [End] Preference Activity -->
+    <string name="settings_aboutTitle">關於</string>
+    <string name="settings_aboutSummary" translatable="false">Made with ❤ in Taiwan</string>
+    <!-- [End] Preference Fragment -->
 
-    <!-- [Start] Preference About Activity -->
+    <!-- [Start] Preference About Fragment -->
     <string name="prefAbout_versionTitle">版本</string>
-    <string name="prefAbout_versionSummary" translatable="false">v2.1-release</string>
     <string name="prefAbout_changelogTitle">更新日誌</string>
     <string name="prefAbout_openSourceTitle">開放原始碼授權</string>
-    <!-- [End] Preference About Activity End -->
+    <!-- [End] Preference About Fragment -->
 
     <!-- [Start] Widget -->
     <string name="widget_noClassToday">今天沒課</string>
     <string name="widget_stillInBetaMessage">小工具為測試版</string>
     <!-- [End] Widget -->
 
-    <!-- File Read Error Msg -->
+    <!-- [Start] Preference File Message -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
+    <!-- [End] Preference File Message -->
 
-    <!-- Campus Map Error Msg -->
-    <string name="campusMapErrorMsg">[設定] -> [自訂學校地圖] 選擇你的圖片
-    </string>
+    <!-- [Start] Maps Viewer Fragment -->
+    <string name="campusMapErrorMsg">[設定] -> [自訂學校地圖] 選擇你的圖片</string>
+    <!-- [End] Maps Viewer Fragment -->
 
-    <!-- PDF Error Msg -->
+    <!-- [Start] PDF Error Message -->
     <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
     <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
+    <!-- [End] PDF Error Message -->
 
     <!-- Common -->
     <string name="all_confirm">確認</string>
