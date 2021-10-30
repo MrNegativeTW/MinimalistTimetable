@@ -19,7 +19,7 @@ private const val PREFERENCE_ABOUT_OPEN_SOURCE = "prefAbout_openSource"
 private const val PREFERENCE_ABOUT_OFFICIAL_SITE = "prefAbout_officialSite"
 private const val PREFERENCE_ABOUT_GITHUB = "prefAbout_github"
 
-private const val CHANGELOG_LINK = "https://github.com/MrNegativeTW/MinimalistTimetable/blob/master/CHANGELOG.md"
+private const val CHANGELOG_LINK = "https://github.com/MrNegativeTW/MinimalistTimetable/releases"
 private const val OPEN_SOURCE_LINK = "prefAbout_openSource"
 private const val OFFICIAL_SITE_LINK = "prefAbout_officialSite"
 private const val GITHUB_LINK = "https://github.com/MrNegativeTW/MinimalistTimetable"
