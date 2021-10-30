@@ -54,10 +54,16 @@ System Default, Light or Dark.
 Don't spend time on landscape screen.
 
 ## Dev Requirement
-- Android Studio 4.2.1
-- Gradle Version: 6.7.1
-- Android Gradle Plugin Version: 4.2.1
+- Android Studio Arctic Fox | 2020.3.1
+- Gradle Version: 7.0.2
+- Android Gradle Plugin Version: 7.0.3
 - A dummy file called `apikey.properties`
+  ```
+  APP_AD_ID=ca-app-pub-3940256099942544~3347511713
+  ADD_COURSE_AD_ID=ca-app-pub-3940256099942544/6300978111
+  EDIT_COURSE_AD_ID=ca-app-pub-3940256099942544/6300978111
+  COURSE_EDITOR_AD_ID=ca-app-pub-3940256099942544/6300978111
+  ```
 
 ## License
 ```
