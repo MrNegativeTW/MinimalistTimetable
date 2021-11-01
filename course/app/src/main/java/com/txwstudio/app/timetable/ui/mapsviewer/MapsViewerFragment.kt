@@ -38,6 +38,7 @@ class MapsViewerFragment : Fragment() {
         mapPath?.isNotEmpty().let {
             if (it == true) {
                 binding.textViewMapsViewerFragMapsNotFound.visibility = View.INVISIBLE
+                // TODO(May cause crash if the image doesn't exist)
                 binding.touchImageView.setImageURI(mapUri)
             }
         }
