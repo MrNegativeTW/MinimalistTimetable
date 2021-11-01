@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.txwstudio.app.timetable.databinding.FragmentMapsViewerBinding
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_MAP_REQUEST
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_MAP_PATH
 
 /**
  * Implementation of TouchImageView.
@@ -31,7 +31,7 @@ class MapsViewerFragment : Fragment() {
         binding = FragmentMapsViewerBinding.inflate(inflater, container, false)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val mapPath = prefs.getString(PREFERENCE_NAME_MAP_REQUEST, "")
+        val mapPath = prefs.getString(PREFERENCE_MAP_PATH, "")
 
         val mapUri = Uri.parse(mapPath)
 
