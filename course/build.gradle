@@ -20,10 +20,12 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.0'
+        classpath 'com.google.gms:google-services:4.3.10' // Loads google-service.json
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:$latestAboutLibsRelease"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
