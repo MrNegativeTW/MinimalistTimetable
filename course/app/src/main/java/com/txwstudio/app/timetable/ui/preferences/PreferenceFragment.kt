@@ -32,7 +32,7 @@ const val PREFERENCE_WEEKDAY_LENGTH_LONG = "pref_weekdayLengthLong"
 private const val PREFERENCE_BUG_REPORT = "pref_bugReport"
 
 const val PREFERENCE_MAP_PATH = "schoolMapPath"
-const val PREFERENCE_NAME_CALENDAR_REQUEST = "schoolCalendarPath"
+const val PREFERENCE_CALENDAR_PATH = "schoolCalendarPath"
 private const val PREFERENCE_NAME_EMPTY = "ohThisIsAEmptySlot"
 
 private const val REQUEST_CODE_MAP = 0
@@ -77,7 +77,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
             // Save the document to [SharedPreferences].
             prefManager.edit().putString(
-                PREFERENCE_NAME_CALENDAR_REQUEST,
+                PREFERENCE_CALENDAR_PATH,
                 documentUri.toString()
             ).commit()
         }
@@ -197,7 +197,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 PREFERENCE_MAP_PATH
             }
             REQUEST_CODE_CALENDAR -> {
-                PREFERENCE_NAME_CALENDAR_REQUEST
+                PREFERENCE_CALENDAR_PATH
             }
             else -> PREFERENCE_NAME_EMPTY
         }
