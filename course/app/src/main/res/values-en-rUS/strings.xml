@@ -81,4 +81,5 @@
     <string name="settings_sectionOther">Others</string>
     <string name="settings_aboutTitle">About</string>
     <string name="mapImageNotSetIconContentDescription">A magnifying glass icon with a huge x</string>
+    <string name="mapImageNotSetTitle">File not set or not found</string>
 </resources>
