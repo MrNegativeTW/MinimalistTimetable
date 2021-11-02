@@ -74,7 +74,7 @@ class MapsViewerFragment : Fragment() {
     private fun checkMapImageExistsThenSetImage(mapImageUri: Uri) {
         DocumentFile.fromSingleUri(requireContext(), mapImageUri)?.exists()?.let {
             if (it) {
-                binding.textViewMapsViewerFragMapsNotFound.visibility = View.INVISIBLE
+                binding.linearLayoutMapsViewerFragImageNotSet.visibility = View.GONE
                 binding.touchImageView.setImageURI(mapImageUri)
             }
         }

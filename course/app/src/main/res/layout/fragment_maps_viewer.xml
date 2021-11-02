@@ -17,16 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
-        <TextView
-            android:id="@+id/textView_mapsViewerFrag_mapsNotFound"
+        <LinearLayout
+            android:id="@+id/linearLayout_mapsViewerFrag_imageNotSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp"
-            android:text="@string/campusMapErrorMsg" />
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:contentDescription="@string/mapImageNotSetIconContentDescription"
+                android:src="@drawable/ic_baseline_search_off_24" />
+
+            <TextView
+                android:id="@+id/textView_mapsViewerFrag_imageNotSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/mapImageNotSetMessage"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
