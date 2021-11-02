@@ -16,7 +16,10 @@
     <string name="settings_campusMapPickerTitle">Campus Map</string>
     <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
     <string name="all_save">Save</string>
-    <string name="campusMapErrorMsg">[Settings] -> [Campus Map] and select your image.</string>
+    <string name="mapImageNotSetMessage">
+        1. Go to \"Settings\".
+        \n2. Click on \"Campus Map\".
+        \n3. Select your image.</string>
     <string name="menuMap">Map</string>
     <string name="menuCalendar">Calendar</string>
     <string name="settings_schoolCalendarPickerTitle">Calendar</string>
@@ -77,4 +80,6 @@
     <string name="widget_noClassToday">No class today.</string>
     <string name="settings_sectionOther">Others</string>
     <string name="settings_aboutTitle">About</string>
+    <string name="mapImageNotSetIconContentDescription">A magnifying glass icon with a huge x</string>
+    <string name="mapImageNotSetTitle">File not set or not found</string>
 </resources>

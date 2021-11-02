@@ -1,6 +1,5 @@
 package com.txwstudio.app.timetable
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
@@ -15,8 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
-import com.txwstudio.app.timetable.ui.activity.PreferenceActivity
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_NAME_CALENDAR_REQUEST
+import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_CALENDAR_PATH
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
@@ -127,7 +125,7 @@ class HomeViewPagerFragment : Fragment() {
         )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
-        prefCalendarPath = sharedPref.getString(PREFERENCE_NAME_CALENDAR_REQUEST, "")!!
+        prefCalendarPath = sharedPref.getString(PREFERENCE_CALENDAR_PATH, "")!!
     }
 
     /**
