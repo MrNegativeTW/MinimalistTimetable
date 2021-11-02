@@ -15,6 +15,11 @@
     <string name="menuSettings">設定</string>
     <!-- [End] Home page menu -->
 
+    <!-- [Start] Maps Viewer Fragment -->
+    <string name="mapImageNotSetIconContentDescription">打著叉叉符號的放大鏡</string>
+    <string name="mapImageNotSetMessage">1. 前往「設定」\n2. 點擊「學校地圖」\n3. 選擇你的圖檔</string>
+    <!-- [End] Maps Viewer Fragment -->
+
     <!-- [Start] Course Viewer -->
     <string name="courseViewer_noClassToday">今天沒課，回去睡覺</string>
     <string name="courseViewer_iconZzzDescription">睡覺的圖案</string>
@@ -102,10 +107,6 @@
     <!-- [Start] Preference File Message -->
     <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
     <!-- [End] Preference File Message -->
-
-    <!-- [Start] Maps Viewer Fragment -->
-    <string name="campusMapErrorMsg">[設定] -> [自訂學校地圖] 選擇你的圖片</string>
-    <!-- [End] Maps Viewer Fragment -->
 
     <!-- [Start] PDF Error Message -->
     <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
