@@ -110,9 +110,9 @@
     <!-- [End] Preference File Message -->
 
     <!-- [Start] PDF Error Message -->
-    <string name="pdfOpenWithMsg">開啟 PDF 使用</string>
+    <string name="pdfOpenWithMsg">開啟 PDF 使用…</string>
     <string name="pdfNoAppMsg">找不到可開 PDF 的程式，建議安裝 Google 雲端硬碟</string>
-    <string name="pdfFileNotFound">PDF 可能移位了，找不到QQ</string>
+    <string name="pdfFileNotFound">PDF 可能被刪除了，找不到QQ</string>
     <!-- [End] PDF Error Message -->
 
     <!-- Common -->

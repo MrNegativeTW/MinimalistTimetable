@@ -25,7 +25,7 @@
     <string name="settings_schoolCalendarPickerTitle">Calendar</string>
     <string name="settings_schoolCalendarPickerSummary">Support PDF</string>
     <string name="pdfNoAppMsg">Install Google Drive first</string>
-    <string name="pdfOpenWithMsg">Open PDF with</string>
+    <string name="pdfOpenWithMsg">Open PDF with…</string>
     <string name="dialogNegativeButton">Hell No</string>
     <string name="dialogPositiveButton">Of Course</string>
     <string name="dialogConfirmExit">Are you sure you want to EXIT?</string>
