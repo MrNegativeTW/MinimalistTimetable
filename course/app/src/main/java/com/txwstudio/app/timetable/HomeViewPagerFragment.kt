@@ -58,6 +58,8 @@ class HomeViewPagerFragment : Fragment() {
     ): View {
         binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
 
+        setupToolBar()
+
         // Fab, one thing it does very well is to close your app.
         binding.fabHomeFrag.setOnClickListener { requireActivity().finish() }
 
@@ -71,7 +73,7 @@ class HomeViewPagerFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getPrefValue()
-        setupToolBar()
+        updateToolbarTitle()
         setupTabLayoutAndViewPager()
         openTodayTimetable()
     }
@@ -128,13 +130,18 @@ class HomeViewPagerFragment : Fragment() {
     }
 
     /**
-     * Set support action and it's title, also enable options menu.
+     * Set support action bar and options menu.
      * */
     private fun setupToolBar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
-        (activity as AppCompatActivity).supportActionBar!!.title = prefTableTitle
-
         setHasOptionsMenu(true)
+    }
+
+    /**
+     * Update toolbar's title.
+     * */
+    private fun updateToolbarTitle() {
+        (activity as AppCompatActivity).supportActionBar!!.title = prefTableTitle
     }
 
     /**
