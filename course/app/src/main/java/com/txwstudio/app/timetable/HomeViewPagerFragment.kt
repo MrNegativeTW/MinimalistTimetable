@@ -162,9 +162,8 @@ class HomeViewPagerFragment : Fragment() {
      * Get day of the week, start from SUNDAY (int == 1), then open the tab belongs today.
      * */
     private fun openTodayTimetable() {
-        val c = Calendar.getInstance()
-        val date = c[Calendar.DAY_OF_WEEK]
-        binding.viewPagerHomeFrag.setCurrentItem(if (date == 1) 8 else date - 2, false)
+        val dayOfWeek = Calendar.getInstance()[Calendar.DAY_OF_WEEK]
+        binding.viewPagerHomeFrag.setCurrentItem(if (dayOfWeek == 1) 8 else dayOfWeek - 2, false)
     }
 
     /**
