@@ -88,17 +88,17 @@ class HomeViewPagerFragment : Fragment() {
                         currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
                     )
                 findNavController().navigate(a)
-                return true
+                true
             }
             R.id.menuMap -> {
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
                 findNavController().navigate(a)
-                return true
+                true
             }
             R.id.menuCalendar -> {
                 openCalendar()
-                return true
+                true
             }
             R.id.menuSettings -> {
                 val a =
@@ -109,7 +109,7 @@ class HomeViewPagerFragment : Fragment() {
                  * {@link #getPrefValue}
                  * */
 //                startActivity(Intent(requireContext(), PreferenceActivity::class.java))
-                return true
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }
