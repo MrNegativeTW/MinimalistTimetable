@@ -43,6 +43,8 @@ class HomeViewPagerFragment : Fragment() {
     private var prefWeekendCol = false
     private var prefWeekdayLengthLong = false
 
+    private var isNeedOpenToday = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -75,7 +77,7 @@ class HomeViewPagerFragment : Fragment() {
         getPrefValue()
         updateToolbarTitle()
         setupTabLayoutAndViewPager()
-        openTodayTimetable()
+        if (isNeedOpenToday) openTodayTimetable() else isNeedOpenToday = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -85,6 +87,7 @@ class HomeViewPagerFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
+                isNeedOpenToday = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
                         currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
@@ -93,16 +96,19 @@ class HomeViewPagerFragment : Fragment() {
                 true
             }
             R.id.menuMap -> {
+                isNeedOpenToday = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
                 findNavController().navigate(a)
                 true
             }
             R.id.menuCalendar -> {
+                isNeedOpenToday = false
                 openCalendar()
                 true
             }
             R.id.menuSettings -> {
+                isNeedOpenToday = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
                 findNavController().navigate(a)
