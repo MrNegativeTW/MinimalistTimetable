@@ -42,7 +42,6 @@ class HomeViewPagerFragment : Fragment() {
     private lateinit var prefTableTitle: String
     private var prefWeekendCol = false
     private var prefWeekdayLengthLong = false
-    private lateinit var prefCalendarPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +101,8 @@ class HomeViewPagerFragment : Fragment() {
                 return true
             }
             R.id.menuSettings -> {
-                val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
+                val a =
+                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
                 findNavController().navigate(a)
                 /**
                  * Maybe use startActivityForResult
@@ -125,7 +125,6 @@ class HomeViewPagerFragment : Fragment() {
         )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
-        prefCalendarPath = sharedPref.getString(PREFERENCE_CALENDAR_PATH, "")!!
     }
 
     /**
@@ -172,7 +171,8 @@ class HomeViewPagerFragment : Fragment() {
      * Create an intent chooser to open calendar.
      * */
     private fun openCalendar() {
-        val uri = Uri.parse(prefCalendarPath)
+        val calendarPath = sharedPref.getString(PREFERENCE_CALENDAR_PATH, "")!!
+        val uri = Uri.parse(calendarPath)
 
         val target = Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(uri, CALENDAR_DATA_TYPE)
