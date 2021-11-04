@@ -18,7 +18,7 @@ import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_CALENDAR_PATH
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
-import com.txwstudio.app.timetable.utilities.CALENDAR_DATA_TYPE
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -175,7 +175,7 @@ class HomeViewPagerFragment : Fragment() {
         val uri = Uri.parse(calendarPath)
 
         val target = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, CALENDAR_DATA_TYPE)
+            setDataAndType(uri, DATA_TYPE_CALENDAR)
             flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }

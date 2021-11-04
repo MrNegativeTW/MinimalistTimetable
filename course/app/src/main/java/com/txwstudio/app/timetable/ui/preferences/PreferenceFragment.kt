@@ -20,8 +20,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.CALENDAR_DATA_TYPE
-import com.txwstudio.app.timetable.utilities.MAPS_DATA_TYPE
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_MAPS
 import java.util.*
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
@@ -277,9 +277,9 @@ class MyContract : ActivityResultContract<Int, Uri?>() {
     override fun createIntent(context: Context, input: Int?): Intent {
         return Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = when (input) {
-                REQUEST_CODE_MAP -> MAPS_DATA_TYPE
-                REQUEST_CODE_CALENDAR -> CALENDAR_DATA_TYPE
-                else -> MAPS_DATA_TYPE
+                REQUEST_CODE_MAP -> DATA_TYPE_MAPS
+                REQUEST_CODE_CALENDAR -> DATA_TYPE_CALENDAR
+                else -> DATA_TYPE_MAPS
             }
             putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         }
