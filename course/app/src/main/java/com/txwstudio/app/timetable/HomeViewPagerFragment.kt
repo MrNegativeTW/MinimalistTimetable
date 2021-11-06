@@ -65,7 +65,17 @@ class HomeViewPagerFragment : Fragment() {
         // Fab, one thing it does very well is to close your app.
         binding.fabHomeFrag.setOnClickListener { requireActivity().finish() }
 
+        sharedPref.registerOnSharedPreferenceChangeListener(this)
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getPrefValue()
+        updateToolbarTitle()
+        setupTabLayoutAndViewPager()
+        openTodayTimetable()
     }
 
     /**
@@ -74,10 +84,16 @@ class HomeViewPagerFragment : Fragment() {
      * */
     override fun onResume() {
         super.onResume()
-        getPrefValue()
-        updateToolbarTitle()
-        setupTabLayoutAndViewPager()
-        if (isNeedOpenToday) openTodayTimetable() else isNeedOpenToday = true
+//        getPrefValue()
+//        updateToolbarTitle()
+//        setupTabLayoutAndViewPager()
+//        openTodayTimetable()
+//        if (isNeedOpenToday) openTodayTimetable() else isNeedOpenToday = true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sharedPref.unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -87,7 +103,6 @@ class HomeViewPagerFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuAdd -> {
-                isNeedOpenToday = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
                         currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
@@ -96,19 +111,16 @@ class HomeViewPagerFragment : Fragment() {
                 true
             }
             R.id.menuMap -> {
-                isNeedOpenToday = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
                 findNavController().navigate(a)
                 true
             }
             R.id.menuCalendar -> {
-                isNeedOpenToday = false
                 openCalendar()
                 true
             }
             R.id.menuSettings -> {
-                isNeedOpenToday = false
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
                 findNavController().navigate(a)
@@ -120,6 +132,22 @@ class HomeViewPagerFragment : Fragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    /**
+     * Called everytime when shared preference changed.
+     */
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        getPrefValue()
+        when (key) {
+            PREFERENCE_TABLE_TITLE -> {
+                updateToolbarTitle()
+            }
+            PREFERENCE_WEEKEND_COL, PREFERENCE_WEEKDAY_LENGTH_LONG -> {
+                setupTabLayoutAndViewPager()
+                openTodayTimetable()
+            }
         }
     }
 
