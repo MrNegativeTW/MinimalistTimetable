@@ -9,7 +9,7 @@ const val PLANT_DATA_FILENAME = "plants.json"
 const val INTENT_EXTRA_COURSE_ID = "course_id"
 const val INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE = -1
 
-const val MAPS_DATA_TYPE = "image/*"
-const val CALENDAR_DATA_TYPE = "application/pdf"
+const val DATA_TYPE_MAPS = "image/*"
+const val DATA_TYPE_CALENDAR = "application/pdf"
 
 const val INTENT_TIMETABLE_CHANGED = "com.txwstudio.app.timetable.TIMETABLE_CHANGED"

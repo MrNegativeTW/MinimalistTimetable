@@ -14,11 +14,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_CALENDAR_PATH
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
-import com.txwstudio.app.timetable.utilities.CALENDAR_DATA_TYPE
+import com.txwstudio.app.timetable.ui.preferences.*
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,12 +23,14 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+private const val THREE_MINUTES_IN_MILLIS = 1800000
+
 /**
  * A simple [Fragment] subclass.
  * Use the [HomeViewPagerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeViewPagerFragment : Fragment() {
+class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -42,7 +41,6 @@ class HomeViewPagerFragment : Fragment() {
     private lateinit var prefTableTitle: String
     private var prefWeekendCol = false
     private var prefWeekdayLengthLong = false
-    private lateinit var prefCalendarPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,22 +57,40 @@ class HomeViewPagerFragment : Fragment() {
     ): View {
         binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
 
+        // Set toolbar and options menu
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
+        setHasOptionsMenu(true)
+
         // Fab, one thing it does very well is to close your app.
         binding.fabHomeFrag.setOnClickListener { requireActivity().finish() }
+
+        // Listen for preference change.
+        sharedPref.registerOnSharedPreferenceChangeListener(this)
 
         return binding.root
     }
 
-    /**
-     * TODO: Fix wired UX, it opens today's timetable when onResume.
-     * Bad experience when after added the course.
-     * */
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getPrefValue()
-        setupToolBar()
+        updateToolbarTitle()
         setupTabLayoutAndViewPager()
         openTodayTimetable()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        openTodayAfterIdleFor3Minutes()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveLastTimeUsedTimestamp()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sharedPref.unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -89,34 +105,52 @@ class HomeViewPagerFragment : Fragment() {
                         currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
                     )
                 findNavController().navigate(a)
-                return true
+                true
             }
             R.id.menuMap -> {
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
                 findNavController().navigate(a)
-                return true
+                true
             }
             R.id.menuCalendar -> {
                 openCalendar()
-                return true
+                true
             }
             R.id.menuSettings -> {
-                val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
+                val a =
+                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
                 findNavController().navigate(a)
                 /**
                  * Maybe use startActivityForResult
                  * {@link #getPrefValue}
                  * */
 //                startActivity(Intent(requireContext(), PreferenceActivity::class.java))
-                return true
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     /**
-     * Get preference value in order to decide what UI should to be present.
+     * Detect preference change to update UI. Called everytime when shared preference changed.
+     */
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        // Get updated preference value
+        getPrefValue()
+        when (key) {
+            PREFERENCE_TABLE_TITLE -> {
+                updateToolbarTitle()
+            }
+            PREFERENCE_WEEKEND_COL, PREFERENCE_WEEKDAY_LENGTH_LONG -> {
+                setupTabLayoutAndViewPager()
+                openTodayTimetable()
+            }
+        }
+    }
+
+    /**
+     * Get the latest preference value.
      * */
     private fun getPrefValue() {
         prefTableTitle = sharedPref.getString(
@@ -125,17 +159,13 @@ class HomeViewPagerFragment : Fragment() {
         )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
-        prefCalendarPath = sharedPref.getString(PREFERENCE_CALENDAR_PATH, "")!!
     }
 
     /**
-     * Set support action and it's title, also enable options menu.
+     * Update toolbar's title.
      * */
-    private fun setupToolBar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
+    private fun updateToolbarTitle() {
         (activity as AppCompatActivity).supportActionBar!!.title = prefTableTitle
-
-        setHasOptionsMenu(true)
     }
 
     /**
@@ -163,19 +193,40 @@ class HomeViewPagerFragment : Fragment() {
      * Get day of the week, start from SUNDAY (int == 1), then open the tab belongs today.
      * */
     private fun openTodayTimetable() {
-        val c = Calendar.getInstance()
-        val date = c[Calendar.DAY_OF_WEEK]
-        binding.viewPagerHomeFrag.setCurrentItem(if (date == 1) 8 else date - 2, false)
+        val dayOfWeek = Calendar.getInstance()[Calendar.DAY_OF_WEEK]
+        binding.viewPagerHomeFrag.setCurrentItem(if (dayOfWeek == 1) 8 else dayOfWeek - 2, false)
+    }
+
+    /**
+     * Compare last time used timestamp and current timestamp, if greater than 3 minutes,
+     * open today's timetable.
+     */
+    private fun openTodayAfterIdleFor3Minutes() {
+        val currentTimeStamp = Calendar.getInstance().timeInMillis
+        val lastTimUse = sharedPref.getLong(PREFERENCE_LAST_TIME_USE, 0)
+        val idleTime = currentTimeStamp - lastTimUse
+        if (idleTime > THREE_MINUTES_IN_MILLIS) {
+            openTodayTimetable()
+        }
+    }
+
+    /**
+     * Called when onPause() to record the last timestamp.
+     */
+    private fun saveLastTimeUsedTimestamp() {
+        val currentTimeStamp = Calendar.getInstance().timeInMillis
+        sharedPref.edit().putLong(PREFERENCE_LAST_TIME_USE, currentTimeStamp).apply()
     }
 
     /**
      * Create an intent chooser to open calendar.
      * */
     private fun openCalendar() {
-        val uri = Uri.parse(prefCalendarPath)
+        val calendarPath = sharedPref.getString(PREFERENCE_CALENDAR_PATH, "")!!
+        val uri = Uri.parse(calendarPath)
 
         val target = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, CALENDAR_DATA_TYPE)
+            setDataAndType(uri, DATA_TYPE_CALENDAR)
             flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
