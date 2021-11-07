@@ -36,6 +36,7 @@ private const val PREFERENCE_BUG_REPORT = "pref_bugReport"
 const val PREFERENCE_MAP_PATH = "schoolMapPath"
 const val PREFERENCE_CALENDAR_PATH = "schoolCalendarPath"
 private const val PREFERENCE_NAME_EMPTY = "ohThisIsAEmptySlot"
+const val PREFERENCE_LAST_TIME_USE = "pref_lastTimeUse"
 
 private const val REQUEST_CODE_MAP = 0
 private const val REQUEST_CODE_CALENDAR = 1

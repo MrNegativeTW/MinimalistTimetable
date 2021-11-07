@@ -14,10 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_CALENDAR_PATH
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_TABLE_TITLE
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKDAY_LENGTH_LONG
-import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_WEEKEND_COL
+import com.txwstudio.app.timetable.ui.preferences.*
 import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
 import java.util.*
 
@@ -25,6 +22,8 @@ import java.util.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+private const val THREE_MINUTES_IN_MILLIS = 1800000
 
 /**
  * A simple [Fragment] subclass.
@@ -60,11 +59,14 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     ): View {
         binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
 
-        setupToolBar()
+        // Set toolbar and options menu
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
+        setHasOptionsMenu(true)
 
         // Fab, one thing it does very well is to close your app.
         binding.fabHomeFrag.setOnClickListener { requireActivity().finish() }
 
+        // Listen for preference change.
         sharedPref.registerOnSharedPreferenceChangeListener(this)
 
         return binding.root
@@ -84,11 +86,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
      * */
     override fun onResume() {
         super.onResume()
-//        getPrefValue()
-//        updateToolbarTitle()
-//        setupTabLayoutAndViewPager()
-//        openTodayTimetable()
-//        if (isNeedOpenToday) openTodayTimetable() else isNeedOpenToday = true
+        openTodayAfterIdleFor3Minutes()
     }
 
     override fun onDestroyView() {
@@ -136,9 +134,10 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     }
 
     /**
-     * Called everytime when shared preference changed.
+     * Detect preference change to update UI. Called everytime when shared preference changed.
      */
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        // Get updated preference value
         getPrefValue()
         when (key) {
             PREFERENCE_TABLE_TITLE -> {
@@ -152,7 +151,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     }
 
     /**
-     * Get preference value in order to decide what UI should to be present.
+     * Get the latest preference value.
      * */
     private fun getPrefValue() {
         prefTableTitle = sharedPref.getString(
@@ -161,14 +160,6 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
-    }
-
-    /**
-     * Set support action bar and options menu.
-     * */
-    private fun setupToolBar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
-        setHasOptionsMenu(true)
     }
 
     /**
@@ -205,6 +196,16 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     private fun openTodayTimetable() {
         val dayOfWeek = Calendar.getInstance()[Calendar.DAY_OF_WEEK]
         binding.viewPagerHomeFrag.setCurrentItem(if (dayOfWeek == 1) 8 else dayOfWeek - 2, false)
+    }
+
+    private fun openTodayAfterIdleFor3Minutes() {
+        val currentTimeStamp = Calendar.getInstance().timeInMillis
+        val lastTimUse = sharedPref.getLong(PREFERENCE_LAST_TIME_USE, 0)
+        val idleTime = currentTimeStamp - lastTimUse
+        if (idleTime > THREE_MINUTES_IN_MILLIS) {
+            openTodayTimetable()
+        }
+        sharedPref.edit().putLong(PREFERENCE_LAST_TIME_USE, currentTimeStamp).apply()
     }
 
     /**
