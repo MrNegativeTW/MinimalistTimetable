@@ -80,13 +80,14 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         openTodayTimetable()
     }
 
-    /**
-     * TODO: Fix wired UX, it opens today's timetable when onResume.
-     * Bad experience when after added the course.
-     * */
     override fun onResume() {
         super.onResume()
         openTodayAfterIdleFor3Minutes()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveLastTimeUsedTimestamp()
     }
 
     override fun onDestroyView() {
@@ -198,6 +199,10 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         binding.viewPagerHomeFrag.setCurrentItem(if (dayOfWeek == 1) 8 else dayOfWeek - 2, false)
     }
 
+    /**
+     * Compare last time used timestamp and current timestamp, if greater than 3 minutes,
+     * open today's timetable.
+     */
     private fun openTodayAfterIdleFor3Minutes() {
         val currentTimeStamp = Calendar.getInstance().timeInMillis
         val lastTimUse = sharedPref.getLong(PREFERENCE_LAST_TIME_USE, 0)
@@ -205,6 +210,13 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         if (idleTime > THREE_MINUTES_IN_MILLIS) {
             openTodayTimetable()
         }
+    }
+
+    /**
+     * Called when onPause() to record the last timestamp.
+     */
+    private fun saveLastTimeUsedTimestamp() {
+        val currentTimeStamp = Calendar.getInstance().timeInMillis
         sharedPref.edit().putLong(PREFERENCE_LAST_TIME_USE, currentTimeStamp).apply()
     }
 
