@@ -42,8 +42,6 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     private var prefWeekendCol = false
     private var prefWeekdayLengthLong = false
 
-    private var isNeedOpenToday = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
