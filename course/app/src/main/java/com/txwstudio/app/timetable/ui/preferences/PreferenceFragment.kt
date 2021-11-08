@@ -89,7 +89,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
-//        PreferenceManager.setDefaultValues(requireContext(), R.xml.preferences, false)
     }
 
     override fun onResume() {
@@ -236,12 +235,16 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             val fileUri = data.data
             val shortcutManager = requireContext().getSystemService(ShortcutManager::class.java)
             val shortcut = ShortcutInfo.Builder(context, "calendarShortcut")
-                    .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
-                    .setIntent(Intent(Intent.ACTION_VIEW)
-                            .setDataAndType(fileUri, "application/pdf")
-                            .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION))
-                    .build()
+                .setShortLabel(getString(R.string.menuCalendar))
+                .setLongLabel(getString(R.string.menuCalendar))
+                .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
+                .setIntent(
+                    Intent(Intent.ACTION_VIEW)
+                        .setDataAndType(fileUri, "application/pdf")
+                        .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                )
+                .build()
             shortcutManager.dynamicShortcuts = Arrays.asList(shortcut)
         }
     }
@@ -258,7 +261,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
                 .setIntent(
                     Intent(Intent.ACTION_VIEW)
-                        .setDataAndType(documentUri, "application/pdf")
+                        .setDataAndType(documentUri, DATA_TYPE_CALENDAR)
                         .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 )
