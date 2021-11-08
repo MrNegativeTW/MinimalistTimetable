@@ -98,6 +98,9 @@
     <string name="prefAbout_versionTitle">版本</string>
     <string name="prefAbout_changelogTitle">更新日誌</string>
     <string name="prefAbout_openSourceTitle">開放原始碼授權</string>
+    <string name="prefAbout_termsOfService">服務條款</string>
+    <string name="prefAbout_privacyPolicy">隱私權政策</string>
+    <string name="prefAbout_license">版權聲明</string>
     <!-- [End] Preference About Fragment -->
 
     <!-- [Start] Widget -->

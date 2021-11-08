@@ -236,8 +236,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             val fileUri = data.data
             val shortcutManager = requireContext().getSystemService(ShortcutManager::class.java)
             val shortcut = ShortcutInfo.Builder(context, "calendarShortcut")
-                    .setShortLabel(getString(R.string.menuCalendar))
-                    .setLongLabel(getString(R.string.menuCalendar))
                     .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
                     .setIntent(Intent(Intent.ACTION_VIEW)
                             .setDataAndType(fileUri, "application/pdf")
