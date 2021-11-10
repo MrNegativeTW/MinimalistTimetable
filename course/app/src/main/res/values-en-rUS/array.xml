@@ -28,4 +28,9 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string-array name="settings_fabActionEntries">
+        <item>Close app</item>
+        <item>Open map</item>
+        <item>Open calendar</item>
+    </string-array>
 </resources>

@@ -26,6 +26,7 @@ import java.util.*
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 const val PREFERENCE_THEME = "pref_theme"
+const val PREFERENCE_FAB_ACTION = "pref_fabAction"
 private const val PREFERENCE_MAP_PICKER = "pref_campusMapPicker"
 private const val PREFERENCE_CALENDAR_PICKER = "pref_schoolCalendarPicker"
 private const val PREFERENCE_MAP_CAL_HELPER = "pref_mapCalHelper"

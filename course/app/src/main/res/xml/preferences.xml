@@ -21,6 +21,14 @@
             android:key="pref_theme"
             android:summary="%s"
             android:title="@string/settings_themeTitle" />
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_fabActionEntries"
+            android:entryValues="@array/settings_fabActionEntriesValues"
+            android:key="pref_fabAction"
+            android:summary="%s"
+            android:title="@string/settings_fabActionTitle" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_sectionMapCalendar">

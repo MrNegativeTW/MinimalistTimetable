@@ -23,6 +23,9 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+private const val FAB_ACTION_DEFAULT = "-1"
+private const val FAB_ACTION_OPEN_MAP = "1"
+private const val FAB_ACTION_OPEN_CALENDAR = "2"
 private const val THREE_MINUTES_IN_MILLIS = 1800000
 
 /**
@@ -61,9 +64,6 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
         setHasOptionsMenu(true)
 
-        // Fab, one thing it does very well is to close your app.
-        binding.fabHomeFrag.setOnClickListener { requireActivity().finish() }
-
         // Listen for preference change.
         sharedPref.registerOnSharedPreferenceChangeListener(this)
 
@@ -73,6 +73,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getPrefValue()
+        updateFabActionAndImage()
         updateToolbarTitle()
         setupTabLayoutAndViewPager()
         openTodayTimetable()
@@ -108,9 +109,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
                 true
             }
             R.id.menuMap -> {
-                val a =
-                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
-                findNavController().navigate(a)
+                openMapsViewer()
                 true
             }
             R.id.menuCalendar -> {
@@ -134,6 +133,9 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         // Get updated preference value
         getPrefValue()
         when (key) {
+            PREFERENCE_FAB_ACTION -> {
+                updateFabActionAndImage()
+            }
             PREFERENCE_TABLE_TITLE -> {
                 updateToolbarTitle()
             }
@@ -154,6 +156,31 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         )!!
         prefWeekendCol = sharedPref.getBoolean(PREFERENCE_WEEKEND_COL, false)
         prefWeekdayLengthLong = sharedPref.getBoolean(PREFERENCE_WEEKDAY_LENGTH_LONG, false)
+    }
+
+    /**
+     * Setting up fab, one thing it does very well is to close your app.
+     */
+    private fun updateFabActionAndImage() {
+        val userFabAction = sharedPref.getString(PREFERENCE_FAB_ACTION, FAB_ACTION_DEFAULT)
+
+        // Set fab drawable
+        val drawable = when (userFabAction) {
+            FAB_ACTION_DEFAULT -> R.drawable.ic_exit_24dp
+            FAB_ACTION_OPEN_MAP -> R.drawable.ic_map_24dp
+            FAB_ACTION_OPEN_CALENDAR -> R.drawable.ic_event_note_24dp
+            else -> R.drawable.ic_exit_24dp
+        }
+        binding.fabHomeFrag.setImageResource(drawable)
+
+        // Set fab onClick action
+        binding.fabHomeFrag.setOnClickListener {
+            when (userFabAction) {
+                FAB_ACTION_DEFAULT -> requireActivity().finish()
+                FAB_ACTION_OPEN_MAP -> openMapsViewer()
+                FAB_ACTION_OPEN_CALENDAR -> openCalendar()
+            }
+        }
     }
 
     /**
@@ -211,6 +238,14 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     private fun saveLastTimeUsedTimestamp() {
         val currentTimeStamp = Calendar.getInstance().timeInMillis
         sharedPref.edit().putLong(PREFERENCE_LAST_TIME_USE, currentTimeStamp).apply()
+    }
+
+    /**
+     * Open MapsViewer fragment.
+     */
+    private fun openMapsViewer() {
+        val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
+        findNavController().navigate(a)
     }
 
     /**
