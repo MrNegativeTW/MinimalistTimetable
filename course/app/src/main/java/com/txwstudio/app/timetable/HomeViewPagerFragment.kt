@@ -108,9 +108,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
                 true
             }
             R.id.menuMap -> {
-                val a =
-                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
-                findNavController().navigate(a)
+                openMapsViewer()
                 true
             }
             R.id.menuCalendar -> {
@@ -211,6 +209,14 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     private fun saveLastTimeUsedTimestamp() {
         val currentTimeStamp = Calendar.getInstance().timeInMillis
         sharedPref.edit().putLong(PREFERENCE_LAST_TIME_USE, currentTimeStamp).apply()
+    }
+
+    /**
+     * Open MapsViewer fragment.
+     */
+    private fun openMapsViewer() {
+        val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
+        findNavController().navigate(a)
     }
 
     /**
