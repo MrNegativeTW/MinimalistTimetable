@@ -28,4 +28,14 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string-array name="settings_fabActionEntries">
+        <item>關閉程式</item>
+        <item>開啟地圖</item>
+        <item>開啟日曆</item>
+    </string-array>
+    <string-array name="settings_fabActionEntriesValues">
+        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
