@@ -121,11 +121,6 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
                 val a =
                     HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
                 findNavController().navigate(a)
-                /**
-                 * Maybe use startActivityForResult
-                 * {@link #getPrefValue}
-                 * */
-//                startActivity(Intent(requireContext(), PreferenceActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

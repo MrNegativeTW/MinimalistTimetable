@@ -18,16 +18,21 @@
         android:title="@string/prefAbout_openSourceTitle"
         app:iconSpaceReserved="false" />
 
-    <!--    <PreferenceCategory>-->
-    <!--        <Preference-->
-    <!--            android:key="prefAbout_officialSite"-->
-    <!--            android:summary="https://"-->
-    <!--            android:title="網站"-->
-    <!--            app:iconSpaceReserved="false" />-->
+    <Preference
+        android:key="prefAbout_termsOfService"
+        android:title="@string/prefAbout_termsOfService"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false" />
 
-    <!--        <Preference-->
-    <!--            android:key="prefAbout_github"-->
-    <!--            android:title="GitHub"-->
-    <!--            app:iconSpaceReserved="false" />-->
-    <!--    </PreferenceCategory>-->
+    <Preference
+        android:key="prefAbout_privacyPolicy"
+        android:title="@string/prefAbout_privacyPolicy"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false" />
+
+    <Preference
+        android:key="prefAbout_license"
+        android:title="@string/prefAbout_license"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false" />
 </PreferenceScreen>

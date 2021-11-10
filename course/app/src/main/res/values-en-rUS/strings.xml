@@ -82,4 +82,7 @@
     <string name="settings_aboutTitle">About</string>
     <string name="mapImageNotSetIconContentDescription">A magnifying glass icon with a huge x</string>
     <string name="mapImageNotSetTitle">File not set or not found</string>
+    <string name="prefAbout_termsOfService">Terms of service</string>
+    <string name="prefAbout_privacyPolicy">Privacy Policy</string>
+    <string name="prefAbout_license">License</string>
 </resources>
