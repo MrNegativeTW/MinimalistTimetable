@@ -26,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
 private const val FAB_ACTION_DEFAULT = "-1"
 private const val FAB_ACTION_OPEN_MAP = "1"
 private const val FAB_ACTION_OPEN_CALENDAR = "2"
-private const val THREE_MINUTES_IN_MILLIS = 1800000
+private const val THREE_MINUTES_IN_MILLIS = 180000
 
 /**
  * A simple [Fragment] subclass.
