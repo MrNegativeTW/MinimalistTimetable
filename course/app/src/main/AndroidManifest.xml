@@ -58,7 +58,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <receiver android:name="com.txwstudio.app.timetable.widget.TimetableWidgetProvider">
+        <receiver android:name="com.txwstudio.app.timetable.widget.TimetableWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.intent.action.DATE_CHANGED" />
