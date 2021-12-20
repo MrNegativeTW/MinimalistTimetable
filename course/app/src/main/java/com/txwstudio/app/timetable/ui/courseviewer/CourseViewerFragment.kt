@@ -1,5 +1,6 @@
 package com.txwstudio.app.timetable.ui.courseviewer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
+import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
+import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
 import kotlinx.coroutines.flow.collect
 
 private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
@@ -82,8 +85,15 @@ class CourseViewerFragment : Fragment() {
             courseViewerViewModel.courseViewerEvent.collect { event ->
                 when (event) {
                     is CourseViewerViewModel.CourseViewerEvent.ShowUndoDeleteMessage -> {
+                        // Show message
                         Snackbar.make(requireView(), R.string.dialogDeleted, Snackbar.LENGTH_LONG)
                             .show()
+
+                        // Update widget
+                        val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
+                            action = INTENT_TIMETABLE_CHANGED
+                        }
+                        requireContext().sendBroadcast(intent)
                     }
                 }
             }
