@@ -170,7 +170,7 @@ class CourseEditorViewModelFactory(
 ) :
     ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CourseEditorViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return CourseEditorViewModel(repository, courseId, currentViewPagerItem) as T

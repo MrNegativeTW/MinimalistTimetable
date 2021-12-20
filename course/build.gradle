@@ -4,10 +4,10 @@ buildscript {
 
     ext {
         // App dependencies
-        coroutinesVersion = '1.4.2'
+        coroutinesVersion = '1.5.0'
         gradleVersion = '7.0.3'
-        kotlinVersion = '1.5.31'
-        roomVersion = '2.3.0'
+        kotlinVersion = '1.6.0'
+        roomVersion = '2.4.0'
         latestAboutLibsRelease = '8.9.4'
     }
 
@@ -22,7 +22,7 @@ buildscript {
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
         classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.0'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
         classpath 'com.google.gms:google-services:4.3.10' // Loads google-service.json
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:$latestAboutLibsRelease"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
