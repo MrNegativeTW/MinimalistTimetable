@@ -102,22 +102,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         super.onPause()
     }
 
-    /**
-     * Handle file section, invoked by showPicker().
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     * */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            handleSelectedFile(requestCode, data)
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(requireActivity(), R.string.all_cancel, Toast.LENGTH_SHORT).show()
-        } else if (data == null) {
-            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
     }
@@ -146,22 +130,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 AppCompatDelegate.setDefaultNightMode(value!!)
             }
         }
-    }
-
-    /**
-     * Start an activity for picking file
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     * */
-    private fun showPicker(requestCode: Int) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-        intent.type = when (requestCode) {
-            REQUEST_CODE_MAP -> "image/*"
-            REQUEST_CODE_CALENDAR -> "application/pdf"
-            else -> "image/*"
-        }
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-        startActivityForResult(intent, requestCode)
     }
 
     /**
@@ -205,7 +173,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             else -> PREFERENCE_NAME_EMPTY
         }
 
-        if (requestCode == REQUEST_CODE_CALENDAR) createShortcut(data)
+//        if (requestCode == REQUEST_CODE_CALENDAR) createShortcut(data)
 
         try {
             val fileUri = data.data
@@ -222,31 +190,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             editor.commit()
         } catch (e: Exception) {
             Toast.makeText(activity, R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
-    /**
-     * Create shortcut it user set calendar path.
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     * */
-    private fun createShortcut(data: Intent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-            val fileUri = data.data
-            val shortcutManager = requireContext().getSystemService(ShortcutManager::class.java)
-            val shortcut = ShortcutInfo.Builder(context, "calendarShortcut")
-                .setShortLabel(getString(R.string.menuCalendar))
-                .setLongLabel(getString(R.string.menuCalendar))
-                .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
-                .setIntent(
-                    Intent(Intent.ACTION_VIEW)
-                        .setDataAndType(fileUri, "application/pdf")
-                        .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                )
-                .build()
-            shortcutManager.dynamicShortcuts = Arrays.asList(shortcut)
         }
     }
 
