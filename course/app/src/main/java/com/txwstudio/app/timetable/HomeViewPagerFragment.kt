@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
 import com.txwstudio.app.timetable.ui.preferences.*
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -256,7 +256,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         val uri = Uri.parse(calendarPath)
 
         val target = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, DATA_TYPE_CALENDAR)
+            setDataAndType(uri, DATA_TYPE_PDF)
             flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }

@@ -20,9 +20,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_MAPS
-import java.util.*
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 const val PREFERENCE_THEME = "pref_theme"
@@ -205,7 +204,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
                 .setIntent(
                     Intent(Intent.ACTION_VIEW)
-                        .setDataAndType(documentUri, DATA_TYPE_CALENDAR)
+                        .setDataAndType(documentUri, DATA_TYPE_PDF)
                         .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 )
@@ -223,9 +222,9 @@ class MyContract : ActivityResultContract<Int, Uri?>() {
     override fun createIntent(context: Context, input: Int?): Intent {
         return Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = when (input) {
-                REQUEST_CODE_MAP -> DATA_TYPE_MAPS
-                REQUEST_CODE_CALENDAR -> DATA_TYPE_CALENDAR
-                else -> DATA_TYPE_MAPS
+                REQUEST_CODE_MAP -> DATA_TYPE_IMAGE
+                REQUEST_CODE_CALENDAR -> DATA_TYPE_PDF
+                else -> DATA_TYPE_IMAGE
             }
             putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         }
