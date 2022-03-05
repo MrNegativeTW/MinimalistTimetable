@@ -20,8 +20,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
 import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 const val PREFERENCE_THEME = "pref_theme"
@@ -33,12 +33,14 @@ const val PREFERENCE_WEEKEND_COL = "pref_weekendCol"
 const val PREFERENCE_WEEKDAY_LENGTH_LONG = "pref_weekdayLengthLong"
 private const val PREFERENCE_BUG_REPORT = "pref_bugReport"
 
+const val PREFERENCE_MAP_DATA_TYPE = "schoolMapDataType"
 const val PREFERENCE_MAP_PATH = "schoolMapPath"
 const val PREFERENCE_CALENDAR_PATH = "schoolCalendarPath"
 private const val PREFERENCE_NAME_EMPTY = "ohThisIsAEmptySlot"
 const val PREFERENCE_LAST_TIME_USE = "pref_lastTimeUse"
 
-private const val REQUEST_CODE_MAP = 0
+private const val REQUEST_CODE_MAP_IMAGE = 0
+private const val REQUEST_CODE_MAP_PDF = 2
 private const val REQUEST_CODE_CALENDAR = 1
 
 private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
@@ -48,7 +50,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     private lateinit var prefManager: SharedPreferences
 
-    private val getMapContract = registerForActivityResult(MyContract()) { documentUri ->
+    private val getMapImageContract = registerForActivityResult(MyContract()) { documentUri ->
         if (documentUri == null) {
             Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
         } else {
@@ -59,10 +61,24 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             )
 
             // Save the document to [SharedPreferences].
-            prefManager.edit().putString(
-                PREFERENCE_MAP_PATH,
-                documentUri.toString()
-            ).commit()
+            prefManager.edit().putString(PREFERENCE_MAP_DATA_TYPE, DATA_TYPE_IMAGE).commit()
+            prefManager.edit().putString(PREFERENCE_MAP_PATH, documentUri.toString()).commit()
+        }
+    }
+
+    private val getMapPDFContract = registerForActivityResult(MyContract()) { documentUri ->
+        if (documentUri == null) {
+            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+        } else {
+            //  Persist the permission across restarts.
+            requireActivity().contentResolver.takePersistableUriPermission(
+                documentUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            // Save the document to [SharedPreferences].
+            prefManager.edit().putString(PREFERENCE_MAP_DATA_TYPE, DATA_TYPE_PDF).commit()
+            prefManager.edit().putString(PREFERENCE_MAP_PATH, documentUri.toString()).commit()
         }
     }
 
@@ -79,10 +95,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             createShortcut(documentUri)
 
             // Save the document to [SharedPreferences].
-            prefManager.edit().putString(
-                PREFERENCE_CALENDAR_PATH,
-                documentUri.toString()
-            ).commit()
+            prefManager.edit().putString(PREFERENCE_CALENDAR_PATH, documentUri.toString()).commit()
         }
     }
 
@@ -111,7 +124,19 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         when (preference?.key) {
-            PREFERENCE_MAP_PICKER -> getMapContract.launch(REQUEST_CODE_MAP)
+            PREFERENCE_MAP_PICKER -> {
+                val fileCategory = arrayOf("Image", "PDF")
+                MaterialAlertDialogBuilder(requireContext()).apply {
+                    setTitle("選擇類型")
+                    setItems(fileCategory) { _, which ->
+                        when (which) {
+                            0 -> getMapImageContract.launch(REQUEST_CODE_MAP_IMAGE)
+                            1 -> getMapPDFContract.launch(REQUEST_CODE_MAP_PDF)
+                        }
+                    }
+                    show()
+                }
+            }
             PREFERENCE_CALENDAR_PICKER -> getCalendarContract.launch(REQUEST_CODE_CALENDAR)
             PREFERENCE_MAP_CAL_HELPER -> showDialog(PREFERENCE_MAP_CAL_HELPER)
             PREFERENCE_BUG_REPORT -> {
@@ -163,7 +188,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
      */
     private fun handleSelectedFile(requestCode: Int, data: Intent) {
         val prefName = when (requestCode) {
-            REQUEST_CODE_MAP -> {
+            REQUEST_CODE_MAP_IMAGE -> {
                 PREFERENCE_MAP_PATH
             }
             REQUEST_CODE_CALENDAR -> {
@@ -222,8 +247,8 @@ class MyContract : ActivityResultContract<Int, Uri?>() {
     override fun createIntent(context: Context, input: Int?): Intent {
         return Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = when (input) {
-                REQUEST_CODE_MAP -> DATA_TYPE_IMAGE
-                REQUEST_CODE_CALENDAR -> DATA_TYPE_PDF
+                REQUEST_CODE_MAP_IMAGE -> DATA_TYPE_IMAGE
+                REQUEST_CODE_MAP_PDF, REQUEST_CODE_CALENDAR -> DATA_TYPE_PDF
                 else -> DATA_TYPE_IMAGE
             }
             putExtra(Intent.EXTRA_LOCAL_ONLY, true)
