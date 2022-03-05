@@ -253,8 +253,35 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
      * */
     private fun openCalendar() {
         val calendarPath = sharedPref.getString(PREFERENCE_CALENDAR_PATH, "")!!
-        val uri = Uri.parse(calendarPath)
+        openPdfFile(calendarPath)
 
+        // Delete below soon i guess.
+//        val uri = Uri.parse(calendarPath)
+//
+//        val target = Intent(Intent.ACTION_VIEW).apply {
+//            setDataAndType(uri, DATA_TYPE_PDF)
+//            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+//            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//        }
+//
+//        val intent = Intent.createChooser(target, java.lang.String.valueOf(R.string.pdfOpenWithMsg))
+//
+//        try {
+//            startActivity(intent)
+//        } catch (e: ActivityNotFoundException) {
+//            // Suitable app not found.
+//            Snackbar.make(requireView(), R.string.pdfNoAppMsg, Snackbar.LENGTH_SHORT).show()
+//        } catch (e: SecurityException) {
+//            // File not found.
+//            Snackbar.make(requireView(), R.string.pdfFileNotFound, Snackbar.LENGTH_SHORT).show()
+//        } catch (e: Exception) {
+//            // Unknown exception.
+//            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT).show()
+//        }
+    }
+
+    private fun openPdfFile(fileUriInString: String) {
+        val uri = Uri.parse(fileUriInString)
         val target = Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(uri, DATA_TYPE_PDF)
             flags = Intent.FLAG_ACTIVITY_NO_HISTORY
