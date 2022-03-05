@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
 import com.txwstudio.app.timetable.ui.preferences.*
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
 import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
 import java.util.*
 
@@ -244,8 +245,18 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
      * Open MapsViewer fragment.
      */
     private fun openMapsViewer() {
-        val a = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToMapsViewerFragment()
-        findNavController().navigate(a)
+        when (sharedPref.getString(PREFERENCE_MAP_DATA_TYPE, DATA_TYPE_IMAGE)) {
+            DATA_TYPE_IMAGE -> {
+                findNavController().navigate(
+                    HomeViewPagerFragmentDirections
+                        .actionHomeViewPagerFragmentToMapsViewerFragment()
+                )
+            }
+            DATA_TYPE_PDF -> {
+                val mapPdfFileUriInString = sharedPref.getString(PREFERENCE_MAP_PATH, "")
+                openPdfFile(mapPdfFileUriInString!!)
+            }
+        }
     }
 
     /**
