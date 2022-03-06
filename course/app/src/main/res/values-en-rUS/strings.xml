@@ -86,4 +86,5 @@
     <string name="prefAbout_privacyPolicy">Privacy Policy</string>
     <string name="prefAbout_license">License</string>
     <string name="settings_fabActionTitle">FAB action</string>
+    <string name="settings_campusMapPickerDialogTitle">Select file type</string>
 </resources>

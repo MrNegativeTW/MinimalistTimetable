@@ -38,4 +38,8 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string-array name="settings_campusMapPickerFileTypeList">
+        <item>圖片 (JPG, PNG)</item>
+        <item>PDF</item>
+    </string-array>
 </resources>
