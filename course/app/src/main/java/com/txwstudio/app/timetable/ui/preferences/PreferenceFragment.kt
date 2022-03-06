@@ -125,9 +125,10 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         when (preference?.key) {
             PREFERENCE_MAP_PICKER -> {
-                val fileCategory = arrayOf("Image", "PDF")
+                val fileCategory =
+                    resources.getStringArray(R.array.settings_campusMapPickerFileTypeList)
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("選擇類型")
+                    setTitle(R.string.settings_campusMapPickerDialogTitle)
                     setItems(fileCategory) { _, which ->
                         when (which) {
                             0 -> getMapImageContract.launch(REQUEST_CODE_MAP_IMAGE)
