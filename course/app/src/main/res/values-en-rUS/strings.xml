@@ -14,7 +14,7 @@
     <string name="settings_contactTitle">Contact Developers</string>
     <string name="settings_sectionGeneral">General</string>
     <string name="settings_campusMapPickerTitle">Campus Map</string>
-    <string name="settings_campusMapPickerSummary">Support JPG and PNG</string>
+    <string name="settings_campusMapPickerSummary">Support image and PDF</string>
     <string name="all_save">Save</string>
     <string name="mapImageNotSetMessage">
         1. Go to \"Settings\".
@@ -38,7 +38,7 @@
         1. These two are the shortcuts of the map/calendar, they can be accessed from the main screen.
         \n\n2. DO NOT delete/move/rename the file, that will invalid the shortcuts.
         \n\n3. If the size of the photo is too large can cause crashes when opening the map, consider making it smaller.
-        \n\nMap: JPG、PNG\nCalendar: PDF
+        \n\nMap: JPG, PNG and PDF\nCalendar: PDF
     </string>
     <string name="courseEditorActivityTitle">Course Editor</string>
     <string name="courseEditor_titleAdd">Add Course</string>
