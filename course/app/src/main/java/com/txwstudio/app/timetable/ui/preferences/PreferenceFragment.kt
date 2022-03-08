@@ -20,9 +20,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_CALENDAR
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_MAPS
-import java.util.*
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
+import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 const val PREFERENCE_THEME = "pref_theme"
@@ -34,12 +33,14 @@ const val PREFERENCE_WEEKEND_COL = "pref_weekendCol"
 const val PREFERENCE_WEEKDAY_LENGTH_LONG = "pref_weekdayLengthLong"
 private const val PREFERENCE_BUG_REPORT = "pref_bugReport"
 
+const val PREFERENCE_MAP_DATA_TYPE = "schoolMapDataType"
 const val PREFERENCE_MAP_PATH = "schoolMapPath"
 const val PREFERENCE_CALENDAR_PATH = "schoolCalendarPath"
 private const val PREFERENCE_NAME_EMPTY = "ohThisIsAEmptySlot"
 const val PREFERENCE_LAST_TIME_USE = "pref_lastTimeUse"
 
-private const val REQUEST_CODE_MAP = 0
+private const val REQUEST_CODE_MAP_IMAGE = 0
+private const val REQUEST_CODE_MAP_PDF = 2
 private const val REQUEST_CODE_CALENDAR = 1
 
 private const val BUG_REPORT_LINK = "http://bit.ly/timetableFeedback"
@@ -49,7 +50,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     private lateinit var prefManager: SharedPreferences
 
-    private val getMapContract = registerForActivityResult(MyContract()) { documentUri ->
+    private val getMapImageContract = registerForActivityResult(MyContract()) { documentUri ->
         if (documentUri == null) {
             Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
         } else {
@@ -60,10 +61,24 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             )
 
             // Save the document to [SharedPreferences].
-            prefManager.edit().putString(
-                PREFERENCE_MAP_PATH,
-                documentUri.toString()
-            ).commit()
+            prefManager.edit().putString(PREFERENCE_MAP_DATA_TYPE, DATA_TYPE_IMAGE).commit()
+            prefManager.edit().putString(PREFERENCE_MAP_PATH, documentUri.toString()).commit()
+        }
+    }
+
+    private val getMapPDFContract = registerForActivityResult(MyContract()) { documentUri ->
+        if (documentUri == null) {
+            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+        } else {
+            //  Persist the permission across restarts.
+            requireActivity().contentResolver.takePersistableUriPermission(
+                documentUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            // Save the document to [SharedPreferences].
+            prefManager.edit().putString(PREFERENCE_MAP_DATA_TYPE, DATA_TYPE_PDF).commit()
+            prefManager.edit().putString(PREFERENCE_MAP_PATH, documentUri.toString()).commit()
         }
     }
 
@@ -80,10 +95,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             createShortcut(documentUri)
 
             // Save the document to [SharedPreferences].
-            prefManager.edit().putString(
-                PREFERENCE_CALENDAR_PATH,
-                documentUri.toString()
-            ).commit()
+            prefManager.edit().putString(PREFERENCE_CALENDAR_PATH, documentUri.toString()).commit()
         }
     }
 
@@ -102,22 +114,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         super.onPause()
     }
 
-    /**
-     * Handle file section, invoked by showPicker().
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     * */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            handleSelectedFile(requestCode, data)
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(requireActivity(), R.string.all_cancel, Toast.LENGTH_SHORT).show()
-        } else if (data == null) {
-            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
     }
@@ -128,7 +124,20 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         when (preference?.key) {
-            PREFERENCE_MAP_PICKER -> getMapContract.launch(REQUEST_CODE_MAP)
+            PREFERENCE_MAP_PICKER -> {
+                val fileCategory =
+                    resources.getStringArray(R.array.settings_campusMapPickerFileTypeList)
+                MaterialAlertDialogBuilder(requireContext()).apply {
+                    setTitle(R.string.settings_campusMapPickerDialogTitle)
+                    setItems(fileCategory) { _, which ->
+                        when (which) {
+                            0 -> getMapImageContract.launch(REQUEST_CODE_MAP_IMAGE)
+                            1 -> getMapPDFContract.launch(REQUEST_CODE_MAP_PDF)
+                        }
+                    }
+                    show()
+                }
+            }
             PREFERENCE_CALENDAR_PICKER -> getCalendarContract.launch(REQUEST_CODE_CALENDAR)
             PREFERENCE_MAP_CAL_HELPER -> showDialog(PREFERENCE_MAP_CAL_HELPER)
             PREFERENCE_BUG_REPORT -> {
@@ -146,22 +155,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 AppCompatDelegate.setDefaultNightMode(value!!)
             }
         }
-    }
-
-    /**
-     * Start an activity for picking file
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     * */
-    private fun showPicker(requestCode: Int) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-        intent.type = when (requestCode) {
-            REQUEST_CODE_MAP -> "image/*"
-            REQUEST_CODE_CALENDAR -> "application/pdf"
-            else -> "image/*"
-        }
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-        startActivityForResult(intent, requestCode)
     }
 
     /**
@@ -196,7 +189,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
      */
     private fun handleSelectedFile(requestCode: Int, data: Intent) {
         val prefName = when (requestCode) {
-            REQUEST_CODE_MAP -> {
+            REQUEST_CODE_MAP_IMAGE -> {
                 PREFERENCE_MAP_PATH
             }
             REQUEST_CODE_CALENDAR -> {
@@ -205,7 +198,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             else -> PREFERENCE_NAME_EMPTY
         }
 
-        if (requestCode == REQUEST_CODE_CALENDAR) createShortcut(data)
+//        if (requestCode == REQUEST_CODE_CALENDAR) createShortcut(data)
 
         try {
             val fileUri = data.data
@@ -225,31 +218,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         }
     }
 
-
-    /**
-     * Create shortcut it user set calendar path.
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     * */
-    private fun createShortcut(data: Intent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-            val fileUri = data.data
-            val shortcutManager = requireContext().getSystemService(ShortcutManager::class.java)
-            val shortcut = ShortcutInfo.Builder(context, "calendarShortcut")
-                .setShortLabel(getString(R.string.menuCalendar))
-                .setLongLabel(getString(R.string.menuCalendar))
-                .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
-                .setIntent(
-                    Intent(Intent.ACTION_VIEW)
-                        .setDataAndType(fileUri, "application/pdf")
-                        .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                )
-                .build()
-            shortcutManager.dynamicShortcuts = Arrays.asList(shortcut)
-        }
-    }
-
     /**
      * Create shortcut if user set calendar path.
      */
@@ -262,7 +230,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 .setIcon(Icon.createWithResource(context, R.mipmap.ic_event_note))
                 .setIntent(
                     Intent(Intent.ACTION_VIEW)
-                        .setDataAndType(documentUri, DATA_TYPE_CALENDAR)
+                        .setDataAndType(documentUri, DATA_TYPE_PDF)
                         .setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 )
@@ -280,9 +248,9 @@ class MyContract : ActivityResultContract<Int, Uri?>() {
     override fun createIntent(context: Context, input: Int?): Intent {
         return Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = when (input) {
-                REQUEST_CODE_MAP -> DATA_TYPE_MAPS
-                REQUEST_CODE_CALENDAR -> DATA_TYPE_CALENDAR
-                else -> DATA_TYPE_MAPS
+                REQUEST_CODE_MAP_IMAGE -> DATA_TYPE_IMAGE
+                REQUEST_CODE_MAP_PDF, REQUEST_CODE_CALENDAR -> DATA_TYPE_PDF
+                else -> DATA_TYPE_IMAGE
             }
             putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         }

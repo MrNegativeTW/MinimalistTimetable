@@ -69,7 +69,8 @@
 
     <string name="settings_sectionMapCalendar">地圖與行事曆</string>
     <string name="settings_campusMapPickerTitle">學校地圖</string>
-    <string name="settings_campusMapPickerSummary">支援 JPG、PNG</string>
+    <string name="settings_campusMapPickerSummary">支援圖片和 PDF</string>
+    <string name="settings_campusMapPickerDialogTitle">選擇檔案類型</string>
     <string name="settings_schoolCalendarPickerTitle">學校行事曆</string>
     <string name="settings_schoolCalendarPickerSummary">支援 PDF</string>
     <string name="settings_mapCalendarHelperTitle">這什麼?</string>
@@ -77,7 +78,7 @@
         1. 這兩個是開啟地圖和行事曆的捷徑，設定後可從主畫面直接開啟。
         \n\n2. 設定後檔案請勿刪除、移動、重命名，以上方法皆會使捷徑失效。
         \n\n3. 圖檔若過大將導致地圖開啟時崩潰，建議轉檔轉小一點。
-        \n\n地圖支援：JPG、PNG\n行事曆支援：PDF
+        \n\n地圖支援：JPG、PNG、PDF\n行事曆支援：PDF
     </string>
 
     <string name="settings_sectionTimetable">課表</string>
