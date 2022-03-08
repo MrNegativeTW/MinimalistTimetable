@@ -16,8 +16,8 @@ android {
         applicationId "com.txwstudio.app.timetable"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 12
-        versionName "2.2-release"
+        versionCode 13
+        versionName "2.3-beta.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
