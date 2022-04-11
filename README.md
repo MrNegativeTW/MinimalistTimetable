@@ -13,9 +13,9 @@ Timetable, Campus Map and Calendar<br>
   <img  src="https://i.imgur.com/S7MZfQ8.png" />
 </a><br>
 
-![](https://img.shields.io/badge/build-failed,%20just%20like%20everything%20else%20in%20my%20life-red.svg?style=flat-square)
+![](https://img.shields.io/badge/build-failed,%20just%20like%20everything%20else%20in%20your%20life-red.svg?style=flat-square)
 ![](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)
-![](https://img.shields.io/badge/Android%20Studio-Arctic%20Fox%20|%202020.3.1-32DE84?style=flat-square)
+![](https://img.shields.io/badge/Android%20Studio-Bumblebee%20|%202021.1.1-32DE84?style=flat-square)
 ![](https://img.shields.io/badge/Android-6.0+-32DE84?style=flat-square)
 
 <p align="center">
@@ -54,14 +54,12 @@ System Default, Light or Dark.
 Don't spend time on landscape screen.
 
 ## Dev Requirement
-- Android Studio Arctic Fox | 2020.3.1
+- Android Studio Bumblebee | 2021.1.1
 - Gradle Version: 7.0.2
 - Android Gradle Plugin Version: 7.0.3
 - A dummy file called `apikey.properties`
   ```
   APP_AD_ID=ca-app-pub-3940256099942544~3347511713
-  ADD_COURSE_AD_ID=ca-app-pub-3940256099942544/6300978111
-  EDIT_COURSE_AD_ID=ca-app-pub-3940256099942544/6300978111
   COURSE_EDITOR_AD_ID=ca-app-pub-3940256099942544/6300978111
   ```
 
