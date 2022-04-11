@@ -6,8 +6,8 @@ buildscript {
         // App dependencies
         coroutinesVersion = '1.5.0'
         gradleVersion = '7.0.3'
-        kotlinVersion = '1.6.0'
-        roomVersion = '2.4.0'
+        kotlinVersion = '1.6.10'
+        roomVersion = '2.4.2'
         latestAboutLibsRelease = '8.9.4'
     }
 
@@ -20,7 +20,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
         classpath 'com.google.gms:google-services:4.3.10' // Loads google-service.json

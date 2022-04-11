@@ -23,16 +23,12 @@ android {
     buildTypes {
         debug {
             resValue "string", "APP_AD_ID", "ca-app-pub-3940256099942544~3347511713"
-            resValue "string", "ADD_COURSE_AD_ID", "ca-app-pub-3940256099942544/6300978111"
-            resValue "string", "EDIT_COURSE_AD_ID", "ca-app-pub-3940256099942544/6300978111"
             resValue "string", "COURSE_EDITOR_AD_ID", "ca-app-pub-3940256099942544/6300978111"
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string", "APP_AD_ID", apikeyProperties['APP_AD_ID']
-            resValue "string", "ADD_COURSE_AD_ID", apikeyProperties['ADD_COURSE_AD_ID']
-            resValue "string", "EDIT_COURSE_AD_ID", apikeyProperties['EDIT_COURSE_AD_ID']
             resValue "string", "COURSE_EDITOR_AD_ID", apikeyProperties['COURSE_EDITOR_AD_ID']
         }
 
@@ -54,21 +50,21 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation "androidx.fragment:fragment-ktx:1.3.6"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     implementation 'androidx.preference:preference-ktx:1.1.1'
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
