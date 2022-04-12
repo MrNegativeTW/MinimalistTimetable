@@ -67,7 +67,6 @@ class PreferenceActivity : AppCompatActivity(),
             pref.fragment
         ).apply {
             arguments = args
-            // setTargetFragment(caller, 0) // deprecated in java
         }
 
         // Replace the existing Fragment with the new Fragment
