@@ -6,7 +6,7 @@ buildscript {
         // App dependencies
         coroutinesVersion = '1.5.0'
         gradleVersion = '7.0.3'
-        kotlinVersion = '1.6.10'
+        kotlinVersion = '1.6.20'
         roomVersion = '2.4.2'
         latestAboutLibsRelease = '8.9.4'
     }
