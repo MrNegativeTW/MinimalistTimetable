@@ -245,7 +245,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
  * */
 class MyContract : ActivityResultContract<Int, Uri?>() {
 
-    override fun createIntent(context: Context, input: Int?): Intent {
+    override fun createIntent(context: Context, input: Int): Intent {
         return Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = when (input) {
                 REQUEST_CODE_MAP_IMAGE -> DATA_TYPE_IMAGE
