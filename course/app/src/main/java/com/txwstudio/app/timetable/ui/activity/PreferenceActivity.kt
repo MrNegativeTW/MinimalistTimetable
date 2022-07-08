@@ -64,7 +64,7 @@ class PreferenceActivity : AppCompatActivity(),
         val args = pref.extras
         val fragment = supportFragmentManager.fragmentFactory.instantiate(
             classLoader,
-            pref.fragment
+            pref.fragment!!
         ).apply {
             arguments = args
         }
