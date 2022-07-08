@@ -32,13 +32,13 @@ class PreferencesAboutFragment : PreferenceFragmentCompat(), Preference.OnPrefer
         findPreference<Preference>(PREFERENCE_ABOUT_VERSION)?.summary = BuildConfig.VERSION_NAME
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
+    override fun onPreferenceClick(preference: Preference): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
         val customTabsIntent = CustomTabsIntent.Builder().build()
-        when (preference?.key) {
+        when (preference.key) {
             PREFERENCE_ABOUT_CHANGELOG -> customTabsIntent.launchUrl(
                 requireContext(),
                 Uri.parse(CHANGELOG_LINK)
