@@ -32,7 +32,17 @@ android {
             resValue "string", "COURSE_EDITOR_AD_ID", apikeyProperties['COURSE_EDITOR_AD_ID']
         }
 
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def appName = "MinimalistTimetable_"
+                    def versionName = defaultConfig.versionName
+                    def newApkName = appName + "v" + versionName + ".apk"
+                    output.outputFileName = newApkName
+                }
+            }
+        }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
