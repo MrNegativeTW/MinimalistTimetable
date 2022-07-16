@@ -10,12 +10,12 @@ Timetable, Campus Map and Calendar<br>
 </h4>
 
 <a target="_blank" href="https://play.google.com/store/apps/details?id=com.txwstudio.app.timetable&hl=zh_TW">
-  <img  src="https://i.imgur.com/S7MZfQ8.png" />
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="180">
 </a><br>
 
 ![](https://img.shields.io/badge/build-failed,%20just%20like%20everything%20else%20in%20your%20life-red.svg?style=flat-square)
 ![](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)
-![](https://img.shields.io/badge/Android%20Studio-Bumblebee%20|%202021.1.1-32DE84?style=flat-square)
+![](https://img.shields.io/badge/Android%20Studio-Bumblebee%20|%202021.2.1-32DE84?style=flat-square)
 ![](https://img.shields.io/badge/Android-6.0+-32DE84?style=flat-square)
 
 <p align="center">
@@ -32,29 +32,31 @@ Timetable, Campus Map and Calendar<br>
 <img src="https://play-lh.googleusercontent.com/5IjmQ5Cj1_PJEM3pDJfpI8qjbOP9xBrhCNmZfceAxW1LVLL1tJigghPv7z0DlZx1XCw=w1920-h947-rw" width="200">
 
 ## Features
-**Fast Launch & Fast Close** <br>
-Place this app to bottom right corner, then you can tap same position to launch and close.
-
 **Get rid of unnecessary info** <br>
 Only shows the essential information about the course.
 
+**Quick access to Campus Map** <br>
+Freshman? Set your campus map for quick access! <br>
+Support both `JPG/PNG` and `PDF`
+
+**Qucik access to School Calendar** <br>
+Don't spend time finding that school calendar pdf<br>
+Set shortcut now!
+
+**One point Launch & Close** <br>
+Place this app to bottom right corner, then you can tap the same position to launch and close.
+
 **Easy to read** <br>
-Large size text, easy to read when outdoor.
-
-**Campus Map** <br>
-Freshman? Set your campus map for fast access!
-
-**Calendar** <br>
-Shortcuts for calendar access!
+Large text, easy to read when outdoor.
 
 **Dark Theme** <br>
-System Default, Light or Dark.
+Choose between light / dark theme, or follow system.
 
 **Portrait Only** <br>
 Don't spend time on landscape screen.
 
 ## Dev Requirement
-- Android Studio Bumblebee | 2021.1.1
+- Android Studio Bumblebee | 2021.2.1
 - Gradle Version: 7.0.2
 - Android Gradle Plugin Version: 7.0.3
 - A dummy file called `apikey.properties`
