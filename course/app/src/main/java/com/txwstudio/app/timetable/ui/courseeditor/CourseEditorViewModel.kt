@@ -105,7 +105,7 @@ class CourseEditorViewModel(
      * */
     fun saveFired() {
         Log.i(
-            "TESTTT", "${courseName.value} | ${coursePlace.value} | " +
+            TAG, "${courseName.value} | ${coursePlace.value} | " +
                     " | ${courseProf.value} | ${courseWeekday.value}" +
                     " | ${courseBeginTime.value} | ${courseEndTime.value}"
         )
@@ -137,7 +137,7 @@ class CourseEditorViewModel(
                     repository.insertCourse(course)
                     isSavedSuccessfully.value = true
                 } catch (e: Exception){
-                    Log.i("TESTTT", "insert failed")
+                    Log.i(TAG, "insert failed")
                 }
             }
         } else {
@@ -147,10 +147,14 @@ class CourseEditorViewModel(
                     repository.updateCourse(course)
                     isSavedSuccessfully.value = true
                 } catch (e: Exception){
-                    Log.i("TESTTT", "update failed")
+                    Log.i(TAG, "update failed")
                 }
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "CourseEditorViewModel"
     }
 }
 
