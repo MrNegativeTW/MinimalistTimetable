@@ -5,13 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
@@ -26,10 +26,6 @@ import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
  * Implementation of TouchImageView.
  */
 class MapsViewerFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MapsViewerFragment()
-    }
 
     private lateinit var sharedPref: SharedPreferences
 
@@ -46,8 +42,8 @@ class MapsViewerFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = FragmentMapsViewerBinding.inflate(inflater, container, false)
 
@@ -58,21 +54,26 @@ class MapsViewerFragment : Fragment() {
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().navigateUp()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun setupToolBar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarMapsViewerFrag)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setHasOptionsMenu(true)
+
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    android.R.id.home -> {
+                        findNavController().navigateUp()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     /**
@@ -88,8 +89,7 @@ class MapsViewerFragment : Fragment() {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
 
-        val intent =
-            Intent.createChooser(target, java.lang.String.valueOf(R.string.pdfOpenWithMsg))
+        val intent = Intent.createChooser(target, java.lang.String.valueOf(R.string.pdfOpenWithMsg))
 
         try {
             startActivity(intent)
@@ -102,8 +102,7 @@ class MapsViewerFragment : Fragment() {
             Snackbar.make(requireView(), R.string.pdfFileNotFound, Snackbar.LENGTH_SHORT).show()
         } catch (e: Exception) {
             // Unknown exception.
-            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT)
-                .show()
+            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -136,4 +135,8 @@ class MapsViewerFragment : Fragment() {
         }
     }
 
+    companion object {
+        private const val TAG = "MapsViewerFragment"
+        fun newInstance() = MapsViewerFragment()
+    }
 }

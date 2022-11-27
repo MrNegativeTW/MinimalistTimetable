@@ -7,7 +7,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
@@ -61,9 +64,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     ): View {
         binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
 
-        // Set toolbar and options menu
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
-        setHasOptionsMenu(true)
+        setupToolBar()
 
         // Listen for preference change.
         sharedPref.registerOnSharedPreferenceChangeListener(this)
@@ -95,36 +96,42 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         sharedPref.unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-    }
+    private fun setupToolBar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomeFrag)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menuAdd -> {
-                val a =
-                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
-                        currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
-                    )
-                findNavController().navigate(a)
-                true
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_main, menu)
             }
-            R.id.menuMap -> {
-                openMapsViewer()
-                true
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menuAdd -> {
+                        val a =
+                                HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
+                                        currentViewPagerItem = binding.viewPagerHomeFrag.currentItem
+                                )
+                        findNavController().navigate(a)
+                        true
+                    }
+                    R.id.menuMap -> {
+                        openMapsViewer()
+                        true
+                    }
+                    R.id.menuCalendar -> {
+                        openCalendar()
+                        true
+                    }
+                    R.id.menuSettings -> {
+                        val a =
+                                HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
+                        findNavController().navigate(a)
+                        true
+                    }
+                    else -> false
+                }
             }
-            R.id.menuCalendar -> {
-                openCalendar()
-                true
-            }
-            R.id.menuSettings -> {
-                val a =
-                    HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToPreferenceActivity()
-                findNavController().navigate(a)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+        }, viewLifecycleOwner, Lifecycle.State.STARTED)
     }
 
     /**
@@ -292,6 +299,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
     }
 
     companion object {
+        private const val TAG = "HomeViewPagerFragment"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

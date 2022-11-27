@@ -8,8 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.ads.AdRequest
@@ -75,30 +78,30 @@ class CourseEditorFragment : Fragment() {
         binding.adViewCourseEditorFrag.loadAd(adRequest)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.save_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menuSave -> {
-                courseEditorViewModel.saveFired()
-                return true
-            }
-            android.R.id.home -> {
-                exitConfirmDialog()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun setupToolBar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarCourseEditorFrag)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
 
-        setHasOptionsMenu(true)
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.save_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menuSave -> {
+                        courseEditorViewModel.saveFired()
+                        true
+                    }
+                    android.R.id.home -> {
+                        exitConfirmDialog()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         courseEditorViewModel.isEditMode.observe(viewLifecycleOwner) {
             // Set actionBar text base on mode.
@@ -263,5 +266,9 @@ class CourseEditorFragment : Fragment() {
         cal.isLenient = false
 
         return formatter.format(cal.time)
+    }
+
+    companion object {
+        private const val TAG = "CourseEditorFragment"
     }
 }
