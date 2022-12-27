@@ -1,17 +1,20 @@
 package com.txwstudio.app.timetable.ui.courseviewer
 
 import androidx.lifecycle.*
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
+import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class CourseViewerViewModel(
-    private val repository: CourseRepository,
-    private val weekday: Int
-) :
-    ViewModel() {
+    private val repository: CourseRepository, private val weekday: Int
+) : ViewModel() {
 
     private val _courseViewerEventChannel = Channel<CourseViewerEvent>()
     val courseViewerEvent = _courseViewerEventChannel.receiveAsFlow()
@@ -28,22 +31,24 @@ class CourseViewerViewModel(
         _courseViewerEventChannel.send(CourseViewerEvent.ShowUndoDeleteMessage(course))
     }
 
-    sealed class CourseViewerEvent{
-        data class ShowUndoDeleteMessage(val course: Course3): CourseViewerEvent()
+    sealed class CourseViewerEvent {
+        data class ShowUndoDeleteMessage(val course: Course3) : CourseViewerEvent()
     }
-}
 
-class CourseViewerViewModelFactory(
-    private val repository: CourseRepository,
-    private val weekday: Int
-) :
-    ViewModelProvider.Factory {
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                // Get the Application object from extras
+                val application = checkNotNull(this[APPLICATION_KEY])
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CourseViewerViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CourseViewerViewModel(repository, weekday) as T
+                // Create a SavedStateHandle for this ViewModel from extras
+                val savedStateHandle = createSavedStateHandle()
+                val weekday: Int = checkNotNull(savedStateHandle[WHICH_WEEKDAY])
+
+                CourseViewerViewModel(
+                    (application as MyApplication).courseRepository, weekday
+                )
+            }
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

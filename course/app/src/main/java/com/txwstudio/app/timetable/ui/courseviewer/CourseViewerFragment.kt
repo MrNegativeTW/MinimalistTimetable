@@ -9,36 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
-import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
 import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
+import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
-import kotlinx.coroutines.flow.collect
-
-private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
 /**
  * A fragment that Display the classes for the specific day.
  * */
 class CourseViewerFragment : Fragment() {
 
-    companion object {
-        fun newInstance(weekday: Int) = CourseViewerFragment().apply {
-            arguments = Bundle().apply {
-                putInt(WHICH_WEEKDAY, weekday)
-            }
-        }
-    }
-
     private lateinit var binding: FragmentCourseViewerBinding
 
     private val courseViewerViewModel: CourseViewerViewModel by viewModels {
-        CourseViewerViewModelFactory(
-            (requireActivity().application as MyApplication).courseRepository,
-            weekday!!
-        )
+        CourseViewerViewModel.Factory
     }
 
     private var weekday: Int? = 0
@@ -66,18 +52,6 @@ class CourseViewerFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    /**
-     * Because of lifecycle, the code below will not work inside onViewCreated,
-     * therefore I move these into onStart, just like the old one.
-     * */
-    override fun onStart() {
-        super.onStart()
-    }
-
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
         // Display "delete success" message when the course got deleted.
         // From: CodingInFlow
@@ -90,9 +64,10 @@ class CourseViewerFragment : Fragment() {
                             .show()
 
                         // Update widget
-                        val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
-                            action = INTENT_TIMETABLE_CHANGED
-                        }
+                        val intent =
+                            Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
+                                action = INTENT_TIMETABLE_CHANGED
+                            }
                         requireContext().sendBroadcast(intent)
                     }
                 }
@@ -110,4 +85,11 @@ class CourseViewerFragment : Fragment() {
         }
     }
 
+    companion object {
+        fun newInstance(weekday: Int) = CourseViewerFragment().apply {
+            arguments = Bundle().apply {
+                putInt(WHICH_WEEKDAY, weekday)
+            }
+        }
+    }
 }
