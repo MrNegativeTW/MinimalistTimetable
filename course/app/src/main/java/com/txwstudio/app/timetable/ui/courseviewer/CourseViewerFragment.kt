@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.txwstudio.app.timetable.HomeViewPagerFragmentDirections
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
+import com.txwstudio.app.timetable.data.CourseCardAction
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
 import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
 import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
@@ -27,6 +30,7 @@ class CourseViewerFragment : Fragment() {
         CourseViewerViewModel.Factory
     }
 
+    private lateinit var courseCardAdapter: CourseCardAdapter
     private var weekday: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +49,26 @@ class CourseViewerFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        val courseCardAdapter = CourseCardAdapter(courseViewerViewModel)
-        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
+        setupAdapter()
 
         subscribeUi(courseCardAdapter)
         return binding.root
+    }
+
+    private fun setupAdapter() {
+        courseCardAdapter = CourseCardAdapter(courseViewerViewModel) { action, id ->
+            when (action) {
+                CourseCardAction.EDIT -> {
+                    val direction =
+                        HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
+                            courseId = id
+                        )
+                    findNavController().navigate(direction)
+                }
+                CourseCardAction.DELETE -> {}
+            }
+        }
+        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
     }
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
@@ -86,6 +105,7 @@ class CourseViewerFragment : Fragment() {
     }
 
     companion object {
+        private const val TAG = "CourseViewerFragment"
         fun newInstance(weekday: Int) = CourseViewerFragment().apply {
             arguments = Bundle().apply {
                 putInt(WHICH_WEEKDAY, weekday)
