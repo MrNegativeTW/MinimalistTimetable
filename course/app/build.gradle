@@ -11,13 +11,16 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
-    compileSdkVersion 33
+    namespace 'com.txwstudio.app.timetable'
+    compileSdk 33
+
     defaultConfig {
         applicationId "com.txwstudio.app.timetable"
-        minSdkVersion 23
-        targetSdkVersion 33
+        minSdk 23
+        targetSdk 33
         versionCode 15
         versionName "2.3-release"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,7 +57,6 @@ android {
     buildFeatures {
         dataBinding = true
     }
-    namespace 'com.txwstudio.app.timetable'
 }
 
 dependencies {
