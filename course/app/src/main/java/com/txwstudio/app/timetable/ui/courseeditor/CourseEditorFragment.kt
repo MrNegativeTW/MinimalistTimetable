@@ -20,13 +20,11 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
 import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
 import com.txwstudio.app.timetable.utilities.StringUtils
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
-import java.text.SimpleDateFormat
 import java.util.*
 
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0
@@ -37,19 +35,12 @@ private const val TAG_TIME_PICKER_END_TIME = 1
  * */
 class CourseEditorFragment : Fragment() {
 
-    private lateinit var binding: FragmentCourseEditorBinding
-
-    private val viewModel: CourseEditorViewModel by viewModels {
-        CourseEditorViewModelFactory(
-            (requireActivity().application as MyApplication).courseRepository,
-            args.courseId,
-            args.currentViewPagerItem
-        )
-    }
-
+    @Deprecated("Get args from ViewModel factory")
     private val args: CourseEditorFragmentArgs by navArgs()
 
-    private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
+    private val viewModel: CourseEditorViewModel by viewModels {
+        CourseEditorViewModel.Factory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +48,8 @@ class CourseEditorFragment : Fragment() {
             exitConfirmDialog()
         }
     }
+
+    private lateinit var binding: FragmentCourseEditorBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,7 +101,6 @@ class CourseEditorFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         viewModel.isEditMode.observe(viewLifecycleOwner) {
-            // Set actionBar text base on mode.
             (activity as AppCompatActivity).supportActionBar!!.title = if (it) {
                 getString(R.string.courseEditor_titleEdit)
             } else {
@@ -116,6 +108,8 @@ class CourseEditorFragment : Fragment() {
             }
         }
     }
+
+    private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
 
     /**
      * Set weekday selector text by is edit mode or not.
@@ -185,7 +179,7 @@ class CourseEditorFragment : Fragment() {
     }
 
     private fun subscribeViewModelForErrorEvents() {
-        viewModel.courseNameError.observe(viewLifecycleOwner) {
+        viewModel.isCourseNameError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCourseNameEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCourseNameEntry.error =
@@ -195,7 +189,7 @@ class CourseEditorFragment : Fragment() {
             }
         }
 
-        viewModel.coursePlaceError.observe(viewLifecycleOwner) {
+        viewModel.isCoursePlaceError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCoursePlaceEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCoursePlaceEntry.error =
@@ -205,7 +199,7 @@ class CourseEditorFragment : Fragment() {
             }
         }
 
-        viewModel.courseBeginTimeError.observe(viewLifecycleOwner) {
+        viewModel.isCourseBeginTimeError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCourseBeginTimeEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCourseBeginTimeEntry.error =
@@ -215,7 +209,7 @@ class CourseEditorFragment : Fragment() {
             }
         }
 
-        viewModel.courseEndTimeError.observe(viewLifecycleOwner) {
+        viewModel.isCourseEndTimeError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCourseEndTimeEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCourseEndTimeEntry.error =

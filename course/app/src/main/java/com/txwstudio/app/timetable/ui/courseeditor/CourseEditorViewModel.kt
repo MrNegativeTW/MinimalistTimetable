@@ -1,23 +1,41 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
 import android.util.Log
+import androidx.lifecycle.DEFAULT_ARGS_KEY
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
 import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
+import com.txwstudio.app.timetable.utilities.logI
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+/**
+ * As you can see, this is a ViewModel.
+ *
+ * @param repository CourseRepository in this project.
+ * @param courseId Default value is -1, passing course id to get into edit mode.
+ * @param currentViewPagerItem Default value is 0, which is Monday.
+ *                             Passing current viewpager item to automatic set weekday.
+ */
 class CourseEditorViewModel(
     private val repository: CourseRepository,
     private val courseId: Int,
     private val currentViewPagerItem: Int
 ) : ViewModel() {
 
-    var isEditMode = MutableLiveData<Boolean>(false)
+    private val _isEditMode = MutableLiveData<Boolean>()
+    val isEditMode: LiveData<Boolean>
+        get() = _isEditMode
 
     private var courseIdFromDatabase = MutableLiveData<Int>(null)
     var courseName = MutableLiveData<String>()
@@ -27,12 +45,23 @@ class CourseEditorViewModel(
     var courseEndTime = MutableLiveData<String>()
     var courseWeekday = MutableLiveData<Int>(0)
 
-    var courseNameError = MutableLiveData<Boolean>()
-    var coursePlaceError = MutableLiveData<Boolean>()
-    var courseBeginTimeError = MutableLiveData<Boolean>()
-    var courseEndTimeError = MutableLiveData<Boolean>()
-    var courseWeekdayError = MutableLiveData<Boolean>()
-    var courseProfError = MutableLiveData<Boolean>()
+    // [START] Error
+    private val _isCourseNameError = MutableLiveData<Boolean>()
+    val isCourseNameError: LiveData<Boolean>
+        get() = _isCourseNameError
+
+    private val _isCoursePlaceError = MutableLiveData<Boolean>()
+    val isCoursePlaceError: LiveData<Boolean>
+        get() = _isCoursePlaceError
+
+    private val _isCourseBeginTimeError = MutableLiveData<Boolean>()
+    val isCourseBeginTimeError: LiveData<Boolean>
+        get() = _isCourseBeginTimeError
+
+    private val _isCourseEndTimeError = MutableLiveData<Boolean>()
+    val isCourseEndTimeError: LiveData<Boolean>
+        get() = _isCourseEndTimeError
+    // [END] Error
 
     var openTimePicker = MutableLiveData<Boolean>(false)
     var pickBeginOrEnd = MutableLiveData<Int>()
@@ -43,8 +72,8 @@ class CourseEditorViewModel(
 
     init {
         if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
-            // Edit mode, if course id is provided.
-            isEditMode.value = true
+            // Edit mode, if courseId is provided.
+            _isEditMode.value = true
             setupValueForEditing()
         } else {
             // Add mode, no course id is provided.
@@ -130,13 +159,13 @@ class CourseEditorViewModel(
         )
 
         // Done
-        if (isEditMode.value != true) {
+        if (_isEditMode.value != true) {
             // Add Mode
             viewModelScope.launch {
                 try {
                     repository.insertCourse(course)
                     isSavedSuccessfully.value = true
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     Log.i(TAG, "insert failed")
                 }
             }
@@ -146,7 +175,7 @@ class CourseEditorViewModel(
                 try {
                     repository.updateCourse(course)
                     isSavedSuccessfully.value = true
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     Log.i(TAG, "update failed")
                 }
             }
@@ -155,30 +184,22 @@ class CourseEditorViewModel(
 
     companion object {
         private const val TAG = "CourseEditorViewModel"
-    }
-}
 
-/**
- * Factory of Course Editor ViewModel
- *
- * @param repository CourseRepository in this project.
- * @param courseId Default value is -1, passing course id to get into edit mode.
- * @param currentViewPagerItem Default value is 0, which is Monday.
- *                             Passing current viewpager item to automatic set weekday.
- * @return CourseEditorViewModel
- * */
-class CourseEditorViewModelFactory(
-    private val repository: CourseRepository,
-    private val courseId: Int,
-    private val currentViewPagerItem: Int
-) :
-    ViewModelProvider.Factory {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val savedStateHandle = createSavedStateHandle()
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CourseEditorViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CourseEditorViewModel(repository, courseId, currentViewPagerItem) as T
+                val courseRepository = (this[APPLICATION_KEY] as MyApplication).courseRepository
+                val courseId = this[DEFAULT_ARGS_KEY]?.getInt("courseId")
+                val currentViewPagerItem = this[DEFAULT_ARGS_KEY]?.getInt("currentViewPagerItem")
+                logI(TAG, "courseId: $courseId, currentViewPagerItem: $currentViewPagerItem")
+
+                CourseEditorViewModel(
+                    repository = courseRepository,
+                    courseId = courseId!!,
+                    currentViewPagerItem = currentViewPagerItem!!
+                )
+            }
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
