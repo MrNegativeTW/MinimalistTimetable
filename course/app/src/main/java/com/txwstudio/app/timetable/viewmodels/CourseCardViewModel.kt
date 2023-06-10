@@ -2,6 +2,7 @@ package com.txwstudio.app.timetable.viewmodels
 
 import com.txwstudio.app.timetable.data.Course3
 
+@Deprecated("Migrate to ViewBinding")
 class CourseCardViewModel(course3: Course3) {
 
     val course = course3

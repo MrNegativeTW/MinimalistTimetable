@@ -62,7 +62,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
+        binding = FragmentHomeViewPagerBinding.inflate(layoutInflater)
 
         setupToolBar()
 

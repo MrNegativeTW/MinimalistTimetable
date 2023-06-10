@@ -45,7 +45,7 @@ class MapsViewerFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMapsViewerBinding.inflate(inflater, container, false)
+        binding = FragmentMapsViewerBinding.inflate(layoutInflater)
 
         setupToolBar()
 

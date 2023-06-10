@@ -4,6 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
@@ -55,7 +56,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        dataBinding = true
+        viewBinding true
     }
 }
 

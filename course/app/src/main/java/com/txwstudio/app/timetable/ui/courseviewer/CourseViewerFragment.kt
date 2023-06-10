@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.txwstudio.app.timetable.HomeViewPagerFragmentDirections
@@ -44,10 +45,7 @@ class CourseViewerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCourseViewerBinding.inflate(inflater, container, false).apply {
-            viewModel = courseViewerViewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
+        binding = FragmentCourseViewerBinding.inflate(layoutInflater)
 
         setupAdapter()
 
@@ -56,16 +54,18 @@ class CourseViewerFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        courseCardAdapter = CourseCardAdapter(courseViewerViewModel) { action, id ->
+        courseCardAdapter = CourseCardAdapter() { action, course3 ->
             when (action) {
                 CourseCardAction.EDIT -> {
                     val direction =
                         HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
-                            courseId = id
+                            courseId = course3.id!!
                         )
                     findNavController().navigate(direction)
                 }
-                CourseCardAction.DELETE -> {}
+                CourseCardAction.DELETE -> {
+                    courseViewerViewModel.deleteCourse(course3)
+                }
             }
         }
         binding.recyclerViewCourseViewer.adapter = courseCardAdapter
