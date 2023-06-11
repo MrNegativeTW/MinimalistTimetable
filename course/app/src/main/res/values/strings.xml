@@ -18,7 +18,7 @@
     <!-- [Start] Maps Viewer Fragment -->
     <string name="mapImageNotSetIconContentDescription">打著叉叉符號的放大鏡</string>
     <string name="mapImageNotSetTitle">檔案未設定或找不到</string>
-    <string name="mapImageNotSetMessage">1. 前往「設定」\n2. 點擊「學校地圖」\n3. 選擇你的圖檔</string>
+    <string name="mapImageNotSetMessage">1. 前往「設定」\n2. 點擊「選擇地圖檔案」\n3. 選擇你的檔案</string>
     <!-- [End] Maps Viewer Fragment -->
 
     <!-- [Start] Course Viewer -->

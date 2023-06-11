@@ -17,9 +17,9 @@
     <string name="settings_campusMapPickerSummary">Supports image or PDF</string>
     <string name="all_save">Save</string>
     <string name="mapImageNotSetMessage">
-        1. Go to \"Settings\".
-        \n2. Click on \"Campus Map\".
-        \n3. Select your image.</string>
+        1. Go to \"Settings\"
+        \n2. Click on \"Choose map file\"
+        \n3. Choose your file</string>
     <string name="menuMap">Map</string>
     <string name="menuCalendar">Calendar</string>
     <string name="settings_schoolCalendarPickerTitle">Choose calendar file</string>
