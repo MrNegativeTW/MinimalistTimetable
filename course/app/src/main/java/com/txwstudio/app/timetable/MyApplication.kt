@@ -3,6 +3,7 @@ package com.txwstudio.app.timetable
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import com.google.android.material.color.DynamicColors
 import com.txwstudio.app.timetable.data.AppDatabase
 import com.txwstudio.app.timetable.data.CourseRepository
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_THEME
@@ -21,6 +22,8 @@ class MyApplication : Application() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val nightModeValue = sharedPreferences?.getString(PREFERENCE_THEME, "-1")?.toInt()
         AppCompatDelegate.setDefaultNightMode(nightModeValue!!)
+
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 
 }
