@@ -7,14 +7,14 @@
     <string name="menuSettings">Settings</string>
     <string name="menuAddCourse">Add</string>
     <string name="traffic_schoolMap">Map</string>
-    <string name="settings_timetableTitle">Table Name</string>
-    <string name="settings_timetableTitleDefaultValue">My Timetable</string>
+    <string name="settings_timetableTitle">Table name</string>
+    <string name="settings_timetableTitleDefaultValue">My timetable</string>
     <string name="settings_timetableTitleSummary">Name to show on the main screen</string>
-    <string name="settings_contactSummary">Bug Report or feature request.</string>
-    <string name="settings_contactTitle">Contact Developers</string>
+    <string name="settings_contactSummary">Bug report or feature request</string>
+    <string name="settings_contactTitle">Hey developer…</string>
     <string name="settings_sectionGeneral">General</string>
-    <string name="settings_campusMapPickerTitle">Campus Map</string>
-    <string name="settings_campusMapPickerSummary">Support image and PDF</string>
+    <string name="settings_campusMapPickerTitle">Choose map file</string>
+    <string name="settings_campusMapPickerSummary">Supports image or PDF</string>
     <string name="all_save">Save</string>
     <string name="mapImageNotSetMessage">
         1. Go to \"Settings\".
@@ -22,8 +22,8 @@
         \n3. Select your image.</string>
     <string name="menuMap">Map</string>
     <string name="menuCalendar">Calendar</string>
-    <string name="settings_schoolCalendarPickerTitle">Calendar</string>
-    <string name="settings_schoolCalendarPickerSummary">Support PDF</string>
+    <string name="settings_schoolCalendarPickerTitle">Choose calendar file</string>
+    <string name="settings_schoolCalendarPickerSummary">Supports PDF</string>
     <string name="pdfNoAppMsg">Install Google Drive first</string>
     <string name="pdfOpenWithMsg">Open PDF with…</string>
     <string name="dialogNegativeButton">Hell No</string>
@@ -32,13 +32,13 @@
     <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
     <string name="fileReadErrorMsg">Unknown error, please try again.</string>
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
-    <string name="settings_sectionMapCalendar">Map and Calendar</string>
+    <string name="settings_sectionMapCalendar">Map and calendar</string>
     <string name="settings_mapCalendarHelperTitle">What are these?</string>
     <string name="settings_mapCalendarHelperMessage">
         1. These two are the shortcuts of the map/calendar, they can be accessed from the main screen.
         \n\n2. DO NOT delete/move/rename the file, that will invalid the shortcuts.
-        \n\n3. If the size of the photo is too large can cause crashes when opening the map, consider making it smaller.
-        \n\nMap: JPG, PNG and PDF\nCalendar: PDF
+        \n\n3. If the size of the photo is too large may cause crashes when opening the map, consider making it smaller.
+        \n\nMap: JPG, PNG or PDF\nCalendar: PDF
     </string>
     <string name="courseEditorActivityTitle">Course Editor</string>
     <string name="courseEditor_titleAdd">Add Course</string>
@@ -55,13 +55,13 @@
     <string name="all_confirm">Confirm</string>
     <string name="all_ohIsError">Something went wrong…</string>
     <string name="settings_weekdayLengthLongSummary">e.g. Monday</string>
-    <string name="settings_weekendColTitle">Enable Weekend</string>
-    <string name="settings_weekendColSummary">Show Saturday and Sunday</string>
-    <string name="settings_themeTitle">Theme</string>
+    <string name="settings_weekendColTitle">Show weekends</string>
+    <string name="settings_weekendColSummary">Show tabs for the weekends</string>
+    <string name="settings_themeTitle">Choose theme</string>
     <string name="settings_sectionTimetable">Timetable</string>
-    <string name="settings_notificationBeforeClassTitle">Noti Before Class (Under Dev)</string>
+    <string name="settings_notificationBeforeClassTitle">Noti before the class (under dev)</string>
     <string name="settings_notificationBeforeClassSummary">Send notification before class</string>
-    <string name="settings_weekdayLengthLongTitle">Show Full Weekday Name</string>
+    <string name="settings_weekdayLengthLongTitle">Show full weekday name</string>
     <string name="courseEditor_coursePlaceTitle">Location</string>
     <string name="courseEditor_courseWeekdayTitle">Day</string>
     <string name="courseEditor_coursePlaceEntry">Surrey Campus</string>
@@ -86,5 +86,5 @@
     <string name="prefAbout_privacyPolicy">Privacy Policy</string>
     <string name="prefAbout_license">License</string>
     <string name="settings_fabActionTitle">FAB action</string>
-    <string name="settings_campusMapPickerDialogTitle">Select file type</string>
+    <string name="settings_campusMapPickerDialogTitle">Choose file type</string>
 </resources>
