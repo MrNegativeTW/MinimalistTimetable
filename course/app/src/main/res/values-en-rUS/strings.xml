@@ -49,8 +49,8 @@
     <string name="courseEditor_courseEndTitle">End</string>
     <string name="courseEditor_courseBeginEntry">00:00</string>
     <string name="courseEditor_courseEndEntry">00:00</string>
-    <string name="courseEditor_exitConfirmDialogTitle">Confirm EXIT</string>
-    <string name="courseEditor_exitConfirmDialogMsg">The information you just entered will not be SAVED !</string>
+    <string name="courseEditor_exitConfirmDialogTitle">Discard changes</string>
+    <string name="courseEditor_exitConfirmDialogMsg">You have unsaved changes!</string>
     <string name="all_cancel">Cancel</string>
     <string name="all_confirm">Confirm</string>
     <string name="all_ohIsError">Something went wrong…</string>
@@ -87,4 +87,5 @@
     <string name="prefAbout_license">License</string>
     <string name="settings_fabActionTitle">FAB action</string>
     <string name="settings_campusMapPickerDialogTitle">Choose file type</string>
+    <string name="all_discard">Discard</string>
 </resources>

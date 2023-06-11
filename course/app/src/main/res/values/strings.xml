@@ -29,8 +29,8 @@
     <!-- [Start] Course Editor -->
     <string name="courseEditor_titleAdd">新增課程</string>
     <string name="courseEditor_titleEdit">編輯課程</string>
-    <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
-    <string name="courseEditor_exitConfirmDialogMsg">您所輸入的資訊將「不會」被儲存</string>
+    <string name="courseEditor_exitConfirmDialogTitle">捨棄變更</string>
+    <string name="courseEditor_exitConfirmDialogMsg">您有變更尚未儲存</string>
     <string name="courseEditor_courseNameTitle">課程名稱</string>
     <string name="courseEditor_courseNameEntry">國文(一)</string>
     <string name="courseEditor_coursePlaceTitle">上課地點</string>
@@ -121,8 +121,9 @@
     <!-- [End] PDF Error Message -->
 
     <!-- Common -->
-    <string name="all_confirm">確認</string>
     <string name="all_cancel">取消</string>
+    <string name="all_confirm">確認</string>
+    <string name="all_discard">捨棄</string>
     <string name="all_ohIsError">歐歐，出錯惹</string>
     <string name="all_save">儲存</string>
 

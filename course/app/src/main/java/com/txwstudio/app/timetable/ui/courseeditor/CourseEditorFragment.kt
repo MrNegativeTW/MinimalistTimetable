@@ -238,7 +238,7 @@ class CourseEditorFragment : Fragment(), MenuProvider {
         MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle(R.string.courseEditor_exitConfirmDialogTitle)
             setMessage(R.string.courseEditor_exitConfirmDialogMsg)
-            setPositiveButton(R.string.all_confirm) { _, _ ->
+            setPositiveButton(R.string.all_discard) { _, _ ->
                 findNavController().navigateUp()
             }
             setNegativeButton(R.string.all_cancel) { _, _ ->
