@@ -90,6 +90,7 @@ class CourseEditorViewModel(
             setupValueForEditing()
         } else {
             // Add mode, no course id is provided.
+            _isEditMode.value = false
             _courseWeekday.value = currentViewPagerItem
         }
     }

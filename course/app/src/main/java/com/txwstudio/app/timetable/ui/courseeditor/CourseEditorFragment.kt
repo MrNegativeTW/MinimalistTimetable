@@ -108,14 +108,6 @@ class CourseEditorFragment : Fragment(), MenuProvider {
             viewLifecycleOwner,
             Lifecycle.State.RESUMED
         )
-
-        viewModel.isEditMode.observe(viewLifecycleOwner) {
-            (activity as AppCompatActivity).supportActionBar!!.title = if (it) {
-                getString(R.string.courseEditor_titleEdit)
-            } else {
-                getString(R.string.courseEditor_titleAdd)
-            }
-        }
     }
 
     private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
@@ -147,6 +139,14 @@ class CourseEditorFragment : Fragment(), MenuProvider {
     }
 
     private fun subscribeViewModel() {
+        viewModel.isEditMode.observe(viewLifecycleOwner) {
+            (activity as AppCompatActivity).supportActionBar!!.title = if (it) {
+                getString(R.string.courseEditor_titleEdit)
+            } else {
+                getString(R.string.courseEditor_titleAdd)
+            }
+        }
+
         viewModel.courseName.observe(viewLifecycleOwner) {
             binding.editTextCourseEditorFragCourseNameEntry.setText(it)
         }
