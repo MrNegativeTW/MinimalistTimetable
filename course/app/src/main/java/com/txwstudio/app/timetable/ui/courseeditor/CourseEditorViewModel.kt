@@ -16,6 +16,7 @@ import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
 import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
 import com.txwstudio.app.timetable.utilities.logI
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -37,13 +38,32 @@ class CourseEditorViewModel(
     val isEditMode: LiveData<Boolean>
         get() = _isEditMode
 
+    // [START] Course information
     private var courseIdFromDatabase = MutableLiveData<Int>(null)
-    var courseName = MutableLiveData<String>()
-    var coursePlace = MutableLiveData<String>()
-    var courseProf = MutableLiveData<String?>()
-    var courseBeginTime = MutableLiveData<String>()
-    var courseEndTime = MutableLiveData<String>()
-    var courseWeekday = MutableLiveData<Int>(0)
+    private val _courseName = MutableLiveData<String>()
+    val courseName: LiveData<String>
+        get() = _courseName
+
+    private val _coursePlace = MutableLiveData<String>()
+    val coursePlace: LiveData<String>
+        get() = _coursePlace
+
+    private val _courseProf = MutableLiveData<String>()
+    val courseProf: LiveData<String>
+        get() = _courseProf
+
+    private val _courseWeekday = MutableLiveData<Int>(0)
+    val courseWeekday: LiveData<Int>
+        get() = _courseWeekday
+
+    private val _courseBeginTime = MutableLiveData<String>()
+    val courseBeginTime: LiveData<String>
+        get() = _courseBeginTime
+
+    private val _courseEndTime = MutableLiveData<String>()
+    val courseEndTime: LiveData<String>
+        get() = _courseEndTime
+    // [END] Course information
 
     // [START] Error
     private val _isCourseNameError = MutableLiveData<Boolean>()
@@ -63,13 +83,6 @@ class CourseEditorViewModel(
         get() = _isCourseEndTimeError
     // [END] Error
 
-    var openTimePicker = MutableLiveData<Boolean>(false)
-    var pickBeginOrEnd = MutableLiveData<Int>()
-    var courseBeginTimeForEdit = MutableLiveData<Int>()
-    var courseEndTimeForEdit = MutableLiveData<Int>()
-
-    var isSavedSuccessfully = MutableLiveData<Boolean>(false)
-
     init {
         if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
             // Edit mode, if courseId is provided.
@@ -77,75 +90,60 @@ class CourseEditorViewModel(
             setupValueForEditing()
         } else {
             // Add mode, no course id is provided.
-            courseWeekday.value = currentViewPagerItem
+            _courseWeekday.value = currentViewPagerItem
         }
     }
 
     /**
-     * If start in edit mode, get course information from database, then set to screen.
+     * If starts in edit mode, get course information from database.
      * */
     private fun setupValueForEditing() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val courseInfo = repository.getCourseById(courseId)
             courseIdFromDatabase.postValue(courseInfo.id!!)
-            courseName.postValue(courseInfo.courseName!!)
-            coursePlace.postValue(courseInfo.coursePlace!!)
-            courseProf.postValue(courseInfo.profName)
-            courseWeekday.postValue(courseInfo.courseWeekday!!)
-            courseBeginTime.postValue(courseInfo.courseStartTime!!)
-            courseEndTime.postValue(courseInfo.courseEndTime!!)
+            _courseName.postValue(courseInfo.courseName!!)
+            _coursePlace.postValue(courseInfo.coursePlace!!)
+            courseInfo.profName?.let {
+                _courseProf.postValue(it)
+            }
+            _courseWeekday.postValue(courseInfo.courseWeekday!!)
+            _courseBeginTime.postValue(courseInfo.courseStartTime!!)
+            _courseEndTime.postValue(courseInfo.courseEndTime!!)
         }
     }
 
-    /**
-     * Open timepicker when clicked, 0 for begin time, 1 for end time.
-     * */
-    fun selectBeginOrEndTime(beginOrAnd: Int) {
-        openTimePicker.value = !openTimePicker.value!!
-        this.pickBeginOrEnd.value = beginOrAnd
+    fun submitCourseText(name: String, place: String, prof: String?) {
+        _courseName.value = name
+        _coursePlace.value = place
+        prof?.let {
+            _courseProf.value = it
+        }
     }
 
-    /**
-     * Check required entries are not empty.
-     *
-     * @return true, if EMPTY
-     * @return false, if NOT EMPTY
-     * */
-    private fun isRequiredEntriesEmpty(): Boolean {
-        return courseName.value.isNullOrEmpty() ||
-                coursePlace.value.isNullOrBlank() ||
-                courseBeginTime.value.isNullOrEmpty() ||
-                courseEndTime.value.isNullOrEmpty()
+    fun submitCourseWeekday(value: Int) {
+        _courseWeekday.value = value
     }
 
-
-    /**
-     * Change error value to true, use to highlight the empty entry.
-     * */
-    private fun markEmptyEntries() {
-        courseNameError.value = courseName.value.isNullOrEmpty()
-        coursePlaceError.value = coursePlace.value.isNullOrEmpty()
-        courseBeginTimeError.value = courseBeginTime.value.isNullOrEmpty()
-        courseEndTimeError.value = courseEndTime.value.isNullOrEmpty()
+    fun submitCourseBeginTime(value: String) {
+        _courseBeginTime.value = value
     }
 
-    /**
-     * User clicked save, start process it.
-     * */
-    fun saveFired() {
+    fun submitCourseEndTime(value: String) {
+        _courseEndTime.value = value
+    }
+
+    private val _isSavedSuccessfully = MutableLiveData<Boolean>(false)
+    val isSavedSuccessfully: LiveData<Boolean>
+        get() = _isSavedSuccessfully
+
+    fun saveToDatabase() {
         Log.i(
             TAG, "${courseName.value} | ${coursePlace.value} | " +
                     " | ${courseProf.value} | ${courseWeekday.value}" +
                     " | ${courseBeginTime.value} | ${courseEndTime.value}"
         )
 
-        // Check entries
-        if (isRequiredEntriesEmpty()) {
-            markEmptyEntries()
-            return
-        } else {
-            markEmptyEntries()
-        }
+        if (isRequiredEntriesHasError()) return
 
         // Making cake
         val course = Course3(
@@ -164,7 +162,7 @@ class CourseEditorViewModel(
             viewModelScope.launch {
                 try {
                     repository.insertCourse(course)
-                    isSavedSuccessfully.value = true
+                    _isSavedSuccessfully.value = true
                 } catch (e: Exception) {
                     Log.i(TAG, "insert failed")
                 }
@@ -174,12 +172,24 @@ class CourseEditorViewModel(
             viewModelScope.launch {
                 try {
                     repository.updateCourse(course)
-                    isSavedSuccessfully.value = true
+                    _isSavedSuccessfully.value = true
                 } catch (e: Exception) {
                     Log.i(TAG, "update failed")
                 }
             }
         }
+    }
+
+    private fun isRequiredEntriesHasError(): Boolean {
+        _isCourseNameError.value = courseName.value.isNullOrEmpty()
+        _isCoursePlaceError.value = coursePlace.value.isNullOrEmpty()
+        _isCourseBeginTimeError.value = courseBeginTime.value.isNullOrEmpty()
+        _isCourseEndTimeError.value = courseEndTime.value.isNullOrEmpty()
+
+        return courseName.value.isNullOrEmpty() ||
+                coursePlace.value.isNullOrBlank() ||
+                courseBeginTime.value.isNullOrEmpty() ||
+                courseEndTime.value.isNullOrEmpty()
     }
 
     companion object {

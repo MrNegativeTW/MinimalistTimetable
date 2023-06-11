@@ -10,7 +10,6 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -33,7 +32,7 @@ private const val TAG_TIME_PICKER_END_TIME = 1
 /**
  * An editor to add or edit the class info.
  * */
-class CourseEditorFragment : Fragment() {
+class CourseEditorFragment : Fragment(), MenuProvider {
 
     @Deprecated("Get args from ViewModel factory")
     private val args: CourseEditorFragmentArgs by navArgs()
@@ -73,32 +72,42 @@ class CourseEditorFragment : Fragment() {
         binding.adViewCourseEditorFrag.loadAd(adRequest)
     }
 
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.save_menu, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.menuSave -> {
+                viewModel.submitCourseText(
+                    binding.editTextCourseEditorFragCourseNameEntry.text.toString(),
+                    binding.editTextCourseEditorFragCoursePlaceEntry.text.toString(),
+                    binding.editTextCourseEditorFragCourseProfEntry.text.toString()
+                )
+                viewModel.saveToDatabase()
+                true
+            }
+
+            android.R.id.home -> {
+                exitConfirmDialog()
+                true
+            }
+
+            else -> false
+        }
+    }
+
     private fun setupToolBar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarCourseEditorFrag)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
 
-        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.save_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.menuSave -> {
-                        viewModel.saveFired()
-                        true
-                    }
-
-                    android.R.id.home -> {
-                        exitConfirmDialog()
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        (requireActivity() as MenuHost).addMenuProvider(
+            this,
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
 
         viewModel.isEditMode.observe(viewLifecycleOwner) {
             (activity as AppCompatActivity).supportActionBar!!.title = if (it) {
@@ -121,21 +130,9 @@ class CourseEditorFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        binding.editTextCourseEditorFragCourseNameEntry.doAfterTextChanged {
-            viewModel.courseName.value = it.toString()
-        }
-
-        binding.editTextCourseEditorFragCoursePlaceEntry.doAfterTextChanged {
-            viewModel.coursePlace.value = it.toString()
-        }
-
-        binding.editTextCourseEditorFragCourseProfEntry.doAfterTextChanged {
-            viewModel.courseProf.value = it.toString()
-        }
-
         // Handle selection of weekday dropdown.
-        binding.dropDownCourseEditorFrag.setOnItemClickListener { adapterView, view, position, rowId ->
-            viewModel.courseWeekday.value = position
+        binding.dropDownCourseEditorFrag.setOnItemClickListener { _, _, position, _ ->
+            viewModel.submitCourseWeekday(position)
         }
 
         // Select course begin time
@@ -150,6 +147,18 @@ class CourseEditorFragment : Fragment() {
     }
 
     private fun subscribeViewModel() {
+        viewModel.courseName.observe(viewLifecycleOwner) {
+            binding.editTextCourseEditorFragCourseNameEntry.setText(it)
+        }
+
+        viewModel.coursePlace.observe(viewLifecycleOwner) {
+            binding.editTextCourseEditorFragCoursePlaceEntry.setText(it)
+        }
+
+        viewModel.courseProf.observe(viewLifecycleOwner) {
+            binding.editTextCourseEditorFragCourseProfEntry.setText(it)
+        }
+
         // Change weekday dropdown text. In order to set init text when is edit mode, observe it.
         viewModel.courseWeekday.observe(viewLifecycleOwner) {
             binding.dropDownCourseEditorFrag.setText(weekdayArray[it], false)
@@ -168,13 +177,15 @@ class CourseEditorFragment : Fragment() {
         }
 
         viewModel.isSavedSuccessfully.observe(viewLifecycleOwner) {
-            // Send broadcast intent to update the widget.
-            val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
-                action = INTENT_TIMETABLE_CHANGED
-            }
-            requireContext().sendBroadcast(intent)
+            if (it) {
+                // Send broadcast intent to update the widget.
+                val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
+                    action = INTENT_TIMETABLE_CHANGED
+                }
+                requireContext().sendBroadcast(intent)
 
-            if (it) findNavController().navigateUp()
+                if (it) findNavController().navigateUp()
+            }
         }
     }
 
@@ -258,9 +269,9 @@ class CourseEditorFragment : Fragment() {
         val timeToDatabase = String.format("%02d%02d", newHour, newMinute)
 
         if (isBeginOrEnd == TAG_TIME_PICKER_BEGIN_TIME) {
-            viewModel.courseBeginTime.value = timeToDatabase
+            viewModel.submitCourseBeginTime(timeToDatabase)
         } else {
-            viewModel.courseEndTime.value = timeToDatabase
+            viewModel.submitCourseEndTime(timeToDatabase)
         }
     }
 
