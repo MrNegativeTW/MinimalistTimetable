@@ -129,7 +129,7 @@ class MapsViewerFragment : Fragment(), MenuProvider {
 
         val mapImageUri = Uri.parse(mapImagePath)
         if (isFileExists(mapImageUri)) {
-            binding.linearLayoutMapsViewerFragImageNotSet.visibility = View.GONE
+            binding.linearLayoutErrorMessageSection.visibility = View.GONE
             binding.progressBarLoadImgPlsWait.visibility = View.VISIBLE
             Glide.with(this)
                 .asBitmap()
@@ -147,6 +147,9 @@ class MapsViewerFragment : Fragment(), MenuProvider {
                     override fun onLoadCleared(placeholder: Drawable?) {
                     }
                 })
+        } else {
+            binding.textViewErrorTitle.text = getString(R.string.mapViewer_notFoundTitle)
+            binding.textViewErrorCause.text = getString(R.string.mapViewer_notFoundMsg)
         }
     }
 
