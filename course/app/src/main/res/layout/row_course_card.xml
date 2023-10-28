@@ -1,83 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/courseCard"
+    style="?attr/materialCardViewFilledStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.txwstudio.app.timetable.viewmodels.CourseCardViewModel" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/courseCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4aa285"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp">
+        android:layout_height="match_parent"
+        android:padding="12dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/margin_normal">
+        <TextView
+            android:id="@+id/textView_beginTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="09:00" />
 
-            <TextView
-                android:id="@+id/textView_courseCard_beginTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="@{viewModel.courseStartTime}"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                tools:text="09:00" />
+        <TextView
+            android:id="@+id/textView_endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="12:00" />
 
-            <TextView
-                android:id="@+id/textView_courseCard_endTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView_courseCard_courseLocation"
-                android:text="@{viewModel.courseEndTime}"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                tools:text="12:00" />
+        <TextView
+            android:id="@+id/textView_courseName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView_beginTime"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Computer Science" />
 
-            <TextView
-                android:id="@+id/textView_courseCard_courseName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/textView_courseCard_beginTime"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/margin_normal"
-                android:layout_toEndOf="@id/textView_courseCard_beginTime"
-                android:text="@{viewModel.courseName}"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                tools:text="Computer Science" />
+        <TextView
+            android:id="@+id/textView_courseLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/textView_beginTime"
+            app:layout_constraintTop_toBottomOf="@id/textView_courseName"
+            tools:text="at A301" />
 
-            <TextView
-                android:id="@+id/textView_courseCard_courseLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView_courseCard_courseName"
-                android:layout_alignStart="@id/textView_courseCard_courseName"
-                android:text="@{viewModel.coursePlace}"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                tools:text="at A301" />
+        <TextView
+            android:id="@+id/textView_profName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView_courseLocation"
+            tools:text=", by Prof. Hsu" />
 
-            <TextView
-                android:id="@+id/textView_courseCard_courseTeacher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView_courseCard_courseName"
-                android:layout_toEndOf="@id/textView_courseCard_courseLocation"
-                android:text="@{viewModel.profName}"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                tools:text=", by Prof. Hsu" />
-
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-</layout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

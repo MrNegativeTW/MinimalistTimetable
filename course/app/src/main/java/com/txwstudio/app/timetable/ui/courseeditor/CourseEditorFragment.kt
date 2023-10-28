@@ -19,12 +19,11 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
 import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
+import com.txwstudio.app.timetable.utilities.StringUtils
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
-import java.text.SimpleDateFormat
 import java.util.*
 
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0
@@ -33,20 +32,14 @@ private const val TAG_TIME_PICKER_END_TIME = 1
 /**
  * An editor to add or edit the class info.
  * */
-class CourseEditorFragment : Fragment() {
+class CourseEditorFragment : Fragment(), MenuProvider {
 
-    private lateinit var binding: FragmentCourseEditorBinding
-    private val courseEditorViewModel: CourseEditorViewModel by viewModels {
-        CourseEditorViewModelFactory(
-            (requireActivity().application as MyApplication).courseRepository,
-            args.courseId,
-            args.currentViewPagerItem
-        )
-    }
-
+    @Deprecated("Get args from ViewModel factory")
     private val args: CourseEditorFragmentArgs by navArgs()
 
-    private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
+    private val viewModel: CourseEditorViewModel by viewModels {
+        CourseEditorViewModel.Factory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,19 +48,20 @@ class CourseEditorFragment : Fragment() {
         }
     }
 
+    private lateinit var binding: FragmentCourseEditorBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCourseEditorBinding.inflate(inflater, container, false)
-        binding.viewModel = courseEditorViewModel
-        binding.lifecycleOwner = this
+        binding = FragmentCourseEditorBinding.inflate(layoutInflater)
 
         setupToolBar()
         setupWeekdayDropdown()
 
         subscribeUi()
-        subscribeUiForError()
+        subscribeViewModel()
+        subscribeViewModelForErrorEvents()
 
         return binding.root
     }
@@ -78,40 +72,45 @@ class CourseEditorFragment : Fragment() {
         binding.adViewCourseEditorFrag.loadAd(adRequest)
     }
 
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.save_menu, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.menuSave -> {
+                viewModel.submitCourseText(
+                    binding.editTextCourseEditorFragCourseNameEntry.text.toString(),
+                    binding.editTextCourseEditorFragCoursePlaceEntry.text.toString(),
+                    binding.editTextCourseEditorFragCourseProfEntry.text.toString()
+                )
+                viewModel.saveToDatabase()
+                true
+            }
+
+            android.R.id.home -> {
+                exitConfirmDialog()
+                true
+            }
+
+            else -> false
+        }
+    }
+
     private fun setupToolBar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarCourseEditorFrag)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
 
-        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.save_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.menuSave -> {
-                        courseEditorViewModel.saveFired()
-                        true
-                    }
-                    android.R.id.home -> {
-                        exitConfirmDialog()
-                        true
-                    }
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-        courseEditorViewModel.isEditMode.observe(viewLifecycleOwner) {
-            // Set actionBar text base on mode.
-            (activity as AppCompatActivity).supportActionBar!!.title = if (it) {
-                getString(R.string.courseEditor_titleEdit)
-            } else {
-                getString(R.string.courseEditor_titleAdd)
-            }
-        }
+        (requireActivity() as MenuHost).addMenuProvider(
+            this,
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
     }
+
+    private val weekdayArray by lazy { resources.getStringArray(R.array.weekdayList) }
 
     /**
      * Set weekday selector text by is edit mode or not.
@@ -124,13 +123,8 @@ class CourseEditorFragment : Fragment() {
 
     private fun subscribeUi() {
         // Handle selection of weekday dropdown.
-        binding.dropDownCourseEditorFrag.setOnItemClickListener { adapterView, view, position, rowId ->
-            courseEditorViewModel.courseWeekday.value = position
-        }
-
-        // Change weekday dropdown text. In order to set init text when is edit mode, observe it.
-        courseEditorViewModel.courseWeekday.observe(viewLifecycleOwner) {
-            binding.dropDownCourseEditorFrag.setText(weekdayArray[it], false)
+        binding.dropDownCourseEditorFrag.setOnItemClickListener { _, _, position, _ ->
+            viewModel.submitCourseWeekday(position)
         }
 
         // Select course begin time
@@ -142,33 +136,61 @@ class CourseEditorFragment : Fragment() {
         binding.textViewCourseEditorFragCourseEndTime.setOnClickListener {
             showMaterialTimePicker(TAG_TIME_PICKER_END_TIME)
         }
+    }
 
-        courseEditorViewModel.courseBeginTime.observe(viewLifecycleOwner) {
-            binding.textViewCourseEditorFragCourseBeginTime.setText(displayFormattedTime(it))
-        }
-
-        courseEditorViewModel.courseEndTime.observe(viewLifecycleOwner) {
-            binding.textViewCourseEditorFragCourseEndTime.setText(displayFormattedTime(it))
-        }
-
-        // Close current activity
-        courseEditorViewModel.isSavedSuccessfully.observe(viewLifecycleOwner) {
-            // Send broadcast intent to update the widget.
-            val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
-                action = INTENT_TIMETABLE_CHANGED
+    private fun subscribeViewModel() {
+        viewModel.isEditMode.observe(viewLifecycleOwner) {
+            (activity as AppCompatActivity).supportActionBar!!.title = if (it) {
+                getString(R.string.courseEditor_titleEdit)
+            } else {
+                getString(R.string.courseEditor_titleAdd)
             }
-            requireContext().sendBroadcast(intent)
+        }
 
-            // Close fragment.
-            if (it) findNavController().navigateUp()
+        viewModel.courseName.observe(viewLifecycleOwner) {
+            binding.editTextCourseEditorFragCourseNameEntry.setText(it)
+        }
+
+        viewModel.coursePlace.observe(viewLifecycleOwner) {
+            binding.editTextCourseEditorFragCoursePlaceEntry.setText(it)
+        }
+
+        viewModel.courseProf.observe(viewLifecycleOwner) {
+            binding.editTextCourseEditorFragCourseProfEntry.setText(it)
+        }
+
+        // Change weekday dropdown text. In order to set init text when is edit mode, observe it.
+        viewModel.courseWeekday.observe(viewLifecycleOwner) {
+            binding.dropDownCourseEditorFrag.setText(weekdayArray[it], false)
+        }
+
+        viewModel.courseBeginTime.observe(viewLifecycleOwner) {
+            binding.textViewCourseEditorFragCourseBeginTime.setText(
+                StringUtils.getHumanReadableTimeFormat(it)
+            )
+        }
+
+        viewModel.courseEndTime.observe(viewLifecycleOwner) {
+            binding.textViewCourseEditorFragCourseEndTime.setText(
+                StringUtils.getHumanReadableTimeFormat(it)
+            )
+        }
+
+        viewModel.isSavedSuccessfully.observe(viewLifecycleOwner) {
+            if (it) {
+                // Send broadcast intent to update the widget.
+                val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
+                    action = INTENT_TIMETABLE_CHANGED
+                }
+                requireContext().sendBroadcast(intent)
+
+                if (it) findNavController().navigateUp()
+            }
         }
     }
 
-    /**
-     * Subscribe Ui for error event.
-     * */
-    private fun subscribeUiForError() {
-        courseEditorViewModel.courseNameError.observe(viewLifecycleOwner) {
+    private fun subscribeViewModelForErrorEvents() {
+        viewModel.isCourseNameError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCourseNameEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCourseNameEntry.error =
@@ -178,7 +200,7 @@ class CourseEditorFragment : Fragment() {
             }
         }
 
-        courseEditorViewModel.coursePlaceError.observe(viewLifecycleOwner) {
+        viewModel.isCoursePlaceError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCoursePlaceEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCoursePlaceEntry.error =
@@ -188,7 +210,7 @@ class CourseEditorFragment : Fragment() {
             }
         }
 
-        courseEditorViewModel.courseBeginTimeError.observe(viewLifecycleOwner) {
+        viewModel.isCourseBeginTimeError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCourseBeginTimeEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCourseBeginTimeEntry.error =
@@ -198,7 +220,7 @@ class CourseEditorFragment : Fragment() {
             }
         }
 
-        courseEditorViewModel.courseEndTimeError.observe(viewLifecycleOwner) {
+        viewModel.isCourseEndTimeError.observe(viewLifecycleOwner) {
             if (it) {
                 binding.tilCourseEditorFragCourseEndTimeEntry.isErrorEnabled = true
                 binding.tilCourseEditorFragCourseEndTimeEntry.error =
@@ -216,7 +238,7 @@ class CourseEditorFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle(R.string.courseEditor_exitConfirmDialogTitle)
             setMessage(R.string.courseEditor_exitConfirmDialogMsg)
-            setPositiveButton(R.string.all_confirm) { _, _ ->
+            setPositiveButton(R.string.all_discard) { _, _ ->
                 findNavController().navigateUp()
             }
             setNegativeButton(R.string.all_cancel) { _, _ ->
@@ -247,25 +269,10 @@ class CourseEditorFragment : Fragment() {
         val timeToDatabase = String.format("%02d%02d", newHour, newMinute)
 
         if (isBeginOrEnd == TAG_TIME_PICKER_BEGIN_TIME) {
-            courseEditorViewModel.courseBeginTime.value = timeToDatabase
+            viewModel.submitCourseBeginTime(timeToDatabase)
         } else {
-            courseEditorViewModel.courseEndTime.value = timeToDatabase
+            viewModel.submitCourseEndTime(timeToDatabase)
         }
-    }
-
-    private fun displayFormattedTime(time: String): String {
-        val formatter = SimpleDateFormat("a hh:mm", Locale.getDefault())
-        val cal = Calendar.getInstance()
-
-        val temp = StringBuilder().append(time)
-        val h = temp.substring(0, 2)
-        val m = temp.substring(2, 4)
-
-        cal[Calendar.HOUR_OF_DAY] = h.toInt()
-        cal[Calendar.MINUTE] = m.toInt()
-        cal.isLenient = false
-
-        return formatter.format(cal.time)
     }
 
     companion object {

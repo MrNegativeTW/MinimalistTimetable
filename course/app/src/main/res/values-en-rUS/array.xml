@@ -19,7 +19,7 @@
         <item>Sun</item>
     </array>
     <string-array name="prefThemeEntries">
-        <item>System Default</item>
+        <item>System default</item>
         <item>Light</item>
         <item>Dark</item>
     </string-array>

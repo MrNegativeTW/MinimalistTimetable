@@ -102,6 +102,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        setDividerHeight(0)
     }
 
     override fun onResume() {

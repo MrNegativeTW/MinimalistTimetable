@@ -13,3 +13,5 @@ const val DATA_TYPE_IMAGE = "image/*"
 const val DATA_TYPE_PDF = "application/pdf"
 
 const val INTENT_TIMETABLE_CHANGED = "com.txwstudio.app.timetable.TIMETABLE_CHANGED"
+
+const val WHICH_WEEKDAY = "WHICH_WEEKDAY"

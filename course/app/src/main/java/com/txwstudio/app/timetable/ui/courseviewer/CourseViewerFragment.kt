@@ -8,39 +8,30 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.txwstudio.app.timetable.MyApplication
+import com.txwstudio.app.timetable.HomeViewPagerFragmentDirections
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
+import com.txwstudio.app.timetable.data.CourseCardAction
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
 import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
+import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
-import kotlinx.coroutines.flow.collect
-
-private const val WHICH_WEEKDAY = "WHICH_WEEKDAY"
 
 /**
  * A fragment that Display the classes for the specific day.
  * */
 class CourseViewerFragment : Fragment() {
 
-    companion object {
-        fun newInstance(weekday: Int) = CourseViewerFragment().apply {
-            arguments = Bundle().apply {
-                putInt(WHICH_WEEKDAY, weekday)
-            }
-        }
-    }
-
     private lateinit var binding: FragmentCourseViewerBinding
 
     private val courseViewerViewModel: CourseViewerViewModel by viewModels {
-        CourseViewerViewModelFactory(
-            (requireActivity().application as MyApplication).courseRepository,
-            weekday!!
-        )
+        CourseViewerViewModel.Factory
     }
 
+    private lateinit var courseCardAdapter: CourseCardAdapter
     private var weekday: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,28 +45,30 @@ class CourseViewerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCourseViewerBinding.inflate(inflater, container, false).apply {
-            viewModel = courseViewerViewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
+        binding = FragmentCourseViewerBinding.inflate(layoutInflater)
 
-        val courseCardAdapter = CourseCardAdapter(courseViewerViewModel)
-        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
+        setupAdapter()
 
         subscribeUi(courseCardAdapter)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    /**
-     * Because of lifecycle, the code below will not work inside onViewCreated,
-     * therefore I move these into onStart, just like the old one.
-     * */
-    override fun onStart() {
-        super.onStart()
+    private fun setupAdapter() {
+        courseCardAdapter = CourseCardAdapter() { action, course3 ->
+            when (action) {
+                CourseCardAction.EDIT -> {
+                    val direction =
+                        HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToCourseEditorFragment(
+                            courseId = course3.id!!
+                        )
+                    findNavController().navigate(direction)
+                }
+                CourseCardAction.DELETE -> {
+                    courseViewerViewModel.deleteCourse(course3)
+                }
+            }
+        }
+        binding.recyclerViewCourseViewer.adapter = courseCardAdapter
     }
 
     private fun subscribeUi(courseCardAdapter: CourseCardAdapter) {
@@ -90,9 +83,10 @@ class CourseViewerFragment : Fragment() {
                             .show()
 
                         // Update widget
-                        val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
-                            action = INTENT_TIMETABLE_CHANGED
-                        }
+                        val intent =
+                            Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
+                                action = INTENT_TIMETABLE_CHANGED
+                            }
                         requireContext().sendBroadcast(intent)
                     }
                 }
@@ -110,4 +104,12 @@ class CourseViewerFragment : Fragment() {
         }
     }
 
+    companion object {
+        private const val TAG = "CourseViewerFragment"
+        fun newInstance(weekday: Int) = CourseViewerFragment().apply {
+            arguments = Bundle().apply {
+                putInt(WHICH_WEEKDAY, weekday)
+            }
+        }
+    }
 }

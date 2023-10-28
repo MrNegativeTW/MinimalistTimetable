@@ -18,7 +18,7 @@
     <!-- [Start] Maps Viewer Fragment -->
     <string name="mapImageNotSetIconContentDescription">打著叉叉符號的放大鏡</string>
     <string name="mapImageNotSetTitle">檔案未設定或找不到</string>
-    <string name="mapImageNotSetMessage">1. 前往「設定」\n2. 點擊「學校地圖」\n3. 選擇你的圖檔</string>
+    <string name="mapImageNotSetMessage">1. 前往「設定」\n2. 點擊「選擇地圖檔案」\n3. 選擇你的檔案</string>
     <!-- [End] Maps Viewer Fragment -->
 
     <!-- [Start] Course Viewer -->
@@ -29,8 +29,8 @@
     <!-- [Start] Course Editor -->
     <string name="courseEditor_titleAdd">新增課程</string>
     <string name="courseEditor_titleEdit">編輯課程</string>
-    <string name="courseEditor_exitConfirmDialogTitle">確定離開此頁面?</string>
-    <string name="courseEditor_exitConfirmDialogMsg">您所輸入的資訊將「不會」被儲存</string>
+    <string name="courseEditor_exitConfirmDialogTitle">捨棄變更</string>
+    <string name="courseEditor_exitConfirmDialogMsg">您有變更尚未儲存</string>
     <string name="courseEditor_courseNameTitle">課程名稱</string>
     <string name="courseEditor_courseNameEntry">國文(一)</string>
     <string name="courseEditor_coursePlaceTitle">上課地點</string>
@@ -64,14 +64,14 @@
     <string name="settings_timetableTitle">課表名稱</string>
     <string name="settings_timetableTitleSummary">我的課表</string>
     <string name="settings_timetableTitleDefaultValue">我的課表</string>
-    <string name="settings_themeTitle">主題</string>
+    <string name="settings_themeTitle">選擇主題</string>
     <string name="settings_fabActionTitle">FAB 動作</string>
 
     <string name="settings_sectionMapCalendar">地圖與行事曆</string>
-    <string name="settings_campusMapPickerTitle">學校地圖</string>
-    <string name="settings_campusMapPickerSummary">支援圖片和 PDF</string>
+    <string name="settings_campusMapPickerTitle">選擇地圖檔案</string>
+    <string name="settings_campusMapPickerSummary">支援圖片或 PDF</string>
     <string name="settings_campusMapPickerDialogTitle">選擇檔案類型</string>
-    <string name="settings_schoolCalendarPickerTitle">學校行事曆</string>
+    <string name="settings_schoolCalendarPickerTitle">選擇行事曆檔案</string>
     <string name="settings_schoolCalendarPickerSummary">支援 PDF</string>
     <string name="settings_mapCalendarHelperTitle">這什麼?</string>
     <string name="settings_mapCalendarHelperMessage">
@@ -84,8 +84,8 @@
     <string name="settings_sectionTimetable">課表</string>
     <string name="settings_notificationBeforeClassTitle">課前通知(開發中)</string>
     <string name="settings_notificationBeforeClassSummary">上課前傳送通知</string>
-    <string name="settings_weekendColTitle">週末欄位</string>
-    <string name="settings_weekendColSummary">開啟禮拜六日欄位</string>
+    <string name="settings_weekendColTitle">顯示週末頁面</string>
+    <string name="settings_weekendColSummary">在首頁顯示禮拜六日頁面</string>
     <string name="settings_weekdayLengthLongTitle">顯示完整星期名稱</string>
     <string name="settings_weekdayLengthLongSummary">例如：「星期一」</string>
 
@@ -121,8 +121,9 @@
     <!-- [End] PDF Error Message -->
 
     <!-- Common -->
-    <string name="all_confirm">確認</string>
     <string name="all_cancel">取消</string>
+    <string name="all_confirm">確認</string>
+    <string name="all_discard">捨棄</string>
     <string name="all_ohIsError">歐歐，出錯惹</string>
     <string name="all_save">儲存</string>
 

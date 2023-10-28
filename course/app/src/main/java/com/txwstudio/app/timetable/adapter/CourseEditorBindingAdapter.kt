@@ -1,12 +1,11 @@
 package com.txwstudio.app.timetable.adapter
 
-import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.txwstudio.app.timetable.R
 
 object CourseEditorBindingAdapter {
     @JvmStatic
-    @BindingAdapter("isError")
+    //@BindingAdapter("isError")
     fun setErrorMsg(view: TextInputLayout, isError: Boolean) {
         if (isError) {
             view.isErrorEnabled = true

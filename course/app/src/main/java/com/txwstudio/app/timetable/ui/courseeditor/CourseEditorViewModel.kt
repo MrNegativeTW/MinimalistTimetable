@@ -1,122 +1,150 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
 import android.util.Log
+import androidx.lifecycle.DEFAULT_ARGS_KEY
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
 import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
+import com.txwstudio.app.timetable.utilities.logI
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+/**
+ * As you can see, this is a ViewModel.
+ *
+ * @param repository CourseRepository in this project.
+ * @param courseId Default value is -1, passing course id to get into edit mode.
+ * @param currentViewPagerItem Default value is 0, which is Monday.
+ *                             Passing current viewpager item to automatic set weekday.
+ */
 class CourseEditorViewModel(
     private val repository: CourseRepository,
     private val courseId: Int,
     private val currentViewPagerItem: Int
 ) : ViewModel() {
 
-    var isEditMode = MutableLiveData<Boolean>(false)
+    private val _isEditMode = MutableLiveData<Boolean>()
+    val isEditMode: LiveData<Boolean>
+        get() = _isEditMode
 
+    // [START] Course information
     private var courseIdFromDatabase = MutableLiveData<Int>(null)
-    var courseName = MutableLiveData<String>()
-    var coursePlace = MutableLiveData<String>()
-    var courseProf = MutableLiveData<String?>()
-    var courseBeginTime = MutableLiveData<String>()
-    var courseEndTime = MutableLiveData<String>()
-    var courseWeekday = MutableLiveData<Int>(0)
+    private val _courseName = MutableLiveData<String>()
+    val courseName: LiveData<String>
+        get() = _courseName
 
-    var courseNameError = MutableLiveData<Boolean>()
-    var coursePlaceError = MutableLiveData<Boolean>()
-    var courseBeginTimeError = MutableLiveData<Boolean>()
-    var courseEndTimeError = MutableLiveData<Boolean>()
-    var courseWeekdayError = MutableLiveData<Boolean>()
-    var courseProfError = MutableLiveData<Boolean>()
+    private val _coursePlace = MutableLiveData<String>()
+    val coursePlace: LiveData<String>
+        get() = _coursePlace
 
-    var openTimePicker = MutableLiveData<Boolean>(false)
-    var pickBeginOrEnd = MutableLiveData<Int>()
-    var courseBeginTimeForEdit = MutableLiveData<Int>()
-    var courseEndTimeForEdit = MutableLiveData<Int>()
+    private val _courseProf = MutableLiveData<String>()
+    val courseProf: LiveData<String>
+        get() = _courseProf
 
-    var isSavedSuccessfully = MutableLiveData<Boolean>(false)
+    private val _courseWeekday = MutableLiveData<Int>(0)
+    val courseWeekday: LiveData<Int>
+        get() = _courseWeekday
+
+    private val _courseBeginTime = MutableLiveData<String>()
+    val courseBeginTime: LiveData<String>
+        get() = _courseBeginTime
+
+    private val _courseEndTime = MutableLiveData<String>()
+    val courseEndTime: LiveData<String>
+        get() = _courseEndTime
+    // [END] Course information
+
+    // [START] Error
+    private val _isCourseNameError = MutableLiveData<Boolean>()
+    val isCourseNameError: LiveData<Boolean>
+        get() = _isCourseNameError
+
+    private val _isCoursePlaceError = MutableLiveData<Boolean>()
+    val isCoursePlaceError: LiveData<Boolean>
+        get() = _isCoursePlaceError
+
+    private val _isCourseBeginTimeError = MutableLiveData<Boolean>()
+    val isCourseBeginTimeError: LiveData<Boolean>
+        get() = _isCourseBeginTimeError
+
+    private val _isCourseEndTimeError = MutableLiveData<Boolean>()
+    val isCourseEndTimeError: LiveData<Boolean>
+        get() = _isCourseEndTimeError
+    // [END] Error
 
     init {
         if (courseId != INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE) {
-            // Edit mode, if course id is provided.
-            isEditMode.value = true
+            // Edit mode, if courseId is provided.
+            _isEditMode.value = true
             setupValueForEditing()
         } else {
             // Add mode, no course id is provided.
-            courseWeekday.value = currentViewPagerItem
+            _isEditMode.value = false
+            _courseWeekday.value = currentViewPagerItem
         }
     }
 
     /**
-     * If start in edit mode, get course information from database, then set to screen.
+     * If starts in edit mode, get course information from database.
      * */
     private fun setupValueForEditing() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val courseInfo = repository.getCourseById(courseId)
             courseIdFromDatabase.postValue(courseInfo.id!!)
-            courseName.postValue(courseInfo.courseName!!)
-            coursePlace.postValue(courseInfo.coursePlace!!)
-            courseProf.postValue(courseInfo.profName)
-            courseWeekday.postValue(courseInfo.courseWeekday!!)
-            courseBeginTime.postValue(courseInfo.courseStartTime!!)
-            courseEndTime.postValue(courseInfo.courseEndTime!!)
+            _courseName.postValue(courseInfo.courseName!!)
+            _coursePlace.postValue(courseInfo.coursePlace!!)
+            courseInfo.profName?.let {
+                _courseProf.postValue(it)
+            }
+            _courseWeekday.postValue(courseInfo.courseWeekday!!)
+            _courseBeginTime.postValue(courseInfo.courseStartTime!!)
+            _courseEndTime.postValue(courseInfo.courseEndTime!!)
         }
     }
 
-    /**
-     * Open timepicker when clicked, 0 for begin time, 1 for end time.
-     * */
-    fun selectBeginOrEndTime(beginOrAnd: Int) {
-        openTimePicker.value = !openTimePicker.value!!
-        this.pickBeginOrEnd.value = beginOrAnd
+    fun submitCourseText(name: String, place: String, prof: String?) {
+        _courseName.value = name
+        _coursePlace.value = place
+        prof?.let {
+            _courseProf.value = it
+        }
     }
 
-    /**
-     * Check required entries are not empty.
-     *
-     * @return true, if EMPTY
-     * @return false, if NOT EMPTY
-     * */
-    private fun isRequiredEntriesEmpty(): Boolean {
-        return courseName.value.isNullOrEmpty() ||
-                coursePlace.value.isNullOrBlank() ||
-                courseBeginTime.value.isNullOrEmpty() ||
-                courseEndTime.value.isNullOrEmpty()
+    fun submitCourseWeekday(value: Int) {
+        _courseWeekday.value = value
     }
 
-
-    /**
-     * Change error value to true, use to highlight the empty entry.
-     * */
-    private fun markEmptyEntries() {
-        courseNameError.value = courseName.value.isNullOrEmpty()
-        coursePlaceError.value = coursePlace.value.isNullOrEmpty()
-        courseBeginTimeError.value = courseBeginTime.value.isNullOrEmpty()
-        courseEndTimeError.value = courseEndTime.value.isNullOrEmpty()
+    fun submitCourseBeginTime(value: String) {
+        _courseBeginTime.value = value
     }
 
-    /**
-     * User clicked save, start process it.
-     * */
-    fun saveFired() {
+    fun submitCourseEndTime(value: String) {
+        _courseEndTime.value = value
+    }
+
+    private val _isSavedSuccessfully = MutableLiveData<Boolean>(false)
+    val isSavedSuccessfully: LiveData<Boolean>
+        get() = _isSavedSuccessfully
+
+    fun saveToDatabase() {
         Log.i(
             TAG, "${courseName.value} | ${coursePlace.value} | " +
                     " | ${courseProf.value} | ${courseWeekday.value}" +
                     " | ${courseBeginTime.value} | ${courseEndTime.value}"
         )
 
-        // Check entries
-        if (isRequiredEntriesEmpty()) {
-            markEmptyEntries()
-            return
-        } else {
-            markEmptyEntries()
-        }
+        if (isRequiredEntriesHasError()) return
 
         // Making cake
         val course = Course3(
@@ -130,13 +158,13 @@ class CourseEditorViewModel(
         )
 
         // Done
-        if (isEditMode.value != true) {
+        if (_isEditMode.value != true) {
             // Add Mode
             viewModelScope.launch {
                 try {
                     repository.insertCourse(course)
-                    isSavedSuccessfully.value = true
-                } catch (e: Exception){
+                    _isSavedSuccessfully.value = true
+                } catch (e: Exception) {
                     Log.i(TAG, "insert failed")
                 }
             }
@@ -145,40 +173,44 @@ class CourseEditorViewModel(
             viewModelScope.launch {
                 try {
                     repository.updateCourse(course)
-                    isSavedSuccessfully.value = true
-                } catch (e: Exception){
+                    _isSavedSuccessfully.value = true
+                } catch (e: Exception) {
                     Log.i(TAG, "update failed")
                 }
             }
         }
     }
 
+    private fun isRequiredEntriesHasError(): Boolean {
+        _isCourseNameError.value = courseName.value.isNullOrEmpty()
+        _isCoursePlaceError.value = coursePlace.value.isNullOrEmpty()
+        _isCourseBeginTimeError.value = courseBeginTime.value.isNullOrEmpty()
+        _isCourseEndTimeError.value = courseEndTime.value.isNullOrEmpty()
+
+        return courseName.value.isNullOrEmpty() ||
+                coursePlace.value.isNullOrBlank() ||
+                courseBeginTime.value.isNullOrEmpty() ||
+                courseEndTime.value.isNullOrEmpty()
+    }
+
     companion object {
         private const val TAG = "CourseEditorViewModel"
-    }
-}
 
-/**
- * Factory of Course Editor ViewModel
- *
- * @param repository CourseRepository in this project.
- * @param courseId Default value is -1, passing course id to get into edit mode.
- * @param currentViewPagerItem Default value is 0, which is Monday.
- *                             Passing current viewpager item to automatic set weekday.
- * @return CourseEditorViewModel
- * */
-class CourseEditorViewModelFactory(
-    private val repository: CourseRepository,
-    private val courseId: Int,
-    private val currentViewPagerItem: Int
-) :
-    ViewModelProvider.Factory {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val savedStateHandle = createSavedStateHandle()
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CourseEditorViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CourseEditorViewModel(repository, courseId, currentViewPagerItem) as T
+                val courseRepository = (this[APPLICATION_KEY] as MyApplication).courseRepository
+                val courseId = this[DEFAULT_ARGS_KEY]?.getInt("courseId")
+                val currentViewPagerItem = this[DEFAULT_ARGS_KEY]?.getInt("currentViewPagerItem")
+                logI(TAG, "courseId: $courseId, currentViewPagerItem: $currentViewPagerItem")
+
+                CourseEditorViewModel(
+                    repository = courseRepository,
+                    courseId = courseId!!,
+                    currentViewPagerItem = currentViewPagerItem!!
+                )
+            }
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

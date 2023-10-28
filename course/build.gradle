@@ -5,7 +5,7 @@ buildscript {
     ext {
         // App dependencies
         coroutinesVersion = '1.6.1'
-        gradleVersion = '7.3.1'
+        gradleVersion = '7.4.2'
         kotlinVersion = '1.7.20'
         roomVersion = '2.4.3'
         latestAboutLibsRelease = '8.9.4'

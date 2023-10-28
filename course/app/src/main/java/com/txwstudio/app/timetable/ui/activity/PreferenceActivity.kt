@@ -2,7 +2,6 @@ package com.txwstudio.app.timetable.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.preference.Preference
@@ -20,7 +19,8 @@ class PreferenceActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_preference)
+        binding = ActivityPreferenceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setSupportActionBar(binding.toolbarSettingsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

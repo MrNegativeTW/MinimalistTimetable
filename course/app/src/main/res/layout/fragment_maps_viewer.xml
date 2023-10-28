@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.courseeditor.CourseEditorFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/touchImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.courseeditor.CourseEditorFragment">
+        android:layout_height="match_parent" />
 
-        <com.ortiz.touchview.TouchImageView
-            android:id="@+id/touchImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_mapsViewerFrag"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_mapsViewerFrag"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+    <LinearLayout
+        android:id="@+id/linearLayout_mapsViewerFrag_imageNotSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:id="@+id/linearLayout_mapsViewerFrag_imageNotSet"
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:contentDescription="@string/mapImageNotSetIconContentDescription"
+            android:src="@drawable/ic_baseline_search_off_24" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_half"
+            android:text="@string/mapImageNotSetTitle"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <TextView
+            android:id="@+id/textView_mapsViewerFrag_imageNotSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:contentDescription="@string/mapImageNotSetIconContentDescription"
-                android:src="@drawable/ic_baseline_search_off_24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mapImageNotSetTitle"
-                android:layout_marginBottom="@dimen/margin_half"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-            <TextView
-                android:id="@+id/textView_mapsViewerFrag_imageNotSet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/mapImageNotSetMessage"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-        </LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-</layout>
+            android:text="@string/mapImageNotSetMessage"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
