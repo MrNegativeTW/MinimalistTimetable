@@ -8,7 +8,7 @@ import android.widget.RemoteViewsService
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.data.AppDatabase
 import com.txwstudio.app.timetable.data.Course3
-import java.util.*
+import java.util.Calendar
 
 class TimetableWidgetService : RemoteViewsService() {
 
