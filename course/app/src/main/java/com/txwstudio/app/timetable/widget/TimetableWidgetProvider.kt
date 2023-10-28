@@ -9,7 +9,6 @@ import android.net.Uri
 import android.widget.RemoteViews
 import androidx.navigation.NavDeepLinkBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
 import java.util.*
 
 /**
@@ -32,26 +31,14 @@ class TimetableWidgetProvider : AppWidgetProvider() {
      */
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-        val action = intent.action
-        if (action.equals(INTENT_TIMETABLE_CHANGED)
-            || action.equals(Intent.ACTION_DATE_CHANGED)
-            || action.equals(Intent.ACTION_TIMEZONE_CHANGED)
-            || action.equals(Intent.ACTION_TIME_CHANGED)
-        ) {
-//            Log.i("TEST", "onReceive")
-            val appWidgetManager = AppWidgetManager.getInstance(context)
-            val appWidgetIds =
-                appWidgetManager.getAppWidgetIds(
-                    ComponentName(
-                        context,
-                        TimetableWidgetProvider::class.java
-                    )
-                )
+        Log.i(TAG, "onReceive: ")
 
-            for (appWidgetId in appWidgetIds) {
-                updateAppWidget(context, appWidgetManager, appWidgetId)
-            }
-
+        val component = ComponentName(context, TimetableWidgetProvider::class.java)
+        with(AppWidgetManager.getInstance(context)) {
+            val appWidgetIds = getAppWidgetIds(component)
+            // No idea why onUpdate doesn't update the title
+            onUpdate(context, this, appWidgetIds) // Update title
+            notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listview_appwidget) // Update dataset
         }
     }
 
@@ -110,10 +97,4 @@ internal fun updateAppWidget(
         setOnClickPendingIntent(R.id.imageView_widget_openMapIcon, intentOpenMapsViewer)
     }
 
-    // Instruct the widget manager to update the widget
-    appWidgetManager.updateAppWidget(appWidgetId, views)
-    appWidgetManager.notifyAppWidgetViewDataChanged(
-        appWidgetId,
-        R.id.listview_appwidget
-    )
 }
