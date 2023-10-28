@@ -33,6 +33,9 @@ class StackRemoteViewsFactory(
         // must be deferred to onDataSetChanged() or getViewAt(). Taking
         // more than 20 seconds on this call results in an ANR.
         Log.i(TAG, "onCreate: ")
+
+        // Initial it to prevent UninitializedPropertyAccessException, fill-in real data later
+        mWidgetItems = listOf()
     }
 
     /**
@@ -40,17 +43,12 @@ class StackRemoteViewsFactory(
      * */
     override fun onDataSetChanged() {
         Log.i(TAG, "onDataSetChanged()")
-        updateWidgetItemFromDatabase()
-    }
-
-    private fun updateWidgetItemFromDatabase() {
         val c = Calendar.getInstance()
         val date = c[Calendar.DAY_OF_WEEK]
 
         mWidgetItems =
             AppDatabase.getInstance(context).courseDao()
-                .getCourseByWeekdayAsList(if (date == 1) 8 else date - 2)
-    }
+                .getCourseByWeekdayAsList(if (date == 1) 8 else date - 2)    }
 
     override fun onDestroy() {}
 
