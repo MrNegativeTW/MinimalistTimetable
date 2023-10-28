@@ -76,7 +76,8 @@
     <string name="courseEditor_courseProfTitle">Prof. (Optional)</string>
     <string name="courseViewer_iconZzzDescription">sleep icon</string>
     <string name="courseViewer_noClassToday">No class today</string>
-    <string name="widget_stillInBetaMessage">The widget is still in beta</string>
+    <string name="widget_stillInBetaMessage">beta version</string>
+    <string name="widget_description">Check today\'s class</string>
     <string name="widget_noClassToday">No class today.</string>
     <string name="settings_sectionOther">Others</string>
     <string name="settings_aboutTitle">About</string>
