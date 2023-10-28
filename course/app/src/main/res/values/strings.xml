@@ -106,8 +106,9 @@
     <!-- [End] Preference About Fragment -->
 
     <!-- [Start] Widget -->
+    <string name="widget_description">查看今日課程</string>
     <string name="widget_noClassToday">今天沒課</string>
-    <string name="widget_stillInBetaMessage">小工具為測試版</string>
+    <string name="widget_stillInBetaMessage">測試版</string>
     <!-- [End] Widget -->
 
     <!-- [Start] Preference File Message -->
