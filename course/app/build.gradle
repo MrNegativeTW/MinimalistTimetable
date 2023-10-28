@@ -13,12 +13,12 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
     namespace 'com.txwstudio.app.timetable'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.txwstudio.app.timetable"
         minSdk 23
-        targetSdk 33
+        targetSdk 34
         versionCode 15
         versionName "2.3-release"
 
