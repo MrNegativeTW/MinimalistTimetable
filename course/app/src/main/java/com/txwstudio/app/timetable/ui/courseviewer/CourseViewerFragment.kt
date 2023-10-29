@@ -83,7 +83,6 @@ class CourseViewerFragment : Fragment() {
                         Snackbar.make(requireView(), R.string.dialogDeleted, Snackbar.LENGTH_LONG).show()
 
                         // Update widget
-                        // Update widget
                         val component = ComponentName(requireContext(), TimetableWidgetProvider::class.java)
                         with(AppWidgetManager.getInstance(requireContext())) {
                             val appWidgetIds = getAppWidgetIds(component)

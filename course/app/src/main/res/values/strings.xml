@@ -48,10 +48,8 @@
     <!-- [End] Course Editor -->
 
     <!-- [Start] Course Card Dialog  -->
-    <string name="courseCardDialog_title">下好離手</string>
-    <string name="courseCardDialog_message">換新學期嗎？\n別刪除了，直接編輯吧！</string>
-    <string name="courseCardDialog_editCourseInfo">編輯</string>
-    <string name="courseCardDialog_deleteCourse">刪除</string>
+    <string name="courseCardDialog_edit">編輯</string>
+    <string name="courseCardDialog_delete">刪除</string>
     <!-- [End] Course Card Dialog  -->
 
     <!-- Dialog -->
