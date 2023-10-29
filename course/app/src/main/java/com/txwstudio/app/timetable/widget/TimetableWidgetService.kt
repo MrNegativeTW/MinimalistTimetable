@@ -48,7 +48,8 @@ class StackRemoteViewsFactory(
 
         mWidgetItems =
             AppDatabase.getInstance(context).courseDao()
-                .getCourseByWeekdayAsList(if (date == 1) 8 else date - 2)    }
+                .getCourseByWeekdayAsList(if (date == 1) 8 else date - 2)
+    }
 
     override fun onDestroy() {}
 

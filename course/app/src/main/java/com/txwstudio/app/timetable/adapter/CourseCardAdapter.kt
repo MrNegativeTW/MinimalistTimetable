@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseCardAction
+import com.txwstudio.app.timetable.databinding.DialogCourseCardActionBinding
 import com.txwstudio.app.timetable.databinding.RowCourseCardBinding
 
 class CourseCardAdapter(
@@ -39,22 +39,26 @@ class CourseCardViewHolder(
 
     init {
         binding.courseCard.setOnLongClickListener {
-            MaterialAlertDialogBuilder(binding.root.context).apply {
-                setTitle(R.string.courseCardDialog_title)
-                setMessage(R.string.courseCardDialog_message)
-                setNeutralButton(R.string.courseCardDialog_deleteCourse) { _, _ ->
-                    sendDeleteAction()
-                    // Call CourseViewerViewModel.deleteCourse to delete the course from db.
-//                     binding.viewModel?.course?.let { viewModel.deleteCourse(it) }
-                }
-                setPositiveButton(R.string.courseCardDialog_editCourseInfo) { _, _ ->
-                    sendEditAction()
-//                    binding.viewModel?.id?.let {
-//                        onItemClicked(CourseCardAction.EDIT, it)
-//                    }
-                }
-                show()
+            val dialogLayout =
+                DialogCourseCardActionBinding.inflate(
+                    LayoutInflater.from(binding.root.context),
+                    binding.root,
+                    false
+                )
+
+            val actionDialog = MaterialAlertDialogBuilder(binding.root.context).apply {
+                setView(dialogLayout.root)
+            }.show()
+
+            dialogLayout.textViewDeleteTitle.setOnClickListener {
+                actionDialog.dismiss()
+                sendDeleteAction()
             }
+            dialogLayout.textViewEditTitle.setOnClickListener {
+                actionDialog.dismiss()
+                sendEditAction()
+            }
+
             true
         }
     }
