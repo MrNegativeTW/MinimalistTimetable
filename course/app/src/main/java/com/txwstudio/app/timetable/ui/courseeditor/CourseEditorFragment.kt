@@ -1,9 +1,16 @@
 package com.txwstudio.app.timetable.ui.courseeditor
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.addCallback
@@ -21,10 +28,8 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
-import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
 import com.txwstudio.app.timetable.utilities.StringUtils
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
-import java.util.*
 
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0
 private const val TAG_TIME_PICKER_END_TIME = 1
@@ -178,11 +183,12 @@ class CourseEditorFragment : Fragment(), MenuProvider {
 
         viewModel.isSavedSuccessfully.observe(viewLifecycleOwner) {
             if (it) {
-                // Send broadcast intent to update the widget.
-                val intent = Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
-                    action = INTENT_TIMETABLE_CHANGED
+                // Update widget
+                val component = ComponentName(requireContext(), TimetableWidgetProvider::class.java)
+                with(AppWidgetManager.getInstance(requireContext())) {
+                    val appWidgetIds = getAppWidgetIds(component)
+                    notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listview_appwidget)
                 }
-                requireContext().sendBroadcast(intent)
 
                 if (it) findNavController().navigateUp()
             }

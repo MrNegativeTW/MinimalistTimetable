@@ -16,10 +16,6 @@
     <string name="settings_campusMapPickerTitle">Choose map file</string>
     <string name="settings_campusMapPickerSummary">Supports image or PDF</string>
     <string name="all_save">Save</string>
-    <string name="mapImageNotSetMessage">
-        1. Go to \"Settings\"
-        \n2. Click on \"Choose map file\"
-        \n3. Choose your file</string>
     <string name="menuMap">Map</string>
     <string name="menuCalendar">Calendar</string>
     <string name="settings_schoolCalendarPickerTitle">Choose calendar file</string>
@@ -76,16 +72,24 @@
     <string name="courseEditor_courseProfTitle">Prof. (Optional)</string>
     <string name="courseViewer_iconZzzDescription">sleep icon</string>
     <string name="courseViewer_noClassToday">No class today</string>
-    <string name="widget_stillInBetaMessage">The widget is still in beta</string>
+    <string name="widget_stillInBetaMessage">beta version</string>
+    <string name="widget_description">Check today\'s class</string>
     <string name="widget_noClassToday">No class today.</string>
     <string name="settings_sectionOther">Others</string>
     <string name="settings_aboutTitle">About</string>
-    <string name="mapImageNotSetIconContentDescription">A magnifying glass icon with a huge x</string>
-    <string name="mapImageNotSetTitle">File not set or not found</string>
+    <string name="mapViewer_errorMsgIconDescription">A magnifying glass icon with a huge red cross</string>
     <string name="prefAbout_termsOfService">Terms of service</string>
     <string name="prefAbout_privacyPolicy">Privacy Policy</string>
     <string name="prefAbout_license">License</string>
     <string name="settings_fabActionTitle">FAB action</string>
     <string name="settings_campusMapPickerDialogTitle">Choose file type</string>
     <string name="all_discard">Discard</string>
+    <string name="mapViewer_notFoundMsg">The file may have been moved or deleted, please select again</string>
+    <string name="mapViewer_notFoundTitle">File Not Found</string>
+    <string name="mapViewer_notSetTitle">File Not Selected</string>
+    <string name="mapViewer_notSetMsg">
+        1. Go to \"Settings\"
+        \n2. Click on \"Choose map file\"
+        \n3. Choose your file
+    </string>
 </resources>

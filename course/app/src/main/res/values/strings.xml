@@ -16,9 +16,11 @@
     <!-- [End] Home page menu -->
 
     <!-- [Start] Maps Viewer Fragment -->
-    <string name="mapImageNotSetIconContentDescription">打著叉叉符號的放大鏡</string>
-    <string name="mapImageNotSetTitle">檔案未設定或找不到</string>
-    <string name="mapImageNotSetMessage">1. 前往「設定」\n2. 點擊「選擇地圖檔案」\n3. 選擇你的檔案</string>
+    <string name="mapViewer_errorMsgIconDescription">打叉符號的放大鏡</string>
+    <string name="mapViewer_notSetTitle">檔案未設定</string>
+    <string name="mapViewer_notSetMsg">1. 前往「設定」\n2. 點擊「選擇地圖檔案」\n3. 選擇你的檔案</string>
+    <string name="mapViewer_notFoundTitle">找不到檔案</string>
+    <string name="mapViewer_notFoundMsg">檔案可能被移動或刪除了，請重新選擇</string>
     <!-- [End] Maps Viewer Fragment -->
 
     <!-- [Start] Course Viewer -->
@@ -106,8 +108,9 @@
     <!-- [End] Preference About Fragment -->
 
     <!-- [Start] Widget -->
+    <string name="widget_description">查看今日課程</string>
     <string name="widget_noClassToday">今天沒課</string>
-    <string name="widget_stillInBetaMessage">小工具為測試版</string>
+    <string name="widget_stillInBetaMessage">測試版</string>
     <!-- [End] Widget -->
 
     <!-- [Start] Preference File Message -->

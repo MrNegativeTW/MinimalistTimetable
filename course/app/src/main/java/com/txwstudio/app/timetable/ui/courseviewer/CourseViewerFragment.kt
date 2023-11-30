@@ -1,5 +1,7 @@
 package com.txwstudio.app.timetable.ui.courseviewer
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +18,6 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.data.CourseCardAction
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
-import com.txwstudio.app.timetable.utilities.INTENT_TIMETABLE_CHANGED
 import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
 
@@ -79,15 +80,15 @@ class CourseViewerFragment : Fragment() {
                 when (event) {
                     is CourseViewerViewModel.CourseViewerEvent.ShowUndoDeleteMessage -> {
                         // Show message
-                        Snackbar.make(requireView(), R.string.dialogDeleted, Snackbar.LENGTH_LONG)
-                            .show()
+                        Snackbar.make(requireView(), R.string.dialogDeleted, Snackbar.LENGTH_LONG).show()
 
                         // Update widget
-                        val intent =
-                            Intent(requireContext(), TimetableWidgetProvider::class.java).apply {
-                                action = INTENT_TIMETABLE_CHANGED
-                            }
-                        requireContext().sendBroadcast(intent)
+                        // Update widget
+                        val component = ComponentName(requireContext(), TimetableWidgetProvider::class.java)
+                        with(AppWidgetManager.getInstance(requireContext())) {
+                            val appWidgetIds = getAppWidgetIds(component)
+                            notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listview_appwidget)
+                        }
                     }
                 }
             }

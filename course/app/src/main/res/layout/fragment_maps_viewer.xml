@@ -10,13 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar_loadImgPlsWait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_mapsViewerFrag"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 
     <LinearLayout
-        android:id="@+id/linearLayout_mapsViewerFrag_imageNotSet"
+        android:id="@+id/linearLayout_errorMessageSection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,22 +36,23 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginBottom="@dimen/margin_normal"
-            android:contentDescription="@string/mapImageNotSetIconContentDescription"
+            android:contentDescription="@string/mapViewer_errorMsgIconDescription"
             android:src="@drawable/ic_baseline_search_off_24" />
 
         <TextView
+            android:id="@+id/textView_errorTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_half"
-            android:text="@string/mapImageNotSetTitle"
+            android:text="@string/mapViewer_notSetTitle"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
         <TextView
-            android:id="@+id/textView_mapsViewerFrag_imageNotSet"
+            android:id="@+id/textView_errorCause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/mapImageNotSetMessage"
+            android:text="@string/mapViewer_notSetMsg"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

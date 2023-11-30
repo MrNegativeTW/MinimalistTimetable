@@ -3,9 +3,16 @@ package com.txwstudio.app.timetable.ui.mapsviewer
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -14,6 +21,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentMapsViewerBinding
@@ -25,7 +36,7 @@ import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
 /**
  * Implementation of TouchImageView.
  */
-class MapsViewerFragment : Fragment() {
+class MapsViewerFragment : Fragment(), MenuProvider {
 
     private lateinit var sharedPref: SharedPreferences
 
@@ -42,8 +53,8 @@ class MapsViewerFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = FragmentMapsViewerBinding.inflate(layoutInflater)
 
@@ -59,21 +70,24 @@ class MapsViewerFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        (requireActivity() as MenuHost).addMenuProvider(
+            this,
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
+    }
 
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            android.R.id.home -> {
+                findNavController().navigateUp()
+                true
             }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    android.R.id.home -> {
-                        findNavController().navigateUp()
-                        true
-                    }
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+            else -> false
+        }
     }
 
     /**
@@ -107,36 +121,48 @@ class MapsViewerFragment : Fragment() {
     }
 
     private fun loadMapImage() {
-        // Get map image path from shared preferences.
-        val mapImagePath = sharedPref.getString(PREFERENCE_MAP_PATH, "")
+        // Get map image path from shared preferences. Returns if null
+        val mapImagePath = sharedPref.getString(PREFERENCE_MAP_PATH, "") ?: return
 
-        // Check if map path string has empty value or not.
-        mapImagePath?.isNotEmpty()?.let {
-            // If it's empty, we treat it as not set, do nothing.
-            if (it) {
-                // Path string not empty, check file exists or not.
-                val mapImageUri = Uri.parse(mapImagePath)
-                checkMapImageExistsThenSetImage(mapImageUri)
-            }
+        // Return if string is empty
+        mapImagePath.isEmpty().let { if (it) return }
+
+        val mapImageUri = Uri.parse(mapImagePath)
+        if (isFileExists(mapImageUri)) {
+            binding.linearLayoutErrorMessageSection.visibility = View.GONE
+            binding.progressBarLoadImgPlsWait.visibility = View.VISIBLE
+            Glide.with(this)
+                .asBitmap()
+                .load(mapImageUri)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(object : CustomTarget<Bitmap>(3000, 3000) {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        binding.progressBarLoadImgPlsWait.visibility = View.GONE
+                        binding.touchImageView.setImageBitmap(resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+        } else {
+            binding.textViewErrorTitle.text = getString(R.string.mapViewer_notFoundTitle)
+            binding.textViewErrorCause.text = getString(R.string.mapViewer_notFoundMsg)
         }
     }
 
-    /**
-     * Check image file exist before setImage to prevent crashes.
-     *
-     * @param mapImageUri Parsed file uri.
-     * */
-    private fun checkMapImageExistsThenSetImage(mapImageUri: Uri) {
-        DocumentFile.fromSingleUri(requireContext(), mapImageUri)?.exists()?.let {
-            if (it) {
-                binding.linearLayoutMapsViewerFragImageNotSet.visibility = View.GONE
-                binding.touchImageView.setImageURI(mapImageUri)
-            }
+    private fun isFileExists(mapImageUri: Uri): Boolean {
+        // When Build.VERSION.SDK_INT >= 19, it shouldn't return null. This is some trust issue lol
+        val documentFile = DocumentFile.fromSingleUri(requireContext(), mapImageUri)
+        if (documentFile != null) {
+            return documentFile.exists()
         }
+        return false
     }
 
     companion object {
         private const val TAG = "MapsViewerFragment"
-        fun newInstance() = MapsViewerFragment()
     }
 }
