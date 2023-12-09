@@ -80,6 +80,7 @@
         \n\n3. 圖檔若過大將導致地圖開啟時崩潰，建議轉檔轉小一點。
         \n\n地圖支援：JPG、PNG、PDF\n行事曆支援：PDF
     </string>
+    <string name="settings_operationCanceled">操作取消</string>
 
     <string name="settings_sectionTimetable">課表</string>
     <string name="settings_notificationBeforeClassTitle">課前通知(開發中)</string>
@@ -110,10 +111,6 @@
     <string name="widget_noClassToday">今天沒課</string>
     <string name="widget_stillInBetaMessage">測試版</string>
     <!-- [End] Widget -->
-
-    <!-- [Start] Preference File Message -->
-    <string name="fileReadErrorMsg">未知錯誤，請在試一次</string>
-    <!-- [End] Preference File Message -->
 
     <!-- [Start] PDF Error Message -->
     <string name="pdfOpenWithMsg">開啟 PDF 使用…</string>

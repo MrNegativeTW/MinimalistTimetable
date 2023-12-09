@@ -294,7 +294,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
             Snackbar.make(requireView(), R.string.pdfFileNotFound, Snackbar.LENGTH_SHORT).show()
         } catch (e: Exception) {
             // Unknown exception.
-            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), R.string.settings_operationCanceled, Snackbar.LENGTH_SHORT).show()
         }
     }
 
