@@ -20,8 +20,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
+import com.txwstudio.app.timetable.utils.DATA_TYPE_IMAGE
+import com.txwstudio.app.timetable.utils.DATA_TYPE_PDF
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 const val PREFERENCE_THEME = "pref_theme"

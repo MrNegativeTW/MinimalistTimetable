@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.utilities
+package com.txwstudio.app.timetable.utils
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

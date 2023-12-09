@@ -14,8 +14,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
-import com.txwstudio.app.timetable.utilities.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
-import com.txwstudio.app.timetable.utilities.logI
+import com.txwstudio.app.timetable.utils.INTENT_EXTRA_COURSE_ID_DEFAULT_VALUE
+import com.txwstudio.app.timetable.utils.logI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception

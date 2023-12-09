@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.utilities
+package com.txwstudio.app.timetable.utils
 
 /**
  * Constants used throughout the app.

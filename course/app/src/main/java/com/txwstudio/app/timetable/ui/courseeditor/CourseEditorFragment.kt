@@ -2,7 +2,6 @@ package com.txwstudio.app.timetable.ui.courseeditor
 
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -28,7 +27,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
-import com.txwstudio.app.timetable.utilities.StringUtils
+import com.txwstudio.app.timetable.utils.StringUtils
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
 
 private const val TAG_TIME_PICKER_BEGIN_TIME = 0

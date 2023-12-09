@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.txwstudio.app.timetable.utilities.DATABASE_NAME
+import com.txwstudio.app.timetable.utils.DATABASE_NAME
 
 @Database(entities = [Course3::class], version = 2, exportSchema = false)
 //@TypeConverters(Converters::class)
