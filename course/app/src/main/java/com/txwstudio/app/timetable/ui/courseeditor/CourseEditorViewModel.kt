@@ -92,6 +92,8 @@ class CourseEditorViewModel(
             // Add mode, no course id is provided.
             _isEditMode.value = false
             _courseWeekday.value = currentViewPagerItem
+            _courseBeginTime.value = "0900"
+            _courseEndTime.value = "1200"
         }
     }
 
