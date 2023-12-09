@@ -130,12 +130,12 @@ class CourseEditorFragment : Fragment(), MenuProvider {
 
         // Select course begin time
         binding.textViewCourseEditorFragCourseBeginTime.setOnClickListener {
-            showMaterialTimePicker(TIME_PICKER_BEGIN)
+            showMaterialTimePicker(viewModel.courseBeginTime.value, TIME_PICKER_BEGIN)
         }
 
         // Select course end time
         binding.textViewCourseEditorFragCourseEndTime.setOnClickListener {
-            showMaterialTimePicker(TIME_PICKER_END)
+            showMaterialTimePicker(viewModel.courseEndTime.value, TIME_PICKER_END)
         }
     }
 
@@ -250,7 +250,7 @@ class CourseEditorFragment : Fragment(), MenuProvider {
         }
     }
 
-    private fun showMaterialTimePicker(isBeginOrEnd: Int) {
+    private fun showMaterialTimePicker(hourMinute: String?, isBeginOrEnd: Int) {
         // Determine system time format.
         val isSystem24Hour = DateFormat.is24HourFormat(requireContext())
         val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
@@ -258,8 +258,17 @@ class CourseEditorFragment : Fragment(), MenuProvider {
         val timePicker = MaterialTimePicker.Builder().apply {
             setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
             setTimeFormat(clockFormat)
-//            setHour() // [0, 23]
-//            setMinute() // [0, 60)
+
+            try {
+                hourMinute?.let {
+                    setHour(it.substring(0, 2).toInt()) // [0, 23]
+                    setMinute(it.substring(2, 4).toInt()) // [0, 60)
+                }
+            } catch (e: Exception) {
+                // Exception? Just reset to default.
+                setHour(9)
+                setMinute(0)
+            }
         }.build()
 
         timePicker.show(requireActivity().supportFragmentManager, "tag")
