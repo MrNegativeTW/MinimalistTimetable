@@ -27,7 +27,7 @@
     <string name="dialogPositiveButton">Of Course</string>
     <string name="dialogConfirmExit">Are you sure you want to EXIT?</string>
     <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
-    <string name="fileReadErrorMsg">Unknown error, please try again.</string>
+    <string name="settings_operationCanceled">Operation canceled</string>
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
     <string name="settings_sectionMapCalendar">Map and calendar</string>
     <string name="settings_mapCalendarHelperTitle">What are these?</string>
