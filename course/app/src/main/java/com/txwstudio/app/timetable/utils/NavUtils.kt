@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.utilities
+package com.txwstudio.app.timetable.utils
 
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections

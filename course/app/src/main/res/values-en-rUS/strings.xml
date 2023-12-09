@@ -3,6 +3,7 @@
     <string name="app_name">Timetable</string>
     <string name="main_activity">Timetable</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="courseCardDialog_edit">EDIT</string>
     <string name="dialogDeleted">Deleted</string>
     <string name="menuSettings">Settings</string>
     <string name="menuAddCourse">Add</string>
@@ -26,7 +27,7 @@
     <string name="dialogPositiveButton">Of Course</string>
     <string name="dialogConfirmExit">Are you sure you want to EXIT?</string>
     <string name="dialogConfirmDelete">Are you sure you want to DELETE it?</string>
-    <string name="fileReadErrorMsg">Unknown error, please try again.</string>
+    <string name="settings_operationCanceled">Operation canceled</string>
     <string name="pdfFileNotFound">PDF not found, does it still there?</string>
     <string name="settings_sectionMapCalendar">Map and calendar</string>
     <string name="settings_mapCalendarHelperTitle">What are these?</string>
@@ -62,10 +63,6 @@
     <string name="courseEditor_courseWeekdayTitle">Day</string>
     <string name="courseEditor_coursePlaceEntry">Surrey Campus</string>
     <string name="courseEditor_noEntry">Required</string>
-    <string name="courseCardDialog_editCourseInfo">Edit</string>
-    <string name="courseCardDialog_deleteCourse">Delete</string>
-    <string name="courseCardDialog_message">New semester?\nEdit it instead of deleting it!</string>
-    <string name="courseCardDialog_title">You want … ?</string>
     <string name="prefAbout_versionTitle">Version</string>
     <string name="prefAbout_changelogTitle">Changelog</string>
     <string name="prefAbout_openSourceTitle">Open Source Library</string>
@@ -92,4 +89,5 @@
         \n2. Click on \"Choose map file\"
         \n3. Choose your file
     </string>
+    <string name="courseCardDialog_delete">DELETE</string>
 </resources>

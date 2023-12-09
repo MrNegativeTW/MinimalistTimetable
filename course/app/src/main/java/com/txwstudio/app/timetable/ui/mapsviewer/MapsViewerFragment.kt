@@ -30,8 +30,8 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.databinding.FragmentMapsViewerBinding
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_MAP_DATA_TYPE
 import com.txwstudio.app.timetable.ui.preferences.PREFERENCE_MAP_PATH
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
+import com.txwstudio.app.timetable.utils.DATA_TYPE_IMAGE
+import com.txwstudio.app.timetable.utils.DATA_TYPE_PDF
 
 /**
  * Implementation of TouchImageView.
@@ -116,7 +116,7 @@ class MapsViewerFragment : Fragment(), MenuProvider {
             Snackbar.make(requireView(), R.string.pdfFileNotFound, Snackbar.LENGTH_SHORT).show()
         } catch (e: Exception) {
             // Unknown exception.
-            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), R.string.settings_operationCanceled, Snackbar.LENGTH_SHORT).show()
         }
     }
 

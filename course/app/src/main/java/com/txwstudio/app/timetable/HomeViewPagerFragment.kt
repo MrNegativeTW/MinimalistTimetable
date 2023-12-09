@@ -18,8 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.txwstudio.app.timetable.adapter.CourseViewerPagerAdapter
 import com.txwstudio.app.timetable.databinding.FragmentHomeViewPagerBinding
 import com.txwstudio.app.timetable.ui.preferences.*
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
+import com.txwstudio.app.timetable.utils.DATA_TYPE_IMAGE
+import com.txwstudio.app.timetable.utils.DATA_TYPE_PDF
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -294,7 +294,7 @@ class HomeViewPagerFragment : Fragment(), SharedPreferences.OnSharedPreferenceCh
             Snackbar.make(requireView(), R.string.pdfFileNotFound, Snackbar.LENGTH_SHORT).show()
         } catch (e: Exception) {
             // Unknown exception.
-            Snackbar.make(requireView(), R.string.fileReadErrorMsg, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), R.string.settings_operationCanceled, Snackbar.LENGTH_SHORT).show()
         }
     }
 

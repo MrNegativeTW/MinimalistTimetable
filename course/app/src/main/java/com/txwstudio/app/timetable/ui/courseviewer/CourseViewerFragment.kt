@@ -2,7 +2,6 @@ package com.txwstudio.app.timetable.ui.courseviewer
 
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.txwstudio.app.timetable.HomeViewPagerFragmentDirections
@@ -18,7 +16,7 @@ import com.txwstudio.app.timetable.R
 import com.txwstudio.app.timetable.adapter.CourseCardAdapter
 import com.txwstudio.app.timetable.data.CourseCardAction
 import com.txwstudio.app.timetable.databinding.FragmentCourseViewerBinding
-import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
+import com.txwstudio.app.timetable.utils.WHICH_WEEKDAY
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
 
 /**
@@ -82,7 +80,6 @@ class CourseViewerFragment : Fragment() {
                         // Show message
                         Snackbar.make(requireView(), R.string.dialogDeleted, Snackbar.LENGTH_LONG).show()
 
-                        // Update widget
                         // Update widget
                         val component = ComponentName(requireContext(), TimetableWidgetProvider::class.java)
                         with(AppWidgetManager.getInstance(requireContext())) {

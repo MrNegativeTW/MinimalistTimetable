@@ -1,4 +1,4 @@
-package com.txwstudio.app.timetable.utilities
+package com.txwstudio.app.timetable.utils
 
 import android.app.Activity
 import android.util.Log

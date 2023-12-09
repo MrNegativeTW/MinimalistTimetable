@@ -7,7 +7,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.txwstudio.app.timetable.MyApplication
 import com.txwstudio.app.timetable.data.Course3
 import com.txwstudio.app.timetable.data.CourseRepository
-import com.txwstudio.app.timetable.utilities.WHICH_WEEKDAY
+import com.txwstudio.app.timetable.utils.WHICH_WEEKDAY
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch

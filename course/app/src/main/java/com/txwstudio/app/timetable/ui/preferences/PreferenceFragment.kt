@@ -20,8 +20,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.txwstudio.app.timetable.R
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_IMAGE
-import com.txwstudio.app.timetable.utilities.DATA_TYPE_PDF
+import com.txwstudio.app.timetable.utils.DATA_TYPE_IMAGE
+import com.txwstudio.app.timetable.utils.DATA_TYPE_PDF
 
 const val PREFERENCE_TABLE_TITLE = "tableTitle_Pref"
 const val PREFERENCE_THEME = "pref_theme"
@@ -52,7 +52,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     private val getMapImageContract = registerForActivityResult(MyContract()) { documentUri ->
         if (documentUri == null) {
-            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), R.string.settings_operationCanceled, Toast.LENGTH_SHORT).show()
         } else {
             //  Persist the permission across restarts.
             requireActivity().contentResolver.takePersistableUriPermission(
@@ -68,7 +68,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     private val getMapPDFContract = registerForActivityResult(MyContract()) { documentUri ->
         if (documentUri == null) {
-            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), R.string.settings_operationCanceled, Toast.LENGTH_SHORT).show()
         } else {
             //  Persist the permission across restarts.
             requireActivity().contentResolver.takePersistableUriPermission(
@@ -84,7 +84,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     private val getCalendarContract = registerForActivityResult(MyContract()) { documentUri ->
         if (documentUri == null) {
-            Toast.makeText(requireActivity(), R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), R.string.settings_operationCanceled, Toast.LENGTH_SHORT).show()
         } else {
             //  Persist the permission across restarts.
             requireActivity().contentResolver.takePersistableUriPermission(
@@ -180,46 +180,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     }
 
     /**
-     * Decide which preference to write, then save uri into preference.
-     * Keyword: Storage Access Framework.
-     *
-     * @param requestCode Receive code and decide which preference to write.
-     * @param data File uri
-     *
-     * @deprecated Switched to ActivityResultContract. Will be deleted soon.
-     */
-    private fun handleSelectedFile(requestCode: Int, data: Intent) {
-        val prefName = when (requestCode) {
-            REQUEST_CODE_MAP_IMAGE -> {
-                PREFERENCE_MAP_PATH
-            }
-            REQUEST_CODE_CALENDAR -> {
-                PREFERENCE_CALENDAR_PATH
-            }
-            else -> PREFERENCE_NAME_EMPTY
-        }
-
-//        if (requestCode == REQUEST_CODE_CALENDAR) createShortcut(data)
-
-        try {
-            val fileUri = data.data
-            val takeFlags = (data.flags
-                    and (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
-            requireActivity().grantUriPermission(requireActivity().packageName, fileUri, takeFlags)
-            requireActivity().contentResolver.takePersistableUriPermission(fileUri!!, takeFlags)
-            val filePath = fileUri.toString()
-
-            val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            val editor = prefs.edit()
-            editor.putString(prefName, filePath)
-            editor.commit()
-        } catch (e: Exception) {
-            Toast.makeText(activity, R.string.fileReadErrorMsg, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    /**
      * Create shortcut if user set calendar path.
      */
     private fun createShortcut(documentUri: Uri) {
@@ -264,4 +224,7 @@ class MyContract : ActivityResultContract<Int, Uri?>() {
         return intent?.data
     }
 
+    companion object {
+        private const val TAG = "MyContract"
+    }
 }
