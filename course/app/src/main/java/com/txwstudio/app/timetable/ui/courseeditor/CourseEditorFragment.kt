@@ -30,9 +30,6 @@ import com.txwstudio.app.timetable.databinding.FragmentCourseEditorBinding
 import com.txwstudio.app.timetable.utils.StringUtils
 import com.txwstudio.app.timetable.widget.TimetableWidgetProvider
 
-private const val TAG_TIME_PICKER_BEGIN_TIME = 0
-private const val TAG_TIME_PICKER_END_TIME = 1
-
 /**
  * An editor to add or edit the class info.
  * */
@@ -133,12 +130,12 @@ class CourseEditorFragment : Fragment(), MenuProvider {
 
         // Select course begin time
         binding.textViewCourseEditorFragCourseBeginTime.setOnClickListener {
-            showMaterialTimePicker(TAG_TIME_PICKER_BEGIN_TIME)
+            showMaterialTimePicker(TIME_PICKER_BEGIN)
         }
 
         // Select course end time
         binding.textViewCourseEditorFragCourseEndTime.setOnClickListener {
-            showMaterialTimePicker(TAG_TIME_PICKER_END_TIME)
+            showMaterialTimePicker(TIME_PICKER_END)
         }
     }
 
@@ -170,13 +167,13 @@ class CourseEditorFragment : Fragment(), MenuProvider {
 
         viewModel.courseBeginTime.observe(viewLifecycleOwner) {
             binding.textViewCourseEditorFragCourseBeginTime.setText(
-                StringUtils.getHumanReadableTimeFormat(it)
+                StringUtils.getHumanReadableTimeFormat(requireContext(), it)
             )
         }
 
         viewModel.courseEndTime.observe(viewLifecycleOwner) {
             binding.textViewCourseEditorFragCourseEndTime.setText(
-                StringUtils.getHumanReadableTimeFormat(it)
+                StringUtils.getHumanReadableTimeFormat(requireContext(),  it)
             )
         }
 
@@ -258,29 +255,31 @@ class CourseEditorFragment : Fragment(), MenuProvider {
         val isSystem24Hour = DateFormat.is24HourFormat(requireContext())
         val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
 
-        val materialTimePicker = MaterialTimePicker.Builder()
-            .setTimeFormat(clockFormat)
-            .build()
-        materialTimePicker.show(requireActivity().supportFragmentManager, "tag")
+        val timePicker = MaterialTimePicker.Builder().apply {
+            setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
+            setTimeFormat(clockFormat)
+//            setHour() // [0, 23]
+//            setMinute() // [0, 60)
+        }.build()
 
-        materialTimePicker.addOnPositiveButtonClickListener {
-            val newHour = materialTimePicker.hour
-            val newMinute = materialTimePicker.minute
-            this.onTimeSet(newHour, newMinute, isBeginOrEnd)
+        timePicker.show(requireActivity().supportFragmentManager, "tag")
+
+        timePicker.addOnPositiveButtonClickListener {
+            onTimeSet(timePicker.hour, timePicker.minute, isBeginOrEnd)
         }
     }
 
     private fun onTimeSet(newHour: Int, newMinute: Int, isBeginOrEnd: Int) {
         val timeToDatabase = String.format("%02d%02d", newHour, newMinute)
-
-        if (isBeginOrEnd == TAG_TIME_PICKER_BEGIN_TIME) {
-            viewModel.submitCourseBeginTime(timeToDatabase)
-        } else {
-            viewModel.submitCourseEndTime(timeToDatabase)
+        when (isBeginOrEnd) {
+            TIME_PICKER_BEGIN -> viewModel.submitCourseBeginTime(timeToDatabase)
+            TIME_PICKER_END -> viewModel.submitCourseEndTime(timeToDatabase)
         }
     }
 
     companion object {
         private const val TAG = "CourseEditorFragment"
+        private const val TIME_PICKER_BEGIN = 0
+        private const val TIME_PICKER_END = 1
     }
 }
